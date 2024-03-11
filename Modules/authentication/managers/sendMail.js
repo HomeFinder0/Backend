@@ -1,6 +1,5 @@
 const appError = require("../../../Helpers/appError");
 const asyncHandler = require("express-async-handler");
-const User = require("../../user/models/User");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 
