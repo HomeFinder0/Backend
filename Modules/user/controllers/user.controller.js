@@ -22,7 +22,7 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
     longitude: Number(longitude),
     latitude: Number(latitude),
   };
-  const location = await getLocation(latitude, longitude);
+  const location = await getLocation(latitude, longitude, next);
 
   for (let key in location) {
     user.location[key] = location[key];
