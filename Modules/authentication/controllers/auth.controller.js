@@ -158,6 +158,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   return res.status(200).json({
     status: "success",
     message: "Verification code has been sent",
+    email,
   });
 });
 
