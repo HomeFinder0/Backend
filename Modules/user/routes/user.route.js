@@ -1,6 +1,6 @@
 const authMiddleware = require("../../authentication/middlewares/auth.middleware.js");
 const isVerified = require("../middlewares/user.isVerified.js");
-const uploadImage = require("../../../Utils/multer.js");
+const {uploadSingle} = require("../../../Utils/multer.js");
 const router = require("express").Router();
 const {
   deleteProfilePicture,
@@ -21,7 +21,7 @@ router.patch("/change-password", changePassword);
 
 router.post("/location", setLocation);
 
-router.post("/upload-image", uploadImage, uploadAvatar);
+router.post("/upload-image", uploadSingle, uploadAvatar);
 router.delete("/delete-profile-picture", deleteProfilePicture);
 
 router.delete("/delete-user", deleteUser);
