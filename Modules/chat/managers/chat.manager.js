@@ -168,11 +168,12 @@ module.exports.deleteConversationManager = asyncHandler(
     const conversation = await Conversation.findOne({
       participants: { $all: [userId, receiverId] },
     });
+    console.log(conversation);
     if (!conversation) return next(new appError("Conversation not found", 404));
 
     await Message.deleteMany({ _id: { $in: conversation.messages } });
     await conversation.deleteOne();
 
-    return conversation;
+    if (conversation) return conversation;
   }
 );

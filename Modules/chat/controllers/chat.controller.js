@@ -9,6 +9,7 @@ const {
   deleteMessageManager,
   deleteConversationManager,
 } = require("../managers/chat.manager.js");
+const appError = require("../../../Helpers/appError.js");
 
 module.exports.sendMessage = asyncHandler(async (req, res, next) => {
   const { messageContent } = req.body;
@@ -21,7 +22,8 @@ module.exports.sendMessage = asyncHandler(async (req, res, next) => {
     receiverId,
     next
   );
-
+  if(!message) return next(new appError("Message not sent", 500));
+  
   const receiverSocketId = getReceiverSocketId(receiverId);
   if (receiverSocketId) {
     // io.to<socketId> is used to send events to a specific client.
@@ -70,12 +72,12 @@ module.exports.editMessage = asyncHandler(async (req, res, next) => {
     messageContent,
     next
   );
+  if (!message) return next(new appError("Message not found", 404));
 
   const receiverSocketId = getReceiverSocketId(message.receiverId);
   if (receiverSocketId) {
     io.to(receiverSocketId).emit("messageEdited", message);
   }
-
   res.status(201).json({ status: "success", updatedMessage: message });
 });
 
@@ -88,8 +90,10 @@ module.exports.deleteMessage = asyncHandler(async (req, res, next) => {
     messageId,
     next
   );
-  const receiverSocketId = getReceiverSocketId(message.receiverId);
+  if (!message || !conversation)
+    return next(new appError("Message not found", 404));
 
+  const receiverSocketId = getReceiverSocketId(message.receiverId);
   if (receiverSocketId) {
     io.to(receiverSocketId).emit("messageDeleted", message);
     if (!conversation.messages) {
@@ -106,11 +110,9 @@ module.exports.deleteConversation = asyncHandler(async (req, res, next) => {
   const { receiverId } = req.params;
   const userId = req.user._id;
 
-  const conversation = await deleteConversationManager(
-    userId,
-    receiverId,
-    next
-  );
+  let conversation = await deleteConversationManager(userId, receiverId, next);
+  if (!conversation)
+    return next(new appError("Conversation cannot delete.", 404));
 
   const receiverSocketId = getReceiverSocketId(receiverId);
   if (receiverSocketId) {
@@ -118,6 +120,5 @@ module.exports.deleteConversation = asyncHandler(async (req, res, next) => {
       conversationId: conversation._id,
     });
   }
-
   res.status(201).json({ status: "success", message: "Conversation deleted" });
 });
