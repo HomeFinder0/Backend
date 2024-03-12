@@ -4,7 +4,7 @@ const {
   createMessageManager,
   getConversationManager,
   searchChatUsersManager,
-  getConversationsManager,
+  getChatUsersManager,
   editMessageManager,
   deleteMessageManager,
   deleteConversationManager,
@@ -23,7 +23,7 @@ module.exports.sendMessage = asyncHandler(async (req, res, next) => {
     next
   );
   if(!message) return next(new appError("Message not sent", 500));
-  
+
   const receiverSocketId = getReceiverSocketId(receiverId);
   if (receiverSocketId) {
     // io.to<socketId> is used to send events to a specific client.
@@ -57,7 +57,7 @@ module.exports.searchUsers = asyncHandler(async (req, res, next) => {
 
 module.exports.getConversations = asyncHandler(async (req, res, next) => {
   const userId = req.user._id;
-  let chatUsers = await getConversationsManager(userId, next);
+  let chatUsers = await getChatUsersManager(userId, next);
 
   res.status(200).json({ status: "success", chatUsers });
 });

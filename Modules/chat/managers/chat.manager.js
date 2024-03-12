@@ -76,7 +76,7 @@ module.exports.searchChatUsersManager = asyncHandler(
   }
 );
 
-module.exports.getConversationsManager = asyncHandler(async (userId, next) => {
+module.exports.getChatUsersManager = asyncHandler(async (userId, next) => {
   // Get sorted conversations based on the last message
   let lastMessages = await Conversation.find({ participants: userId })
     .select("lastMessage")
