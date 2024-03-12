@@ -1,14 +1,10 @@
 const asyncHandler = require("express-async-handler");
-const Conversation = require("../models/Conversation.js");
-const Message = require("../models/Message.js");
-const User = require("../../user/models/User.js");
-const appError = require("../../../Helpers/appError.js");
 const { io, getReceiverSocketId } = require("../../../Socket/socket.js");
 const {
-  createMessage,
-  getConversation,
-  searchChatUsers,
-  getChatUsers,
+  createMessageManager,
+  getConversationManager,
+  searchChatUsersManager,
+  getConversationsManager,
   editMessageManager,
   deleteMessageManager,
   deleteConversationManager,
@@ -19,7 +15,7 @@ module.exports.sendMessage = asyncHandler(async (req, res, next) => {
   const senderId = req.user._id;
   const receiverId = req.params.receiverId;
 
-  const message = await createMessage(
+  const message = await createMessageManager(
     messageContent,
     senderId,
     receiverId,
@@ -38,10 +34,10 @@ module.exports.sendMessage = asyncHandler(async (req, res, next) => {
 });
 
 module.exports.getMessages = asyncHandler(async (req, res, next) => {
-  const receiverId = req.params.receiverId;
+  const { receiverId } = req.params;
   const senderId = req.user._id;
 
-  const messages = await getConversation(senderId, receiverId, next);
+  const messages = await getConversationManager(senderId, receiverId, next);
 
   res.status(200).json({
     status: "success",
@@ -52,14 +48,14 @@ module.exports.getMessages = asyncHandler(async (req, res, next) => {
 module.exports.searchUsers = asyncHandler(async (req, res, next) => {
   const { search } = req.query;
   const userId = req.user._id;
-  let users = await searchChatUsers(search, userId, next);
+  let users = await searchChatUsersManager(search, userId, next);
 
   res.status(200).json({ status: "success", users });
 });
 
 module.exports.getConversations = asyncHandler(async (req, res, next) => {
   const userId = req.user._id;
-  let chatUsers = await getChatUsers(userId, next);
+  let chatUsers = await getConversationsManager(userId, next);
 
   res.status(200).json({ status: "success", chatUsers });
 });

@@ -4,7 +4,7 @@ const Message = require("../models/Message.js");
 const User = require("../../user/models/User.js");
 const appError = require("../../../Helpers/appError.js");
 
-module.exports.createMessage = asyncHandler(
+module.exports.createMessageManager = asyncHandler(
   async (messageContent, senderId, receiverId, next) => {
     if (!messageContent || !receiverId || !senderId) {
       return next(
@@ -43,7 +43,7 @@ module.exports.createMessage = asyncHandler(
   }
 );
 
-module.exports.getConversation = asyncHandler(
+module.exports.getConversationManager = asyncHandler(
   async (senderId, receiverId, next) => {
     if (!receiverId || !senderId)
       return next(new appError("Please provide senderId and receiverId.", 400));
@@ -58,23 +58,25 @@ module.exports.getConversation = asyncHandler(
   }
 );
 
-module.exports.searchChatUsers = asyncHandler(async (search, userId, next) => {
-  let users = await User.find({
-    $and: [
-      { _id: { $ne: userId } },
-      {
-        $or: [
-          { username: { $regex: search, $options: "i" } },
-          { fullName: { $regex: search, $options: "i" } },
-        ],
-      },
-    ],
-  });
-  if (!users) users = [];
-  return users;
-});
+module.exports.searchChatUsersManager = asyncHandler(
+  async (search, userId, next) => {
+    let users = await User.find({
+      $and: [
+        { _id: { $ne: userId } },
+        {
+          $or: [
+            { username: { $regex: search, $options: "i" } },
+            { fullName: { $regex: search, $options: "i" } },
+          ],
+        },
+      ],
+    });
+    if (!users) users = [];
+    return users;
+  }
+);
 
-module.exports.getChatUsers = asyncHandler(async (userId, next) => {
+module.exports.getConversationsManager = asyncHandler(async (userId, next) => {
   // Get sorted conversations based on the last message
   let lastMessages = await Conversation.find({ participants: userId })
     .select("lastMessage")
