@@ -35,6 +35,7 @@ exports.signUp = asyncHandler(async (req, res, next) => {
     status: "success",
     message: "Verification code has been sent",
     token,
+    userId: user._id,
   });
 });
 
@@ -125,8 +126,9 @@ exports.logIn = asyncHandler(async (req, res, next) => {
   res.json({
     status: "success",
     message: "Logged in successfully",
-    isVerified : user.isVerified,
+    isVerified: user.isVerified,
     token,
+    userId: user._id,
   });
 });
 
