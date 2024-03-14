@@ -89,7 +89,7 @@ module.exports.getChatUsersManager = asyncHandler(async (userId, next) => {
   let chatUsers = await Promise.all(
     lastMessages.map(async (conversation) => {
       let receiverId = conversation.lastMessage.receiverId;
-      if (userId.toString() === conversation.lastMessage.receiverId.toString())
+      if (userId.toString() === receiverId.toString())
         receiverId = conversation.lastMessage.senderId;
 
       const user = await User.findById(receiverId).select(
