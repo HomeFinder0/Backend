@@ -68,6 +68,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   for (let key in value) {
     user[key] = value[key];
   }
+  user.fullName = `${user.firstName} ${user.lastName}`;
   await user.save();
 
   return res.status(200).json({
