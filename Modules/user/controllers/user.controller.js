@@ -38,13 +38,13 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
 exports.uploadAvatar = uploadImage(User);
 
 exports.getUser = asyncHandler(async (req, res, next) => {
-  let user = await User.findById(req.user._id);
+  const userId = req.params.id || req.user._id;
+  let user = await User.findById(userId);
   if (!user) return next(new appError("User not found", 404));
 
   return res.status(200).json({
     status: "success",
     user,
-    wishList: user.wishlist,
   });
 });
 
