@@ -15,7 +15,7 @@ const {
 router.use(authMiddleware);
 router.use(isVerified);
 
-router.get("/get-user", getUser);
+router.get("/get-user/:id?", getUser);
 router.patch("/update-user", updateUser);
 router.patch("/change-password", changePassword);
 
