@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const cloudinary = require('../config/cloudinary');
 
-const upload_image_to_cloud = asyncHandler(async(data, filePath)=>{
+const uploadImage = asyncHandler(async(data, filePath)=>{
         const img = await cloudinary.uploader.upload(filePath, function(error, result) {
             if(error) return null;
         });
@@ -11,7 +11,7 @@ const upload_image_to_cloud = asyncHandler(async(data, filePath)=>{
         
         return img;
 });
-const delete_image_from_cloud = asyncHandler(async(public_id)=>{
+const deleteImage = asyncHandler(async(public_id)=>{
     const img = await cloudinary.uploader.destroy(public_id, function(error, result) {
         if(error) return null;
     });
@@ -19,7 +19,7 @@ const delete_image_from_cloud = asyncHandler(async(public_id)=>{
 })
 
 
-const upload_messages = asyncHandler(async(conversationId, newMessage, filesPath)=>{
+const uploadMessages = asyncHandler(async(conversationId, newMessage, filesPath)=>{
         let folderName = `${conversationId}`;
         const img = await cloudinary.uploader.upload(filesPath, {folder: folderName},function(error, result) {
             if(error) return null;
@@ -33,7 +33,7 @@ const upload_messages = asyncHandler(async(conversationId, newMessage, filesPath
         return newMessage.message.media;
 });
 
-const delete_messages = asyncHandler(async(conversationId)=>{
+const deleteMessages = asyncHandler(async(conversationId)=>{
     let folderName = `${conversationId}`; 
     const img = await cloudinary.api.delete_resources_by_prefix(folderName, function(error, result) {
         if(error) return null;
@@ -42,10 +42,10 @@ const delete_messages = asyncHandler(async(conversationId)=>{
 });
 
 module.exports = {
-    upload_image_to_cloud,
-    delete_image_from_cloud,
+    uploadImage,
+    deleteImage,
     
-    upload_messages,
-    delete_messages
+    uploadMessages,
+    deleteMessages
 };
 
