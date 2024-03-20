@@ -18,10 +18,10 @@ const isVerified = require("../../user/middlewares/user.isVerified.js");
 router.post("/signup", signUp);
 router.post("/login", logIn);
 
-router.post("/forgot-pass", isVerified, forgotPassword);
-router.patch("/reset-pass/:email", isVerified, resetPassword);
-router.post("/resend-pass-otp/:email", isVerified, forgotPassword);
-router.post("/verify-pass-otp/:email", isVerified, verifyPasswordOtp);
+router.post("/forgot-pass", forgotPassword);
+router.patch("/reset-pass/:email", resetPassword);
+router.post("/resend-pass-otp/:email", forgotPassword);
+router.post("/verify-pass-otp/:email", verifyPasswordOtp);
 
 router.use(authMiddleware);
 

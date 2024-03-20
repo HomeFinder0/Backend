@@ -34,7 +34,8 @@ exports.signUp = asyncHandler(async (req, res, next) => {
   return res.status(200).json({
     status: "success",
     message: "Verification code has been sent",
-    token
+    token,
+    userId: user._id,
   });
 });
 
@@ -125,8 +126,9 @@ exports.logIn = asyncHandler(async (req, res, next) => {
   res.json({
     status: "success",
     message: "Logged in successfully",
-    isVerified : user.isVerified,
+    isVerified: user.isVerified,
     token,
+    userId: user._id,
   });
 });
 
@@ -158,6 +160,7 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   return res.status(200).json({
     status: "success",
     message: "Verification code has been sent",
+    email,
   });
 });
 

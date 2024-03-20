@@ -1,47 +1,28 @@
 const asyncHandler = require("express-async-handler");
-const Conversation = require("../models/Conversation.js");
-const Message = require("../models/Message.js");
-const User = require("../../user/models/User.js");
-const appError = require("../../../Helpers/appError.js");
 const { io, getReceiverSocketId } = require("../../../Socket/socket.js");
+const {
+  createMessageManager,
+  getConversationManager,
+  searchChatUsersManager,
+  getChatUsersManager,
+  editMessageManager,
+  deleteMessageManager,
+  deleteConversationManager,
+} = require("../managers/chat.manager.js");
+const appError = require("../../../Helpers/appError.js");
 
 module.exports.sendMessage = asyncHandler(async (req, res, next) => {
   const { messageContent } = req.body;
   const senderId = req.user._id;
   const receiverId = req.params.receiverId;
 
-  if (!messageContent || !receiverId) {
-    return next(
-      new appError("Please provide conversationId, sender and text", 400)
-    );
-  }
-
-  let conversation = await Conversation.findOne({
-    participants: { $all: [senderId, receiverId] },
-  });
-
-  if (!conversation) {
-    conversation = await Conversation.create({
-      participants: [senderId, receiverId],
-    });
-  }
-
-  const message = await Message.create({
-    message: { text: messageContent },
+  const message = await createMessageManager(
+    messageContent,
     senderId,
     receiverId,
-  });
-
-  if (!message) return next(new appError("Message not sent", 500));
-
-  const receiver = await User.findById(receiverId);
-  if (!receiver) return next(new appError("User not found", 404));
-
-  conversation.lastMessage = message._id;
-  conversation.messages.push(message._id);
-  await conversation.save();
-
-  await receiver.save();
+    next
+  );
+  if(!message) return next(new appError("Message not sent", 500));
 
   const receiverSocketId = getReceiverSocketId(receiverId);
   if (receiverSocketId) {
@@ -55,132 +36,89 @@ module.exports.sendMessage = asyncHandler(async (req, res, next) => {
 });
 
 module.exports.getMessages = asyncHandler(async (req, res, next) => {
-  const receiverId = req.params.receiverId;
+  const { receiverId } = req.params;
   const senderId = req.user._id;
-  if (!receiverId) return next(new appError("Please provide receiverId", 400));
 
-  const conversation = await Conversation.findOne({
-    participants: { $all: [senderId, receiverId] },
-  }).populate("messages");
+  const messages = await getConversationManager(senderId, receiverId, next);
 
   res.status(200).json({
     status: "success",
-    messages: conversation.messages ? conversation.messages : [],
+    messages,
   });
 });
 
 module.exports.searchUsers = asyncHandler(async (req, res, next) => {
   const { search } = req.query;
-  if (!search) return next(new appError("Please provide search query", 400));
-
-  const users = await User.find({
-    $or: [
-      { username: { $regex: search, $options: "i" } },
-      { fullName: { $regex: search, $options: "i" } },
-    ],
-  });
+  const userId = req.user._id;
+  let users = await searchChatUsersManager(search, userId, next);
 
   res.status(200).json({ status: "success", users });
 });
 
 module.exports.getConversations = asyncHandler(async (req, res, next) => {
-  // Get sorted conversations based on the last message
-  const lastMessages = await Conversation.find({ participants: req.user._id })
-    .select("lastMessage")
-    .populate("lastMessage")
-    .sort({ updatedAt: -1 });
-
-  if (!lastMessages) return next(new appError("Conversations not found", 404));
-
-  // Get user details of the receiver of the last message and add it to the lastMessage object
-  const chatUsers = await Promise.all(
-    lastMessages.map(async (conversation) => {
-      const receiverId = conversation.lastMessage.receiverId;
-
-      const user = await User.findById(receiverId).select(
-        "username fullName image"
-      );
-
-      return { ...user.toObject(), lastMessage: conversation.lastMessage };
-    })
-  );
+  const userId = req.user._id;
+  let chatUsers = await getChatUsersManager(userId, next);
 
   res.status(200).json({ status: "success", chatUsers });
 });
 
 module.exports.editMessage = asyncHandler(async (req, res, next) => {
-  const messageId = req.params.messageId;
+  const { messageId } = req.params;
   const { messageContent } = req.body;
-  if (!messageId || !messageContent) {
-    return next(
-      new appError("Please provide messageId and messageContent", 400)
-    );
-  }
-
-  const message = await Message.findById(messageId);
-
-  if (message.senderId.toString() !== req.user._id.toString())
-    return next(
-      new appError("You are not authorized to edit this message", 401)
-    );
-
-  message.message.text = messageContent;
-  await message.save();
-
+  const userId = req.user._id;
+  const message = await editMessageManager(
+    userId,
+    messageId,
+    messageContent,
+    next
+  );
   if (!message) return next(new appError("Message not found", 404));
 
   const receiverSocketId = getReceiverSocketId(message.receiverId);
   if (receiverSocketId) {
-    io.to(receiverSocketId).emit("messageEdited", { message });
+    io.to(receiverSocketId).emit("messageEdited", message);
   }
-
   res.status(201).json({ status: "success", updatedMessage: message });
 });
 
 module.exports.deleteMessage = asyncHandler(async (req, res, next) => {
-  const messageId = req.params.messageId;
-  if (!messageId) return next(new appError("Please provide messageId", 400));
+  const userId = req.user._id;
+  const { messageId } = req.params;
 
-  const conversation = await Conversation.findOne({
-    messages: { $in: [messageId] },
-  });
-
-  const message = await Message.findById(messageId);
-  if (!message) return next(new appError("Message not found", 404));
-
-  if (message.senderId.toString() !== req.user._id.toString())
-    return next(
-      new appError("You are not authorized to delete this message", 401)
-    );
-
-  if (!conversation) return next(new appError("Conversation not found", 404));
-  conversation.messages = conversation.messages.filter(
-    (message) => message.toString() !== messageId
+  const { message, conversation } = await deleteMessageManager(
+    userId,
+    messageId,
+    next
   );
-
-  await message.deleteOne();
-  await conversation.save();
+  if (!message || !conversation)
+    return next(new appError("Message not found", 404));
 
   const receiverSocketId = getReceiverSocketId(message.receiverId);
-
   if (receiverSocketId) {
-    io.to(receiverSocketId).emit("messageDeleted", { message });
+    io.to(receiverSocketId).emit("messageDeleted", message);
+    if (!conversation.messages) {
+      io.to(receiverSocketId).emit("conversationDeleted", {
+        conversationId: conversation._id,
+      });
+    }
   }
 
   res.status(201).json({ status: "success", message: "Message deleted" });
 });
 
 module.exports.deleteConversation = asyncHandler(async (req, res, next) => {
-  const receiverId = req.params.receiverId;
-  if (!receiverId) return next(new appError("Please provide receiverId", 400));
+  const { receiverId } = req.params;
+  const userId = req.user._id;
 
-  const conversation = await Conversation.findOne({
-    participants: { $all: [req.user._id, receiverId] },
-  });
-  if (!conversation) return next(new appError("Conversation not found", 404));
+  let conversation = await deleteConversationManager(userId, receiverId, next);
+  if (!conversation)
+    return next(new appError("Conversation cannot delete.", 404));
 
-  await Message.deleteMany({ _id: { $in: conversation.messages } });
-  await conversation.deleteOne();
-
+  const receiverSocketId = getReceiverSocketId(receiverId);
+  if (receiverSocketId) {
+    io.to(receiverSocketId).emit("conversationDeleted", {
+      conversationId: conversation._id,
+    });
+  }
   res.status(201).json({ status: "success", message: "Conversation deleted" });
 });

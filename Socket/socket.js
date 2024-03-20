@@ -6,7 +6,7 @@ const http = require("http");
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:3000"],
+    origin: ["*"],
     methods: ["GET", "POST", "PUT", "DELETE"],
   },
 });
@@ -21,6 +21,7 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 
   const userId = socket.handshake.query.userId;
+  console.log("a user connected");
   if (userId) {
     userSocketMap[userId] = socket.id;
   }

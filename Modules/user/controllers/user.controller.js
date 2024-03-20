@@ -20,7 +20,7 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
     longitude: Number(longitude),
     latitude: Number(latitude),
   };
-  const location = await getLocation(latitude, longitude);
+  const location = await getLocation(latitude, longitude, next);
 
   for (let key in location) {
     user.location[key] = location[key];
@@ -66,13 +66,13 @@ exports.deleteProfilePicture = asyncHandler(async (req, res, next) => {
   });
 });
 exports.getUser = asyncHandler(async (req, res, next) => {
-  let user = await User.findById(req.user._id);
+  const userId = req.params.id || req.user._id;
+  let user = await User.findById(userId);
   if (!user) return next(new appError("User not found", 404));
 
   return res.status(200).json({
     status: "success",
     user,
-    wishList: user.wishlist,
   });
 });
 
@@ -96,6 +96,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   for (let key in value) {
     user[key] = value[key];
   }
+  user.fullName = `${user.firstName} ${user.lastName}`;
   await user.save();
 
   return res.status(200).json({

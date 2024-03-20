@@ -1,6 +1,5 @@
 const appError = require("../../../Helpers/appError");
 const asyncHandler = require("express-async-handler");
-const User = require("../../user/models/User");
 require("dotenv").config();
 const nodemailer = require("nodemailer");
 
@@ -51,7 +50,7 @@ exports.otpSending = asyncHandler(async (user, res, next) => {
             <h3 style="color: #000; font-weight: bold;">Home Finder<br></h3>
             <p style="color: #666;">Your verification code is:<br></p>
             <p style="color: #333; font-size: 24px; font-weight: bold;">${Otp}</p>
-            <p style="color: #666;">Please note that for added security this link becomes invalid after 1:30 hours.</p>
+            <p style="color: #666;">Please note that otp becomes invalid after 1:30 hours.</p>
         </div>
     </div>`;
   let result = await sendEmail(
@@ -85,7 +84,7 @@ exports.resetPassEmail = asyncHandler(async (user, res, next) => {
             <h3 style="color: #000; font-weight: bold;">Home Finder<br></h3>
             <p style="color: #666;">Your Otp for Resetting  Password:<br></p>
             <p style="color: #333; font-size: 24px; font-weight: bold;">${Otp}</p>
-            <p style="color: #666;">Please note that for added security this link becomes invalid after 15 minutes.</p>
+            <p style="color: #666;">Please note that otp becomes invalid after 15 minutes.</p>
         </div>
     </div>`;
   let result = await sendEmail(user.email, "Reset Password", html, res, next);
