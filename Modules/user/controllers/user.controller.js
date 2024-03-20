@@ -7,9 +7,7 @@ const {
   resetPasswordValidation,
 } = require("../../common/validation/common.validation.js");
 
-const cloudinary = require("../../../config/cloudinary.js");
-const { uploadImage } = require("../../../Helpers/globalFun.js");
-
+const { uploadImage, deleteImage } = require("../../../Helpers/cloud.js");
 exports.setLocation = asyncHandler(async (req, res, next) => {
   let { user } = req;
 
@@ -22,7 +20,7 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
     longitude: Number(longitude),
     latitude: Number(latitude),
   };
-  const location = await getLocation(latitude, longitude);
+  const location = await getLocation(latitude, longitude, next);
 
   for (let key in location) {
     user.location[key] = location[key];
@@ -35,16 +33,47 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.uploadAvatar = uploadImage(User);
+exports.uploadAvatar = asyncHandler(async (req, res, next) => {
+  let { user } = req.user._id;
+  if (!req.file) return next(new appError("Please provide an image", 400));
 
+  await uploadImage(user, req.file.path);
+  await user.save();
+
+  return res.status(200).json({
+    status: "success",
+    message: "Profile picture has been uploaded",
+  });
+});
+
+exports.deleteProfilePicture = asyncHandler(async (req, res, next) => {
+  let { user } = req;
+
+  if (user.image.public_id === "iwonvcvpn6oidmyhezvh")
+    return next(new appError("You don't have a profile picture", 400));
+
+  await deleteImage(user.image.public_id);
+
+  user.image.url =
+    "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg";
+  user.image.public_id = "iwonvcvpn6oidmyhezvh";
+
+  await user.save();
+
+  return res.status(200).json({
+    status: "success",
+    message: "Profile picture has been deleted",
+  });
+});
 exports.getUser = asyncHandler(async (req, res, next) => {
-  let user = await User.findById(req.user._id);
+  const userId = req.params.id || req.user._id;
+  let user = await User.findById(userId);
   if (!user) return next(new appError("User not found", 404));
 
   return res.status(200).json({
     status: "success",
     user,
-    wishList: user.wishlist,
+    wishlist: user.wishlist,
   });
 });
 
@@ -68,6 +97,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   for (let key in value) {
     user[key] = value[key];
   }
+  user.fullName = `${user.firstName} ${user.lastName}`;
   await user.save();
 
   return res.status(200).json({
@@ -77,25 +107,7 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.deleteProfilePicture = asyncHandler(async (req, res, next) => {
-  let { user } = req;
 
-  if (user.image.public_id === "iwonvcvpn6oidmyhezvh")
-    return next(new appError("You don't have a profile picture", 400));
-
-  await cloudinary.uploader.destroy(user.image.public_id);
-
-  user.image.url =
-    "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg";
-  user.image.public_id = "iwonvcvpn6oidmyhezvh";
-
-  await user.save();
-
-  return res.status(200).json({
-    status: "success",
-    message: "Profile picture has been deleted",
-  });
-});
 
 exports.deleteUser = asyncHandler(async (req, res, next) => {
   let { user } = req;

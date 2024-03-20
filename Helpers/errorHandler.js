@@ -45,12 +45,9 @@ module.exports = (error, req, res, next) => {
   error.status = error.status || "error";
 
   if (process.env.NODE_ENV == "development") {
-    console.log("Error ", error);
-
     devErrorHandler(res, error);
   } else {
     if (error.name === "CastError") error = castErrorHandler(error);
-    console.log("Error ", error);
 
     prodErrorHandler(res, error);
   }
