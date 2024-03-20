@@ -22,13 +22,18 @@ module.exports.sendMessage = asyncHandler(async (req, res, next) => {
     receiverId,
     next
   );
-  if(!message) return next(new appError("Message not sent", 500));
+  if (!message) return next(new appError("Message not sent", 500));
 
   const receiverSocketId = getReceiverSocketId(receiverId);
   if (receiverSocketId) {
     // io.to<socketId> is used to send events to a specific client.
     io.to(receiverSocketId).emit("newMessage", {
       newMessage: message,
+    });
+    io.to(receiverSocketId).emit("newNotification", {
+      message: "New message from " + req.user.username,
+      senderId: req.user._id,
+      isRead: false,
     });
   }
 
