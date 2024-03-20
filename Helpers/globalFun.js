@@ -67,6 +67,7 @@ exports.deleteAll = (Model) =>
     });
   });
 
+//delete image from cloudinary
 // exports.uploadImage = (Model) =>
 //   asyncHandler(async (req, res, next) => {
 //     if (req.body.id) data = await Model.findById(req.body.id);
