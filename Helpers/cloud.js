@@ -1,47 +1,51 @@
 const cloudinary = require('../config/cloudinary');
+const asyncHandler = require("express-async-handler");
 
-const upload_image_to_cloud = async(data, file)=>{
-    try{
-        const img = await cloudinary.uploader.upload(file);
-        data.image.url       = img.secure_url;
-        data.image.public_id = img.public_id;
+const uploadImage = asyncHandler(async(filePath)=>{
+        const img = await cloudinary.uploader.upload(filePath);
         
-        return img;
-    }catch(err){
-        console.log(err);
-        return null;
-    }
-};
-const delete_image_from_cloud = async(public_id)=>{
-    try{
-        const img = await cloudinary.uploader.destroy(public_id);
-        return img;
-    }catch(err){
-        console.log(err);
-        return null;
-    }
-};
-
-const upload_message_images_to_cloud = async(newMessage, filesPath)=>{
-    try{
-        const img = await cloudinary.uploader.upload(filesPath)
-        
-        newMessage.message.media.push({
+        return { 
             url: img.secure_url,
             public_id: img.public_id
-        });
-        
-        return newMessage.message.media;
-    }catch(err){
-        console.log(err);
-        return null;
-    }
+        };
+});
+
+const deleteImage = asyncHandler(async(public_id)=>{
+    await cloudinary.uploader.destroy(public_id);
+    return {};
+});
+
+
+const uploadCloudFolder = async (objId, files) => {
+    //This allows all the files to be uploaded in parallel to avoid the bottleneck of uploading one by one "timeOut error"
+    const uploadPromises = files.map(file => 
+        cloudinary.uploader.upload(file.path, { folder: `${objId}` })
+    );
+
+    const images = await Promise.all(uploadPromises);
+    return images.map(img => ({
+        url: img.secure_url,
+        public_id: img.public_id
+    }));
 };
 
-module.exports = {
-    upload_image_to_cloud,
-    delete_image_from_cloud,
+const deleteCloudFolder = asyncHandler(async(objId)=>{
+    const folderName = `${objId}`;
     
-    upload_message_images_to_cloud
+    await cloudinary.api.delete_resources_by_prefix(folderName);
+    await cloudinary.api.delete_folder(folderName);
+    return {};
+    
+});
+
+
+
+module.exports = {
+    uploadImage,
+    deleteImage,
+    
+    uploadCloudFolder,
+    deleteCloudFolder
 };
+
 
