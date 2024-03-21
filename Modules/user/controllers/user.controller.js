@@ -8,7 +8,7 @@ const {
 } = require("../../common/validation/common.validation.js");
 
 const cloudinary = require("../../../config/cloudinary.js");
-const { uploadImage } = require("../../../Helpers/cloud.js");
+const { uploadImage, deleteImage } = require("../../../Helpers/cloud.js");
 
 exports.setLocation = asyncHandler(async (req, res, next) => {
   let { user } = req;
@@ -99,7 +99,7 @@ exports.deleteProfilePicture = asyncHandler(async (req, res, next) => {
   if (user.image.public_id === "iwonvcvpn6oidmyhezvh")
     return next(new appError("You don't have a profile picture", 400));
 
-  await cloudinary.uploader.destroy(user.image.public_id);
+  await deleteImage(user.image.public_id);
 
   user.image.url =
     "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg";
