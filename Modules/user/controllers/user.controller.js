@@ -8,7 +8,7 @@ const {
 } = require("../../common/validation/common.validation.js");
 
 const cloudinary = require("../../../config/cloudinary.js");
-const { uploadImage } = require("../../../Helpers/globalFun.js");
+const { uploadImage, deleteImage } = require("../../../Helpers/cloud.js");
 
 exports.setLocation = asyncHandler(async (req, res, next) => {
   let { user } = req;
@@ -35,7 +35,24 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.uploadAvatar = uploadImage(User);
+exports.uploadAvatar = asyncHandler(async (req, res, next) => {
+  let { user } = req;
+  if (!req.file) return next(new appError("Please provide an image", 400));
+  if (user.image.public_id !== process.env.DEFAULT_IMAGE_ID)
+    await deleteImage(user.image.public_id);
+
+  const { url, public_id } = await uploadImage("avatar", req.file.path);
+
+  user.image.url = url;
+  user.image.public_id = public_id;
+
+  await user.save();
+
+  return res.status(200).json({
+    status: "success",
+    image: user.image,
+  });
+});
 
 exports.getUser = asyncHandler(async (req, res, next) => {
   const userId = req.params.id || req.user._id;
@@ -84,7 +101,8 @@ exports.deleteProfilePicture = asyncHandler(async (req, res, next) => {
   if (user.image.public_id === "iwonvcvpn6oidmyhezvh")
     return next(new appError("You don't have a profile picture", 400));
 
-  await cloudinary.uploader.destroy(user.image.public_id);
+  await deleteImage(user.image.public_id);
+  // await cloudinary.uploader.destroy(user.image.public_id);
 
   user.image.url =
     "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg";

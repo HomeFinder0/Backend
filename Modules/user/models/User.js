@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema(
         default:
           "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg",
       },
-      public_id: { type: String },
+      public_id: { type: String, default: process.env.DEFAULT_IMAGE_ID },
     },
 
     location: {
