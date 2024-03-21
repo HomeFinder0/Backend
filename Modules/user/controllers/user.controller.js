@@ -8,7 +8,7 @@ const {
 } = require("../../common/validation/common.validation.js");
 
 const cloudinary = require("../../../config/cloudinary.js");
-const { uploadImage } = require("../../../Helpers/globalFun.js");
+const { uploadImage } = require("../../../Helpers/cloud.js");
 
 exports.setLocation = asyncHandler(async (req, res, next) => {
   let { user } = req;
@@ -35,7 +35,22 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.uploadAvatar = uploadImage(User);
+exports.uploadAvatar = asyncHandler(async (req, res, next) => {
+  let { user } = req;
+  if(!req.file) return next(new appError("Please provide an image", 400))
+  const { url, public_id } = await uploadImage(req.file.path);
+
+  user.image.url = url;
+  user.image.public_id = public_id;
+
+  await user.save();
+
+  return res.status(200).json({
+    status: "success",
+    image: data.image,
+  });
+
+});
 
 exports.getUser = asyncHandler(async (req, res, next) => {
   const userId = req.params.id || req.user._id;
