@@ -25,14 +25,12 @@ exports.signUp = asyncHandler(async (req, res, next) => {
   }
   if (error) return next(new appError(error, 400));
 
-  user = new User(value);
+  user = await User.create(value);
   await user.save();
-  
-  otpSending(user, res, next);
+
+  await otpSending(user, res, next);
 
   const token = await user.generateAuthToken();
-  user.tokens.push( {token} );
-  await user.save();
   return res.status(200).json({
     status: "success",
     message: "Verification code has been sent",
@@ -125,9 +123,6 @@ exports.logIn = asyncHandler(async (req, res, next) => {
     return next(new appError("Invalid email, username, or password", 400));
 
   let token = await user.generateAuthToken();
-  user.tokens.push( {token} );
-  await user.save();
-
   res.json({
     status: "success",
     message: "Logged in successfully",

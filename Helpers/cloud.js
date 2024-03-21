@@ -1,29 +1,30 @@
-const asyncHandler = require("express-async-handler");
 const cloudinary = require('../config/cloudinary');
 
-const uploadImage = asyncHandler(async(data, filePath)=>{
-        const img = await cloudinary.uploader.upload(filePath, function(error, result) {
-            if(error) return null;
-        });
-
+const upload_image_to_cloud = async(data, file)=>{
+    try{
+        const img = await cloudinary.uploader.upload(file);
         data.image.url       = img.secure_url;
         data.image.public_id = img.public_id;
         
         return img;
-});
-const deleteImage = asyncHandler(async(public_id)=>{
-    const img = await cloudinary.uploader.destroy(public_id, function(error, result) {
-        if(error) return null;
-    });
-    return img;
-})
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+};
+const delete_image_from_cloud = async(public_id)=>{
+    try{
+        const img = await cloudinary.uploader.destroy(public_id);
+        return img;
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+};
 
-
-const uploadMessages = asyncHandler(async(conversationId, newMessage, filesPath)=>{
-        let folderName = `${conversationId}`;
-        const img = await cloudinary.uploader.upload(filesPath, {folder: folderName},function(error, result) {
-            if(error) return null;
-        });
+const upload_message_images_to_cloud = async(newMessage, filesPath)=>{
+    try{
+        const img = await cloudinary.uploader.upload(filesPath)
         
         newMessage.message.media.push({
             url: img.secure_url,
@@ -31,21 +32,16 @@ const uploadMessages = asyncHandler(async(conversationId, newMessage, filesPath)
         });
         
         return newMessage.message.media;
-});
-
-const deleteMessages = asyncHandler(async(conversationId)=>{
-    let folderName = `${conversationId}`; 
-    const img = await cloudinary.api.delete_resources_by_prefix(folderName, function(error, result) {
-        if(error) return null;
-    });
-    return img;
-});
+    }catch(err){
+        console.log(err);
+        return null;
+    }
+};
 
 module.exports = {
-    uploadImage,
-    deleteImage,
+    upload_image_to_cloud,
+    delete_image_from_cloud,
     
-    uploadMessages,
-    deleteMessages
+    upload_message_images_to_cloud
 };
 

@@ -74,6 +74,7 @@ userSchema.methods.generateAuthToken = async function () {
     { expiresIn: process.env.JWT_EXPIRES_IN }
   );
   user.tokens = user.tokens.concat({ token });
+  await user.save();
   return token;
 };
 
