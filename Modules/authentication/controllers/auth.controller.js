@@ -27,7 +27,7 @@ exports.signUp = asyncHandler(async (req, res, next) => {
 
   user = await User.create(value);
   await user.save();
-
+  
   await otpSending(user, res, next);
 
   const token = await user.generateAuthToken();
