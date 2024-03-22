@@ -25,11 +25,10 @@ const uploadSingle = multer({
 const uploadMultiple  = multer({
   limits: {
     fileSize: 2000000,
-    
   },
   storage: Storage,
   fileFilter: imageFilter
-}).array("images", 10); // 10 is the max number of images
+}).array(); // 10 is the max number of images
 
 module.exports = {
   uploadSingle,

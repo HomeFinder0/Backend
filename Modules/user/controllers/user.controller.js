@@ -7,8 +7,7 @@ const {
   resetPasswordValidation,
 } = require("../../common/validation/common.validation.js");
 
-const cloudinary = require("../../../config/cloudinary.js");
-const { uploadImage } = require("../../../Helpers/globalFun.js");
+const { uploadImage, deleteImage } = require("../../../Helpers/cloud.js");
 
 exports.setLocation = asyncHandler(async (req, res, next) => {
   let { user } = req;
@@ -35,7 +34,21 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.uploadAvatar = uploadImage(User);
+exports.uploadAvatar = asyncHandler(async (req, res, next) => {
+  let { user } = req;
+  if (!req.file) return next(new appError("Please provide an image", 400));
+  if (user.image.public_id !== process.env.DEFAULT_AVATAR_ID)
+    await deleteImage(user.image.public_id);
+
+  let image = await uploadImage("avatar", req.file.path);
+  user.image = image;
+  await user.save();
+
+  return res.status(200).json({
+    status: "success",
+    image: user.image,
+  });
+});
 
 exports.getUser = asyncHandler(async (req, res, next) => {
   const userId = req.params.id || req.user._id;
@@ -81,14 +94,13 @@ exports.updateUser = asyncHandler(async (req, res, next) => {
 exports.deleteProfilePicture = asyncHandler(async (req, res, next) => {
   let { user } = req;
 
-  if (user.image.public_id === "iwonvcvpn6oidmyhezvh")
+  if (user.image.public_id === process.env.DEFAULT_AVATAR_ID)
     return next(new appError("You don't have a profile picture", 400));
 
-  await cloudinary.uploader.destroy(user.image.public_id);
+  await deleteImage(user.image.public_id);
 
-  user.image.url =
-    "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg";
-  user.image.public_id = "iwonvcvpn6oidmyhezvh";
+  user.image.url = process.env.DEFAULT_AVATAR_URL;
+  user.image.public_id = process.env.DEFAULT_AVATAR_ID;
 
   await user.save();
 
@@ -105,6 +117,9 @@ exports.deleteUser = asyncHandler(async (req, res, next) => {
   const isPassMatch = await user.passwordMatch(req.body.password);
   if (!isPassMatch)
     return next(new appError("Invalid password, please try again", 400));
+
+  if (user.image.public_id !== process.env.DEFAULT_AVATAR_ID)
+    await deleteImage(user.image.public_id);
 
   await user.deleteOne();
   return res.status(200).json({

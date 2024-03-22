@@ -66,26 +66,3 @@ exports.deleteAll = (Model) =>
       data,
     });
   });
-
-exports.uploadImage = (Model) =>
-  asyncHandler(async (req, res, next) => {
-    if (req.body.id) data = await Model.findById(req.body.id);
-    else data = await Model.findById(req.user._id);
-
-    if (!data) return next(new appError("Not found", 404));
-
-    if (!req.file) return next(new appError("Please upload an image", 400));
-    const img = await cloudinary.uploader.upload(req.file.path);
-
-    if (data.image.public_id && data.image.public_id !== "iwonvcvpn6oidmyhezvh")
-      await cloudinary.uploader.destroy(data.image.public_id);
-
-    data.image.url = img.secure_url;
-    data.image.public_id = img.public_id;
-
-    await data.save();
-    return res.status(200).json({
-      status: "success",
-      image: data.image,
-    });
-  });
