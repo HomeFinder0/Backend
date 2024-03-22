@@ -25,7 +25,7 @@ module.exports.deleteImage = asyncHandler(async (public_id) => {
   }
 });
 
-module.exports.uploadImages = async (folder, files, next) => {
+module.exports.uploadImages = asyncHandler(async (folder, files, next) => {
   //This allows all the files to be uploaded in parallel to avoid the bottleneck of uploading one by one "timeOut error"
   try {
     const uploadPromises = files.map((file) =>
@@ -41,7 +41,7 @@ module.exports.uploadImages = async (folder, files, next) => {
   } catch (error) {
     return next(new appError("Error uploading images", 500));
   }
-};
+});
 
 module.exports.deleteCloudFolder = asyncHandler(async (folder) => {
   folder = `${folder}`;
