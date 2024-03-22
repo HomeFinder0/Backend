@@ -26,7 +26,7 @@ module.exports.sendMessage = asyncHandler(async (req, res, next) => {
   if (!message) return next(new appError("Message not sent", 500));
 
   if (req.files) {
-    let images = await uploadImages(`${conversation._id}`, req.files);
+    let images = await uploadImages(`${conversation._id}`, req.files, next);
     message.message.media = images;
     await message.save();
   }

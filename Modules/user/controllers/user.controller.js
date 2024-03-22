@@ -40,7 +40,7 @@ exports.uploadAvatar = asyncHandler(async (req, res, next) => {
   if (user.image.public_id !== process.env.DEFAULT_AVATAR_ID)
     deleteImage(user.image.public_id);
 
-  let image = await uploadImage("avatar", req.file.path);
+  let image = await uploadImage("avatar", req.file.path, next);
   user.image = image;
   await user.save();
 
