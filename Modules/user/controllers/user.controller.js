@@ -38,7 +38,7 @@ exports.uploadAvatar = asyncHandler(async (req, res, next) => {
   let { user } = req;
   if (!req.file) return next(new appError("Please provide an image", 400));
   if (user.image.public_id !== process.env.DEFAULT_AVATAR_ID)
-    await deleteImage(user.image.public_id);
+    deleteImage(user.image.public_id);
 
   let image = await uploadImage("avatar", req.file.path);
   user.image = image;
@@ -97,7 +97,7 @@ exports.deleteProfilePicture = asyncHandler(async (req, res, next) => {
   if (user.image.public_id === process.env.DEFAULT_AVATAR_ID)
     return next(new appError("You don't have a profile picture", 400));
 
-  await deleteImage(user.image.public_id);
+  deleteImage(user.image.public_id);
 
   user.image.url = process.env.DEFAULT_AVATAR_URL;
   user.image.public_id = process.env.DEFAULT_AVATAR_ID;
