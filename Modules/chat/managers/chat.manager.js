@@ -10,7 +10,7 @@ const {
 
 module.exports.createMessageManager = asyncHandler(
   async (messageContent, senderId, receiverId, next) => {
-    if (!messageContent || !receiverId || !senderId) {
+    if (!receiverId || !senderId) {
       return next(
         new appError("Please provide receiverId, sender and text", 400)
       );
@@ -25,7 +25,7 @@ module.exports.createMessageManager = asyncHandler(
         participants: [senderId, receiverId],
       });
     }
-
+    if(!messageContent) messageContent = " ";
     let message = await Message.create({
       message: { text: messageContent },
       senderId,
