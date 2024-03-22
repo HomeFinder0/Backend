@@ -6,7 +6,6 @@ const appError = require("../../../Helpers/appError.js");
 const {
   deleteCloudFolder,
   deleteMultipleImages,
-  deleteImage,
 } = require("../../../Helpers/cloud.js");
 
 module.exports.createMessageManager = asyncHandler(
