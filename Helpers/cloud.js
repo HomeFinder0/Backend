@@ -1,9 +1,6 @@
 const cloudinary = require("../config/cloudinary");
 const asyncHandler = require("express-async-handler");
 
-const cloudinary = require("../config/cloudinary");
-const asyncHandler = require("express-async-handler");
-
 const uploadImage = asyncHandler(async (folder, filePath) => {
   const img = await cloudinary.uploader.upload(filePath, {
     folder,
