@@ -10,6 +10,7 @@ const {
   deleteConversationManager,
 } = require("../managers/chat.manager.js");
 const appError = require("../../../Helpers/appError.js");
+const { uploadCloudFolder,deleteCloudFolder } = require("../../../Helpers/cloud.js");
 
 module.exports.sendMessage = asyncHandler(async (req, res, next) => {
   const { messageContent } = req.body;
@@ -126,4 +127,13 @@ module.exports.deleteConversation = asyncHandler(async (req, res, next) => {
     });
   }
   res.status(201).json({ status: "success", message: "Conversation deleted" });
+});
+
+module.exports.sendMedia = asyncHandler(async (req, res, next) => {
+
+  const images = await uploadCloudFolder(req.user._id, req.files);
+
+  await deleteCloudFolder(req.user._id);
+  
+  res.status(201).json({ status: "success", images });
 });

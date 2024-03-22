@@ -7,7 +7,6 @@ const {
   resetPasswordValidation,
 } = require("../../common/validation/common.validation.js");
 
-const cloudinary = require("../../../config/cloudinary.js");
 const { uploadImage, deleteImage } = require("../../../Helpers/cloud.js");
 
 exports.setLocation = asyncHandler(async (req, res, next) => {

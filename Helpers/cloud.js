@@ -18,13 +18,14 @@ const deleteImage = asyncHandler(async (public_id) => {
   return true;
 });
 
-const uploadCloudFolder = async (objId, files) => {
+const uploadCloudFolder = async (folder, files) => {
   //This allows all the files to be uploaded in parallel to avoid the bottleneck of uploading one by one "timeOut error"
   const uploadPromises = files.map((file) =>
-    cloudinary.uploader.upload(file.path, { folder: `${objId}` })
+    cloudinary.uploader.upload(file.path, { folder })
   );
 
   const images = await Promise.all(uploadPromises);
+
   return images.map((img) => ({
     url: img.secure_url,
     public_id: img.public_id,
@@ -36,13 +37,13 @@ const deleteCloudFolder = asyncHandler(async (objId) => {
 
   await cloudinary.api.delete_resources_by_prefix(folderName);
   await cloudinary.api.delete_folder(folderName);
-  return {};
+  return true;
 });
+
 
 module.exports = {
   uploadImage,
   deleteImage,
-
   uploadCloudFolder,
   deleteCloudFolder,
 };

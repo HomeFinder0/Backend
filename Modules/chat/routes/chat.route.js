@@ -7,8 +7,10 @@ const {
   searchUsers,
   editMessage,
   deleteMessage,
-  deleteConversation
+  deleteConversation,
+  sendMedia,
 } = require("../controllers/chat.controller.js");
+const { uploadMultiple } = require("../../../Utils/multer.js");
 const isVerified = require("../../user/middlewares/user.isVerified.js");
 
 router.use(authMiddleware);
@@ -28,4 +30,5 @@ router.delete("/delete-message/:messageId", deleteMessage);
 
 router.delete("/delete-conversation/:receiverId", deleteConversation);
 
+router.post("/send-media",uploadMultiple, sendMedia);
 module.exports = router;
