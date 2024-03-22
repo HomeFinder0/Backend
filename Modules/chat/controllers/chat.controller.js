@@ -10,20 +10,26 @@ const {
   deleteConversationManager,
 } = require("../managers/chat.manager.js");
 const appError = require("../../../Helpers/appError.js");
-const { uploadCloudFolder,deleteCloudFolder } = require("../../../Helpers/cloud.js");
+const { uploadImages } = require("../../../Helpers/cloud.js");
 
 module.exports.sendMessage = asyncHandler(async (req, res, next) => {
   const { messageContent } = req.body;
   const senderId = req.user._id;
   const receiverId = req.params.receiverId;
 
-  const message = await createMessageManager(
+  const { message, conversation } = await createMessageManager(
     messageContent,
     senderId,
     receiverId,
     next
   );
   if (!message) return next(new appError("Message not sent", 500));
+
+  if (req.files) {
+    let images = await uploadImages(`${conversation._id}`, req.files);
+    message.message.media = images;
+    await message.save();
+  }
 
   const receiverSocketId = getReceiverSocketId(receiverId);
   if (receiverSocketId) {
@@ -127,13 +133,4 @@ module.exports.deleteConversation = asyncHandler(async (req, res, next) => {
     });
   }
   res.status(201).json({ status: "success", message: "Conversation deleted" });
-});
-
-module.exports.sendMedia = asyncHandler(async (req, res, next) => {
-
-  const images = await uploadCloudFolder(req.user._id, req.files);
-
-  await deleteCloudFolder(req.user._id);
-  
-  res.status(201).json({ status: "success", images });
 });

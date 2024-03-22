@@ -3,6 +3,11 @@ const Conversation = require("../models/Conversation.js");
 const Message = require("../models/Message.js");
 const User = require("../../user/models/User.js");
 const appError = require("../../../Helpers/appError.js");
+const {
+  deleteCloudFolder,
+  deleteMultipleImages,
+  deleteImage,
+} = require("../../../Helpers/cloud.js");
 
 module.exports.createMessageManager = asyncHandler(
   async (messageContent, senderId, receiverId, next) => {
@@ -39,7 +44,7 @@ module.exports.createMessageManager = asyncHandler(
     await conversation.save();
     await receiver.save();
 
-    return message;
+    return { message, conversation };
   }
 );
 
@@ -150,7 +155,13 @@ module.exports.deleteMessageManager = asyncHandler(
     );
 
     await message.deleteOne();
+    if (message.message.media) {
+      let public_ids = message.message.media.map((img) => img.public_id);
+      deleteMultipleImages(public_ids);
+    }
+    
     if (conversation.messages.length === 0 || !conversation.messages) {
+      deleteCloudFolder(`${conversation._id}`);
       await conversation.deleteOne();
       return { conversation, message };
     }
@@ -168,9 +179,10 @@ module.exports.deleteConversationManager = asyncHandler(
     const conversation = await Conversation.findOne({
       participants: { $all: [userId, receiverId] },
     });
-    console.log(conversation);
+
     if (!conversation) return next(new appError("Conversation not found", 404));
 
+    deleteCloudFolder(`${conversation._id}`);
     await Message.deleteMany({ _id: { $in: conversation.messages } });
     await conversation.deleteOne();
 

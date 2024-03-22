@@ -28,7 +28,7 @@ const uploadMultiple  = multer({
   },
   storage: Storage,
   fileFilter: imageFilter
-}).array(); // 10 is the max number of images
+}).array("images",10); // 10 is the max number of images
 
 module.exports = {
   uploadSingle,
