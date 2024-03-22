@@ -93,12 +93,11 @@ exports.completeSignup = asyncHandler(async (req, res, next) => {
 
   if (error) return next(new appError(error, 400));
 
-  user.firstName = value.firstName;
-  user.lastName = value.lastName;
-  user.fullName = `${value.firstName} ${value.lastName}`;
-  user.phone = value.phone;
-  user.gender = value.gender;
-
+  for (let key in value) {
+    user[key] = value[key];
+  }
+  user.fullName = `${user.firstName} ${user.lastName}`;
+  
   await user.save();
   return res.status(200).json({
     status: "success",

@@ -18,10 +18,9 @@ const userSchema = new mongoose.Schema(
     image: {
       url: {
         type: String,
-        default:
-          "https://res.cloudinary.com/dgslxtxg8/image/upload/v1703609152/iwonvcvpn6oidmyhezvh.jpg",
+        default: process.env.DEFAULT_AVATAR_URL,
       },
-      public_id: { type: String, default: process.env.DEFAULT_IMAGE_ID },
+      public_id: { type: String, default: process.env.DEFAULT_AVATAR_ID },
     },
 
     location: {
