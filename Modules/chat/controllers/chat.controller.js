@@ -55,7 +55,7 @@ module.exports.getMessages = asyncHandler(async (req, res, next) => {
 
   res.status(200).json({
     status: "success",
-    messages,
+    chat: messages,
   });
 });
 

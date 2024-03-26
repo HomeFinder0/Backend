@@ -54,7 +54,7 @@ module.exports.getConversationManager = asyncHandler(
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     })
-      .select("messages participants")
+      .select("messages")
       .populate("messages");
 
     if (conversation) {
@@ -67,7 +67,6 @@ module.exports.getConversationManager = asyncHandler(
       });
     }
     if (!conversation) conversation = [];
-
     return conversation;
   }
 );
