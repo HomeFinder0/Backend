@@ -20,4 +20,9 @@ const conversationSchema = new mongoose.Schema(
   }
 );
 
+conversationSchema.methods.toJSON = function () {
+  const conversation = this.toObject();
+  delete conversation.__v;
+  return conversation;
+};
 module.exports = mongoose.model("Conversation", conversationSchema);

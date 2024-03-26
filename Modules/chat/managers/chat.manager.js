@@ -25,9 +25,8 @@ module.exports.createMessageManager = asyncHandler(
         participants: [senderId, receiverId],
       });
     }
-    if(!messageContent) messageContent = " ";
     let message = await Message.create({
-      message: { text: messageContent },
+      messageContent,
       senderId,
       receiverId,
     });
@@ -54,8 +53,19 @@ module.exports.getConversationManager = asyncHandler(
 
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
-    }).populate("messages");
+    })
+      .select("messages participants")
+      .populate("messages");
 
+    if (conversation) {
+      conversation = conversation.toObject();
+      conversation.messages = conversation.messages.map((message) => {
+        let urls = message.media.map((item) => item.url);
+        message.media = urls;
+        delete message.__v;
+        return message;
+      });
+    }
     if (!conversation) conversation = [];
 
     return conversation;
@@ -154,11 +164,11 @@ module.exports.deleteMessageManager = asyncHandler(
     );
 
     await message.deleteOne();
-    if (message.message.media) {
-      let public_ids = message.message.media.map((img) => img.public_id);
+    if (message.media.length) {
+      let public_ids = message.media.map((img) => img.public_id);
       deleteMultipleImages(public_ids);
     }
-    
+
     if (conversation.messages.length === 0 || !conversation.messages) {
       deleteCloudFolder(`${conversation._id}`);
       await conversation.deleteOne();
