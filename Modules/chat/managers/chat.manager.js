@@ -54,13 +54,11 @@ module.exports.getConversationManager = asyncHandler(
     let conversation = await Conversation.findOne({
       participants: { $all: [senderId, receiverId] },
     })
-      .select("messages participants")
+      .select("messages")
       .populate("messages");
 
     if (conversation) {
       conversation = conversation.toObject();
-      delete conversation.__v;
-      delete conversation.participants;
       conversation.messages = conversation.messages.map((message) => {
         let urls = message.media.map((item) => item.url);
         message.media = urls;
