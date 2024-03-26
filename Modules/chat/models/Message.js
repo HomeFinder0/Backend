@@ -2,15 +2,13 @@ const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema(
   {
-    message: {
-      text: {
-        type: String,
-        required: true,
-      },
-      media: {
-        type: [{ url: String, public_id: String }],
-        required: false,
-      },
+    messageContent: {
+      type: String,
+      default: "",
+    },
+    media: {
+      type: [{ url: String, public_id: String }],
+      required: false,
     },
     senderId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -31,10 +29,9 @@ const messageSchema = new mongoose.Schema(
 messageSchema.methods.toJSON = function () {
   const message = this.toObject();
   delete message.__v;
-  delete message.message.__v;
-  if (message.message.media.length > 0) {
-    const urls = message.message.media.map((item) => item.url);
-    message.message.media = urls;
+  if (message.media.length > 0) {
+    const urls = message.media.map((item) => item.url);
+    message.media = urls;
   }
   return message;
 };
