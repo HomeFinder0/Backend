@@ -132,7 +132,7 @@ module.exports.editMessageManager = asyncHandler(
         new appError("You are not authorized to edit this message", 401)
       );
 
-    message.message.text = messageContent;
+    message.messageContent = messageContent;
     await message.save();
 
     if (!message) return next(new appError("Message not found", 404));
