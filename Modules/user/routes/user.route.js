@@ -10,6 +10,9 @@ const {
   uploadAvatar,
   deleteUser,
   changePassword,
+  addReview,
+  addOrRemoveFavorite,
+  getWishlist
 } = require("../controllers/user.controller.js");
 
 router.use(authMiddleware);
@@ -25,5 +28,9 @@ router.post("/upload-image", uploadSingle, uploadAvatar);
 router.delete("/delete-profile-picture", deleteProfilePicture);
 
 router.delete("/delete-user", deleteUser);
+
+router.post("/review/:residenceId", addReview);
+router.get("/favorite/:residenceId", addOrRemoveFavorite);
+router.get("/favorites", getWishlist);
 
 module.exports = router;

@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema(
         type: String,
       },
     },
-    wishlist: [{ type: mongoose.Schema.ObjectId, ref: "Products" }],
+    wishlist: [{ type: mongoose.Schema.ObjectId, ref: "Residence" }],
     tokens: [
       {
         token: {
