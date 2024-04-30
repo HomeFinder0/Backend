@@ -10,6 +10,7 @@ const appError = require("./Helpers/appError.js");
 const authRouter = require("./Modules/authentication/routes/auth.route.js");
 const userRouter = require("./Modules/user/routes/user.route.js");
 const chatRouter = require("./Modules/chat/routes/chat.route.js");
+const residenceRouter = require("./Modules/residence/routes/residence.route.js");
 
 app.use(cors());
 app.use(helmet());
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/chat", chatRouter);
+app.use("/api/v1/residence", residenceRouter);
 
 app.all("*", (req, res, next) => {
   return next(
