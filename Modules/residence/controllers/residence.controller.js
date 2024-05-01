@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const appError = require("../../../Helpers/appError.js");
 const Residence = require('../models/Residence.js');
+const User = require('../../user/models/User.js');
 const {
     uploadImage,
     deleteImage
@@ -190,6 +191,12 @@ exports.deleteOneResidence = asyncHandler(async (req, res, next) => {
             await deleteImage(image.public_id);
         }
 }
+    const user = await User.findOne({wishlist: residenceId});
+
+    if (user && user.wishlist) {
+        user.wishlist = user.wishlist.filter((fav) => fav.toString() !== residenceId);
+        await user.save();
+    }
     await residence.deleteOne();
     
     return res.status(200).json({
