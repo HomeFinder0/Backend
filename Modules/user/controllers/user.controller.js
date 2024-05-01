@@ -214,7 +214,7 @@ exports.addReview = asyncHandler(async (req, res, next) => {
   if(req.body.comment) review.comment = req.body.comment;
 
   residence.reviews.push(review._id);
-
+  review.populate('userId','username image');
   await review.save();
   await residence.save();
   
