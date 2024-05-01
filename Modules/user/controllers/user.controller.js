@@ -215,6 +215,7 @@ exports.addReview = asyncHandler(async (req, res, next) => {
 
   residence.reviews.push(review._id);
   review.populate('userId','username image');
+  
   await review.save();
   await residence.save();
   
