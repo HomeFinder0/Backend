@@ -11,7 +11,9 @@ const {
   deleteUser,
   changePassword,
   addReview,
-  addOrRemoveFavorite,
+  addFavorite,
+  deleteOneFavorite,
+  deleteAllFavorites,
   getWishlist
 } = require("../controllers/user.controller.js");
 
@@ -30,7 +32,10 @@ router.delete("/delete-profile-picture", deleteProfilePicture);
 router.delete("/delete-user", deleteUser);
 
 router.post("/review/:residenceId", addReview);
-router.get("/favorite/:residenceId", addOrRemoveFavorite);
+
 router.get("/favorites", getWishlist);
+router.get("/favorites/add/:residenceId", addFavorite);
+router.delete("/favorites/delete/:residenceId", deleteOneFavorite);
+router.delete("/favorites/delete", deleteAllFavorites);
 
 module.exports = router;

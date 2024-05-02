@@ -160,21 +160,50 @@ exports.changePassword = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.addOrRemoveFavorite = asyncHandler(async (req, res, next) => {
+exports.addFavorite = asyncHandler(async (req, res, next) => {
   let { user } = req;
   const { residenceId } = req.params;
+  
+  if(user.wishlist.includes(residenceId)) return next(new appError('Residence is already in your Favorite', 400));
 
-  if (user.wishlist.map(String).includes(residenceId)) {
-    user.wishlist = user.wishlist.filter((fav) => fav.toString() !== residenceId);
-}else {
-    user.wishlist.push(residenceId);
-  }
+  user.wishlist.push(residenceId);  
 
   await user.save();
 
   return res.status(200).json({
     status: "success",
-    message: "Favorite has been updated",
+    message: "Favorite has been added",
+  });
+});
+
+exports.deleteOneFavorite = asyncHandler(async (req, res, next) => {
+  let { user } = req;
+  const { residenceId } = req.params;
+
+  if (!user.wishlist.map(String).includes(residenceId))
+    return next(new appError("Residence is not in your Favorite", 400));
+
+  user.wishlist = user.wishlist.filter((fav) => fav.toString() !== residenceId);
+
+  await user.save();
+
+  return res.status(200).json({
+    status: "success",
+    message: "Favorite has been removed",
+  });
+});
+
+exports.deleteAllFavorites = asyncHandler(async (req, res, next) => {
+  let { user } = req;
+  
+  if(user.wishlist.length === 0) return next(new appError('You have no favorites', 400));
+  user.wishlist = [];
+
+  await user.save();
+
+  return res.status(200).json({
+    status: "success",
+    message: "All Favorites has been removed",
   });
 });
 
@@ -183,17 +212,18 @@ exports.getWishlist = asyncHandler(async (req, res, next) => {
 
   let user = await User.findById(_id).populate({
     path: 'wishlist',
-    populate:{
-      path: 'ownerId',
-      select: 'username image'
-    },
-    populate: {
+    populate:[
+      {
+        path:'ownerId',
+        select: 'username image'
+      },{
       path: 'reviews',
       populate: {
         path: 'userId',
         select: 'username image'
-      }
-    }
+        }
+      }  
+    ]
   });
 
   return res.status(200).json({
