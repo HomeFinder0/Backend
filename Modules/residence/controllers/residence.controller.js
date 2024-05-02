@@ -249,7 +249,8 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
   });
 
 exports.filtration = asyncHandler(async (req, res, next) => {
-    const {min, max, rating, bedroom, bathroom, neighborhood} = req.query;
+    let {min, max, rating, bedroom, bathroom, neighborhood} = req.query;
+    neighborhood = neighborhoodConverter(neighborhood);
 
     let residences = await Residence.find({
         $and: [
