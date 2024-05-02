@@ -6,6 +6,7 @@ const {
     uploadImage,
     deleteImage
 } = require("../../../Helpers/cloud.js");
+const getLocation = require("../../../Managers/getLocation.manager.js");
 const { 
     residenceValidation,
     completeResidenceValidation ,
@@ -223,3 +224,33 @@ function setBasementProperties(residence, value){
     residence.bsmtQual      = qualityRatingConverter(value.bsmtQual);
     residence.bsmtUnfSF     = value.bsmtUnfSF;
 }
+
+exports.setLocation = asyncHandler(async (req, res, next) => {
+    const { longitude, latitude } = req.query;
+    const { residenceId } = req.params;
+
+    if (!longitude || !latitude)   return next(new appError("Please provide a valid location", 400));
+    
+    const residence = await Residence.findById(residenceId);
+    if (!residence) return next(new appError("Residence not found!", 404));
+
+    residence.location = {
+        longitude: Number(longitude),
+        latitude : Number(latitude),
+    };
+    const location = await getLocation(latitude, longitude, next);
+    if (!location) return next(new appError("Unable to get location", 500));
+
+    if(location.country != 'United States' || location.city != 'Ames' || location.state != 'Iowa') return next(new appError("location must be inside Ames, Iowa, USA", 400))
+    
+    for (let key in location) {
+        residence.location[key] = location[key];
+    }
+
+    await residence.save();
+
+    return res.status(200).json({
+      status: "success",
+      location,
+    });
+  });

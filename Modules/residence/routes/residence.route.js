@@ -4,6 +4,7 @@ const {
     residenceImages,
     completeResidence,
     finalStep,
+    setLocation,
     updateResidence,
     getOneResidence,
     getAllResidences,
@@ -18,6 +19,7 @@ router.post("/create", createResidence);
 router.post("/upload/:residenceId", uploadMultiple , residenceImages);
 router.post("/complete/:residenceId" , completeResidence);
 router.post("/final/complete/:residenceId" , finalStep);
+router.post("/location/:residenceId" , setLocation);
 
 router.get("/get/:residenceId", getOneResidence);
 router.get("/all?", getAllResidences);

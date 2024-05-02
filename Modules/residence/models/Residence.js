@@ -13,6 +13,27 @@ const residenceSchema = new mongoose.Schema({
         url: { type: String },
         public_id: { type: String }
     }],
+
+    location: {
+        longitude: {
+          type: Number,
+        },
+        latitude: {
+          type: Number,
+        },
+        city: {
+          type: String,
+        },
+        state: {
+          type: String,
+        },
+        country: {
+          type: String,
+        },
+        fullAddress: {
+          type: String,
+        },
+      },
    
     poolArea   :{ type: Number, default: 0},
     roofStyle  :{ type: String, enum: ['Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed'] },
