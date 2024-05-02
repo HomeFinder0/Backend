@@ -1,7 +1,10 @@
 const asyncHandler = require("express-async-handler");
 const appError = require("../../../Helpers/appError.js");
+
 const Residence = require('../models/Residence.js');
+const Review = require('../models/Review.js');
 const User = require('../../user/models/User.js');
+
 const {
     uploadImage,
     deleteImage
@@ -40,7 +43,6 @@ exports.createResidence = asyncHandler(async (req, res, next) => {
     value.kitchenQual   = qualityRatingConverter(value.kitchenQual);
     value.mszoning      = mszoningConverter(value.mszoning);
     
-    if(value.salePrice == 0 ) return next(new appError("please, add a correct price", 400));
     const residence = await Residence.create({...value, ownerId: user._id});
 
     if(value.hasGarage){ 
@@ -57,6 +59,8 @@ exports.createResidence = asyncHandler(async (req, res, next) => {
         setBasementProperties(residence, value)
     }
     await residence.save();
+    console.log(value.salePrice);
+    console.log('residence', residence.salePrice);
     res.status(201).json({
         status: "success",
         residence
@@ -198,6 +202,13 @@ exports.deleteOneResidence = asyncHandler(async (req, res, next) => {
         user.wishlist = user.wishlist.filter((fav) => fav.toString() !== residenceId);
         await user.save();
     }
+
+    const reviews = await Review.find({residenceId});
+    if(reviews){
+        for(const review of reviews){
+            await review.deleteOne();
+        }
+    }
     await residence.deleteOne();
     
     return res.status(200).json({
@@ -206,24 +217,6 @@ exports.deleteOneResidence = asyncHandler(async (req, res, next) => {
     });
 });
 
-function setFirePlaceProperties(residence, value) {
-    residence.fireplaces = value.fireplaces;
-    residence.fireplaceQu = qualityRatingConverter(value.fireplaceQu);
-}
-function setGarageProperties(residence, value) {
-    residence.garageCars   = value.garageCars;
-    residence.garageType   = garageConverter(value.garageType);
-    residence.garageFinish = garageConverter(value.garageFinish);
-    residence.garageQual   = qualityRatingConverter(value.garageQual);
-}
-
-function setBasementProperties(residence, value){
-    residence.bsmtFinType1  = bsmtFinType1Converter(value.bsmtFinType1);
-    residence.bsmtExposure  = bsmtExposureConverter(value.bsmtExposure);
-    residence.BsmtCond      = qualityRatingConverter(value.BsmtCond);
-    residence.bsmtQual      = qualityRatingConverter(value.bsmtQual);
-    residence.bsmtUnfSF     = value.bsmtUnfSF;
-}
 
 exports.setLocation = asyncHandler(async (req, res, next) => {
     const { longitude, latitude } = req.query;
@@ -254,3 +247,48 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
       location,
     });
   });
+
+exports.filtration = asyncHandler(async (req, res, next) => {
+    const {min, max, rating, bedroom, bathroom, neighborhood} = req.query;
+
+    let residences = await Residence.find({
+        $and: [
+            { salePrice   : { $gte: min, $lte: max } },
+            { bedroomAbvGr: { $lte: bedroom } },
+            { neighborhood: neighborhood },
+        ]
+    }).populate([
+        {
+            path: 'reviews',
+            select: 'rating',
+        }
+    ]).select('title salePrice location.fullAddress images category');
+
+    residences = residences.filter(residence => 
+        residence.reviews.some(review => review.rating >= rating)
+      );
+    return res.status(200).json({
+        status: 'success',
+        count: residences.length,
+        residences
+    });
+});
+
+function setFirePlaceProperties(residence, value) {
+    residence.fireplaces = value.fireplaces;
+    residence.fireplaceQu = qualityRatingConverter(value.fireplaceQu);
+}
+function setGarageProperties(residence, value) {
+    residence.garageCars   = value.garageCars;
+    residence.garageType   = garageConverter(value.garageType);
+    residence.garageFinish = garageConverter(value.garageFinish);
+    residence.garageQual   = qualityRatingConverter(value.garageQual);
+}
+
+function setBasementProperties(residence, value){
+    residence.bsmtFinType1  = bsmtFinType1Converter(value.bsmtFinType1);
+    residence.bsmtExposure  = bsmtExposureConverter(value.bsmtExposure);
+    residence.BsmtCond      = qualityRatingConverter(value.BsmtCond);
+    residence.bsmtQual      = qualityRatingConverter(value.bsmtQual);
+    residence.bsmtUnfSF     = value.bsmtUnfSF;
+}

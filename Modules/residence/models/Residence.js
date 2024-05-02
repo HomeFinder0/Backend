@@ -74,7 +74,7 @@ const residenceSchema = new mongoose.Schema({
     saleCondition:{ type: String,  enum: ['Normal', 'Abnorml', 'AdjLand', 'Alloca', 'Family', 'Partial']  },
     saleType     :{ type: String,  enum:['WD','CWD','VWD','New','COD','Con','ConLw','ConLI','ConLD','Oth']},
     moSold       :{ type: Number },
-    SalePrice    :{ type: Number },
+    salePrice    :{ type: Number },
     mszoning     :{ type: String},
     
     utilities  :{ type: String,   enum: ['AllPub', 'NoSewr', 'NoSeWa', 'ELO']},

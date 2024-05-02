@@ -8,7 +8,8 @@ const {
     updateResidence,
     getOneResidence,
     getAllResidences,
-    deleteOneResidence
+    deleteOneResidence,
+    filtration
 } = require("../controllers/residence.controller.js");
 const authMiddleware = require("../../authentication/middlewares/auth.middleware.js");
 const {uploadMultiple} = require("../../../Utils/multer.js");
@@ -27,4 +28,5 @@ router.get("/all?", getAllResidences);
 router.patch("/update/:residenceId", updateResidence);
 router.delete("/delete/:residenceId", deleteOneResidence);
 
+router.get("/filter", filtration);
 module.exports = router;
