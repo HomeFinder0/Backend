@@ -4,7 +4,7 @@
 		"name": "Graduation",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25350743",
-		"_collection_link": "https://www.postman.com/telecoms-specialist-16112359/workspace/applications/collection/25350743-92622551-6996-4e69-bce8-4542e20ea444?action=share&source=collection_link&creator=25350743"
+		"_collection_link": "https://www.postman.com/workspace/59cde71a-0d27-49fd-a76f-504444644a9c/collection/25350743-92622551-6996-4e69-bce8-4542e20ea444?action=share&source=collection_link&creator=25350743"
 	},
 	"item": [
 		{
@@ -352,11 +352,13 @@
 									"variable": [
 										{
 											"key": "token",
-											"value": ""
+											"value": "",
+											"uuid": "6f8ea9a0-9ebe-4a0d-8235-98b8f22cbbb6"
 										},
 										{
 											"key": "id",
-											"value": ""
+											"value": "",
+											"uuid": "c8f18724-e443-4e86-8a66-9bc398663cde"
 										}
 									]
 								}
@@ -393,11 +395,13 @@
 									"variable": [
 										{
 											"key": "token",
-											"value": ""
+											"value": "",
+											"uuid": "c0fc0247-6dc3-4d21-a086-9d7d36a573b5"
 										},
 										{
 											"key": "id",
-											"value": ""
+											"value": "",
+											"uuid": "cd2600ae-57b0-4538-8fa3-d51aacd76408"
 										}
 									]
 								}
@@ -405,53 +409,6 @@
 							"response": []
 						}
 					]
-				}
-			]
-		},
-		{
-			"name": "Chat",
-			"item": [
-				{
-					"name": "send message",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDkxNjA2MSwiZXhwIjoxNzEzNTA4MDYxfQ.k_GhXtg5fs_29Yvr-XVEZHvM7dik8VmB98C2Sz-ayW4",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"messageContent\": \"HI\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/chat/send/65ef6083ab9a7db3b05c8414",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"chat",
-								"send",
-								"65ef6083ab9a7db3b05c8414"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -478,7 +435,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\"       :\"Home2\",\r\n    \"type\"        :\"rent\", \r\n    \"category\"    :\"cottage\" , \r\n    \"neighborhood\":\"clear creek\", \r\n    \"mszoning\"    :\"industrial\",\r\n\r\n    \"hasGarage\": true,\r\n      \"garageFinish\": \"unfinished\",\r\n      \"garageType\"  : \"basement\",\r\n      \"garageQual\"  : \"good\",\r\n      \"garageCars\"  : 2,\r\n\r\n    \"hasBasement\": false,\r\n    //   \"bsmtExposure\": \"\",\r\n    //   \"bsmtFinType1\": \"\",\r\n    //   \"bsmtQual\"    : \"\",\r\n    //   \"bsmtCond\"    : \"\",\r\n    //   \"bsmtUnfSF\"   : \"\",\r\n\r\n    \"hasFireplace\": true,\r\n       \"fireplaces\" : 0,\r\n       \"fireplaceQu\": \"poor\",\r\n    \r\n    \"poolArea\"    : 0,\r\n    \"roofStyle\"   : \"Flat\",\r\n    \"roofMatl\"    : \"standard shingle\",\r\n    \"houseStyle\"  : \"2Story\",\r\n    \"bedroomAbvGr\": 3,\r\n    \"KitchenAbvGr\": 1,\r\n    \"kitchenQual\" : \"good\",\r\n    \"totRmsAbvGrd\": 5,\r\n    \"centralAir\"  : \"Y\",\r\n\r\n   \"saleCondition\" : \"normal\",\r\n    \"saleType\"     : \"Cash\",\r\n    \"salePrice\"    : 1230,\r\n    \"moSold\"       : 0\r\n}",
+									"raw": "{\r\n    \"title\"       :\"tester 4\",\r\n    \"type\"        :\"rent\", \r\n    \"category\"    :\"cottage\" , \r\n    \"neighborhood\":\"brookside\", \r\n    \"mszoning\"    :\"industrial\",\r\n\r\n    \"hasGarage\": true,\r\n      \"garageFinish\": \"unfinished\",\r\n      \"garageType\"  : \"basement\",\r\n      \"garageQual\"  : \"good\",\r\n      \"garageCars\"  : 2,\r\n\r\n    \"hasBasement\": false,\r\n    //   \"bsmtExposure\": \"\",\r\n    //   \"bsmtFinType1\": \"\",\r\n    //   \"bsmtQual\"    : \"\",\r\n    //   \"bsmtCond\"    : \"\",\r\n    //   \"bsmtUnfSF\"   : \"\",\r\n\r\n    \"hasFireplace\": true,\r\n       \"fireplaces\" : 0,\r\n       \"fireplaceQu\": \"poor\",\r\n    \r\n    \"poolArea\"    : 0,\r\n    \"roofStyle\"   : \"Flat\",\r\n    \"roofMatl\"    : \"standard shingle\",\r\n    \"houseStyle\"  : \"2Story\",\r\n    \"bedroomAbvGr\": 1,\r\n    \"KitchenAbvGr\": 1,\r\n    \"kitchenQual\" : \"good\",\r\n    \"totRmsAbvGrd\": 5,\r\n    \"centralAir\"  : \"Y\",\r\n\r\n   \"saleCondition\" : \"normal\",\r\n    \"saleType\"     : \"Cash\",\r\n    \"salePrice\"    : 1300,\r\n    \"moSold\"       : 0\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -562,7 +519,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/complete/6631184b9e0cf8256c6f5ff1",
+									"raw": "http://localhost:8080/api/v1/residence/complete/:residenceId",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -573,7 +530,14 @@
 										"v1",
 										"residence",
 										"complete",
-										"6631184b9e0cf8256c6f5ff1"
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": "",
+											"uuid": "8eb034ba-a640-4c01-a40f-57fc6b4b1746"
+										}
 									]
 								}
 							},
@@ -632,7 +596,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"overallQual\"    : 10,\r\n    \"overallCond\"    : 2,\r\n    \"msSubClass\"     : 40,\r\n    \"totalarea\"      : 0,\r\n    \"totalbaths\"     : 0,\r\n    \"totalporchsf\"   : 0,\r\n    \"lotFrontage\"    : 0,\r\n    \"lotArea\"        : 0,\r\n\t\"totalsf\"        : 0,\r\n    \"masVnrArea\"     : 0,\r\n    \"lowQualFinSF\"   : 0,\r\n    \"miscVal\"        : 0,\r\n    \"houseage\"       : 0,\r\n    \"houseremodelage\": 0\r\n}",
+									"raw": "{\r\n    \"overallQual\"    : 0,\r\n    \"overallCond\"    : 0,\r\n    \"msSubClass\"     : 40,\r\n    \"totalarea\"      : 0,\r\n    \"totalbaths\"     : 0,\r\n    \"totalporchsf\"   : 0,\r\n    \"lotFrontage\"    : 0,\r\n    \"lotArea\"        : 0,\r\n\t\"totalsf\"        : 0,\r\n    \"masVnrArea\"     : 0,\r\n    \"lowQualFinSF\"   : 0,\r\n    \"miscVal\"        : 0,\r\n    \"houseage\"       : 0,\r\n    \"houseremodelage\": 0\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -640,7 +604,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/final/complete/6631184b9e0cf8256c6f5ff1",
+									"raw": "http://localhost:8080/api/v1/residence/final/complete/residenceId",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -652,14 +616,14 @@
 										"residence",
 										"final",
 										"complete",
-										"6631184b9e0cf8256c6f5ff1"
+										"residenceId"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "Get one residence",
+							"name": "Set Location",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -671,10 +635,10 @@
 										}
 									]
 								},
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/get/6630b5d17407f6ae404696b6",
+									"raw": "http://localhost:8080/api/v1/residence/location/:residenceId?latitude=&longitude=",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -684,8 +648,80 @@
 										"api",
 										"v1",
 										"residence",
-										"get",
-										"6630b5d17407f6ae404696b6"
+										"location",
+										":residenceId"
+									],
+									"query": [
+										{
+											"key": "latitude",
+											"value": ""
+										},
+										{
+											"key": "longitude",
+											"value": ""
+										},
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": "",
+											"uuid": "07c0588a-2722-4811-acd1-c4edcd39bca2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload images",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": "pexels-designecologist-1779487.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/upload/:residenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"upload",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": "",
+											"uuid": "5e035cec-c8d5-4dd1-ab45-4b3c838bff07"
+										}
 									]
 								}
 							},
@@ -694,7 +730,7 @@
 					]
 				},
 				{
-					"name": "Upload images",
+					"name": "Get One",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -706,20 +742,10 @@
 								}
 							]
 						},
-						"method": "POST",
+						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "images",
-									"type": "file",
-									"src": "pexels-designecologist-1779487.jpg"
-								}
-							]
-						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/residence/upload/:residenceId",
+							"raw": "http://localhost:8080/api/v1/residence/get/:residenceId",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -729,94 +755,14 @@
 								"api",
 								"v1",
 								"residence",
-								"upload",
+								"get",
 								":residenceId"
 							],
 							"variable": [
 								{
 									"key": "residenceId",
-									"value": ""
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update residence",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PATCH",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    // \"title\"         :\"\"\r\n    // \"type\"          :\"\",\r\n    // \"category\"      :\"\" , \r\n    // \"neighborhood\"  :\"\", \r\n    // \"mszoning\"      :\"\",\r\n    \"roofStyle\"     : \"Gable\"\r\n    // \"roofMatl\"      : \"\",\r\n    // \"houseStyle\"    : \"\",\r\n    // \"kitchenQual\"   : \"\",\r\n    // \"centralAir\"    : \"\",\r\n    // \"saleCondition\" : \"\",\r\n    // \"saleType\"      : \"\",\r\n\t\t// \"street\"        : \"\", \r\n    // \"foundation\"    : \"\", \r\n    // \"bldgType\"      : \"\", \r\n    // \"heating\"       : \"\", \r\n    // \"heatingQc\"     : \"\", \r\n    // \"electrical\"    : \"\", \r\n    // \"utilities\"     : \"\", \r\n    // \"lotShape\"      : \"\", \r\n    // \"lotConfig\"     : \"\", \r\n    // \"landContour\"   : \"\", \r\n    // \"landSlope\"     : \"\", \r\n    // \"condition1\"    : \"\", \r\n    // \"condition2\"    : \"\", \r\n    // \"masVnrType\"    : \"\", \r\n    // \"pavedDrive\"    : \"\", \r\n    // \"exterior2nd\"   : \"\", \r\n    // \"exterior1st\"   : \"\", \r\n    // \"exterCond\"     : \"\", \r\n\t\t\r\n    // \"totRmsAbvGrd\"   : 0,\r\n\t\t// \"poolArea\"       : 0,\r\n    // \"bedroomAbvGr\"   : 0,\r\n    // \"KitchenAbvGr\"   : 0,\r\n    // \"salePrice\"      : 0,\r\n    // \"moSold\"         : 0,\r\n    // \"msSubClass\"     : 0,\r\n    // \"totalarea\"      : 0,\r\n    // \"totalbaths\"     : 0,\r\n    // \"totalporchsf\"   : 0,\r\n    // \"lotFrontage\"    : 0,\r\n    // \"lotArea\"        : 0,\r\n    // \"totalsf\"        : 0,\r\n    // \"overallQual\"    : 0,\r\n    // \"overallCond\"    : 0,\r\n    // \"masVnrArea\"     : 0,\r\n    // \"lowQualFinSF\"   : 0,\r\n    // \"miscVal\"        : 0,\r\n    // \"houseage\"       : 0,\r\n    // \"houseremodelage\": 0,\r\n\r\n\t  // \"hasGarage\": false,\r\n    //   \"garageFinish\": \"\",\r\n    //   \"garageType\"  : \"\",\r\n    //   \"garageQual\"  : \"\",\r\n    //   \"garageCars\"  : 0,\r\n\r\n    // \"hasBasement\": false,\r\n    //   \"bsmtExposure\": \"\",\r\n    //   \"bsmtFinType1\": \"\",\r\n    //   \"bsmtQual\"    : \"\",\r\n    //   \"bsmtCond\"    : \"\",\r\n    //   \"bsmtUnfSF\"   : \"\",\r\n\r\n    // \"hasFireplace\": true,\r\n    //    \"fireplaces\" : 0,\r\n    //    \"fireplaceQu\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/residence/update/663116fbd72c610580e740e2",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"residence",
-								"update",
-								"663116fbd72c610580e740e2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete one residence",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/residence/delete/:residenceId",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"residence",
-								"delete",
-								":residenceId"
-							],
-							"variable": [
-								{
-									"key": "residenceId",
-									"value": ""
+									"value": "",
+									"uuid": "8a6da588-f0a2-4951-bf4e-7399834ccfa2"
 								}
 							]
 						}
@@ -867,7 +813,96 @@
 					"response": []
 				},
 				{
-					"name": "Get One",
+					"name": "Delete one residence",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/residence/delete/:residenceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"residence",
+								"delete",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": "",
+									"uuid": "a2e24c79-9b64-496b-9d05-e5c0ef8e03e3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update residence",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"title\"         :\"\"\r\n    // \"type\"          :\"\",\r\n    // \"category\"      :\"\" , \r\n    // \"neighborhood\"  :\"\", \r\n    // \"mszoning\"      :\"\",\r\n    //\"roofStyle\"     : \"\"\r\n    // \"roofMatl\"      : \"\",\r\n    // \"houseStyle\"    : \"\",\r\n    // \"kitchenQual\"   : \"\",\r\n    // \"centralAir\"    : \"\",\r\n    // \"saleCondition\" : \"\",\r\n    // \"saleType\"      : \"\",\r\n\t\t// \"street\"        : \"\", \r\n    // \"foundation\"    : \"\", \r\n    // \"bldgType\"      : \"\", \r\n    // \"heating\"       : \"\", \r\n    // \"heatingQc\"     : \"\", \r\n    // \"electrical\"    : \"\", \r\n    // \"utilities\"     : \"\", \r\n    // \"lotShape\"      : \"\", \r\n    // \"lotConfig\"     : \"\", \r\n    // \"landContour\"   : \"\", \r\n    // \"landSlope\"     : \"\", \r\n    // \"condition1\"    : \"\", \r\n    // \"condition2\"    : \"\", \r\n    // \"masVnrType\"    : \"\", \r\n    // \"pavedDrive\"    : \"\", \r\n    // \"exterior2nd\"   : \"\", \r\n    // \"exterior1st\"   : \"\", \r\n    // \"exterCond\"     : \"\", \r\n\t\t\r\n    // \"totRmsAbvGrd\"   : 0,\r\n\t\t// \"poolArea\"       : 0,\r\n    // \"bedroomAbvGr\"   : 0,\r\n    // \"KitchenAbvGr\"   : 0,\r\n    // \"salePrice\"      : 0,\r\n    // \"moSold\"         : 0,\r\n    // \"msSubClass\"     : 0,\r\n    // \"totalarea\"      : 0,\r\n    // \"totalbaths\"     : 0,\r\n    // \"totalporchsf\"   : 0,\r\n    // \"lotFrontage\"    : 0,\r\n    // \"lotArea\"        : 0,\r\n    // \"totalsf\"        : 0,\r\n    // \"overallQual\"    : 0,\r\n    // \"overallCond\"    : 0,\r\n    // \"masVnrArea\"     : 0,\r\n    // \"lowQualFinSF\"   : 0,\r\n    // \"miscVal\"        : 0,\r\n    // \"houseage\"       : 0,\r\n    // \"houseremodelage\": 0,\r\n\r\n\t  // \"hasGarage\": false,\r\n    //   \"garageFinish\": \"\",\r\n    //   \"garageType\"  : \"\",\r\n    //   \"garageQual\"  : \"\",\r\n    //   \"garageCars\"  : 0,\r\n\r\n    // \"hasBasement\": false,\r\n    //   \"bsmtExposure\": \"\",\r\n    //   \"bsmtFinType1\": \"\",\r\n    //   \"bsmtQual\"    : \"\",\r\n    //   \"bsmtCond\"    : \"\",\r\n    //   \"bsmtUnfSF\"   : \"\",\r\n\r\n    // \"hasFireplace\": true,\r\n    //    \"fireplaces\" : 0,\r\n    //    \"fireplaceQu\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/residence/update/:residenceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"residence",
+								"update",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": "",
+									"uuid": "5c54e824-a64c-4334-b009-9b2dc06b34f6"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtration",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -882,7 +917,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/residence/get/:residenceId",
+							"raw": "http://localhost:8080/api/v1/residence/filter?min=&max=&rating=&bedroom=&neighborhood=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -892,12 +927,32 @@
 								"api",
 								"v1",
 								"residence",
-								"get",
-								":residenceId"
+								"filter"
 							],
-							"variable": [
+							"query": [
 								{
-									"key": "residenceId",
+									"key": "min",
+									"value": ""
+								},
+								{
+									"key": "max",
+									"value": ""
+								},
+								{
+									"key": "rating",
+									"value": ""
+								},
+								{
+									"key": "bedroom",
+									"value": ""
+								},
+								{
+									"key": "bathroom",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "neighborhood",
 									"value": ""
 								}
 							]
@@ -910,6 +965,170 @@
 		{
 			"name": "User",
 			"item": [
+				{
+					"name": "Favorites",
+					"item": [
+						{
+							"name": "add to favorite",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/favorites/add/:residenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"favorites",
+										"add",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": "",
+											"uuid": "6b186a39-1342-4fb2-a99e-d8cb89af9e2c"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User Favorites",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/favorites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"favorites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove from favarites",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/favorites/delete/:residenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"favorites",
+										"delete",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": "",
+											"uuid": "ae54399d-6982-49b8-a55c-6d178c2b9198"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete all favorites",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/favorites/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"favorites",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
 				{
 					"name": "Add review",
 					"request": {
@@ -927,7 +1146,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"rating\": 4,\r\n    \"comment\": \"\"\r\n}",
+							"raw": "{\r\n    \"rating\": 0,\r\n    \"comment\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -935,7 +1154,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/user/review/6631184b9e0cf8256c6f5ff1",
+							"raw": "http://localhost:8080/api/v1/user/review/:residenceId",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -946,84 +1165,14 @@
 								"v1",
 								"user",
 								"review",
-								"6631184b9e0cf8256c6f5ff1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "add/remove  favorite",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8080/api/v1/user/favorite/6631184b9e0cf8256c6f5ff1",
-							"protocol": "http",
-							"host": [
-								"localhost"
+								":residenceId"
 							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"favorite",
-								"6631184b9e0cf8256c6f5ff1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get User Whishlist",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
+							"variable": [
 								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
-									"type": "string"
+									"key": "residenceId",
+									"value": "",
+									"uuid": "259d5ca1-d9a5-4055-bd29-f9318fdfb755"
 								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/api/v1/user/favorites",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"favorites"
 							]
 						}
 					},
