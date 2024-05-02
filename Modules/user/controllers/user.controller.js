@@ -5,7 +5,7 @@ const User = require("../models/User.js");
 const Residence = require("../../residence/models/Residence.js");
 const Review = require("../../residence/models/Review.js");
 
-const getLocation = require("../managers/getLocation.manager.js");
+const getLocation = require("../../../Managers/getLocation.manager.js");
 const { updateUserValidation } = require("../validators/user.validation.js");
 const {
   resetPasswordValidation,
