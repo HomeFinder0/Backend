@@ -17,5 +17,6 @@ module.exports = asyncHandler(async (lat, lon, next) => {
   const state = data.address.state;
   const country = data.address.country;
   const location = { fullAddress, city, state, country };
+  
   return location;
 });
