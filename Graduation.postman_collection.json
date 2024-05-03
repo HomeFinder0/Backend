@@ -4,7 +4,7 @@
 		"name": "Graduation",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25350743",
-		"_collection_link": "https://www.postman.com/workspace/59cde71a-0d27-49fd-a76f-504444644a9c/collection/25350743-92622551-6996-4e69-bce8-4542e20ea444?action=share&source=collection_link&creator=25350743"
+		"_collection_link": "https://www.postman.com/telecoms-specialist-16112359/workspace/applications/collection/25350743-92622551-6996-4e69-bce8-4542e20ea444?action=share&source=collection_link&creator=25350743"
 	},
 	"item": [
 		{
@@ -353,12 +353,12 @@
 										{
 											"key": "token",
 											"value": "",
-											"uuid": "6f8ea9a0-9ebe-4a0d-8235-98b8f22cbbb6"
+											"uuid": "5fd6461e-ea09-4f14-b16f-b0117e1e38a5"
 										},
 										{
 											"key": "id",
 											"value": "",
-											"uuid": "c8f18724-e443-4e86-8a66-9bc398663cde"
+											"uuid": "584bd64b-bd51-4cbc-8e13-0e7709f2bab9"
 										}
 									]
 								}
@@ -396,12 +396,12 @@
 										{
 											"key": "token",
 											"value": "",
-											"uuid": "c0fc0247-6dc3-4d21-a086-9d7d36a573b5"
+											"uuid": "5a4ff9cc-2142-460d-81c0-fd2780f37239"
 										},
 										{
 											"key": "id",
 											"value": "",
-											"uuid": "cd2600ae-57b0-4538-8fa3-d51aacd76408"
+											"uuid": "0dcebd73-a13e-485e-a884-7482d40cff21"
 										}
 									]
 								}
@@ -536,7 +536,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "8eb034ba-a640-4c01-a40f-57fc6b4b1746"
+											"uuid": "fdd91fbe-5e34-4ca7-baf7-95b0aff6eb2b"
 										}
 									]
 								}
@@ -670,7 +670,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "07c0588a-2722-4811-acd1-c4edcd39bca2"
+											"uuid": "e4e9ba7e-ec3c-4367-a6df-5964d8d2853b"
 										}
 									]
 								}
@@ -720,7 +720,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "5e035cec-c8d5-4dd1-ab45-4b3c838bff07"
+											"uuid": "79e454f0-8193-4bed-b41c-68448ba6bb2f"
 										}
 									]
 								}
@@ -762,7 +762,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "8a6da588-f0a2-4951-bf4e-7399834ccfa2"
+									"uuid": "ca495b34-c58f-4196-86e8-eb65ae08c80c"
 								}
 							]
 						}
@@ -845,7 +845,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "a2e24c79-9b64-496b-9d05-e5c0ef8e03e3"
+									"uuid": "f672e3c6-1e7a-4bd3-b91c-e044a5499eaa"
 								}
 							]
 						}
@@ -894,7 +894,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "5c54e824-a64c-4334-b009-9b2dc06b34f6"
+									"uuid": "4a5136b0-537a-4a6a-af82-117b65f1833b"
 								}
 							]
 						}
@@ -917,7 +917,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/residence/filter?min=&max=&rating=&bedroom=&neighborhood=",
+							"raw": "http://localhost:8080/api/v1/residence/filter?min=&max=&rating=&bedroom=&bathroom=&neighborhood=",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -948,8 +948,7 @@
 								},
 								{
 									"key": "bathroom",
-									"value": null,
-									"disabled": true
+									"value": ""
 								},
 								{
 									"key": "neighborhood",
@@ -1014,7 +1013,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "6b186a39-1342-4fb2-a99e-d8cb89af9e2c"
+											"uuid": "780ae4dd-3dbc-402e-9319-9f52ac120573"
 										}
 									]
 								}
@@ -1087,7 +1086,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "ae54399d-6982-49b8-a55c-6d178c2b9198"
+											"uuid": "c54c2a40-36d0-4f93-875a-5175372de8bb"
 										}
 									]
 								}
@@ -1128,7 +1127,12 @@
 							"response": []
 						}
 					]
-				},
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
 				{
 					"name": "Add review",
 					"request": {
@@ -1154,7 +1158,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/user/review/:residenceId",
+							"raw": "http://localhost:8080/api/v1/review/:residenceId",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1163,7 +1167,6 @@
 							"path": [
 								"api",
 								"v1",
-								"user",
 								"review",
 								":residenceId"
 							],
@@ -1171,7 +1174,127 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "259d5ca1-d9a5-4055-bd29-f9318fdfb755"
+									"uuid": "d5640c0b-83dc-4646-b4f4-3b25e6f0c151"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all reviews for one residence",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/review/get/:residenceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"get",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": "",
+									"uuid": "59dae7ad-16c2-4ff9-a962-dc72d144b065"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/review/like/:reviewId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"like",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": "",
+									"uuid": "51ad8f4d-7720-4873-a36f-b62360eb2b51"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unlike review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/review/unlike/:reviewId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"unlike",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": "",
+									"uuid": "236cc945-1508-4c95-8cbb-6aba2928bf94"
 								}
 							]
 						}
