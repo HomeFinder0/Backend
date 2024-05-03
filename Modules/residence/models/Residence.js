@@ -84,33 +84,49 @@ const residenceSchema = new mongoose.Schema({
     landSlope  :{ type: String,   enum: ['Gtl', 'Mod', 'Sev']},
     condition1 :{ type: String,   enum: ['Artery', 'Feedr', 'Norm', 'RRNn', 'RRAn', 'PosN', 'PosA', 'RRNe', 'RRAe']},
     condition2 :{ type: String,   enum: ['Artery', 'Feedr', 'Norm', 'RRNn', 'RRAn', 'PosN', 'PosA', 'RRNe', 'RRAe']},
-    masVnrType :{ type: String,   enum: ['BrkCmn', 'BrkFace', 'CBlock', 'None', 'Stone'], default: "None"}, 
     pavedDrive :{ type: String,   enum: ['Y','P','N'] }, 
     exterCond  :{ type: String,   enum: ['Ex', 'Gd', 'TA', 'Fa', 'Po']},
     exterQual  :{ type: String,   enum: ['Ex','Gd','TA','Fa','Po']},
     exterior1st:{ type: String},
     exterior2nd:{ type: String,   enum: ['AsbShng', 'AsphShn', 'BrkComm', 'BrkFace', 'CBlock', 'CemntBd', 'HdBoard', 'ImStucc', 'MetalSd', 'Other', 'Plywood', 'PreCast', 'Stone', 'Stucco', 'VinylSd', 'Wd Sdng', 'WdShing']}, 
     
-
+    masVnrType :{ type: String,   enum: ['BrkCmn', 'BrkFace', 'CBlock', 'None', 'Stone'], default: "None"}, 
+    masVnrArea     :{ type: Number, default: 0},
+    
     overallQual    :{ type: Number}, 
     overallCond    :{ type: Number},
     msSubClass     :{ type: Number, default: 0 }, 
     totalporchsf   :{ type: Number, default: 0 },
     lotFrontage    :{ type: Number, default: 0},
     lotArea        :{ type: Number, default: 0},
-    masVnrArea     :{ type: Number, default: 0},
     lowQualFinSF   :{ type: Number, default: 0},
     miscVal        :{ type: Number, default: 0},
     
     totalsf        : { type: Number, default: 0 },
     totalarea      :{ type: Number, default: 0 },
     totalbaths     :{ type: Number, default: 0 },
+
     houseage       :{ type: Number, default: 0},
     houseremodelage:{ type: Number, default: 0},
 },{
         timestamp: true
     }
 );
+
+const EXCLUDED_FIELDS = [
+  'houseremodelage', 'houseage','totalsf','lotArea', 'lotFrontage', 'miscVal', 'lowQualFinSF', 'masVnrArea','masVnrType',
+  'msSubClass', 'exterior2nd', 'exterior1st', 'condition1', 'condition2',
+  'landSlope', 'landContour', 'lotConfig', 'lotShape',  'moSold', 'bsmtExposure', '__v', 'pavedDrive'
+];
+
+residenceSchema.methods.toJSON = function () {
+  const residence = this.toObject();
+  EXCLUDED_FIELDS.forEach(field => delete residence[field]);
+  delete residence.location.latitude;
+  delete residence.location.longitude;
+  
+  return residence;
+};
 
 
 module.exports = mongoose.model('Residence', residenceSchema);
