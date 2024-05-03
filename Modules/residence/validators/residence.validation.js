@@ -95,6 +95,7 @@ exports.residenceValidation = function (residence) {
         .messages({ "string.empty": "House style is required","any.only":  "House style must be'1Story', '1.5Fin', '1.5Unf', '2Story', '2.5Fin', '2.5Unf', 'SFoyer' or 'SLvl'" }),
 
         bedroomAbvGr  : Joi.number().required().messages({ "number.type": "bedrooms must be a number" }).min(1),
+        totalbaths      : Joi.number().required().messages({ "number.type": "total baths must be a number" }).min(1).max(7),
         KitchenAbvGr  : Joi.number().required().messages({ "number.type": "Kitchens must be a number" }).min(1),
         kitchenQual   : Joi.string().required().valid('excellent', 'good', 'average', 'fair' , 'poor').lowercase()
         .messages({"any.only": "kitchen quality must be excellent, good, average, fair or poor" }),
@@ -156,11 +157,7 @@ exports.completeResidenceValidation = function (residence) {
         .messages({ "string.empty": "Condition 1 is required", "any.only": "Condition 1 must be normal, feeder, arterial, east west, north south, within 200 of east west, within 200 of North-South, positive off site feature or near positive" }),
         condition2  : Joi.string().required().valid('normal', 'feeder', 'arterial',  "east west" , 'north south', 'within 200 of east west', 'within 200 of North-South', 'positive off site feature','near positive' ).lowercase()
         .messages({ "string.empty": "Condition 2 is required", "any.only": "Condition 2 must be normal, feeder, arterial, east west, north south, within 200 of east west, within 200 of North-South, positive off site feature or near positive" }),
-        
-        masVnrType: Joi.string().valid('brick face', 'brick common', 'cinder block', 'None', 'Stone').lowercase().messages({
-            "string.empty": "Masonry veneer type is required",
-            "any.only": "Masonry veneer type must be brick face, brick common, cinder block, Stone or None "
-        }),
+    
         pavedDrive : Joi.string().required().valid('paved', 'dirt/gravel', 'partial')
         .messages({ "string.empty": "Paved drive is required", "any.only": "Paved drive must be paved, dirt/gravel or partial" }),
 
@@ -191,12 +188,17 @@ exports.finalStepValidation = function (residence) {
         msSubClass      : Joi.number().required().messages({ "number.type": "msSubClass must be a number" }).min(20).max(190),
         lotFrontage     : Joi.number().required().messages({ "number.type": "lot frontage must be a number" }),
         lotArea         : Joi.number().required().messages({ "number.type": "lot area must be a number" }),
-        masVnrArea      : Joi.number().required().messages({ "number.type": "masonry veneer area must be a number" }),
         
         totalsf         : Joi.number().required().messages({ "number.type": "total square footage must be a number" }),
         totalarea       : Joi.number().required().messages({ "number.type": "total area must be a number" }),
         totalporchsf    : Joi.number().required().messages({ "number.type": "total porch square footage must be a number" }),
-        totalbaths      : Joi.number().required().messages({ "number.type": "total baths must be a number" }),
+        
+        masVnrArea      : Joi.number().required().messages({ "number.type": "masonry veneer area must be a number" }),
+        masVnrType: Joi.string().valid('brick face', 'brick common', 'cinder block', 'None', 'Stone').lowercase().messages({
+            "string.empty": "Masonry veneer type is required",
+            "any.only": "Masonry veneer type must be brick face, brick common, cinder block, Stone or None "
+        }),
+
         houseage        : Joi.number().required().messages({ "number.type": "house age must be a number" }),
         houseremodelage : Joi.number().required().messages({ "number.type": "house remodel age must be a number" }),
 
@@ -324,16 +326,18 @@ exports.updateResidenceValidation = function (residence) {
         .messages({"any.only": "Exterior 2nd must be asbestos shingles, asphalt shingles, brick face, brick common, cement board, hardboard, hardboard siding, metal siding, plywood, Other, precast concrete, stucco, vinyl siding, wood siding, wood shingles or cinder block"}),  
         exterCond       : Joi.string().valid('excellent', 'good', 'average', 'fair', 'poor').lowercase().messages({"any.only": "Exterior condition must be excellent, good, average, fair or poor"}),
         exterQual       : Joi.string().valid('excellent', 'good', 'average', 'fair', 'poor').lowercase().messages({"any.only": "Exterior quality must be excellent, good, average, fair or poor"}),
+       
         overallQual     : Joi.number().messages({ "number.type": "overall material quality must be a number" }).min(1).max(10),
         overallCond     : Joi.number().messages({ "number.type": "overall condition must be a number" }).min(1).max(10),
+        totalarea       : Joi.number().messages({ "number.type": "total area must be a number" }),
+        totalporchsf    : Joi.number().messages({ "number.type": "total porch square footage must be a number", "number.empty": "total porch square footage is required" }).min(1),
+        totalbaths      : Joi.number().messages({ "number.type": "total baths must be a number", "number.empty": "total baths is required"}).min(1),
+       
         msSubClass      : Joi.number().messages({ "number.type": "msSubClass must be a number" }).min(20).max(190),
         lotFrontage     : Joi.number().messages({ "number.type": "lot frontage must be a number" }),
         lotArea         : Joi.number().messages({ "number.type": "lot area must be a number" }),
         masVnrArea      : Joi.number().messages({ "number.type": "masonry veneer area must be a number" }),
         totalsf         : Joi.number().messages({ "number.type": "total square footage must be a number" }),
-        totalarea       : Joi.number().messages({ "number.type": "total area must be a number" }),
-        totalporchsf    : Joi.number().messages({ "number.type": "total porch square footage must be a number" }),
-        totalbaths      : Joi.number().messages({ "number.type": "total baths must be a number" }),
         houseage        : Joi.number().messages({ "number.type": "house age must be a number" }),
         houseremodelage : Joi.number().messages({ "number.type": "house remodel age must be a number" }),
         miscVal         : Joi.number().messages({ "number.type": "miscellaneous value must be a number" }),
