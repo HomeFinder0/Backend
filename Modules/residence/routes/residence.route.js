@@ -29,4 +29,5 @@ router.patch("/update/:residenceId", updateResidence);
 router.delete("/delete/:residenceId", deleteOneResidence);
 
 router.get("/filter", filtration);
+
 module.exports = router;

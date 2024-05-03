@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler");
 const appError = require("../../../Helpers/appError.js");
 
 const Residence = require('../models/Residence.js');
-const Review = require('../models/Review.js');
+const Review = require('../../Review/models/Review.js');
 const User = require('../../user/models/User.js');
 
 const {
@@ -254,9 +254,10 @@ exports.filtration = asyncHandler(async (req, res, next) => {
 
     let residences = await Residence.find({
         $and: [
-            { salePrice   : { $gte: min, $lte: max } },
-            { bedroomAbvGr: { $lte: bedroom } },
-            { neighborhood: neighborhood },
+            { salePrice    : { $gte: min, $lte: max } },
+            { bedroomAbvGr : { $lte: bedroom } },
+            { totalbaths   : { $lte: bathroom } },
+            { neighborhood : neighborhood },
         ]
     }).populate([
         {
@@ -264,7 +265,7 @@ exports.filtration = asyncHandler(async (req, res, next) => {
             select: 'rating',
         }
     ]).select('title salePrice location.fullAddress images category');
-
+    if(rating)
     residences = residences.filter(residence => 
         residence.reviews.some(review => review.rating >= rating)
       );

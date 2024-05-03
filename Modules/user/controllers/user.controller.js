@@ -3,7 +3,6 @@ const appError = require("../../../Helpers/appError.js");
 
 const User = require("../models/User.js");
 const Residence = require("../../residence/models/Residence.js");
-const Review = require("../../residence/models/Review.js");
 
 const getLocation = require("../../../Managers/getLocation.manager.js");
 const { updateUserValidation } = require("../validators/user.validation.js");
@@ -232,26 +231,3 @@ exports.getWishlist = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.addReview = asyncHandler(async (req, res, next) => {
-  let userId = req.user._id;
-  const {residenceId} = req.params;
-  const { rating } = req.body;
-
-  let residence = await Residence.findById(residenceId);
-  if(!residence) return next(new appError('Residence not found!', 404));
-
-  const review = await Review.create({residenceId:residenceId, userId, rating});
-  if(req.body.comment) review.comment = req.body.comment;
-
-  residence.reviews.push(review._id);
-  review.populate('userId','username image');
-  
-  await review.save();
-  await residence.save();
-  
-  review.populate('residenceId','userId');
-  return res.status(200).json({
-    status: 'success',
-    review
-  });
-});

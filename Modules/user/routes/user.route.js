@@ -31,8 +31,6 @@ router.delete("/delete-profile-picture", deleteProfilePicture);
 
 router.delete("/delete-user", deleteUser);
 
-router.post("/review/:residenceId", addReview);
-
 router.get("/favorites", getWishlist);
 router.get("/favorites/add/:residenceId", addFavorite);
 router.delete("/favorites/delete/:residenceId", deleteOneFavorite);

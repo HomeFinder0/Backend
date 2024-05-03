@@ -7,9 +7,10 @@ const helmet = require("helmet");
 const ErrorHandler = require("./Helpers/errorHandler.js");
 const appError = require("./Helpers/appError.js");
 
-const authRouter = require("./Modules/authentication/routes/auth.route.js");
-const userRouter = require("./Modules/user/routes/user.route.js");
-const chatRouter = require("./Modules/chat/routes/chat.route.js");
+const authRouter      = require("./Modules/authentication/routes/auth.route.js");
+const userRouter      = require("./Modules/user/routes/user.route.js");
+const chatRouter      = require("./Modules/chat/routes/chat.route.js");
+const reviewRouter    = require("./Modules/Review/routes/review.route.js");
 const residenceRouter = require("./Modules/residence/routes/residence.route.js");
 
 app.use(cors());
@@ -26,6 +27,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/chat", chatRouter);
+app.use("/api/v1/review", reviewRouter);
 app.use("/api/v1/residence", residenceRouter);
 
 app.all("*", (req, res, next) => {
