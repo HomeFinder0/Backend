@@ -435,7 +435,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"title\"       :\"tester 4\",\r\n    \"type\"        :\"rent\", \r\n    \"category\"    :\"cottage\" , \r\n    \"neighborhood\":\"brookside\", \r\n    \"mszoning\"    :\"industrial\",\r\n\r\n    \"hasGarage\": true,\r\n      \"garageFinish\": \"unfinished\",\r\n      \"garageType\"  : \"basement\",\r\n      \"garageQual\"  : \"good\",\r\n      \"garageCars\"  : 2,\r\n\r\n    \"hasBasement\": false,\r\n    //   \"bsmtExposure\": \"\",\r\n    //   \"bsmtFinType1\": \"\",\r\n    //   \"bsmtQual\"    : \"\",\r\n    //   \"bsmtCond\"    : \"\",\r\n    //   \"bsmtUnfSF\"   : \"\",\r\n\r\n    \"hasFireplace\": true,\r\n       \"fireplaces\" : 0,\r\n       \"fireplaceQu\": \"poor\",\r\n    \r\n    \"poolArea\"    : 0,\r\n    \"roofStyle\"   : \"Flat\",\r\n    \"roofMatl\"    : \"standard shingle\",\r\n    \"houseStyle\"  : \"2Story\",\r\n    \"bedroomAbvGr\": 1,\r\n    \"KitchenAbvGr\": 1,\r\n    \"kitchenQual\" : \"good\",\r\n    \"totRmsAbvGrd\": 5,\r\n    \"centralAir\"  : \"Y\",\r\n\r\n   \"saleCondition\" : \"normal\",\r\n    \"saleType\"     : \"Cash\",\r\n    \"salePrice\"    : 1300,\r\n    \"moSold\"       : 0\r\n}",
+									"raw": "{\r\n    \"title\"       :\"Home test 2\",\r\n    \"type\"        :\"rent\", \r\n    \"category\"    :\"cottage\" , \r\n    \"neighborhood\":\"brookside\", \r\n    \"mszoning\"    :\"industrial\",\r\n\r\n    \"hasGarage\": true,\r\n      \"garageFinish\": \"unfinished\",\r\n      \"garageType\"  : \"basement\",\r\n      \"garageQual\"  : \"good\",\r\n      \"garageCars\"  : 2,\r\n\r\n    \"hasBasement\": false,\r\n    //   \"bsmtExposure\": \"\",\r\n    //   \"bsmtFinType1\": \"\",\r\n    //   \"bsmtQual\"    : \"\",\r\n    //   \"bsmtCond\"    : \"\",\r\n    //   \"bsmtUnfSF\"   : \"\",\r\n\r\n    \"hasFireplace\": true,\r\n       \"fireplaces\" : 0,\r\n       \"fireplaceQu\": \"poor\",\r\n    \r\n    \"poolArea\"    : 0,\r\n    \"roofStyle\"   : \"Flat\",\r\n    \"roofMatl\"    : \"standard shingle\",\r\n    \"houseStyle\"  : \"2Story\",\r\n\r\n    \"bedroomAbvGr\": 1,\r\n    \"totalbaths\"     : 5,\r\n    \"KitchenAbvGr\": 1,\r\n    \"kitchenQual\" : \"good\",\r\n    \"totRmsAbvGrd\": 5,\r\n    \"centralAir\"  : \"Y\",\r\n\r\n   \"saleCondition\" : \"normal\",\r\n    \"saleType\"     : \"Cash\",\r\n    \"salePrice\"    : 1300,\r\n    \"moSold\"       : 0\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -511,7 +511,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{   \r\n    \"street\"     : \"paved\", \r\n    \"foundation\" : \"wood\", \r\n    \"bldgType\"   : \"townhouse end unit\", \r\n    \"heating\"    : \"Gas\", \r\n    \"heatingQc\"  : \"poor\", \r\n    \"electrical\" : \"poor\", \r\n    \"utilities\"  : \"all\", \r\n    \"lotShape\"   : \"irregular\", \r\n    \"lotConfig\"  : \"frontage on 3\", \r\n    \"landContour\": \"banked\", \r\n    \"landSlope\"  : \"severe\", \r\n    \"condition1\" : \"feeder\", \r\n    \"condition2\" : \"normal\", \r\n    \"masVnrType\" : \"brick common\", \r\n    \"pavedDrive\" : \"paved\", \r\n    \"exterior2nd\": \"brick common\", \r\n    \"exterior1st\": \"asbestos shingles\", \r\n    \"exterCond\"  : \"good\", \r\n    \"exterQual\"  : \"good\"\r\n}",
+									"raw": "{   \r\n    \"street\"     : \"paved\", \r\n    \"foundation\" : \"wood\", \r\n    \"bldgType\"   : \"townhouse end unit\", \r\n    \"heating\"    : \"Gas\", \r\n    \"heatingQc\"  : \"poor\", \r\n    \"electrical\" : \"poor\", \r\n    \"utilities\"  : \"all\", \r\n    \"lotShape\"   : \"irregular\", \r\n    \"lotConfig\"  : \"frontage on 3\", \r\n    \"landContour\": \"banked\", \r\n    \"landSlope\"  : \"severe\", \r\n    \"condition1\" : \"feeder\", \r\n    \"condition2\" : \"normal\", \r\n    \"pavedDrive\" : \"paved\", \r\n    \"exterior2nd\": \"brick common\", \r\n    \"exterior1st\": \"asbestos shingles\", \r\n    \"exterCond\"  : \"good\", \r\n    \"exterQual\"  : \"good\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -596,7 +596,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"overallQual\"    : 0,\r\n    \"overallCond\"    : 0,\r\n    \"msSubClass\"     : 40,\r\n    \"totalarea\"      : 0,\r\n    \"totalbaths\"     : 0,\r\n    \"totalporchsf\"   : 0,\r\n    \"lotFrontage\"    : 0,\r\n    \"lotArea\"        : 0,\r\n\t\"totalsf\"        : 0,\r\n    \"masVnrArea\"     : 0,\r\n    \"lowQualFinSF\"   : 0,\r\n    \"miscVal\"        : 0,\r\n    \"houseage\"       : 0,\r\n    \"houseremodelage\": 0\r\n}",
+									"raw": "{\r\n    \"overallQual\"    : 10,\r\n    \"overallCond\"    : 10,\r\n    \"msSubClass\"     : 40,\r\n    \"totalarea\"      : 0,\r\n    \"totalporchsf\"   : 0,\r\n\r\n    \"masVnrType\" : \"brick common\", \r\n    \"masVnrArea\"     : 0,\r\n\r\n    \"lotFrontage\"    : 0,\r\n    \"lotArea\"        : 0,\r\n\t\"totalsf\"        : 0,\r\n    \"lowQualFinSF\"   : 0,\r\n    \"miscVal\"        : 0,\r\n    \"houseage\"       : 0,\r\n    \"houseremodelage\": 0\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -604,7 +604,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/final/complete/residenceId",
+									"raw": "http://localhost:8080/api/v1/residence/final/complete/:residenceId",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -616,7 +616,14 @@
 										"residence",
 										"final",
 										"complete",
-										"residenceId"
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": "",
+											"uuid": "1a08e28a-ad43-4394-87f0-a86bfe0d211c"
+										}
 									]
 								}
 							},
