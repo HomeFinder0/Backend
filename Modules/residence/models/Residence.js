@@ -113,20 +113,4 @@ const residenceSchema = new mongoose.Schema({
     }
 );
 
-const EXCLUDED_FIELDS = [
-  'houseremodelage', 'houseage','totalsf','lotArea', 'lotFrontage', 'miscVal', 'lowQualFinSF', 'masVnrArea','masVnrType',
-  'msSubClass', 'exterior2nd', 'exterior1st', 'condition1', 'condition2',
-  'landSlope', 'landContour', 'lotConfig', 'lotShape',  'moSold', 'bsmtExposure', '__v', 'pavedDrive'
-];
-
-residenceSchema.methods.toJSON = function () {
-  const residence = this.toObject();
-  EXCLUDED_FIELDS.forEach(field => delete residence[field]);
-  delete residence.location.latitude;
-  delete residence.location.longitude;
-  
-  return residence;
-};
-
-
 module.exports = mongoose.model('Residence', residenceSchema);
