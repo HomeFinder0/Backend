@@ -222,7 +222,8 @@ exports.getWishlist = asyncHandler(async (req, res, next) => {
         select: 'username image'
         }
       }  
-    ]
+    ],
+    select: 'title price image location reviews'
   });
 
   return res.status(200).json({
