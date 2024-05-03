@@ -59,8 +59,7 @@ exports.createResidence = asyncHandler(async (req, res, next) => {
         setBasementProperties(residence, value)
     }
     await residence.save();
-    console.log(value.salePrice);
-    console.log('residence', residence.salePrice);
+
     res.status(201).json({
         status: "success",
         residence
@@ -108,7 +107,6 @@ exports.completeResidence = asyncHandler(async (req, res, next) => {
     residence.condition2   = condConverter(value.condition2);
     residence.exterior2nd  = exteriorConverter(value.exterior2nd);
     residence.exterior1st  = exteriorConverter(value.exterior1st);
-    residence.masVnrType   = masVnrTypeConverter(value.masVnrType);
     residence.pavedDrive   = pavedDriveConverter(value.pavedDrive);
     residence.exterCond    = qualityRatingConverter(value.exterCond);
     residence.exterQual    = qualityRatingConverter(value.exterQual);
@@ -125,12 +123,15 @@ exports.finalStep = asyncHandler( async(req, res, next) => {
     if(error) return next(new appError(error, 400));
     
     const {residenceId} = req.params;
+
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true}).populate({
         path: 'ownerId',
-        select: 'username email phone location.fullAddress image'})
-    
+        select: 'username  location.fullAddress image'});
+        
     if(!residence) next(new appError("Residence not found!", 404));
     
+    residence.masVnrType   = masVnrTypeConverter(value.masVnrType);
+    await residence.save();
     return res.status(200).json({
         status: 'success',
         residence
@@ -154,7 +155,19 @@ exports.updateResidence = asyncHandler(async (req, res, next) => {
 
 exports.getOneResidence = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
-    const residence = await Residence.findById(residenceId).populate('ownerId').populate('reviews');
+    const residence = await Residence.findById(residenceId).populate([
+       { 
+        path: 'ownerId',
+        select: 'username  image location.fullAddress'
+    },{
+        path: 'reviews',
+        populate: {
+            path: 'userId',
+            select : 'username image location.fullAddress'
+        }
+    }
+    ]);
+
     if(!residence) next(new appError("Residence not found!", 404));
     
     return res.status(200).json({
@@ -170,7 +183,7 @@ exports.getAllResidences = asyncHandler(async (req, res, next) => {
 
     const residences = await Residence.find().populate({
         path: 'ownerId',
-        select: 'username email phone location.fullAddress image'
+        select: 'username image location.fullAddress'
     }).populate({
         path: 'reviews',
         populate: {
@@ -265,6 +278,7 @@ exports.filtration = asyncHandler(async (req, res, next) => {
             select: 'rating',
         }
     ]).select('title salePrice location.fullAddress images category');
+
     if(rating)
     residences = residences.filter(residence => 
         residence.reviews.some(review => review.rating >= rating)
