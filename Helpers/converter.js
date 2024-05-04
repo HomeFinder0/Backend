@@ -1,3 +1,33 @@
+exports.msSubClassConverter = (value) => {
+    const conversions = {
+        "1story and newer" : 20,
+        "1story and older" : 30,
+        "2story and newer" : 60,
+        "2story and older" : 70,
+        "1 story finished attic" : 40,
+        "1 story unfinished attic" : 45,
+        "multi-level" : 80,
+        "split foyer" : 85,
+        "duplex" : 90,
+        "multilevel and split" : 180,
+        "2 family conversion" : 190,
+    };
+
+    return conversions[value];
+};
+
+exports.bldgTypeConverter = (value) => {
+    const conversions = {
+        'single-family' : '1Fam',
+        'two-family': '2fmCon',
+        'duplex': 'Duplx',
+        'townhouse end unit': 'TwnhsE',
+        'townhouse inside unit': 'TwnhsI'
+    };
+
+    return conversions[value];
+};
+
 exports.qualityRatingConverter = (value) => {
     const conversions = {
         'good'         : 'Gd',
@@ -10,24 +40,47 @@ exports.qualityRatingConverter = (value) => {
 
     return conversions[value];
 }
-
-exports.neighborhoodConverter = (value) => {
+exports.centralAirConverter = (value) => {
     const conversions = {
-        'craord'                : 'Crawfor',
-        'edwards'               : 'Edwards',
-        'gilbert'               : 'Gilbert',
-        'blueste'               : 'Bluestem',
-        'briardale'             : 'BrDale',
-        'brookside'             : 'BrkSide',
-        'clear creek'           : 'ClearCr',
-        'college creek'         : 'CollgCr',
-        'meadow village'        : 'MeadowV',
-        'bloomington heights'   : 'Blmngtn',
-        'iowa dot and rail road': 'IDOTRR',
+        'yes' : 'Y',
+        'no'  : 'N'
     };
 
     return conversions[value];
 };
+
+exports.neighborhoodConverter = (value) => {
+    const conversions = {
+        'bloomington heights'   : 'Blmngtn',
+        'bluestem'               : 'Blueste',
+        'briardale'             : 'BrDale',
+        'clear creek'           : 'ClearCr',
+        'college creek'         : 'CollgCr',
+        'crawfor'                : 'Crawfor',
+        'edwards'               : 'Edwards',
+        'gilbert'               : 'Gilbert',
+        'iowa dot and rail road': 'IDOTRR',
+        'meadow village'        : 'MeadowV',
+        'mitchell'              : "Mitchel",
+        'north ames'            : 'Names',
+        'northridge'            : 'NoRidge',
+        'northpark villa'       : 'NPkVill',
+        'northridge heights'    : 'NridgHt',
+        'northwest ames'        : 'NWAmes',
+        'old town'              : 'OldTown',
+        'sawyer'                : 'Sawyer',
+        'sawyer west'           : 'SawyerW',
+        'somerset'              : 'Somerst',
+        'stone brook'           : 'StoneBr',
+        'timberland'            : 'Timber',
+        'veenker'               : 'Veenker',
+        'south & west of iowa state university': 'SWISU',
+    };
+
+    return conversions[value];
+};
+
+
 
 exports.mszoningConverter = (value) => {
     const conversions = {
@@ -51,7 +104,7 @@ exports.roofMaterialsConverter = (value) => {
         'membran'          : 'Membran',
         'wood shakes'      : 'WdShake',
         'gravel & tar'     : 'Tar&Grv',
-        'clay or tile'     : 'ClayTile',
+        'clay or tile'     : 'ClyTile',
         'wood shingles'    : 'WdShngl',
         'standard shingle' : 'CompShg',
     }
@@ -103,7 +156,15 @@ exports.saleTypeConverter = (value) => {
     }
     return conversions[value];
 }
+exports.alleyConverter = (value) =>{
+    const conversions = {
+        'gravel' : 'Grvl',
+        'paved'  : 'Pave',
+        'no alley access':'NA' 	
+    };
 
+    return conversions[value];
+}
 exports.streetConverter = (value) => {
     const conversions = {
         'gravel' : 'Grvl',
@@ -161,7 +222,7 @@ exports.utilitiesConverter = (value) => {
         'all'                         : 'AllPub',
         'electricity only'            : 'ELO',
         'electricity and gas only'    : 'NoSeWa',
-        'electricity, gas and water' : 'NoSewr',
+        'electricity, gas and water'  : 'NoSewr',
     }
     return conversions[value];
 };
@@ -202,16 +263,6 @@ exports.condConverter = (value) =>{
     return conversions[value];
 };
 
-exports.bldTypeConverter = (value) => {
-    const conversions = {
-        'duplex'               : 'Duplx',
-        'two family'           : '2fmCon',
-        'single family'        : '1Fam',
-        'townhouse end unit'   : 'TwnhsE',
-        'townhouse inside unit': 'TwnhsI'
-    };
-    return conversions[value];
-};
 
 exports.exteriorConverter = (value) => {
     const conversions = {
@@ -219,6 +270,7 @@ exports.exteriorConverter = (value) => {
         'asphalt shingles'          : 'AsphShn',
         'brick face'                : 'BrkFace',
         'brick common'              : 'BrkComm',
+        'cinder block'              : 'CBlock',
         'cement board'              : 'CemntBd',
         'hardboard'                 : 'HdBoard',
         'hardboard siding'          : 'HdBoard',
@@ -229,8 +281,9 @@ exports.exteriorConverter = (value) => {
         'vinyl siding'              : 'VinylSd',
         'wood siding'               : 'Wd Sdng',
         'wood shingles'             : 'WdShing',
-        'cinder block'              : 'CBlock',
         'other'                     : 'Other',
+        'imitation stucco'          : 'ImStucc',
+        'stone'                     :'Stone'	
     };
     return conversions[value];
 }
@@ -276,12 +329,14 @@ exports.bsmtExposureConverter = (value) => {
         'average'     : 'Av',
         'minimum'     : 'Mn',
         'no exposure' : 'No' ,
-    }
+    };
+    return conversions[value];
+
 }
 exports.pavedDriveConverter = (value) => {
     const conversions = {
         'paved'    : 'Y',
-        'dirt/gravel': 'N',
+        'gravel'   : 'N',
         'partial'  : 'P'
     };
     return conversions[value];
