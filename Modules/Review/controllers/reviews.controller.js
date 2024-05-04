@@ -9,7 +9,8 @@ exports.addReview = asyncHandler(async (req, res, next) => {
     let userId = req.user._id;
     const {residenceId} = req.params;
     const { rating } = req.body;
-  
+    if(rating < 1 || rating > 5) return next(new appError('Rating must be between 1 and 5', 400));
+
     let residence = await Residence.findById(residenceId);
     if(!residence) return next(new appError('Residence not found!', 404));
   
