@@ -3,7 +3,8 @@ const {
     createResidence,
     residenceImages,
     completeResidence,
-    finalStep,
+    stepTwoComplete,
+    stepThreeComplete,
     setLocation,
     updateResidence,
     getOneResidence,
@@ -17,10 +18,12 @@ const {uploadMultiple} = require("../../../Utils/multer.js");
 router.use(authMiddleware);
 
 router.post("/create", createResidence);
-router.post("/upload/:residenceId", uploadMultiple , residenceImages);
-router.post("/complete/:residenceId" , completeResidence);
-router.post("/final/complete/:residenceId" , finalStep);
+router.post("/complete/1st/:residenceId" , completeResidence);
+router.post("/complete/2nd/:residenceId" , stepTwoComplete);
+router.post("/complete/3rd/:residenceId" , stepThreeComplete);
+
 router.post("/location/:residenceId" , setLocation);
+router.post("/upload/:residenceId", uploadMultiple , residenceImages);
 
 router.get("/get/:residenceId", getOneResidence);
 router.get("/all?", getAllResidences);

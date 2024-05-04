@@ -7,7 +7,9 @@ const residenceSchema = new mongoose.Schema({
     title       : { type: String },
     type        : { type: String,  enum: ['rent', 'sale'] },
     category    : { type: String,  enum: ['apartment', 'house', 'hotel', 'villa', 'cottage'],},
-    neighborhood:{type: String},//loaction
+    neighborhood: { type: String, 
+      enum: []
+    },//loaction
 
     images:[{
         url: { type: String },
@@ -34,7 +36,7 @@ const residenceSchema = new mongoose.Schema({
           type: String,
         },
       },
-   
+    alley      : {type:String, default:'NA', enum:['Grvl','Pave', 'NA']}, 
     poolArea   :{ type: Number, default: 0},
     roofStyle  :{ type: String, enum: ['Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed'] },
     roofMatl   :{ type: String, enum: ['ClyTile', 'CompShg', 'Membran', 'Metal', 'Roll', 'Tar&Grv', 'WdShake', 'WdShngl'] },
@@ -53,7 +55,7 @@ const residenceSchema = new mongoose.Schema({
     hasBasement  :{type: Boolean, default: false},
     bsmtExposure :{type: String,  enum: ['Gd','Av','Mn','No'], default: "No"},
     bsmtFinType1 :{type: String,  enum: ['GLQ','ALQ','BLQ','Rec','LwQ','Unf']}, 
-    smtCond      :{type: String,  enum: ['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NO'], default: "NO"},
+    bsmtCond      :{type: String,  enum: ['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NO'], default: "NO"},
     bsmtQual     :{type:String,   enum: ['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NO'], default: "NO"},
     bsmtUnfSF    :{type: Number,  default: 0},
 
@@ -64,7 +66,7 @@ const residenceSchema = new mongoose.Schema({
     
     street     :{ type: String, enum: ['Pave', 'Grvl']},
     foundation :{ type: String, enum:['BrkTil','CBlock','PConc','Slab', 'Stone', 'Wood']},
-    bldgType   :{ type: String, enum: ['1Fam', '2fmCon', 'Duplex', 'TwnhsE', 'TwnhsI'] }, //Type of dwelling
+    bldgType   :{ type: String, enum: ['1Fam', '2FmCon', 'Duplx', 'TwnhsE', 'TwnhsI'] }, //Type of dwelling
     
     centralAir :{ type: String, enum:['N','Y']},
     heating    :{ type: String, enum:['Floor','GasA','GasW','Grav','OthW','Wall'] },
@@ -75,7 +77,8 @@ const residenceSchema = new mongoose.Schema({
     saleType     :{ type: String,  enum:['WD','CWD','VWD','New','COD','Con','ConLw','ConLI','ConLD','Oth']},
     moSold       :{ type: Number },
     salePrice    :{ type: Number },
-    mszoning     :{ type: String},
+    paymentPeriod:{ type: String, enum:['monthly', 'yearly'] },
+    mszoning     :{ type: String, enum:["A", "C", 'FV', 'I', 'RH','RL', 'RP', 'RM']},
     
     utilities  :{ type: String,   enum: ['AllPub', 'NoSewr', 'NoSeWa', 'ELO']},
     lotShape   :{ type: String,   enum: ['Reg', 'IR1', 'IR2', 'IR3']},
