@@ -156,7 +156,7 @@ exports.residenceImages = asyncHandler(async (req, res, next) => {
     await residence.save();
     res.status(200).json({
         status: "success",
-        residence
+        images: residence.images
     });
 });
 
