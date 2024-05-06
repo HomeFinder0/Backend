@@ -353,12 +353,12 @@
 										{
 											"key": "token",
 											"value": "",
-											"uuid": "d969c86b-26b1-4b04-9899-0a5b5cc7b335"
+											"uuid": "a6cc2a07-8e11-45cd-b913-e127a996ec86"
 										},
 										{
 											"key": "id",
 											"value": "",
-											"uuid": "08c99a6e-f4bc-4455-a04e-afbce7b7ac90"
+											"uuid": "20123b55-155e-4326-8507-ba91531d4cf2"
 										}
 									]
 								}
@@ -396,12 +396,12 @@
 										{
 											"key": "token",
 											"value": "",
-											"uuid": "d584375b-8ca6-402e-9cd9-46be584b834a"
+											"uuid": "dd36a7b3-a007-407a-9792-b42d05f1a098"
 										},
 										{
 											"key": "id",
 											"value": "",
-											"uuid": "4153835d-9cb2-422c-9d6d-5593b67e8a12"
+											"uuid": "85b08139-87af-47a9-b636-0b242e4d8d1c"
 										}
 									]
 								}
@@ -435,7 +435,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //15 Attributes\r\n    \"title\"       :\"\",\r\n    \"type\"        :\"\",   //Values:['sale', 'rent']\r\n    \"category\"    :\"\" ,  //\"apartment\", \"house\", \"hotel\", \"villa\",  \"cottage\"\r\n    \"neighborhood\":\"\",   // Physical location within Ames city limits \r\n    \"mszoning\"    :\"\",   //'agricultural', 'commercial', 'floating village', 'industrial', 'high residential','low', 'park', 'medium' \r\n    \r\n    \"saleCondition\" : \"\", //'normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial'\r\n    \"moSold\"       : 0,   //Month Sold\r\n    \"salePrice\"    : 0,\r\n    \"paymentPeriod\": \"\",  //Yearly, monthly\r\n    \"saleType\"     : \"\",  //Values:['conventional', 'cash', 'va Loan', 'new', 'court officer deed/estate', 'Contract Low Interest',\r\n    //'contract 15% Down payment regular terms', 'Contract Low Down payment and low intere', 'Contract Low Down', 'Other']\r\n    \r\n       \r\n    \"utilities\"  : \"\",   // Values:['all', 'electricity only', 'electricity and gas only' , 'electricity, gas and water']\r\n    \"lotShape\"   : \"\",   // General shape of property=>Values:['regular', 'slightly', 'moderately', 'irregular']\r\n    \"electrical\" : \"\",   // Values:['average', 'poor', 'fair', 'mixed', 'standard circuit breakers & romex']\r\n    \"foundation\" : \"\",         // Values:['slab', 'stone', 'wood', 'cinder block', 'brick and tile', 'poured contrete']\r\n    \"bldgType\"   : \"\"       // Values:['single family', 'duplex', 'townhouse end unit', 'townhouse inside unit', '2 family conversion']\r\n}",
+									"raw": "{\r\n    //15 Attributes\r\n    \"title\"       :\"\",\r\n    \"type\"        :\"\",   //Values:['sale', 'rent']\r\n    \"category\"    :\"\" ,  //\"apartment\", \"house\", \"hotel\", \"villa\",  \"cottage\"\r\n    \"neighborhood\":\"\",   // Physical location within Ames city limits \r\n    \"mszoning\"    :\"\",   //'agricultural', 'commercial', 'floating village', 'industrial', 'high residential','low', 'park', 'medium' \r\n    \r\n    \"saleCondition\" : \"\", //'normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial'\r\n    \"moSold\"       : 0,   //Month Sold\r\n    \"salePrice\"    : 0,\r\n    \"paymentPeriod\": \"\",  //Yearly, monthly\r\n    \"saleType\"     : \"\",  //Values:['conventional', 'cash', 'va Loan', 'new', 'court officer deed/estate', 'Contract Low Interest',\r\n    //'contract 15% Down payment regular terms', 'Contract Low Down payment and low intere', 'Contract Low Down', 'Other']\r\n    \r\n       \r\n    \"utilities\"  :[\"\"],   // Values:[ 'electricity', 'gas' , 'water']\r\n    \"lotShape\"   : \"\",   // General shape of property=>Values:['regular', 'slightly', 'moderately', 'irregular']\r\n    \"electrical\" : \"\",   // Values:['average', 'poor', 'fair', 'mixed', 'standard circuit breakers & romex']\r\n    \"foundation\" : \"\",         // Values:['slab', 'stone', 'wood', 'cinder block', 'brick and tile', 'poured contrete']\r\n    \"bldgType\"   : \"\"       // Values:['single family', 'duplex', 'townhouse end unit', 'townhouse inside unit', '2 family conversion']\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -502,7 +502,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "8c7b3488-d143-4636-8c8c-9686a2d8184d"
+											"uuid": "f412f56c-fd11-4383-97af-97c9e9a643ac"
 										}
 									]
 								}
@@ -552,7 +552,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "4459de31-f284-4f8c-b5a7-f6a36b6be0d2"
+											"uuid": "8c2b1cb9-a266-4e3a-a616-0e8433fcb26a"
 										}
 									]
 								}
@@ -602,7 +602,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "391ca1c2-01d7-4087-a171-926ce88d9f05"
+											"uuid": "6de956d4-64f9-4636-b2cc-e50f2df1dff2"
 										}
 									]
 								}
@@ -657,7 +657,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "c5eb8eb8-50eb-4ba1-826d-2ba5bc1c1396"
+											"uuid": "b9d13712-d351-478b-b930-42df058252b4"
 										}
 									]
 								}
@@ -707,7 +707,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "d697b6d3-b5bc-4af7-956a-64e2012e53aa"
+											"uuid": "d0a9ab61-edcb-4f8b-a05c-ffec93c4fb95"
 										}
 									]
 								}
@@ -749,7 +749,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "2cad0179-f568-4158-bef7-d04be5840343"
+									"uuid": "abbc20f6-3734-437b-bafc-6a076075fad4"
 								}
 							]
 						}
@@ -832,7 +832,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "c973e872-a069-49de-a6a5-bfe2e5ebaa15"
+									"uuid": "792f2764-2508-41b3-b23c-e55913ad9978"
 								}
 							]
 						}
@@ -881,7 +881,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "64b4eb9a-50db-44e0-b4bc-8d98c52e1778"
+									"uuid": "12a9cff6-bc53-47fd-ad8a-42ec9fc1e25a"
 								}
 							]
 						}
@@ -1000,7 +1000,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "bd6011e9-82d4-4f8e-b27a-d35885b3973d"
+											"uuid": "51d54449-df26-4288-9bdc-0fd6813acaa5"
 										}
 									]
 								}
@@ -1073,7 +1073,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "b6e5efc6-a2ff-4541-bd97-7c814b2b07b4"
+											"uuid": "8024307c-22bb-4a16-afb2-eacdb08ac08b"
 										}
 									]
 								}
@@ -1161,7 +1161,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "c8e1608e-df54-4600-8a3a-91987fa908f2"
+									"uuid": "ed66ebb0-63e5-48ee-9b08-e13b20311eed"
 								}
 							]
 						}
@@ -1201,7 +1201,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "0bedcaa1-3052-431d-b030-7fcee9d516e3"
+									"uuid": "c0da9884-063f-427d-9afa-209915be3cd3"
 								}
 							]
 						}
@@ -1241,7 +1241,7 @@
 								{
 									"key": "reviewId",
 									"value": "",
-									"uuid": "a9375f4b-6569-405e-91be-ac31a60937af"
+									"uuid": "1045fd5e-96a6-4b7a-aa4b-fab3bb289628"
 								}
 							]
 						}
@@ -1281,7 +1281,7 @@
 								{
 									"key": "reviewId",
 									"value": "",
-									"uuid": "a0a63cab-dea4-46c8-8951-9af279dec021"
+									"uuid": "9a5e0949-f1c3-41bd-8d1a-3a4286e1f4aa"
 								}
 							]
 						}
