@@ -217,15 +217,15 @@ exports.landContourConverter = (value) => {
     return conversions[value];
 }
 
-exports.utilitiesConverter = (value) => {
-    const conversions = {
-        'all'                         : 'AllPub',
-        'electricity only'            : 'ELO',
-        'electricity and gas only'    : 'NoSeWa',
-        'electricity, gas and water'  : 'NoSewr',
-    }
-    return conversions[value];
-};
+// exports.utilitiesConverter = (value) => {
+//     const conversions = {
+//         'all'                         : 'AllPub',
+//         'electricity only'            : 'ELO',
+//         'electricity and gas only'    : 'NoSeWa',
+//         'electricity, gas and water'  : 'NoSewr',
+//     }
+//     return conversions[value];
+// };
 
 exports.lotConfigConverter = (value) => {
     const conversions = {
