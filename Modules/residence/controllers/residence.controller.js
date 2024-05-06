@@ -21,7 +21,6 @@ const { updateResidenceValidation } = require("../validators/updateResidence.val
 
 const { 
     neighborhoodConverter,   mszoningConverter,
-    utilitiesConverter,      qualityRatingConverter,
     roofMaterialsConverter,  garageConverter,
     saleTypeConverter,       electricalConverter,    
     streetConverter,         bsmtExposureConverter,
@@ -32,20 +31,32 @@ const {
     lotShapeConverter,       lotConfigConverter, 
     centralAirConverter,     saleConditionConverter,
     msSubClassConverter,     bldgTypeConverter,
-    foundationConverter,     alleyConverter
+    foundationConverter,     alleyConverter,
+    qualityRatingConverter,
     } = require("../../../Helpers/converter.js");
 
 exports.createResidence = asyncHandler(async (req, res, next) => {
     const user = req.user;
     const {value, error} = residenceValidation(req.body);
     if(error) return next(new appError(error, 400));
-
+    
+    switch(value.utilities.length) {
+        case 3:
+            value.utilities = 'AllPub';
+            break;
+        case 1:
+            value.utilities = 'ELO';
+            break;
+        default:
+            value.utilities = value.utilities.includes('gas') ? 'NoSeWa' : value.utilities.includes('water') ? 'NoSewr' : value.utilities;
+            break;
+    }
+    
     value.neighborhood  = neighborhoodConverter(value.neighborhood);
     value.saleCondition = saleConditionConverter(value.saleCondition);
     value.saleType      = saleTypeConverter(value.saleType);
     value.kitchenQual   = qualityRatingConverter(value.kitchenQual);
     value.mszoning      = mszoningConverter(value.mszoning);
-    value.utilities     = utilitiesConverter(value.utilities);
     value.lotShape      = lotShapeConverter(value.lotShape);   
     value.electrical    = electricalConverter(value.electrical);
     value.foundation    = foundationConverter(value.foundation);
@@ -141,7 +152,8 @@ exports.stepThreeComplete = asyncHandler( async(req, res, next) => {
         status: 'success',
         residence
     });
-})
+});
+
 exports.residenceImages = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
     const residence = await Residence.findById(residenceId);
@@ -159,7 +171,6 @@ exports.residenceImages = asyncHandler(async (req, res, next) => {
         images: residence.images
     });
 });
-
 
 exports.setLocation = asyncHandler(async (req, res, next) => {
     const { longitude, latitude } = req.query;
@@ -189,7 +200,7 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
       status: "success",
       location,
     });
-    });
+});
 
 exports.updateResidence = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
@@ -208,7 +219,7 @@ exports.updateResidence = asyncHandler(async (req, res, next) => {
 exports.getOneResidence = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
     const residence = await Residence.findById(residenceId).populate([
-       { 
+    { 
         path: 'ownerId',
         select: 'username  image location.fullAddress'
     },{
@@ -239,7 +250,7 @@ exports.getAllResidences = asyncHandler(async (req, res, next) => {
     }).populate({
         path: 'reviews',
         populate: {
-            path: 'userId',
+            path: 'userId likedUsers',
             select : 'username image location.fullAddress'
         }
     }).skip(skip).limit(limit);
@@ -284,24 +295,32 @@ exports.deleteOneResidence = asyncHandler(async (req, res, next) => {
 exports.filtration = asyncHandler(async (req, res, next) => {
     let {min, max, rating, bedroom, bathroom, neighborhood} = req.query;
     neighborhood = neighborhoodConverter(neighborhood);
-
+    if(!min) min = 0;
+    if(!max) max = 15000;
+    if(!bedroom)  bedroom = 1
+    if(!bathroom) bathroom = 1
+    
+    if(bedroom == 7) bedroom = { $eq: bedroom }; else bedroom = { $gte: bedroom };
     let residences = await Residence.find({
         $and: [
             { salePrice    : { $gte: min, $lte: max } },
-            { bedroomAbvGr : { $lte: bedroom } },
-            { totalbaths   : { $lte: bathroom } },
-            { neighborhood : neighborhood },
+            { bedroomAbvGr :  bedroom  },
+            { totalbaths   : { $gte: bathroom } },
         ]
     }).populate([
         {
             path: 'reviews',
             select: 'rating',
         }
-    ]).select('title salePrice location.fullAddress images category');
+    ]).select('title salePrice location.fullAddress images category neighborhood bedroomAbvGr totalbaths ');
+    
     if(rating)
     residences = residences.filter(residence => 
         residence.reviews.some(review => review.rating >= rating)
-      );
+    );
+    
+    if(neighborhood) residences = residences.filter(residence => residence.neighborhood === neighborhood);
+    
     return res.status(200).json({
         status: 'success',
         count: residences.length,
