@@ -353,12 +353,12 @@
 										{
 											"key": "token",
 											"value": "",
-											"uuid": "a6cc2a07-8e11-45cd-b913-e127a996ec86"
+											"uuid": "a48c384b-40ac-46b2-8745-c9a0291b6070"
 										},
 										{
 											"key": "id",
 											"value": "",
-											"uuid": "20123b55-155e-4326-8507-ba91531d4cf2"
+											"uuid": "9aa499cd-5608-4ddd-bd91-ed2549004507"
 										}
 									]
 								}
@@ -396,12 +396,12 @@
 										{
 											"key": "token",
 											"value": "",
-											"uuid": "dd36a7b3-a007-407a-9792-b42d05f1a098"
+											"uuid": "d66684b4-2786-4ae5-9ef5-b73a8ce5b105"
 										},
 										{
 											"key": "id",
 											"value": "",
-											"uuid": "85b08139-87af-47a9-b636-0b242e4d8d1c"
+											"uuid": "84242b5d-fcb9-40e4-833d-1f4f30a88c85"
 										}
 									]
 								}
@@ -435,7 +435,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //15 Attributes\r\n    \"title\"       :\"\",\r\n    \"type\"        :\"\",   //Values:['sale', 'rent']\r\n    \"category\"    :\"\" ,  //\"apartment\", \"house\", \"hotel\", \"villa\",  \"cottage\"\r\n    \"neighborhood\":\"\",   // Physical location within Ames city limits \r\n    \"mszoning\"    :\"\",   //'agricultural', 'commercial', 'floating village', 'industrial', 'high residential','low', 'park', 'medium' \r\n    \r\n    \"saleCondition\" : \"\", //'normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial'\r\n    \"moSold\"       : 0,   //Month Sold\r\n    \"salePrice\"    : 0,\r\n    \"paymentPeriod\": \"\",  //Yearly, monthly\r\n    \"saleType\"     : \"\",  //Values:['conventional', 'cash', 'va Loan', 'new', 'court officer deed/estate', 'Contract Low Interest',\r\n    //'contract 15% Down payment regular terms', 'Contract Low Down payment and low intere', 'Contract Low Down', 'Other']\r\n    \r\n       \r\n    \"utilities\"  :[\"\"],   // Values:[ 'electricity', 'gas' , 'water']\r\n    \"lotShape\"   : \"\",   // General shape of property=>Values:['regular', 'slightly', 'moderately', 'irregular']\r\n    \"electrical\" : \"\",   // Values:['average', 'poor', 'fair', 'mixed', 'standard circuit breakers & romex']\r\n    \"foundation\" : \"\",         // Values:['slab', 'stone', 'wood', 'cinder block', 'brick and tile', 'poured contrete']\r\n    \"bldgType\"   : \"\"       // Values:['single family', 'duplex', 'townhouse end unit', 'townhouse inside unit', '2 family conversion']\r\n}",
+									"raw": "{\r\n    //15 Attributes\r\n    \"title\"       :\"Test 2\",\r\n    \"type\"        :\"sale\",   //Values:['sale', 'rent']\r\n    \"category\"    :\"house\" ,  //\"apartment\", \"house\", \"hotel\", \"villa\",  \"cottage\"\r\n    \"neighborhood\":\"iowa dot and rail road\",   // Physical location within Ames city limits \r\n    \"mszoning\"    :\"low\",   //'agricultural', 'commercial', 'floating village', 'industrial', 'high residential','low', 'park', 'medium' \r\n    \r\n    \"saleCondition\" : \"normal\", //'normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial'\r\n    \"moSold\"       : 10,   //Month Sold\r\n    \"salePrice\"    : 2240,\r\n    \"paymentPeriod\": \"Yearly\",  //Yearly, monthly\r\n    \"saleType\"     : \"conventional\",  //Values:['conventional', 'cash', 'va Loan', 'new', 'court officer deed/estate', 'Contract Low Interest',\r\n    //'contract 15% Down payment regular terms', 'Contract Low Down payment and low intere', 'Contract Low Down', 'Other']\r\n    \r\n       \r\n    \"utilities\"  :[\"electricity\" ],   // Values:[ 'electricity', 'gas' , 'water'] electricity must be sent\r\n    \"lotShape\"   : \"regular\",   // General shape of property=>Values:['regular', 'slightly', 'moderately', 'irregular']\r\n    \"electrical\" : \"poor\",   // Values:['average', 'poor', 'fair', 'mixed', 'standard circuit breakers & romex']\r\n    \"foundation\" : \"slab\",         // Values:['slab', 'stone', 'wood', 'cinder block', 'brick and tile', 'poured contrete']\r\n    \"bldgType\"   : \"single family\"       // Values:['single family', 'duplex', 'townhouse end unit', 'townhouse inside unit', '2 family conversion']\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -476,7 +476,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{   //17 Attributes\r\n    \"roofStyle\"   : \"\",        //'Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed'\r\n    \"roofMatl\"    : \"\",       //'clay or tile','standard shingle','membran','metal','roll','gravel & tar','wood shakes','wood shingles'\r\n    \"houseStyle\"  : \"\",      // عدد الطوابق=> Values: [1Story', '1.5Fin', '1.5Unf', '2Story', '2.5Fin', '2.5Unf', 'SFoyer', 'SLvl']\r\n    \"msSubClass\"  : \"\" ,    //type of residence: عدد الطوابق واشكالها \r\n     //\"2 family conversion\", \"multilevel and split\", \"duplex\", \"split foyer\",\"multi-level\",\"1 story unfinished attic\",\"1 story finished attic\", \"2story and older\", \"2story and newer\",  \"1story and older\", \"1story and newer\"\r\n     \r\n    \"centralAir\" : \"\", // Values: [yes, no]\r\n    \"street\"     : \"\",  // Values:[ paved , gravel ]\t نوع الطريق المؤدي إلى العقار\r\n    \"alley\"      : \"\" ,   //نوع الممر المؤدي إلى العقار   => Values:['gravel', 'paved','no alley access'] **Not required\r\n\r\n    \"heating\"    : \"\",  // Type of heating=>Values:['floor','gas', 'gas water', 'gravity', 'other water', 'wall']\r\n    \"heatingQc\"  : \"\",  // Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n              \r\n    \"masVnrType\" : \"\",  //Masonry veneer type =>Values:['brick face', 'brick common', 'cinder block', 'None', 'Stone']\r\n    \"masVnrArea\" : 0,\r\n    \r\n    \"exterior1st\": \"asphalt shingles\",  //Exterior covering on house \r\n    //'asbestos shingles','asphalt shingles','brick face','brick common','cement board','hardboard','hardboard siding','metal siding', 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block',  'stone', 'imitation stucco'\r\n    \"exterior2nd\": \"asphalt shingles\", //Exterior covering on house (if more than one material): same values of exterior1st\r\n\r\n    \"exterCond\"  : \"good\", //Evaluates the present condition of the material on the exterior Values:{'excellent', 'good', 'average', 'fair', 'poor'}\r\n    \"exterQual\"  : \"good\",  //Evaluates the quality of the material on the exterior=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"condition1\" : \"near positive off-site feature\",   // Proximity to various conditions:   \r\n    \"condition2\" : \"adjacent to positive off site feature\"    //if more than various conditions , same values of condition1\r\n\r\n\t\t//Conditions Value : ['normal', 'adjacent to feeder street', 'adjacent to arterial street',  \"adjacent to east west railroad\" , 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature','near positive off-site feature']\r\n}",
+									"raw": "{   //17 Attributes\r\n    \"roofStyle\"   : \"Hip\",        //'Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed'\r\n    \"roofMatl\"    : \"roll\",       //'clay or tile','standard shingle','membran','metal','roll','gravel & tar','wood shakes','wood shingles'\r\n    \"houseStyle\"  : \"2Story\",      // عدد الطوابق=> Values: [1Story', '1.5Fin', '1.5Unf', '2Story', '2.5Fin', '2.5Unf', 'SFoyer', 'SLvl']\r\n    \"msSubClass\"  : \"2story and newer\" ,    //type of residence: عدد الطوابق واشكالها \r\n     //\"2 family conversion\", \"multilevel and split\", \"duplex\", \"split foyer\",\"multi-level\",\"1 story unfinished attic\",\"1 story finished attic\", \"2story and older\", \"2story and newer\",  \"1story and older\", \"1story and newer\"\r\n     \r\n    \"centralAir\" : \"yes\", // Values: [yes, no]\r\n    \"street\"     : \"paved\",  // Values:[ paved , gravel ]\t نوع الطريق المؤدي إلى العقار\r\n    \"alley\"      : \"paved\" ,   //نوع الممر المؤدي إلى العقار   => Values:['gravel', 'paved','no alley access'] **Not required\r\n\r\n    \"heating\"    : \"gas\",  // Type of heating=>Values:['floor','gas', 'gas water', 'gravity', 'other water', 'wall']\r\n    \"heatingQc\"  : \"average\",  // Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n              \r\n    \"masVnrType\" : \"brick face\",  //Masonry veneer type =>Values:['brick face', 'brick common', 'cinder block', 'None', 'Stone']\r\n    \"masVnrArea\" : 10,\r\n    \r\n    \"exterior1st\": \"asphalt shingles\",  //Exterior covering on house \r\n    //'asbestos shingles','asphalt shingles','brick face','brick common','cement board','hardboard','hardboard siding','metal siding', 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block',  'stone', 'imitation stucco'\r\n    \"exterior2nd\": \"asphalt shingles\", //Exterior covering on house (if more than one material): same values of exterior1st\r\n\r\n    \"exterCond\"  : \"good\", //Evaluates the present condition of the material on the exterior Values:{'excellent', 'good', 'average', 'fair', 'poor'}\r\n    \"exterQual\"  : \"good\",  //Evaluates the quality of the material on the exterior=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"condition1\" : \"near positive off-site feature\",   // Proximity to various conditions:   \r\n    \"condition2\" : \"adjacent to positive off site feature\"    //if more than various conditions , same values of condition1\r\n\r\n\t\t//Conditions Value : ['normal', 'adjacent to feeder street', 'adjacent to arterial street',  \"adjacent to east west railroad\" , 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature','near positive off-site feature']\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -484,7 +484,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/complete/1st/:residenceId",
+									"raw": "http://localhost:8080/api/v1/residence/complete/1st/6638b5efbcdc5a553ad76310",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -496,14 +496,7 @@
 										"residence",
 										"complete",
 										"1st",
-										":residenceId"
-									],
-									"variable": [
-										{
-											"key": "residenceId",
-											"value": "",
-											"uuid": "f412f56c-fd11-4383-97af-97c9e9a643ac"
-										}
+										"6638b5efbcdc5a553ad76310"
 									]
 								}
 							},
@@ -526,7 +519,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //19 Attributes\r\n    \"hasGarage\"    : true,\r\n     \"garageType\"   : \"car port\", // Values:['2 types', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available']\r\n      \"garageQual\"  : \"good\",  // Values:['good','fair','poor','average','excellent', 'not available]\r\n     \"garageCars\"   : 2,\r\n      \"garageFinish\": \"finished\", //Values: ['finished','rough finished' ,'unfinished', 'not available']\r\n\r\n    \"hasBasement\" : true,\r\n     \"bsmtUnfSF\"   : 10,    //Unfinished square feet of basement ar\r\n     \"bsmtExposure\": \"average\",   //Refers to walkout or garden level walls=> Values:['good', 'average', 'minimum', 'no exposure']\r\n     \"bsmtFinType1\": \"low\",  //Rating of basement => Values:['good', 'average', 'below average', 'average rec room',  'low', 'unfinished' ]\r\n     \"bsmtQual\"    : \"excellent\",  //Evaluates the height of the basement=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n     \"bsmtCond\"    : \"excellent\",  //Evaluates the general condition of the basement=> values:['excellent', 'good', 'average', 'fair', 'poor', 'not available']\r\n\r\n    \"hasFireplace\": true,\r\n      \"fireplaces\" : 0,\r\n      \"fireplaceQu\": \"excellent\", //Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"bedroomAbvGr\": 1, \r\n    \"totalbaths\"  : 2,\r\n    \"KitchenAbvGr\": 2,\r\n    \"kitchenQual\" : \"excellent\",  //'excellent', 'good', 'average', 'fair' , 'poor'\r\n    \"totRmsAbvGrd\": 5             // total rooms without bathrooms\r\n\r\n}",
+									"raw": "{\r\n    //19 Attributes\r\n    \"hasGarage\"    : true,\r\n     \"garageType\"   : \"more than one\", // Values:['more than one', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available']\r\n      \"garageQual\"  : \"good\",  // Values:['good','fair','poor','average','excellent', 'not available]\r\n     \"garageCars\"   : 2,\r\n      \"garageFinish\": \"finished\", //Values: ['finished','rough finished' ,'unfinished', 'not available']\r\n\r\n    \"hasBasement\" : true,\r\n     \"bsmtUnfSF\"   : 10,    //Unfinished square feet of basement ar\r\n     \"bsmtExposure\": \"average\",   //Refers to walkout or garden level walls=> Values:['good', 'average', 'minimum', 'no exposure']\r\n     \"bsmtFinType1\": \"low\",  //Rating of basement => Values:['good', 'average', 'below average', 'average rec room',  'low', 'unfinished' ]\r\n     \"bsmtQual\"    : \"excellent\",  //Evaluates the height of the basement=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n     \"bsmtCond\"    : \"excellent\",  //Evaluates the general condition of the basement=> values:['excellent', 'good', 'average', 'fair', 'poor', 'not available']\r\n\r\n    \"hasFireplace\": true,\r\n      \"fireplaces\" : 0,\r\n      \"fireplaceQu\": \"excellent\", //Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"bedroomAbvGr\": 1, \r\n    \"totalbaths\"  : 2,\r\n    \"KitchenAbvGr\": 2,\r\n    \"kitchenQual\" : \"excellent\",  //'excellent', 'good', 'average', 'fair' , 'poor'\r\n    \"totRmsAbvGrd\": 5             // total rooms without bathrooms\r\n\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -552,7 +545,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "8c2b1cb9-a266-4e3a-a616-0e8433fcb26a"
+											"uuid": "5e3fc6b3-1407-4450-a6fd-2278ee2436c3"
 										}
 									]
 								}
@@ -602,7 +595,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "6de956d4-64f9-4636-b2cc-e50f2df1dff2"
+											"uuid": "0389fd21-aafd-4dc8-b489-4c84858a02c1"
 										}
 									]
 								}
@@ -657,7 +650,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "b9d13712-d351-478b-b930-42df058252b4"
+											"uuid": "5f6c9a92-ff1a-46f6-a63e-8faadedec1f3"
 										}
 									]
 								}
@@ -707,7 +700,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "d0a9ab61-edcb-4f8b-a05c-ffec93c4fb95"
+											"uuid": "02f0c100-b044-41d2-bd03-66f62888b15b"
 										}
 									]
 								}
@@ -749,7 +742,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "abbc20f6-3734-437b-bafc-6a076075fad4"
+									"uuid": "ea096c41-8fac-42fb-b15e-9f8a30b530be"
 								}
 							]
 						}
@@ -832,7 +825,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "792f2764-2508-41b3-b23c-e55913ad9978"
+									"uuid": "5c7213f4-84b4-4ccd-82ac-1d2bdc2c1c6a"
 								}
 							]
 						}
@@ -881,7 +874,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "12a9cff6-bc53-47fd-ad8a-42ec9fc1e25a"
+									"uuid": "884f4e27-6bbd-48e1-bf0e-fac43be309b0"
 								}
 							]
 						}
@@ -1000,7 +993,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "51d54449-df26-4288-9bdc-0fd6813acaa5"
+											"uuid": "64ab1cc5-0cd4-43d8-81ab-e195b27d8fd9"
 										}
 									]
 								}
@@ -1073,7 +1066,7 @@
 										{
 											"key": "residenceId",
 											"value": "",
-											"uuid": "8024307c-22bb-4a16-afb2-eacdb08ac08b"
+											"uuid": "3827b0f2-c845-45a0-b5e8-b7dd6d99a976"
 										}
 									]
 								}
@@ -1161,7 +1154,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "ed66ebb0-63e5-48ee-9b08-e13b20311eed"
+									"uuid": "07f5cac4-68a5-44cb-8480-80937cbaeffb"
 								}
 							]
 						}
@@ -1201,7 +1194,7 @@
 								{
 									"key": "residenceId",
 									"value": "",
-									"uuid": "c0da9884-063f-427d-9afa-209915be3cd3"
+									"uuid": "bbda5e9c-34cd-44d6-a811-0aa8929a0d84"
 								}
 							]
 						}
@@ -1241,7 +1234,7 @@
 								{
 									"key": "reviewId",
 									"value": "",
-									"uuid": "1045fd5e-96a6-4b7a-aa4b-fab3bb289628"
+									"uuid": "6ede3450-4a02-4128-8682-9567b4857fc0"
 								}
 							]
 						}
@@ -1281,7 +1274,7 @@
 								{
 									"key": "reviewId",
 									"value": "",
-									"uuid": "9a5e0949-f1c3-41bd-8d1a-3a4286e1f4aa"
+									"uuid": "e5dcdad3-cb30-4437-8fb6-dd479927b0aa"
 								}
 							]
 						}
