@@ -29,8 +29,14 @@ exports.updateResidenceValidation = function (residence) {
         totRmsAbvGrd  : Joi.number().messages({ "number.type": "total rooms must be a number" }).min(1),
         
         
-        utilities: Joi.string().valid('all', 'electricity only', 'electricity and gas only', 'electricity, gas and water').lowercase().messages({ 
-            "string.empty": "Utilities is required", "any.only": "Utilities must be 'all', 'electricity only', 'electricity and gas only' or 'electricity, gas and water'" }),
+        utilities: Joi.array().items(Joi.string().valid('electricity', 'gas', 'water')).required()
+        .messages({
+            "array.base": "Utilities must be an array",
+            "any.required": "Utilities is a required field",
+            "string.base": "Each item in utilities must be a string",
+            "any.only": "Each item in utilities must be one of ['electricity', 'gas', 'water']"
+        }),
+        
         lotShape    : Joi.string().valid('regular', 'slightly', 'moderately', 'irregular').lowercase().messages({
             "string.empty": "Lot shape is required", "any.only": "Lot shape must be regular, slightly, moderately or irregular" }),
         electrical: Joi.string().valid('standard circuit breakers & romex', 'average', 'poor', 'fair' ,'mixed').lowercase().messages({ 

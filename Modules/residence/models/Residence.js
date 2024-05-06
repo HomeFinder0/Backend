@@ -2,14 +2,13 @@ const mongoose = require('mongoose');
 
 const residenceSchema = new mongoose.Schema({
     ownerId     : { type: mongoose.Schema.Types.ObjectId,  ref: 'Users' },
+    isSold      : { type: Boolean, default: false },
     reviews     : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
 
     title       : { type: String },
     type        : { type: String,  enum: ['rent', 'sale'] },
     category    : { type: String,  enum: ['apartment', 'house', 'hotel', 'villa', 'cottage'],},
-    neighborhood: { type: String, 
-      enum: []
-    },//loaction
+    neighborhood: { type: String},
 
     images:[{
         url: { type: String },
@@ -17,22 +16,24 @@ const residenceSchema = new mongoose.Schema({
     }],
 
     location: {
-        longitude: {
+      latitude: {
+        type: Number,
+        default: 42.03320661739305
+      },
+    longitude: {
           type: Number,
+          default: -93.63323867085344
         },
-        latitude: {
-          type: Number,
-        },
-        city: {
+    city: {
           type: String,
         },
-        state: {
+    state: {
           type: String,
         },
-        country: {
+    country: {
           type: String,
         },
-        fullAddress: {
+    fullAddress: {
           type: String,
         },
       },

@@ -21,9 +21,14 @@ exports.residenceValidation = function (residence) {
         saleType     : Joi.string().valid('conventional', 'cash', 'va Loan', 'new', 'court officer deed/estate', 'contract 15% Down payment regular terms', 'contract Low down payment and low intere', 'contract low interest', 'contract low gown', 'other').lowercase().required().messages({ "string.empty": "Sale type is required","any.only": "Sale type must be Conventional, Cash, VA Loan, New, Court Officer Deed/Estate, Contract 15% Down payment regular terms, Contract Low Down payment and low intere, Contract Low Interest, Contract Low Down or Other" }),
         paymentPeriod : Joi.string().required().valid('monthly', 'yearly').lowercase().messages({"string.empty":"Payment period is required", "any.only":"Payment period must be monthly or yearly"}),
         
-        utilities: Joi.string().required().valid('all', 'electricity only', 'electricity and gas only', 'electricity, gas and water').lowercase().messages({ 
-            "string.empty": "Utilities is required", "any.only": "Utilities must be 'all', 'electricity only', 'electricity and gas only' or  'electricity, gas and water'" }),
-        lotShape    : Joi.string().required().valid('regular', 'slightly', 'moderately', 'irregular').lowercase().messages({
+        utilities: Joi.array().items(Joi.string().valid('electricity', 'gas', 'water')).required()
+        .messages({
+            "array.base": "Utilities must be an array",
+            "any.required": "Utilities is a required field",
+            "string.base": "Each item in utilities must be a string",
+            "any.only": "Each item in utilities must be one of ['electricity', 'gas', 'water']"
+        }),
+            lotShape    : Joi.string().required().valid('regular', 'slightly', 'moderately', 'irregular').lowercase().messages({
             "string.empty": "Lot shape is required", "any.only": "Lot shape must be regular, slightly, moderately or irregular" }),
         electrical: Joi.string().required().valid('standard circuit breakers & romex', 'average', 'poor', 'fair' ,'mixed').lowercase().messages({ 
             "string.empty": "Electrical is required","any.only": "Electrical must be  'average', 'poor', 'fair' , 'mixed' or 'standard circuit breakers & romex'" }),
