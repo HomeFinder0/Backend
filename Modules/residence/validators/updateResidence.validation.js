@@ -72,8 +72,8 @@ exports.updateResidenceValidation = function (residence) {
         }),
         garageType  : Joi.any().when('hasGarage', {
             is:true,
-            then: Joi.string().required().valid('2 types', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available').lowercase()
-        .messages({ "any.only": "Garage type must be 2 types, attached, basement, built in, car port, detached or not available" }),
+            then: Joi.string().required().valid('more than one', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available').lowercase()
+        .messages({ "any.only": "Garage type must bemore than one, attached, basement, built in, car port, detached or not available" }),
         otherwise: Joi.string().not('')
 
         }),

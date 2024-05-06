@@ -18,21 +18,9 @@ const {
 } = require("../validators/residence.validation.js");
 
 const { updateResidenceValidation } = require("../validators/updateResidence.validation.js");
-
+const valueConversion = require('../middlewares/valueConversion.js')
 const { 
-    neighborhoodConverter,   mszoningConverter,
-    roofMaterialsConverter,  garageConverter,
-    saleTypeConverter,       electricalConverter,    
-    streetConverter,         bsmtExposureConverter,
-    bsmtFinType1Converter,   pavedDriveConverter,
-    masVnrTypeConverter,     condConverter,
-    exteriorConverter,       landSlopeConverter,
-    landContourConverter,    heatingConverter, 
-    lotShapeConverter,       lotConfigConverter, 
-    centralAirConverter,     saleConditionConverter,
-    msSubClassConverter,     bldgTypeConverter,
-    foundationConverter,     alleyConverter,
-    qualityRatingConverter,
+    neighborhoodConverter
     } = require("../../../Helpers/converter.js");
 
 exports.createResidence = asyncHandler(async (req, res, next) => {
@@ -52,15 +40,7 @@ exports.createResidence = asyncHandler(async (req, res, next) => {
             break;
     }
     
-    value.neighborhood  = neighborhoodConverter(value.neighborhood);
-    value.saleCondition = saleConditionConverter(value.saleCondition);
-    value.saleType      = saleTypeConverter(value.saleType);
-    value.kitchenQual   = qualityRatingConverter(value.kitchenQual);
-    value.mszoning      = mszoningConverter(value.mszoning);
-    value.lotShape      = lotShapeConverter(value.lotShape);   
-    value.electrical    = electricalConverter(value.electrical);
-    value.foundation    = foundationConverter(value.foundation);
-    value.bldgType      = bldgTypeConverter(value.bldgType);
+    valueConversion(value);
     
     const residence = await Residence.create({...value, ownerId: user._id});
     
@@ -76,22 +56,7 @@ exports.completeResidence = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
     const {value, error} = completeResidenceValidation(req.body);
     if(error) return next(new appError(error, 400));
-    
-    value.masVnrType   = masVnrTypeConverter(value.masVnrType);
-    value.centralAir   = centralAirConverter(value.centralAir);
-    value.roofMatl     = roofMaterialsConverter(value.roofMatl);
-    value.street       = streetConverter(value.street);
-    value.alley        = alleyConverter(value.alley);
-    value.heating      = heatingConverter(value.heating);
-    value.heatingQc    = qualityRatingConverter(value.heatingQc);
-    value.exterior2nd  = exteriorConverter(value.exterior2nd);
-    value.exterior1st  = exteriorConverter(value.exterior1st);
-    value.exterCond    = qualityRatingConverter(value.exterCond);
-    value.exterQual    = qualityRatingConverter(value.exterQual);
-    value.msSubClass   = msSubClassConverter(value.msSubClass);
-    value.condition1   = condConverter(value.condition1);
-    value.condition2   = condConverter(value.condition2);
-
+    valueConversion(value);
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
 
@@ -105,22 +70,11 @@ exports.stepTwoComplete = asyncHandler( async(req, res, next) => {
     const {residenceId} = req.params;
     const {value, error} = stepTwoCompleteValidation(req.body);
     if(error) return next(new appError(error, 400));
-    console.log(value.bsmtExposure)
-    if(value.hasGarage){ 
-        value.garageType   = garageConverter(value.garageType);
-        value.garageFinish = garageConverter(value.garageFinish);
-        value.garageQual   = qualityRatingConverter(value.garageQual);
-    }
-    if(value.hasBasement) { 
-        value.bsmtFinType1  = bsmtFinType1Converter(value.bsmtFinType1);
-        value.bsmtExposure  = bsmtExposureConverter(value.bsmtExposure);
-        value.bsmtCond      = qualityRatingConverter(value.bsmtCond);
-        value.bsmtQual      = qualityRatingConverter(value.bsmtQual);
+    console.log(value.garageType)
+    
+    valueConversion(value);
+    console.log(value.garageType)
 
-    }
-    if(value.hasFireplace)  value.fireplaceQu = qualityRatingConverter(value.fireplaceQu);
-    value.kitchenQual  = qualityRatingConverter(value.kitchenQual);
-   
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
 
@@ -136,10 +90,7 @@ exports.stepThreeComplete = asyncHandler( async(req, res, next) => {
     
     const {residenceId} = req.params;
 
-    value.lotConfig    = lotConfigConverter(value.lotConfig);
-    value.landContour  = landContourConverter(value.landContour);
-    value.landSlope    = landSlopeConverter(value.landSlope);
-    value.pavedDrive   = pavedDriveConverter(value.pavedDrive);
+    valueConversion(value);
 
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true}).populate({
         path: 'ownerId',
@@ -205,6 +156,8 @@ exports.updateResidence = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
     const {value, error} = updateResidenceValidation(req.body);
     if(error) return next(new appError(error, 400));
+
+    valueConversion(value);
     if(value.utilities){
         if(! value.utilities.includes('electricity')) return next(new appError("electricity is required", 400))
     switch(value.utilities.length) {
@@ -219,51 +172,7 @@ exports.updateResidence = asyncHandler(async (req, res, next) => {
             break;
     }
     }
-    value.neighborhood  = neighborhoodConverter(value.neighborhood);
-    value.saleCondition = saleConditionConverter(value.saleCondition);
-    value.saleType      = saleTypeConverter(value.saleType);
-    value.kitchenQual   = qualityRatingConverter(value.kitchenQual);
-    value.mszoning      = mszoningConverter(value.mszoning);
-    value.lotShape      = lotShapeConverter(value.lotShape);   
-    value.electrical    = electricalConverter(value.electrical);
-    value.foundation    = foundationConverter(value.foundation);
-    value.bldgType      = bldgTypeConverter(value.bldgType);
-
-    value.masVnrType   = masVnrTypeConverter(value.masVnrType);
-    value.centralAir   = centralAirConverter(value.centralAir);
-    value.roofMatl     = roofMaterialsConverter(value.roofMatl);
-    value.street       = streetConverter(value.street);
-    value.alley        = alleyConverter(value.alley);
-    value.heating      = heatingConverter(value.heating);
-    value.heatingQc    = qualityRatingConverter(value.heatingQc);
-    value.exterior2nd  = exteriorConverter(value.exterior2nd);
-    value.exterior1st  = exteriorConverter(value.exterior1st);
-    value.exterCond    = qualityRatingConverter(value.exterCond);
-    value.exterQual    = qualityRatingConverter(value.exterQual);
-    value.msSubClass   = msSubClassConverter(value.msSubClass);
-    value.condition1   = condConverter(value.condition1);
-    value.condition2   = condConverter(value.condition2);
-
-    if(value.hasGarage){ 
-        value.garageType   = garageConverter(value.garageType);
-        value.garageFinish = garageConverter(value.garageFinish);
-        value.garageQual   = qualityRatingConverter(value.garageQual);
-    }
-    if(value.hasBasement) { 
-        value.bsmtFinType1  = bsmtFinType1Converter(value.bsmtFinType1);
-        value.bsmtExposure  = bsmtExposureConverter(value.bsmtExposure);
-        value.bsmtCond      = qualityRatingConverter(value.bsmtCond);
-        value.bsmtQual      = qualityRatingConverter(value.bsmtQual);
-
-    }
-    if(value.hasFireplace)  value.fireplaceQu = qualityRatingConverter(value.fireplaceQu);
-    value.kitchenQual  = qualityRatingConverter(value.kitchenQual);
-   
-    value.lotConfig    = lotConfigConverter(value.lotConfig);
-    value.landContour  = landContourConverter(value.landContour);
-    value.landSlope    = landSlopeConverter(value.landSlope);
-    value.pavedDrive   = pavedDriveConverter(value.pavedDrive);
-
+    
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
     
@@ -384,14 +293,3 @@ exports.filtration = asyncHandler(async (req, res, next) => {
         residences
     });
 });
-
-function convertUtilities(utilities) {
-    switch(utilities.length) {
-        case 3:
-            return 'AllPub';
-        case 1:
-            return 'ELO';
-        default:
-            return utilities.includes('gas') ? 'NoSeWa' : utilities.includes('water') ? 'NoSewr' : utilities;
-    }
-}
