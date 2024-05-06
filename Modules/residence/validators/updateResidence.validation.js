@@ -29,7 +29,7 @@ exports.updateResidenceValidation = function (residence) {
         totRmsAbvGrd  : Joi.number().messages({ "number.type": "total rooms must be a number" }).min(1),
         
         
-        utilities: Joi.array().items(Joi.string().valid('electricity', 'gas', 'water')).required()
+        utilities: Joi.array().items(Joi.string().valid('electricity', 'gas', 'water'))
         .messages({
             "array.base": "Utilities must be an array",
             "any.required": "Utilities is a required field",
