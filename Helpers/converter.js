@@ -119,9 +119,9 @@ exports.garageConverter = (value) => {
         'not available' : 'NA',
 
         'built in'          : 'BuiltIn',
-        'Car Port'          : 'CarPort',
+        'car port'          : 'CarPort',
         'more than one'     : '2Types',
-        'basement Garage'   : 'Basment',
+        'basement garage'   : 'Basment',
         'attached to home'  : 'Attchd',
         'Detached from home': 'Detchd' 
     }
