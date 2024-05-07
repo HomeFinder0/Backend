@@ -16,14 +16,15 @@ const residenceSchema = new mongoose.Schema({
     }],
 
     location: {
-      latitude: {
-        type: Number,
-        default: 42.03320661739305
-      },
-    longitude: {
-          type: Number,
-          default: -93.63323867085344
-        },
+      type: {
+        type: String,
+        enum: ['Point'],
+        default: 'Point'
+    },
+    coordinates : {
+        type: [Number],
+        default: [ -93.63323867085344, 42.03320661739305] //[long, lat]
+    },
     city: {
           type: String,
         },
@@ -117,4 +118,6 @@ const residenceSchema = new mongoose.Schema({
     }
 );
 
+residenceSchema.index({ 'location': '2dsphere'   });
 module.exports = mongoose.model('Residence', residenceSchema);
+

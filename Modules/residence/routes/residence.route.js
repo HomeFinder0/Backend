@@ -10,7 +10,8 @@ const {
     getOneResidence,
     getAllResidences,
     deleteOneResidence,
-    filtration
+    filtration,
+    getNearestResidences
 } = require("../controllers/residence.controller.js");
 const authMiddleware = require("../../authentication/middlewares/auth.middleware.js");
 const {uploadMultiple} = require("../../../Utils/multer.js");
@@ -27,6 +28,7 @@ router.post("/upload/:residenceId", uploadMultiple , residenceImages);
 
 router.get("/get/:residenceId", getOneResidence);
 router.get("/all?", getAllResidences);
+router.get("/nearest", getNearestResidences);
 
 router.patch("/update/:residenceId", updateResidence);
 router.delete("/delete/:residenceId", deleteOneResidence);

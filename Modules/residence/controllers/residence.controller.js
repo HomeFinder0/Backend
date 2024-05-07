@@ -111,7 +111,7 @@ exports.residenceImages = asyncHandler(async (req, res, next) => {
     if(! req.files) next(new appError("please, upload an image", 400));
     
     for (const file of req.files) {
-        const image = await uploadImage(residenceId, file.path);
+        const image = await uploadImage(residenceId, file.path, next);
         residence.images.push(image);
     }
 
@@ -130,12 +130,13 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
     
     const residence = await Residence.findById(residenceId);
     if (!residence) return next(new appError("Residence not found!", 404));
-
+    
+    let coord = [Number(longitude), Number(latitude)];
     residence.location = {
-        longitude: Number(longitude),
-        latitude : Number(latitude),
+        type     : 'Point',
+        coordinates: coord
     };
-    const location = await getLocation(latitude, longitude, next);
+    const location = await getLocation(latitude, longitude, next); 
     if (!location) return next(new appError("Unable to get location", 500));
 
     if(location.country != 'United States' || location.city != 'Ames' || location.state != 'Iowa') return next(new appError("location must be inside Ames, Iowa, USA", 400))
@@ -147,8 +148,8 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
     await residence.save();
 
     return res.status(200).json({
-      status: "success",
-      location,
+    status: "success",
+    location
     });
 });
 
@@ -202,6 +203,43 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
     return res.status(200).json({
         status: 'success',
         residence
+    });
+});
+
+
+exports.getNearestResidences = asyncHandler(async (req, res, next) => {
+    const {longitude, latitude} = req.user.location;
+
+    if(!longitude || !latitude) return next(new appError("Please provide a valid location", 400));
+    
+    const residences = await Residence.find({
+        location: {
+            $near: {
+                $geometry: {
+                    type: "Point",
+                    coordinates: [Number(longitude), Number(latitude)]
+                },
+                $maxDistance: 3000 // 5km
+            }
+        }
+    }).populate([
+        {
+            path: 'ownerId',
+            select: 'username image location.fullAddress'
+        },
+        {
+            path: 'reviews',
+            populate: {
+                path: 'userId',
+                select: 'username image location.fullAddress'
+            }
+        }
+    ]);
+
+    return res.status(200).json({
+        status: 'success',
+        count : residences.length,
+        residences
     });
 });
 
@@ -261,6 +299,7 @@ exports.deleteOneResidence = asyncHandler(async (req, res, next) => {
 exports.filtration = asyncHandler(async (req, res, next) => {
     let {min, max, rating, bedroom, bathroom, neighborhood} = req.query;
     neighborhood = neighborhoodConverter(neighborhood);
+   
     if(!min) min = 0;
     if(!max) max = 15000;
     if(!bedroom)  bedroom = 1
@@ -293,3 +332,4 @@ exports.filtration = asyncHandler(async (req, res, next) => {
         residences
     });
 });
+
