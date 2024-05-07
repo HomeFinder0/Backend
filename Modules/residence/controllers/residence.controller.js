@@ -219,7 +219,7 @@ exports.getNearestResidences = asyncHandler(async (req, res, next) => {
                     type: "Point",
                     coordinates: [Number(longitude), Number(latitude)]
                 },
-                $maxDistance: 3000 // 5km
+                $maxDistance: 3000 // 3km
             }
         }
     }).populate([
