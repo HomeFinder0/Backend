@@ -110,6 +110,7 @@ exports.deleteProfilePicture = asyncHandler(async (req, res, next) => {
   return res.status(200).json({
     status: "success",
     message: "Profile picture has been deleted",
+    image : user.image
   });
 });
 
