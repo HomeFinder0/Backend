@@ -114,10 +114,45 @@ const residenceSchema = new mongoose.Schema({
     houseage       :{ type: Number, default: 0},
     houseremodelage:{ type: Number, default: 0},
 },{
-        timestamp: true
-    }
+    timestamp: true,
+    toJSON: { 
+      transform: function (doc, ret) {
+          return {
+              _id          : ret._id,
+              title        : ret.title,
+              type         : ret.type,
+              isSold       : ret.isSold,
+              category     : ret.category,
+              salePrice    : ret.salePrice,
+              paymentPeriod: ret.paymentPeriod,
+              neighborhood : ret.neighborhood,
+              
+              bedroomAbvGr : ret.bedroomAbvGr,
+              totalbaths   : ret.totalbaths,
+              totRmsAbvGrd : ret.totRmsAbvGrd,
+              KitchenAbvGr : ret.KitchenAbvGr,
+              
+              hasGarage    : ret.hasGarage,
+              garageCars   : ret.garageCars,
+              garageType   : ret.garageType,
+              garageQual   : ret.garageQual,
+              hasFireplace : ret.hasFireplace,
+              fireplaces   : ret.fireplaces,
+              fireplaceQu  : ret.fireplaceQu,
+              hasBasement  : ret.hasBasement,
+              bsmtQual     : ret.bsmtQual,
+
+              location     : ret.location,
+              images       : ret.images,
+              reviews      : ret.reviews,
+              ownerId      : ret.ownerId,
+            };
+      }
+  }}
 );
 
-residenceSchema.index({ 'location': '2dsphere'   });
+
+residenceSchema.index({ 'location': '2dsphere'   }); // calculate geometries on an earth-like sphere.
+
 module.exports = mongoose.model('Residence', residenceSchema);
 
