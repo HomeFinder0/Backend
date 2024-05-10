@@ -14,7 +14,7 @@ exports.updateResidenceValidation = function (residence) {
         .lowercase().messages({ "string.empty": "Neighborhood is required", "any.only": "Neighborhood must be within Ames city limits ",}),
         
 
-        salePrice    : Joi.number().messages({ "number.type": "Sale price must be a number" }),
+        salePrice    : Joi.number().messages({ "number.type": "Sale price must be a number" }).min(100),
         saleCondition: Joi.string().valid('normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial').lowercase().messages({
             "string.empty": "Sale condition is required",  "any.only": "Sale condition must be normal, abnormal, adjoining land purchase , family, partial or allocation"}),
         moSold       : Joi.number().messages({ "number.type": "Month sold must be a number" }).min(1).max(12),
@@ -132,7 +132,7 @@ exports.updateResidenceValidation = function (residence) {
         "string.empty": "Heating quality is required","any.only": "Heating quality must be excellent, good, average, fair or poor"}),   
     
     exterior1st: Joi.string().valid('asbestos shingles', 'asphalt shingles', 'brick face', 'brick common', 'cement board', 'hardboard', 'hardboard siding', 'metal siding' , 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block').lowercase().messages({
-        "string.empty": "Exterior 1st is required", "any.only": "Exterior 2nd must be asbestos shingles, asphalt shingles, brick face, brick common, cement board, hardboard, hardboard siding, metal siding, plywood, Other, precast concrete, stucco, vinyl siding, wood siding, wood shingles or cinder block"}),  
+        "string.empty": "Exterior 1st is required", "any.only": "Exterior 1st must be asbestos shingles, asphalt shingles, brick face, brick common, cement board, hardboard, hardboard siding, metal siding, plywood, Other, precast concrete, stucco, vinyl siding, wood siding, wood shingles or cinder block"}),  
     exterior2nd: Joi.string().valid('asbestos shingles', 'asphalt shingles', 'brick face', 'brick common', 'cement board', 'hardboard', 'hardboard siding', 'metal siding' , 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block').lowercase().messages({ 
         "string.empty": "Exterior 2nd is required", "any.only": "Exterior 2nd must be asbestos shingles, asphalt shingles, brick face, brick common, cement board, hardboard, hardboard siding, metal siding, plywood, Other, precast concrete, stucco, vinyl siding, wood siding, wood shingles or cinder block"}),  
     exterCond   : Joi.string().valid('excellent', 'good', 'average', 'fair', 'poor').lowercase().messages({
@@ -167,7 +167,7 @@ exports.updateResidenceValidation = function (residence) {
         .messages({ "string.empty": "Proximity to various conditions is required", "any.only":  " Proximity to various conditions must be 'normal', 'adjacent to feeder street', 'adjacent to arterial street',  'adjacent to east west railroad', 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature' or 'near positive off-site feature' "}),
        
         condition2  : Joi.string().valid('normal', 'adjacent to feeder street', 'adjacent to arterial street',  "adjacent to east west railroad" , 
-        'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature','near positive off-site feature').lowercase()
+        'adjacent to north south', 'within 200 of east west', 'within 200 of north south', 'adjacent to positive off site feature','near positive off-site feature').lowercase()
         .messages({"any.only": "Invalid value of Proximity to various conditions"}),
     
         pavedDrive : Joi.string().valid('paved', 'gravel', 'partial')

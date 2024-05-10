@@ -6,6 +6,15 @@ exports.residenceValidation = function (residence) {
         title        : Joi.string().required().messages({ "string.empty": "Title is required" }),
         type         : Joi.string().valid("rent", "sale").trim().required().lowercase().messages({"string.empty": "Type is required","any.only": "Type must be rent or sale" }),
         category     : Joi.string().required().valid("apartment", "house", "hotel", "villa",  "cottage").lowercase().trim().messages({"string.empty": "Category is required","any.only": "Category must be apartment, house, hotel, villa or cottage" }),
+        }).unknown();
+
+    let { error, value } = residenceSchema.validate(residence);
+    if (error) error = errorUpdate(error);
+    return { value, error };
+};
+
+exports.completeResidenceValidation = function (residence) {
+    const residenceSchema = Joi.object({
         mszoning     : Joi.string().required().valid('agricultural', 'commercial', 'floating village', 'industrial', 'high residential','low', 'park', 'medium' ).lowercase()
         .messages({ "string.empty": "zoning is required", "any.only": "zoning must be agricultural, commercial, industrial , high residential, low,medium or park "}),
         
@@ -14,7 +23,7 @@ exports.residenceValidation = function (residence) {
         .lowercase().required().messages({ "string.empty": "Neighborhood is required", "any.only": "Neighborhood must be within Ames city limits ",}),
         
 
-        salePrice    : Joi.number().required().messages({ "number.type": "Sale price must be a number" }),
+        salePrice    : Joi.number().required().messages({ "number.type": "Sale price must be a number" }).min(100),
         saleCondition: Joi.string().required().valid('normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial').lowercase().messages({
             "string.empty": "Sale condition is required",  "any.only": "Sale condition must be normal, abnormal, adjoining land purchase , family, partial or allocation"}),
         moSold       : Joi.number().required().messages({ "number.type": "Month sold must be a number" }).min(1).max(12),
@@ -44,7 +53,7 @@ exports.residenceValidation = function (residence) {
     return { value, error };
 };
 
-exports.completeResidenceValidation = function (residence) {
+exports.stepTwoCompleteValidation =function (residence) {
     const residenceSchema = Joi.object({
         roofStyle: Joi.string().required().valid('Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed').messages({ 
             "string.empty": "Roof style is required",
@@ -70,7 +79,7 @@ exports.completeResidenceValidation = function (residence) {
         masVnrType: Joi.string().valid("brick face", "brick common", "cinder block", "stone" , "none").lowercase().messages({
             "string.empty": "Masonry veneer type is required","any.only": "Masonry veneer type must be brick face, brick common, cinder block, Stone or None "}),
         exterior1st: Joi.string().required().valid('asbestos shingles', 'asphalt shingles', 'brick face', 'brick common', 'cement board', 'hardboard', 'hardboard siding', 'metal siding' , 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block', 'stone', 'imitation stucco').lowercase().messages({
-            "string.empty": "Exterior 1st is required", "any.only": "Exterior 2nd must be asbestos shingles, asphalt shingles, brick face, brick common, cement board, hardboard, hardboard siding, metal siding, plywood, Other, precast concrete, stucco, vinyl siding, wood siding, wood shingles , imitation stucco, stone,  or cinder block"}),  
+            "string.empty": "Exterior 1st is required", "any.only": "Exterior 1st must be asbestos shingles, asphalt shingles, brick face, brick common, cement board, hardboard, hardboard siding, metal siding, plywood, Other, precast concrete, stucco, vinyl siding, wood siding, wood shingles , imitation stucco, stone,  or cinder block"}),  
         exterior2nd: Joi.string().required().valid('asbestos shingles', 'asphalt shingles', 'brick face', 'brick common', 'cement board', 'hardboard', 'hardboard siding', 'metal siding' , 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block', 'stone', 'imitation stucco').lowercase().messages({ 
             "string.empty": "Exterior 2nd is required", "any.only": "Exterior 2nd must be asbestos shingles, asphalt shingles, brick face, brick common, cement board, hardboard, hardboard siding, metal siding, plywood, Other, precast concrete, stucco, vinyl siding, wood siding, wood shingles, imitation stucco, stone or cinder block"}),  
         exterCond   : Joi.string().required().valid('excellent', 'good', 'average', 'fair', 'poor').lowercase().messages({
@@ -79,11 +88,11 @@ exports.completeResidenceValidation = function (residence) {
             "string.empty": "Exterior quality is required", "any.only": "Exterior quality must be excellent, good, average, fair or poor"}),
          condition1  : Joi.string().required().valid('normal', 'adjacent to feeder street', 'adjacent to arterial street',  "adjacent to east west railroad" , 
             'adjacent to north south', 'within 200 of east west', 'within 200 of north south', 'adjacent to positive off site feature','near positive off-site feature').lowercase()
-            .messages({ "string.empty": "Proximity to various conditions is required", "any.only":  " Proximity to various conditions must be 'normal', 'adjacent to feeder street', 'adjacent to arterial street',  'adjacent to east west railroad', 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature' or 'near positive off-site feature' "}),
+            .messages({ "string.empty": "Proximity to various conditions 1 is required", "any.only":  " Proximity to various conditions1 must be 'normal', 'adjacent to feeder street', 'adjacent to arterial street',  'adjacent to east west railroad', 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature' or 'near positive off-site feature' "}),
 
         condition2  : Joi.string().valid('normal', 'adjacent to feeder street', 'adjacent to arterial street',  "adjacent to east west railroad" , 
-            'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature','near positive off-site feature').lowercase()
-            .messages({"any.only": "Invalid value of Proximity to various conditions"}),
+            'adjacent to north south', 'within 200 of east west', 'within 200 of north south', 'adjacent to positive off site feature','near positive off-site feature').lowercase()
+            .messages({"any.only": "Invalid value of Proximity to various conditions 2  must be 'normal', 'adjacent to feeder street', 'adjacent to arterial street',  'adjacent to east west railroad', 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature' or 'near positive off-site feature' "}),
                             
    }).unknown();
     
@@ -91,8 +100,7 @@ exports.completeResidenceValidation = function (residence) {
     if (error) error = errorUpdate(error);
     return { value, error };  
 };
-
-exports.stepTwoCompleteValidation = function (residence){
+exports.stepThreeCompleteValidation =  function (residence){
     const residenceSchema = Joi.object({
         hasGarage   : Joi.boolean().required().messages({ "boolean.empty": "isGarage attribute is required"    }),
         garageFinish: Joi.any().when('hasGarage', { 
@@ -137,7 +145,7 @@ exports.stepTwoCompleteValidation = function (residence){
             is:true, 
             then: Joi.string().required().valid('excellent', 'good', 'average', 'fair', 'poor').lowercase()
         .messages({"any.only": "Basement quality must be excellent, good, average, fair or poor" }),
-        otherwise: Joi.string().default('no basement')
+
     }),
         bsmtCond    : Joi.any().when('hasBasement', { 
             is:true, 
@@ -170,9 +178,8 @@ exports.stepTwoCompleteValidation = function (residence){
     let { error, value } = residenceSchema.validate(residence);
     if (error) error = errorUpdate(error);
     return { value, error };  
-}
-
-exports.stepThreeCompleteValidation = function (residence) {
+};
+exports.stepFourCompleteValidation = function (residence) {
     const residenceSchema = Joi.object({
         poolArea: Joi.number().messages({ "number.type": "poolArea must be a number" }),
         overallQual     : Joi.number().required().messages({ "number.type": "overall material quality must be a number" }).min(1).max(10),
@@ -206,4 +213,4 @@ exports.stepThreeCompleteValidation = function (residence) {
     let { error, value } = residenceSchema.validate(residence);
     if (error) error = errorUpdate(error);
     return { value, error };
-}
+};
