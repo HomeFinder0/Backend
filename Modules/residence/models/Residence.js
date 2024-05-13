@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const residenceSchema = new mongoose.Schema({
     ownerId     : { type: mongoose.Schema.Types.ObjectId,  ref: 'Users' },
     isSold      : { type: Boolean, default: false },
+    isCompleted : { type: Boolean, default: false },
     reviews     : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
 
     title       : { type: String },
@@ -119,6 +120,7 @@ const residenceSchema = new mongoose.Schema({
       transform: function (doc, ret) {
           return {
               _id          : ret._id,
+              isCompleted  : ret.isCompleted,
               title        : ret.title,
               type         : ret.type,
               isSold       : ret.isSold,
@@ -131,16 +133,18 @@ const residenceSchema = new mongoose.Schema({
               totalbaths   : ret.totalbaths,
               totRmsAbvGrd : ret.totRmsAbvGrd,
               KitchenAbvGr : ret.KitchenAbvGr,
-              
+              totalporchsf : ret.totalporchsf,
+              totalarea    : ret.totalarea,
+
               hasGarage    : ret.hasGarage,
-              garageCars   : ret.garageCars,
-              garageType   : ret.garageType,
-              garageQual   : ret.garageQual,
               hasFireplace : ret.hasFireplace,
-              fireplaces   : ret.fireplaces,
-              fireplaceQu  : ret.fireplaceQu,
               hasBasement  : ret.hasBasement,
-              bsmtQual     : ret.bsmtQual,
+              // garageCars   : ret.garageCars,
+              // garageType   : ret.garageType,
+              // garageQual   : ret.garageQual,
+              // fireplaces   : ret.fireplaces,
+              // fireplaceQu  : ret.fireplaceQu,
+              // bsmtQual     : ret.bsmtQual,
 
               location     : ret.location,
               images       : ret.images,

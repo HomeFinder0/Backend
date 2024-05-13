@@ -15,6 +15,7 @@ const {
     
     updateResidence,
     deleteOneResidence,
+    deleteResidenceImage,
     filtration,
 } = require("../controllers/residence.controller.js");
 const authMiddleware = require("../../authentication/middlewares/auth.middleware.js");
@@ -37,6 +38,7 @@ router.get("/all?",             getAllResidences);
 
 router.patch("/update/:residenceId", updateResidence);
 router.delete("/delete/:residenceId", deleteOneResidence);
+router.delete("/delete/images/:residenceId", deleteResidenceImage);
 
 router.get("/filter", filtration);
 

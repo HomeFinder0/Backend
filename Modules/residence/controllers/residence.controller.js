@@ -7,7 +7,7 @@ const User = require('../../user/models/User.js');
 
 const {
     uploadImage,
-    deleteImage
+    deleteImage,deleteMultipleImages
 } = require("../../../Helpers/cloud.js");
 const getLocation = require("../../../Managers/getLocation.manager.js");
 const { 
@@ -30,7 +30,8 @@ exports.createResidence = asyncHandler(async (req, res, next) => {
     const {value, error} = residenceValidation(req.body);
     if(error) return next(new appError(error, 400));
     
-    const residence = await Residence.create({...value, ownerId: user._id});
+    let residence = await Residence.create({...value, ownerId: user._id});
+    if(!residence) next(new appError("Unable to create residence", 500));
 
     res.status(201).json({
         status: "success",
@@ -109,13 +110,13 @@ exports.stepFourComplete = asyncHandler( async(req, res, next) => {
 
     if(!residence) next(new appError("Residence not found!", 404));
     
+    residence.isCompleted = true;
+    await residence.save();
     return res.status(200).json({
         status: 'success',
         residence
     });
 });
-
-
 exports.residenceImages = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
     const residence = await Residence.findById(residenceId);
@@ -131,6 +132,23 @@ exports.residenceImages = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         status: "success",
         images: residence.images
+    });
+});
+exports.deleteResidenceImage = asyncHandler(async (req, res, next) => {
+    const {residenceId} = req.params;
+    const residence = await Residence.findById(residenceId);
+    if(!residence) next(new appError("Residence not found!", 404));
+    
+    const images = residence.images.find(img => img.url == imageId);
+    if(!images) next(new appError("Image not found!", 404));
+    let public_ids = images.map((img) => img.public_id);
+    deleteMultipleImages(public_ids);
+    residence.images = residence.images.filter(img => img.url !== imageId);
+    await residence.save();
+    
+    res.status(200).json({
+        status: "success",
+        message: "Image deleted successfully"
     });
 });
 exports.setLocation = asyncHandler(async (req, res, next) => {
@@ -164,13 +182,12 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
     });
 });
 
-
 exports.getAllResidences = asyncHandler(async (req, res, next) => {
     const page  = req.query.page  * 1 || 1;
     const limit = 10;
     const skip  = (page - 1) * limit;
 
-    const residences = await Residence.find().populate({
+    let residences = await Residence.find().populate({
         path: 'ownerId',
         select: 'username image location.fullAddress'
     }).populate({
@@ -180,9 +197,21 @@ exports.getAllResidences = asyncHandler(async (req, res, next) => {
             select : 'username image location.fullAddress'
         }
     }).skip(skip).limit(limit);
-
+    let unCompletedResidences = residences.filter(residence => !residence.isCompleted);
+    
+    for(let residence of unCompletedResidences){
+        if( ! residence.isCompleted){
+        if( residence.images.length != 0){
+            let public_ids = residence.images.map((img) => img.public_id);
+            await deleteMultipleImages(public_ids);
+            await Residence.deleteMany({ isCompleted: false } );
+        }}
+    }
+    
+    residences = residences.filter(residence => residence.isCompleted);
     return res.status(200).json({
         status: 'success',
+        count : residences.length,
         residences
     });
 });
@@ -202,7 +231,14 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
     ]);
     
     if(!residence) next(new appError("Residence not found!", 404));
-    
+    if(!residence.isCompleted){
+        if( residence.images.length != 0){
+            let public_ids = residence.images.map((img) => img.public_id);
+            await deleteMultipleImages(public_ids);
+        }
+        await residence.deleteOne();
+        return next(new appError("Residence not found!", 404));
+    }
     return res.status(200).json({
         status: 'success',
         residence
@@ -280,10 +316,9 @@ exports.deleteOneResidence = asyncHandler(async (req, res, next) => {
     if(!residence) next(new appError("Residence not found!", 404));
     
     if( residence.images.length != 0){
-        for(const image of residence.images){
-            await deleteImage(image.public_id);
-        }
-}
+        let public_ids = residence.images.map((img) => img.public_id);
+        await deleteMultipleImages(public_ids);
+    }
     const user = await User.findOne({wishlist: residenceId});
 
     if (user && user.wishlist) {
