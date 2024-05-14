@@ -178,6 +178,7 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
 
     return res.status(200).json({
     status: "success",
+    residenceId : residence._id,
     location
     });
 });
