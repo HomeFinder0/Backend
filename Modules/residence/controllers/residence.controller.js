@@ -131,6 +131,7 @@ exports.residenceImages = asyncHandler(async (req, res, next) => {
     await residence.save();
     res.status(200).json({
         status: "success",
+        residenceId : residence._id,
         images: residence.images
     });
 });
@@ -148,6 +149,7 @@ exports.deleteResidenceImage = asyncHandler(async (req, res, next) => {
     
     res.status(200).json({
         status: "success",
+        residenceId : residence._id,
         message: "Image deleted successfully"
     });
 });
