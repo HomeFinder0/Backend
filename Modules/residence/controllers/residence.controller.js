@@ -194,7 +194,7 @@ exports.getAllResidences = asyncHandler(async (req, res, next) => {
     const limit = 10;
     const skip  = (page - 1) * limit;
 
-    let residences = await Residence.find({ isCompleted: true, status: 'approved' }).populate({
+    let residences = await Residence.find({ isCompleted: true, status: 'approved', isSold: false }).populate({
         path: 'ownerId',
         select:'username image location.fullAddress'
     }).populate({
