@@ -63,7 +63,7 @@ exports.getResidenceReviews = asyncHandler(async (req, res, next) => {
 
 });
 
-exports.like = asyncHandler(async (req, res, next) => {
+exports.likeReview = asyncHandler(async (req, res, next) => {
     const {reviewId} = req.params;
     const review = await Review.findById(reviewId).populate({
             path : 'userId',
@@ -84,7 +84,7 @@ exports.like = asyncHandler(async (req, res, next) => {
     });
 })
 
-exports.unLike = asyncHandler(async (req, res, next) => {
+exports.unLikeReview = asyncHandler(async (req, res, next) => {
     const {reviewId} = req.params;
     const review = await Review.findById(reviewId).populate({
             path : 'userId',
