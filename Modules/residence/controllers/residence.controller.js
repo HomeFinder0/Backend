@@ -264,7 +264,7 @@ exports.getNearestResidences = asyncHandler(async (req, res, next) => {
                 },
                 $maxDistance: 3000 // 3km
             }
-        }
+        }, isCompleted: true, status: 'approved', isSold: false
     }).populate([
         {
             path: 'ownerId',
