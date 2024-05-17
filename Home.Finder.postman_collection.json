@@ -1,0 +1,1542 @@
+{
+	"info": {
+		"_postman_id": "92622551-6996-4e69-bce8-4542e20ea444",
+		"name": "Home.Finder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25350743",
+		"_collection_link": "https://www.postman.com/telecoms-specialist-16112359/workspace/applications/collection/25350743-92622551-6996-4e69-bce8-4542e20ea444?action=share&source=collection_link&creator=25350743"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Sign Up Steps",
+					"item": [
+						{
+							"name": "Sign Up",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\":\"rewan_adel\",\r\n    \"email\": \"rewanmahrous0@gmail.com\",\r\n    \"password\":\"12345678\",\r\n    \"confirmPass\":\"12345678\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/signup",
+									"protocol": "https",
+									"host": [
+										"home-finder-back-end-i7ca",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "VerificationCode",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"otp\": \"277368\"\r\n  // sending id as a params\r\n}    ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/verification/65ef8459c2bd7a5646b05034",
+									"protocol": "https",
+									"host": [
+										"home-finder-back-end-i7ca",
+										"onrender",
+										"com"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"verification",
+										"65ef8459c2bd7a5646b05034"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Resend Code",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/auth/resend-code/65ef8459c2bd7a5646b05034",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"resend-code",
+										"65ef8459c2bd7a5646b05034"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Complete Sign Up",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"firstName\":\"\",\r\n    \"lastName\": \"\",\r\n    \"gender\":\"\",\r\n    \"phone\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/auth/complete-signup",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"complete-signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload Image",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMTA1MzI2OCwiZXhwIjoxNzEzNjQ1MjY4fQ.1tCTnobaAlUfotCU496bM38210F6oWWOC2BdZdklbi0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "pexels-designecologist-1779487.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/upload-image",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"upload-image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Set Location",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"location\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/auth/location",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"location"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMTA1MzI2OCwiZXhwIjoxNzEzNjQ1MjY4fQ.1tCTnobaAlUfotCU496bM38210F6oWWOC2BdZdklbi0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/delete-profile-picture",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"delete-profile-picture"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "log in",
+					"item": [
+						{
+							"name": "Log In",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDkxNDA2OSwiZXhwIjoxNzEzNTA2MDY5fQ.zHZ4fbtwIlmFM2KI_9tltB1l8P7hCB_kMcSkkmHAUhI",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"rewanadel1266@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "log out",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/auth/logout",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Password",
+					"item": [
+						{
+							"name": "Forgot Password",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/auth/forgot-pass",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"forgot-pass"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Verify Reset password link",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/auth/verify-token/:token/:id",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"verify-token",
+										":token",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "token",
+											"value": ""
+										},
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Reset Password",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    //get token and id from link at email which sent\r\n    \"password\":\"\", //new password\r\n    \"confirmPass\":\"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/auth/reset-pass/:token/:id",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"reset-pass",
+										":token",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "token",
+											"value": ""
+										},
+										{
+											"key": "id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Residence",
+			"item": [
+				{
+					"name": "create residence",
+					"item": [
+						{
+							"name": "Create Residence",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    //15 Attributes\r\n    \"title\"       :\"home test 2\",\r\n    \"type\"        :\"sale\",       //Values:['sale', 'rent']\r\n    \"category\"    :\"house\"   //\"apartment\", \"house\", \"hotel\", \"villa\",  \"cottage\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1st complete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"neighborhood\":\"south & west of iowa state university\",   // Physical location within Ames city limits \r\n    \"mszoning\"    :\"low\",   //'agricultural', 'commercial', 'floating village', 'industrial', 'high residential','low', 'park', 'medium' \r\n    \r\n    \"saleCondition\" : \"abnormal\", //'normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial'\r\n    \"moSold\"       : 10,   //Month Sold\r\n    \"salePrice\"    : 2430,\r\n    \"paymentPeriod\": \"Yearly\",  //Yearly, monthly\r\n    \"saleType\"     : \"conventional\",  //Values:['conventional', 'cash', 'va Loan', 'new', 'court officer deed/estate', 'Contract Low Interest',\r\n    //'contract 15% Down payment regular terms', 'Contract Low Down payment and low intere', 'Contract Low Down', 'Other']\r\n    \r\n       \r\n    \"utilities\"  :[\"electricity\" ],   // Values:[ 'electricity', 'gas' , 'water'] electricity must be sent\r\n    \"lotShape\"   : \"slightly\",   // General shape of property=>Values:['regular', 'slightly', 'moderately', 'irregular']\r\n    \"electrical\" : \"average\",   // Values:['average', 'poor', 'fair', 'mixed', 'standard circuit breakers & romex']\r\n    \"foundation\" : \"slab\",         // Values:['slab', 'stone', 'wood', 'cinder block', 'brick and tile', 'poured contrete']\r\n    \"bldgType\"   : \"duplex\"       // Values:['single family', 'duplex', 'townhouse end unit', 'townhouse inside unit', '2 family conversion']\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/complete/1st/664732efc6684c6e1c23c9be",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"complete",
+										"1st",
+										"664732efc6684c6e1c23c9be"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2nd residence",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{   //17 Attributes\r\n    \"roofStyle\"   : \"\",        //'Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed'\r\n    \"roofMatl\"    : \"\",       //'clay or tile','standard shingle','membran','metal','roll','gravel & tar','wood shakes','wood shingles'\r\n    \"houseStyle\"  : \"\",      // عدد الطوابق=> Values: [1Story', '1.5Fin', '1.5Unf', '2Story', '2.5Fin', '2.5Unf', 'SFoyer', 'SLvl']\r\n    \"msSubClass\"  : \"\" ,    //type of residence: عدد الطوابق واشكالها \r\n     //\"2 family conversion\", \"multilevel and split\", \"duplex\", \"split foyer\",\"multi-level\",\"1 story unfinished attic\",\"1 story finished attic\", \"2story and older\", \"2story and newer\",  \"1story and older\", \"1story and newer\"\r\n     \r\n    \"centralAir\" : \"\", // Values: [yes, no]\r\n    \"street\"     : \"\",  // Values:[ paved , gravel ]\t نوع الطريق المؤدي إلى العقار\r\n    \"alley\"      : \"\" ,   //نوع الممر المؤدي إلى العقار   => Values:['gravel', 'paved','no alley access'] **Not required\r\n\r\n    \"heating\"    : \"\",  // Type of heating=>Values:['floor','gas', 'gas water', 'gravity', 'other water', 'wall']\r\n    \"heatingQc\"  : \"\",  // Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n              \r\n    \"masVnrType\" : \"\",  //Masonry veneer type =>Values:['brick face', 'brick common', 'cinder block', 'None', 'Stone']\r\n    \"masVnrArea\" : 110,\r\n    \r\n    \"exterior1st\": \"\",  //Exterior covering on house \r\n    //'asbestos shingles','asphalt shingles','brick face','brick common','cement board','hardboard','hardboard siding','metal siding', 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block',  'stone', 'imitation stucco'\r\n    \"exterior2nd\": \"\", //Exterior covering on house (if more than one material): same values of exterior1st\r\n\r\n    \"exterCond\"  : \"\", //Evaluates the present condition of the material on the exterior Values:{'excellent', 'good', 'average', 'fair', 'poor'}\r\n    \"exterQual\"  : \"\",  //Evaluates the quality of the material on the exterior=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"condition1\" : \"\",   // Proximity to various conditions:   \r\n    \"condition2\" : \"\"    //if more than various conditions , same values of condition1\r\n\r\n\t\t//Conditions Value : ['normal', 'adjacent to feeder street', 'adjacent to arterial street',  \"adjacent to east west railroad\" , 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature','near positive off-site feature']\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/complete/2nd/:residenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"complete",
+										"2nd",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3rd complete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    //19 Attributes\r\n    \"hasGarage\"    : true,\r\n     \"garageType\"   : \"\", // Values:['more than one', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available']\r\n      \"garageQual\"  : \"\",  // Values:['good','fair','poor','average','excellent', 'not available]\r\n     \"garageCars\"   : 0,\r\n      \"garageFinish\": \"\", //Values: ['finished','rough finished' ,'unfinished', 'not available']\r\n\r\n    \"hasBasement\" : false,\r\n    //  \"bsmtUnfSF\"   : 0,    //Unfinished square feet of basement ar\r\n    //  \"bsmtExposure\": \"\",   //Refers to walkout or garden level walls=> Values:['good', 'average', 'minimum', 'no exposure']\r\n    //  \"bsmtFinType1\": \"\",  //Rating of basement => Values:['good', 'average', 'below average', 'average rec room',  'low', 'unfinished' ]\r\n    //  \"bsmtQual\"    : \"\",  //Evaluates the height of the basement=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n    //  \"bsmtCond\"    : \"\",  //Evaluates the general condition of the basement=> values:['excellent', 'good', 'average', 'fair', 'poor', 'not available']\r\n\r\n    \"hasFireplace\": true,\r\n      \"fireplaces\" : 0,\r\n      \"fireplaceQu\": \"\", //Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"bedroomAbvGr\": 0, \r\n    \"totalbaths\"  : 0,\r\n    \"KitchenAbvGr\": 0,\r\n    \"kitchenQual\" : \"\",  //'excellent', 'good', 'average', 'fair' , 'poor'\r\n    \"totRmsAbvGrd\": 0             // total rooms without bathrooms\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/complete/3rd/:residenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"complete",
+										"3rd",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4th complete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{  \r\n    //16 Attributes\r\n    \"lotConfig\"      : \"inside\",        //Values : ['inside', 'corner', 'cul de sac', 'frontage on 2', 'frontage on 3']\r\n    \"landContour\"    : \"level\",        //Flatness of the property => Values: ['level', 'banked', 'hillside', 'depression']\r\n    \"landSlope\"      : \"gentle\",       //Slope of property => values: ['gentle', 'moderate', 'severe'] \r\n    \"pavedDrive\"     : \"gravel\",       //type of driveway (road)=> Values:['paved', 'gravel', 'partial'] \r\n\r\n    \"poolArea\"       : 210,\r\n    \"overallQual\"    : 10,\r\n    \"overallCond\"    : 10,\r\n\r\n    \"totalarea\"      : 10, // living area + totalbaths area\r\n    \"totalporchsf\"   : 220, // مساحة العقار كله \r\n    \"lotArea\"        : 120, // مساحة الأرض\r\n\r\n    \"lotFrontage\"    : 10,\r\n\t\"totalsf\"        : 30,\r\n    \"lowQualFinSF\"   : 10, \r\n    \"miscVal\"        : 20,\r\n    \"houseage\"       : 10,\r\n    \"houseremodelage\": 20\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/complete/4th/664732efc6684c6e1c23c9be",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"complete",
+										"4th",
+										"664732efc6684c6e1c23c9be"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Set Location",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/location/:residenceId?longitude=&latitude=",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"location",
+										":residenceId"
+									],
+									"query": [
+										{
+											"key": "longitude",
+											"value": ""
+										},
+										{
+											"key": "latitude",
+											"value": ""
+										}
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Upload images",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "images",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/upload/:residenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"upload",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Residences",
+					"item": [
+						{
+							"name": "Get One",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/get/:residenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"get",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Sold",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/sold",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"sold"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Approved",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/approved",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"approved"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Nearest",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/nearest",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"nearest"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Pending",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/pending",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"pending"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get All",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/residence/all?page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"all"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete one residence",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/residence/delete/:residenceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"residence",
+								"delete",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update residence",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"title\"         :\"\"\r\n    // \"type\"          :\"\",\r\n    // \"category\"      :\"\" , \r\n    // \"neighborhood\"  :\"\", \r\n    // \"mszoning\"      :\"\",\r\n    //\"roofStyle\"     : \"\"\r\n    // \"roofMatl\"      : \"\",\r\n    // \"houseStyle\"    : \"\",\r\n    // \"kitchenQual\"   : \"\",\r\n    // \"centralAir\"    : \"\",\r\n    // \"saleCondition\" : \"\",\r\n    // \"saleType\"      : \"\",\r\n\t\t// \"street\"        : \"\", \r\n    // \"foundation\"    : \"\", \r\n    // \"bldgType\"      : \"\", \r\n    // \"heating\"       : \"\", \r\n    // \"heatingQc\"     : \"\", \r\n    // \"electrical\"    : \"\", \r\n    // \"utilities\"     : \"\", \r\n    // \"lotShape\"      : \"\", \r\n    // \"lotConfig\"     : \"\", \r\n    // \"landContour\"   : \"\", \r\n    // \"landSlope\"     : \"\", \r\n    // \"condition1\"    : \"\", \r\n    // \"condition2\"    : \"\", \r\n    // \"masVnrType\"    : \"\", \r\n    // \"pavedDrive\"    : \"\", \r\n    // \"exterior2nd\"   : \"\", \r\n    // \"exterior1st\"   : \"\", \r\n    // \"exterCond\"     : \"\", \r\n\t\t\r\n    // \"totRmsAbvGrd\"   : 0,\r\n\t\t// \"poolArea\"       : 0,\r\n    // \"bedroomAbvGr\"   : 0,\r\n    // \"KitchenAbvGr\"   : 0,\r\n    // \"salePrice\"      : 0,\r\n    // \"moSold\"         : 0,\r\n    // \"msSubClass\"     : 0,\r\n    // \"totalarea\"      : 0,\r\n    // \"totalbaths\"     : 0,\r\n    // \"totalporchsf\"   : 0,\r\n    // \"lotFrontage\"    : 0,\r\n    // \"lotArea\"        : 0,\r\n    // \"totalsf\"        : 0,\r\n    // \"overallQual\"    : 0,\r\n    // \"overallCond\"    : 0,\r\n    // \"masVnrArea\"     : 0,\r\n    // \"lowQualFinSF\"   : 0,\r\n    // \"miscVal\"        : 0,\r\n    // \"houseage\"       : 0,\r\n    // \"houseremodelage\": 0,\r\n\r\n\t  // \"hasGarage\": false,\r\n    //   \"garageFinish\": \"\",\r\n    //   \"garageType\"  : \"\",\r\n    //   \"garageQual\"  : \"\",\r\n    //   \"garageCars\"  : 0,\r\n\r\n    // \"hasBasement\": false,\r\n    //   \"bsmtExposure\": \"\",\r\n    //   \"bsmtFinType1\": \"\",\r\n    //   \"bsmtQual\"    : \"\",\r\n    //   \"bsmtCond\"    : \"\",\r\n    //   \"bsmtUnfSF\"   : \"\",\r\n\r\n    // \"hasFireplace\": true,\r\n    //    \"fireplaces\" : 0,\r\n    //    \"fireplaceQu\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/residence/update/:residenceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"residence",
+								"update",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtration",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/residence/filter?min=&max=&rating=&bedroom=&bathroom=&neighborhood=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"residence",
+								"filter"
+							],
+							"query": [
+								{
+									"key": "min",
+									"value": ""
+								},
+								{
+									"key": "max",
+									"value": ""
+								},
+								{
+									"key": "rating",
+									"value": ""
+								},
+								{
+									"key": "bedroom",
+									"value": ""
+								},
+								{
+									"key": "bathroom",
+									"value": ""
+								},
+								{
+									"key": "neighborhood",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Favorites",
+					"item": [
+						{
+							"name": "add to favorite",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/favorites/add/:residenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"favorites",
+										"add",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User Favorites",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/favorites",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"favorites"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "remove from favarites",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/favorites/delete/:residenceId",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"favorites",
+										"delete",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete all favorites",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/v1/user/favorites/delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"favorites",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/get-user/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"get-user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete image profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/delete-profile-picture",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"delete-profile-picture"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upoad profile pic",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "pexels-pixabay-33545.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/upload-image",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"upload-image"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Add review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 0,\r\n    \"comment\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/review/:residenceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"review",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all reviews for one residence",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/review/get/:residenceId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"get",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/review/like/:reviewId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"like",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unlike review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/review/unlike/:reviewId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"unlike",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
