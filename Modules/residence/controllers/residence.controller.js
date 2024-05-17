@@ -21,7 +21,7 @@ const {
 const { updateResidenceValidation } = require("../validators/updateResidence.validation.js");
 const valueConversion = require('../middlewares/valueConversion.js')
 const { 
-    neighborhoodConverter
+    neighborhoodConverter, centralAirConverter
     } = require("../../../Helpers/converter.js");
 
 
@@ -207,6 +207,10 @@ exports.getAllResidences = asyncHandler(async (req, res, next) => {
 
     await deleteUncompletedResidence(Residence);
     
+    residences.map(res => {
+        res.neighborhood = neighborhoodConverter(res.neighborhood)
+        res.centralAir = centralAirConverter(res.centralAir)
+    });
     return res.status(200).json({
         status: 'success',
         count : residences.length,
@@ -238,6 +242,9 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
         await residence.deleteOne();
         return next(new appError("Residence not found!", 404));
     }
+    residence.neighborhood = neighborhoodConverter(residence.neighborhood);
+    residence.centralAir = centralAirConverter(residence.centralAir);
+
     return res.status(200).json({
         status: 'success',
         residence
@@ -271,6 +278,10 @@ exports.getNearestResidences = asyncHandler(async (req, res, next) => {
             }
         }
     ]);
+    residences.map(res => {
+        res.neighborhood = neighborhoodConverter(res.neighborhood)
+        res.centralAir = centralAirConverter(res.centralAir)
+    });
 
     return res.status(200).json({
         status: 'success',
@@ -292,7 +303,8 @@ exports.getPending = asyncHandler(async (req, res, next) => {
         }
     }
     ]);
-    residence.map(res => res.neighborhood = neighborhoodConverter(res.neighborhood));
+    residence.neighborhood = neighborhoodConverter(residence.neighborhood);
+    residence.centralAir   = centralAirConverter(residence.centralAir);
 
     return res.status(200).json({
         status: 'success',
@@ -314,8 +326,8 @@ exports.getApproved = asyncHandler(async (req, res, next) => {
         }
     }
     ]);
-    residence.map(res => res.neighborhood = neighborhoodConverter(res.neighborhood));
-
+    residence.neighborhood = neighborhoodConverter(residence.neighborhood);
+    
     return res.status(200).json({
         status: 'success',
         count : residence.length,
@@ -336,7 +348,7 @@ exports.getSold =  asyncHandler(async (req, res, next) => {
         }
     }
     ]);
-    residence.map(res => res.neighborhood = neighborhoodConverter(res.neighborhood));
+    residence.neighborhood = neighborhoodConverter(residence.neighborhood);
 
     return res.status(200).json({
         status: 'success',
