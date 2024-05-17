@@ -314,7 +314,7 @@ exports.getPending = asyncHandler(async (req, res, next) => {
 });
 exports.getApproved = asyncHandler(async (req, res, next) => {
     const {_id} = req.user;
-    const residence = await Residence.find({ownerId: _id, status: "approved", isCompleted: true}).populate([
+    const residence = await Residence.find({ownerId: _id, status: "approved", isCompleted: true, isSold: false}).populate([
     { 
         path: 'ownerId',
         select: 'username  image location.fullAddress'
