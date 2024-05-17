@@ -244,6 +244,7 @@ exports.getWishlist = asyncHandler(async (req, res, next) => {
 
   return res.status(200).json({
     status: "success",
+    count : user.wishlist.length,
     wishlist : user.wishlist
   });
 });
