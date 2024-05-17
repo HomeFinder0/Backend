@@ -81,6 +81,7 @@ exports.likeReview = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         message: 'Review liked successfully',
+        reviewId: review._id,
         likes : review.likes
     });
 })
@@ -104,6 +105,7 @@ exports.unLikeReview = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         status: 'success',
         message: 'Review unliked successfully',
+        reviewId: review._id,
         likes : review.likes
     });
 })
