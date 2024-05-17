@@ -42,8 +42,8 @@ exports.qualityRatingConverter = (value) => {
 }
 exports.centralAirConverter = (value) => {
     const conversions = {
-        'yes' : 'Y',
-        'no'  : 'N'
+        'yes' : 'Y', 'Y': 'yes',
+        'no'  : 'N', 'N' : "no"
     };
 
     return conversions[value];
