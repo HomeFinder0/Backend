@@ -7,7 +7,7 @@ const User = require('../../user/models/User.js');
 
 const {
     uploadImage,
-    deleteImage,deleteMultipleImages
+    deleteMultipleImages
 } = require("../../../Helpers/cloud.js");
 const getLocation = require("../../../Managers/getLocation.manager.js");
 const { 
@@ -25,6 +25,8 @@ const {
     } = require("../../../Helpers/converter.js");
 
 
+// @desc Create a residence
+// @method Post
 exports.createResidence = asyncHandler(async (req, res, next) => {
     const user = req.user;
     const {value, error} = residenceValidation(req.body);
@@ -185,33 +187,26 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
     });
 });
 
+// @desc Get a residence
+// @method Get
 exports.getAllResidences = asyncHandler(async (req, res, next) => {
     const page  = req.query.page  * 1 || 1;
     const limit = 10;
     const skip  = (page - 1) * limit;
 
-    let residences = await Residence.find().populate({
+    let residences = await Residence.find({ isCompleted: true, status: 'approved' }).populate({
         path: 'ownerId',
-        select: 'username image location.fullAddress'
+        select:'username image location.fullAddress'
     }).populate({
         path: 'reviews',
         populate: {
             path: 'userId likedUsers',
-            select : 'username image location.fullAddress'
+            select : 'username image location.fullAddress',
         }
     }).skip(skip).limit(limit);
-    let unCompletedResidences = residences.filter(residence => !residence.isCompleted);
+
+    await deleteUncompletedResidence(Residence);
     
-    for(let residence of unCompletedResidences){
-        if( ! residence.isCompleted){
-        if( residence.images.length != 0){
-            let public_ids = residence.images.map((img) => img.public_id);
-            await deleteMultipleImages(public_ids);
-            await Residence.deleteMany({ isCompleted: false } );
-        }}
-    }
-    
-    residences = residences.filter(residence => residence.isCompleted);
     return res.status(200).json({
         status: 'success',
         count : residences.length,
@@ -234,6 +229,7 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
     ]);
     
     if(!residence) next(new appError("Residence not found!", 404));
+
     if(!residence.isCompleted){
         if( residence.images.length != 0){
             let public_ids = residence.images.map((img) => img.public_id);
@@ -282,6 +278,75 @@ exports.getNearestResidences = asyncHandler(async (req, res, next) => {
         residences
     });
 });
+exports.getPending = asyncHandler(async (req, res, next) => {
+    const {_id} = req.user;
+    const residence = await Residence.find({ownerId: _id, status: "pending", isCompleted: true}).populate([
+    { 
+        path: 'ownerId',
+        select: 'username  image location.fullAddress'
+    },{
+        path: 'reviews',
+        populate: {
+            path: 'userId',
+            select : 'username image location.fullAddress'
+        }
+    }
+    ]);
+    residence.map(res => res.neighborhood = neighborhoodConverter(res.neighborhood));
+
+    return res.status(200).json({
+        status: 'success',
+        count : residence.length,
+        residence
+    });
+});
+exports.getApproved = asyncHandler(async (req, res, next) => {
+    const {_id} = req.user;
+    const residence = await Residence.find({ownerId: _id, status: "approved", isCompleted: true}).populate([
+    { 
+        path: 'ownerId',
+        select: 'username  image location.fullAddress'
+    },{
+        path: 'reviews',
+        populate: {
+            path: 'userId',
+            select : 'username image location.fullAddress'
+        }
+    }
+    ]);
+    residence.map(res => res.neighborhood = neighborhoodConverter(res.neighborhood));
+
+    return res.status(200).json({
+        status: 'success',
+        count : residence.length,
+        residence
+    });
+});
+exports.getSold =  asyncHandler(async (req, res, next) => {
+    const {_id} = req.user;
+    const residence = await Residence.find({ownerId: _id, isSold: true, isCompleted: true}).populate([
+    { 
+        path: 'ownerId',
+        select: 'username  image location.fullAddress'
+    },{
+        path: 'reviews',
+        populate: {
+            path: 'userId',
+            select : 'username image location.fullAddress'
+        }
+    }
+    ]);
+    residence.map(res => res.neighborhood = neighborhoodConverter(res.neighborhood));
+
+    return res.status(200).json({
+        status: 'success',
+        count : residence.length,
+        residence
+    });
+});
+
+
+
 
 
 exports.updateResidence = asyncHandler(async (req, res, next) => {
@@ -379,3 +444,13 @@ exports.filtration = asyncHandler(async (req, res, next) => {
         residences
     });
 });
+
+async function  deleteUncompletedResidence(Residence){
+    let unCompletedResidences = await Residence.find({ isCompleted: false });
+    let public_ids = unCompletedResidences.flatMap(residence => residence.images.map(img => img.public_id));
+    if (public_ids.length > 0) {
+        await deleteMultipleImages(public_ids);
+    }
+    await Residence.deleteMany({ isCompleted: false } );
+}
+
