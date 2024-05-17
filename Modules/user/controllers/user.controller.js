@@ -163,12 +163,16 @@ exports.changePassword = asyncHandler(async (req, res, next) => {
 exports.addFavorite = asyncHandler(async (req, res, next) => {
   let { user } = req;
   const { residenceId } = req.params;
+  let residence = await Residence.findById(residenceId);
+  if(!residence) return next(new appError('Residence not found', 404));
   
+ // if(residence.ownerId.toString() === user._id.toString()) return next(new appError('You can not add your own residence to your Favorite', 400));
   if(user.wishlist.includes(residenceId)) return next(new appError('Residence is already in your Favorite', 400));
 
   user.wishlist.push(residenceId);  
-
-  await user.save();
+  residence.likes += 1;
+  residence.isLiked = true;
+  Promise.all([user.save(), residence.save()]);
 
   return res.status(200).json({
     status: "success",
@@ -180,13 +184,17 @@ exports.deleteOneFavorite = asyncHandler(async (req, res, next) => {
   let { user } = req;
   const { residenceId } = req.params;
 
+  let residence = await Residence.findById(residenceId);
+  if(!residence) return next(new appError('Residence not found', 404));
+
   if (!user.wishlist.map(String).includes(residenceId))
     return next(new appError("Residence is not in your Favorite", 400));
 
   user.wishlist = user.wishlist.filter((fav) => fav.toString() !== residenceId);
+  residence.likes -= 1;
+  residence.isLiked = false;
 
-  await user.save();
-
+  Promise.all([user.save(), residence.save()]);
   return res.status(200).json({
     status: "success",
     message: "Favorite has been removed",
@@ -197,8 +205,15 @@ exports.deleteAllFavorites = asyncHandler(async (req, res, next) => {
   let { user } = req;
   
   if(user.wishlist.length === 0) return next(new appError('You have no favorites', 400));
-  user.wishlist = [];
+  
+  for(let residenceId of user.wishlist){
+    let residence = await Residence.findById(residenceId);
+    residence.likes -= 1;
+    residence.isLiked = false;
+    await residence.save();
+  }
 
+  user.wishlist = [];
   await user.save();
 
   return res.status(200).json({
