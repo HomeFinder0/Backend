@@ -13,7 +13,7 @@ const {
     getApproved,
     getPending,
     getSold, 
-    getAllResidences,
+    getAllApproved,
     getNearestResidences,
     
     updateResidence,
@@ -40,7 +40,7 @@ router.get("/pending",          getPending);
 router.get("/approved",         getApproved);
 router.get("/sold",             getSold);
 router.get("/nearest",          getNearestResidences);
-router.get("/all?",             getAllResidences);
+router.get("/all?",             getAllApproved);
 
 router.patch("/update/:residenceId", updateResidence);
 router.delete("/delete/:residenceId", deleteOneResidence);

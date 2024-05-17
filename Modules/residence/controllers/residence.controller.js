@@ -189,7 +189,7 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
 
 // @desc Get a residence
 // @method Get
-exports.getAllResidences = asyncHandler(async (req, res, next) => {
+exports.getAllApproved = asyncHandler(async (req, res, next) => {
     const page  = req.query.page  * 1 || 1;
     const limit = 10;
     const skip  = (page - 1) * limit;
