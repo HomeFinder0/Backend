@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const residenceSchema = new mongoose.Schema({
     ownerId     : { type: mongoose.Schema.Types.ObjectId,  ref: 'Users' },
     isSold      : { type: Boolean, default: false },
+    status      : {type : String, default: "pending", enum :["pending", "approved"]},
     isCompleted : { type: Boolean, default: false },
     reviews     : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
-
+    likes       : { type: Number, default: 0 },
+    isLiked     : { type: Boolean, default: false},
     title       : { type: String },
     type        : { type: String,  enum: ['rent', 'sale'] },
     category    : { type: String,  enum: ['apartment', 'house', 'hotel', 'villa', 'cottage'],},
@@ -122,6 +124,9 @@ const residenceSchema = new mongoose.Schema({
               _id          : ret._id,
               isCompleted  : ret.isCompleted,
               title        : ret.title,
+              status       : ret.status,
+              likes        : ret.likes,
+              isLiked      : ret.isLiked,
               type         : ret.type,
               isSold       : ret.isSold,
               category     : ret.category,
@@ -139,13 +144,7 @@ const residenceSchema = new mongoose.Schema({
               hasGarage    : ret.hasGarage,
               hasFireplace : ret.hasFireplace,
               hasBasement  : ret.hasBasement,
-              // garageCars   : ret.garageCars,
-              // garageType   : ret.garageType,
-              // garageQual   : ret.garageQual,
-              // fireplaces   : ret.fireplaces,
-              // fireplaceQu  : ret.fireplaceQu,
-              // bsmtQual     : ret.bsmtQual,
-
+              
               location     : ret.location,
               images       : ret.images,
               reviews      : ret.reviews,
