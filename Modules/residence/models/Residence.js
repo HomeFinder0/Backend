@@ -144,6 +144,7 @@ const residenceSchema = new mongoose.Schema({
               hasGarage    : ret.hasGarage,
               hasFireplace : ret.hasFireplace,
               hasBasement  : ret.hasBasement,
+              centralAir   : ret.centralAir,
               
               location     : ret.location,
               images       : ret.images,
