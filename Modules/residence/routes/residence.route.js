@@ -10,6 +10,9 @@ const {
     residenceImages,
     
     getOneResidence,
+    getApproved,
+    getPending,
+    getSold, 
     getAllResidences,
     getNearestResidences,
     
@@ -33,6 +36,9 @@ router.post("/location/:residenceId" , setLocation);
 router.post("/upload/:residenceId", uploadMultiple , residenceImages);
 
 router.get("/get/:residenceId", getOneResidence);
+router.get("/pending",          getPending);
+router.get("/approved",         getApproved);
+router.get("/sold",             getSold);
 router.get("/nearest",          getNearestResidences);
 router.get("/all?",             getAllResidences);
 
