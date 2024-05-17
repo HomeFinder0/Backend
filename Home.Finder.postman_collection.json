@@ -8,10 +8,10 @@
 	},
 	"item": [
 		{
-			"name": "Auth",
+			"name": "Authentication",
 			"item": [
 				{
-					"name": "Sign Up Steps",
+					"name": "Signup steps",
 					"item": [
 						{
 							"name": "Sign Up",
@@ -20,7 +20,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"username\":\"rewan_adel\",\r\n    \"email\": \"rewanmahrous0@gmail.com\",\r\n    \"password\":\"12345678\",\r\n    \"confirmPass\":\"12345678\"\r\n}\r\n",
+									"raw": "{\r\n    \"username\":\"ibrahim11\",\r\n    \"email\": \"ibrahim3hmedib@gmail.com\",\r\n    \"password\":\"71212165756\",\r\n    \"confirmPass\":\"71212165756\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -28,12 +28,9 @@
 									}
 								},
 								"url": {
-									"raw": "https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/signup",
-									"protocol": "https",
+									"raw": "{{LOCAL_URL}}/api/v1/auth/signup",
 									"host": [
-										"home-finder-back-end-i7ca",
-										"onrender",
-										"com"
+										"{{LOCAL_URL}}"
 									],
 									"path": [
 										"api",
@@ -41,18 +38,29 @@
 										"auth",
 										"signup"
 									]
-								}
+								},
+								"description": "This endpoint allows users to sign up by creating a new account. The HTTP POST request should be made to {{url}}/api/v1/auth/signup with the following payload in the raw request body type:\n\n- username (string): The username of the user\n- email (string): The email address of the user\n- password (string): The password for the user's account\n- confirmPass (string): The confirmation of the password\n    \n\nThe response to the request will have a status code of 200 and will include the following data:\n\n- status (string): The status of the response\n- message (string): A message related to the response\n- user (object): An object containing user details including username, email, role, image URL, public ID, verification status, user ID, creation timestamp, and update timestamp\n- token (string): The authentication token for the user\n    \n\nEnsure that the provided user details are accurate and complete to successfully create a new account."
 							},
 							"response": []
 						},
 						{
-							"name": "VerificationCode",
+							"name": "Verification Code",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU0Y2JkNzJlMzUyZTQ5YWI5OWY1MjciLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTQ5MzIwOSwiZXhwIjoxNzEyMDg1MjA5fQ.BTZIkbWTlLraxrhSnpNYAOL-Mti4e57sACBZa4qmjm4",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"otp\": \"277368\"\r\n  // sending id as a params\r\n}    ",
+									"raw": "{\r\n    \"otp\": 103306\r\n    \r\n  // sending id as a params\r\n}    ",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -60,53 +68,70 @@
 									}
 								},
 								"url": {
-									"raw": "https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/verification/65ef8459c2bd7a5646b05034",
-									"protocol": "https",
+									"raw": "{{LOCAL_URL}}/api/v1/auth/verification",
 									"host": [
-										"home-finder-back-end-i7ca",
-										"onrender",
-										"com"
+										"{{LOCAL_URL}}"
 									],
 									"path": [
 										"api",
 										"v1",
 										"auth",
-										"verification",
-										"65ef8459c2bd7a5646b05034"
+										"verification"
 									]
-								}
+								},
+								"description": "The API endpoint `POST /api/v1/auth/verification/:id` is used to verify a user's identity by providing the OTP (One-Time Password) for the given ID. The request should be sent with a JSON payload containing the OTP.\n\n### Request Body\n\n- `otp` (number, required): The OTP (One-Time Password) to verify the user's identity.\n    \n\n### Request Parameters\n\n- `id` (in path, required): The ID of the user for whom the verification is being performed.\n    \n\n### Response\n\nUpon successful execution, the API returns a status code of 200 and a JSON response with the following structure:\n\n``` json\n{\n  \"status\": \"\",\n  \"user\": {{ /* User details */ }\n}\n\n ```\n\nThe `user` object contains information about the verified user, including their ID, username, email, role, and verification status."
 							},
 							"response": []
 						},
 						{
 							"name": "Resend Code",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NThiNDY2NGM2ZmY3ZjhlNmY1MjFiNzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwMzYyNjM0Mn0.rIZhrwzdoXqO_qp3vH1ENyZsWzE5yBPN2fFIqnOKfEY",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{URL}}/api/v1/auth/resend-code/65ef8459c2bd7a5646b05034",
+									"raw": "{{LOCAL_URL}}/api/v1/auth/resend-code",
 									"host": [
-										"{{URL}}"
+										"{{LOCAL_URL}}"
 									],
 									"path": [
 										"api",
 										"v1",
 										"auth",
-										"resend-code",
-										"65ef8459c2bd7a5646b05034"
+										"resend-code"
 									]
-								}
+								},
+								"description": "This endpoint triggers an HTTP GET request to resend a verification code for a specific user ID.\n\nThe request does not contain a request body.\n\nUpon a successful execution, the response will have a status code of 200 and will include the user details with their image, ID, username, email, role, verification status, and timestamps for creation and update."
 							},
 							"response": []
 						},
 						{
 							"name": "Complete Sign Up",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWEwNzFhZTVjZDM0ZDY1NTdmZjkyYjUiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwNTAxMzY4Mn0.len1vOsYCuKkOlt9_TBzpW583rWErBZ88KqpkAwjEQY",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"firstName\":\"\",\r\n    \"lastName\": \"\",\r\n    \"gender\":\"\",\r\n    \"phone\":\"\"\r\n}",
+									"raw": "{\r\n    \"firstName\":\"Ibrahim\",\r\n    \"lastName\": \"Ahmed\",\r\n    \"gender\":\"male\",\r\n    \"phone\":\"51445444144\"\r\n\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -114,9 +139,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{URL}}/api/v1/auth/complete-signup",
+									"raw": "{{url}}/api/v1/auth/complete-signup",
 									"host": [
-										"{{URL}}"
+										"{{url}}"
 									],
 									"path": [
 										"api",
@@ -124,136 +149,25 @@
 										"auth",
 										"complete-signup"
 									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Upload Image",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMTA1MzI2OCwiZXhwIjoxNzEzNjQ1MjY4fQ.1tCTnobaAlUfotCU496bM38210F6oWWOC2BdZdklbi0",
-											"type": "string"
-										}
-									]
 								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "image",
-											"type": "file",
-											"src": "pexels-designecologist-1779487.jpg"
-										}
-									]
-								},
-								"url": {
-									"raw": "http://localhost:8080/api/v1/user/upload-image",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"user",
-										"upload-image"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Set Location",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"location\":\"\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{URL}}/api/v1/auth/location",
-									"host": [
-										"{{URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"location"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "New Request",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMTA1MzI2OCwiZXhwIjoxNzEzNjQ1MjY4fQ.1tCTnobaAlUfotCU496bM38210F6oWWOC2BdZdklbi0",
-											"type": "string"
-										}
-									]
-								},
-								"method": "DELETE",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8080/api/v1/user/delete-profile-picture",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8080",
-									"path": [
-										"api",
-										"v1",
-										"user",
-										"delete-profile-picture"
-									]
-								}
+								"description": "The API endpoint `POST /api/v1/auth/complete-signup` is used to complete the user signup process. The request should include the user's first name, last name, gender, and phone number in the request body.\n\n### Request Body\n\n- `firstName` (string): The user's first name.\n- `lastName` (string): The user's last name.\n- `gender` (string): The user's gender.\n- `phone` (string): The user's phone number.\n    \n\n### Response\n\nUpon successful execution, the API responds with a status code of 200 and the following JSON object:\n\n``` json\n{\n    \"status\": \"\",\n    \"user\": {/* user details */},\n    \"token\": \"\"\n}\n\n ```\n\n- `status` (string): The status of the response.\n- `user` (object): An object containing user details such as image, location, ID, username, email, role, wishlist, verification status, and timestamps.\n- `token` (string): The authentication token for the user."
 							},
 							"response": []
 						}
-					]
+					],
+					"description": "Sign up steps"
 				},
 				{
-					"name": "log in",
+					"name": "log in/out",
 					"item": [
 						{
 							"name": "Log In",
 							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDkxNDA2OSwiZXhwIjoxNzEzNTA2MDY5fQ.zHZ4fbtwIlmFM2KI_9tltB1l8P7hCB_kMcSkkmHAUhI",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\": \"rewanadel1266@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+									"raw": "{\r\n    \"email\":\"ibrahim3hmedib@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -261,37 +175,77 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/auth/login",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/auth/login",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
 										"auth",
 										"login"
 									]
-								}
+								},
+								"description": "### Auth Login\n\nThis endpoint allows users to log in and obtain an authentication token.\n\n#### Request Body\n\n- `email` (string, required): The email address of the user.\n- `password` (string, required): The password for the user's account.\n    \n\n#### Response\n\n- `status` (string): The status of the response.\n- `token` (string): The authentication token for the logged-in user.\n- `user` (object): An object containing user details including:\n    - `image` (object): An object with the public ID and URL of the user's image.\n    - `_id` (string): The unique identifier of the user.\n    - `username` (string): The username of the user.\n    - `email` (string): The email address of the user.\n    - `role` (string): The role of the user.\n    - `isVerified` (boolean): Indicates if the user's account is verified.\n    - `createdAt` (string): The timestamp of user creation.\n    - `updatedAt` (string): The timestamp of the last update.\n\n#### Example\n\n``` json\n{\n    \"email\": \"user@example.com\",\n    \"password\": \"********\"\n}\n\n ```"
 							},
 							"response": []
 						},
 						{
 							"name": "log out",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NThiNDY2NGM2ZmY3ZjhlNmY1MjFiNzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwMzYyNjM0Mn0.rIZhrwzdoXqO_qp3vH1ENyZsWzE5yBPN2fFIqnOKfEY",
+											"type": "string"
+										}
+									]
+								},
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{URL}}/api/v1/auth/logout",
+									"raw": "{{LOCAL_URL}}/api/v1/auth/logout",
 									"host": [
-										"{{URL}}"
+										"{{LOCAL_URL}}"
 									],
 									"path": [
 										"api",
 										"v1",
 										"auth",
 										"logout"
+									]
+								},
+								"description": "This endpoint is used to log out the authenticated user. Upon successful execution, it returns a status code of 200 with an empty JSON response body.\n\nNo request payload is required for this request.\n\n### Response\n\n- status (string): Indicates the status of the logout process."
+							},
+							"response": []
+						},
+						{
+							"name": "log-out-all",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2MzU2NywiZXhwIjoxNzEyNjU1NTY3fQ.GXWmjBIuIUj8gab1vuHaPbQl4kx5Z32bu3ppRPV0zbk",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/auth/logout-all",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"logout-all"
 									]
 								}
 							},
@@ -305,11 +259,21 @@
 						{
 							"name": "Forgot Password",
 							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU0YmY1Y2RlNTMxODQwNGJlOTNhNzIiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTQ5MDAxNCwiZXhwIjoxNzEyMDgyMDE0fQ.K5yLE9TvDjzquPtv1Ux_HDYcZWNGdS7dKUB6vR4sHn8",
+											"type": "string"
+										}
+									]
+								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"email\":\"\"\r\n}",
+									"raw": "{\r\n    \"email\":\"ibrahim3hmedib@gmail.com\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -317,9 +281,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{URL}}/api/v1/auth/forgot-pass",
+									"raw": "{{LOCAL_URL}}/api/v1/auth/forgot-pass",
 									"host": [
-										"{{URL}}"
+										"{{LOCAL_URL}}"
 									],
 									"path": [
 										"api",
@@ -327,50 +291,19 @@
 										"auth",
 										"forgot-pass"
 									]
-								}
+								},
+								"description": "This API endpoint is used to initiate the process of resetting a forgotten password. When making a POST request to [https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/forgot-pass](https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/forgot-pass), the request should include a JSON payload in the raw request body type with the user's email address.\n\n### Request Body\n\n- email (string, required): The email address of the user who has forgotten their password.\n    \n\n### Response\n\nUpon successful execution, the API will return a 200 status code with a JSON response containing the following fields:\n\n- status (string): Indicates the status of the request.\n- message (string): Provides a message regarding the status of the password reset process.\n    \n\nExample:\n\n``` json\n{\n    \"status\": \"success\",\n    \"message\": \"Password reset instructions sent to the provided email address\"\n}\n\n ```"
 							},
 							"response": []
 						},
 						{
-							"name": "Verify Reset password link",
+							"name": "Verify-pass-otp",
 							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{URL}}/api/v1/auth/verify-token/:token/:id",
-									"host": [
-										"{{URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"verify-token",
-										":token",
-										":id"
-									],
-									"variable": [
-										{
-											"key": "token",
-											"value": ""
-										},
-										{
-											"key": "id",
-											"value": ""
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Reset Password",
-							"request": {
-								"method": "PATCH",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //get token and id from link at email which sent\r\n    \"password\":\"\", //new password\r\n    \"confirmPass\":\"\"\r\n}",
+									"raw": "{\r\n    \"otp\":\"636405\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -378,35 +311,106 @@
 									}
 								},
 								"url": {
-									"raw": "{{URL}}/api/v1/auth/reset-pass/:token/:id",
+									"raw": "{{LOCAL_URL}}/api/v1/auth/verify-pass-otp/:email",
 									"host": [
-										"{{URL}}"
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"verify-pass-otp",
+										":email"
+									],
+									"variable": [
+										{
+											"key": "email",
+											"value": "ibrahim3hmedib@gmail.com"
+										}
+									]
+								},
+								"description": "This HTTP POST request is used to verify the one-time password (OTP) for a user's email address. The request should be sent to https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/verify-pass-otp.\n\n### Request Body\n\n- email (string, required): The email address of the user.\n- otp (string, required): The one-time password to be verified.\n    \n\n### Response\n\n- status (string): Indicates the status of the OTP verification process.\n- message (string): Provides a message related to the OTP verification status.\n    \n\nExample:\n\n``` json\n{\n    \"status\": \"verified\",\n    \"message\": \"OTP verified successfully\"\n}\n\n ```"
+							},
+							"response": []
+						},
+						{
+							"name": "Reset password",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"password\":\"123456789\",\r\n    \"confirmPass\":\"123456789\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/auth/reset-pass/:email",
+									"host": [
+										"{{LOCAL_URL}}"
 									],
 									"path": [
 										"api",
 										"v1",
 										"auth",
 										"reset-pass",
-										":token",
-										":id"
+										":email"
 									],
 									"variable": [
 										{
-											"key": "token",
-											"value": ""
-										},
-										{
-											"key": "id",
-											"value": ""
+											"key": "email",
+											"value": "ibrahim3hmedib@gmail.com"
 										}
 									]
-								}
+								},
+								"description": "This endpoint is used to reset the password for a user. The HTTP PATCH request is sent to https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/reset-pass with a payload in raw format including the user's email, new password, and confirmation of the new password.\n\n### Request Body\n\n- email (string): The email of the user requesting the password reset.\n- password (string): The new password for the user's account.\n- confirmPass (string): Confirmation of the new password.\n    \n\n### Response\n\nUpon successful execution, the endpoint returns a 200 status with a JSON response including:\n\n- status (string): Indicates the status of the password reset operation.\n- message (string): Provides additional information about the password reset process."
+							},
+							"response": []
+						},
+						{
+							"name": "Resend password otp",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/auth/resend-pass-otp/:email",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"resend-pass-otp",
+										":email"
+									],
+									"variable": [
+										{
+											"key": "email",
+											"value": "ibrahim3hmedib@gmail.com"
+										}
+									]
+								},
+								"description": "This endpoint is used to resend a one-time password (OTP) for password reset to the provided email address. The request should be sent to [https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/resend-pass-otp](https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/resend-pass-otp) using the HTTP POST method.\n\n### Request Body\n\nThe request body should be in raw format and include the following parameter:\n\n- `email`: (string) The email address to which the OTP should be sent.\n    \n\n### Response\n\nUpon successful execution, the endpoint will return a JSON response with the following fields:\n\n- `status`: (string) The status of the request.\n- `message`: (string) A message indicating the outcome of the request.\n    \n\nExample:\n\n``` json\n{\n    \"status\": \"success\",\n    \"message\": \"OTP resent successfully\"\n}\n\n ```\n\nIn case of an error, appropriate status codes and error messages will be returned."
 							},
 							"response": []
 						}
 					]
 				}
-			]
+			],
+			"description": "### Authentication API Summary:\n\nThe Authentication API provides endpoints for user registration, login, password management, and user profile operations. It incorporates secure practices such as email verification and password reset functionality. Key features include:\n\n- **User Registration:** Allows users to sign up with a unique username and email. Sends a verification code for email confirmation.\n- **Email Verification:** Verifies user identity through email confirmation, ensuring a secure registration process.\n- **Login:** Enables users to log in securely using their email and password.\n- **Password Management:** Includes features for password reset, ensuring users can regain access to their accounts in case of a forgotten password.\n- **User Profile Operations:** Allows users to update their profiles, change passwords, upload profile pictures, and manage account settings.\n- **Security Measures:** Implements secure practices like OTP verification and secure password handling to protect user accounts.\n    \n\nThis API is designed to provide a robust and secure authentication system for user interactions with the application."
 		},
 		{
 			"name": "Residence",
@@ -431,7 +435,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //15 Attributes\r\n    \"title\"       :\"home test 2\",\r\n    \"type\"        :\"sale\",       //Values:['sale', 'rent']\r\n    \"category\"    :\"house\"   //\"apartment\", \"house\", \"hotel\", \"villa\",  \"cottage\"\r\n}",
+									"raw": "{\r\n    //15 Attributes\r\n    \"title\"       :\"home test 1\",\r\n    \"type\"        :\"sale\",       //Values:['sale', 'rent']\r\n    \"category\"    :\"house\"   //\"apartment\", \"house\", \"hotel\", \"villa\",  \"cottage\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -439,12 +443,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/create",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/create",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -480,19 +482,23 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/complete/1st/664732efc6684c6e1c23c9be",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/1st/:residenceId",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
 										"residence",
 										"complete",
 										"1st",
-										"664732efc6684c6e1c23c9be"
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
 									]
 								}
 							},
@@ -523,12 +529,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/complete/2nd/:residenceId",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/2nd/:residenceId",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -564,7 +568,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //19 Attributes\r\n    \"hasGarage\"    : true,\r\n     \"garageType\"   : \"\", // Values:['more than one', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available']\r\n      \"garageQual\"  : \"\",  // Values:['good','fair','poor','average','excellent', 'not available]\r\n     \"garageCars\"   : 0,\r\n      \"garageFinish\": \"\", //Values: ['finished','rough finished' ,'unfinished', 'not available']\r\n\r\n    \"hasBasement\" : false,\r\n    //  \"bsmtUnfSF\"   : 0,    //Unfinished square feet of basement ar\r\n    //  \"bsmtExposure\": \"\",   //Refers to walkout or garden level walls=> Values:['good', 'average', 'minimum', 'no exposure']\r\n    //  \"bsmtFinType1\": \"\",  //Rating of basement => Values:['good', 'average', 'below average', 'average rec room',  'low', 'unfinished' ]\r\n    //  \"bsmtQual\"    : \"\",  //Evaluates the height of the basement=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n    //  \"bsmtCond\"    : \"\",  //Evaluates the general condition of the basement=> values:['excellent', 'good', 'average', 'fair', 'poor', 'not available']\r\n\r\n    \"hasFireplace\": true,\r\n      \"fireplaces\" : 0,\r\n      \"fireplaceQu\": \"\", //Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"bedroomAbvGr\": 0, \r\n    \"totalbaths\"  : 0,\r\n    \"KitchenAbvGr\": 0,\r\n    \"kitchenQual\" : \"\",  //'excellent', 'good', 'average', 'fair' , 'poor'\r\n    \"totRmsAbvGrd\": 0             // total rooms without bathrooms\r\n\r\n}",
+									"raw": "{\r\n    //19 Attributes\r\n    \"hasGarage\"    : true,\r\n     \"garageType\"   : \"attached\", // Values:['more than one', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available']\r\n      \"garageQual\"  : \"fair\",  // Values:['good','fair','poor','average','excellent', 'not available]\r\n     \"garageCars\"   : 3,\r\n      \"garageFinish\": \"finished\", //Values: ['finished','rough finished' ,'unfinished', 'not available']\r\n\r\n    \"hasBasement\" : false,\r\n    //  \"bsmtUnfSF\"   : 0,    //Unfinished square feet of basement ar\r\n    //  \"bsmtExposure\": \"\",   //Refers to walkout or garden level walls=> Values:['good', 'average', 'minimum', 'no exposure']\r\n    //  \"bsmtFinType1\": \"\",  //Rating of basement => Values:['good', 'average', 'below average', 'average rec room',  'low', 'unfinished' ]\r\n    //  \"bsmtQual\"    : \"\",  //Evaluates the height of the basement=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n    //  \"bsmtCond\"    : \"\",  //Evaluates the general condition of the basement=> values:['excellent', 'good', 'average', 'fair', 'poor', 'not available']\r\n\r\n    \"hasFireplace\": true,\r\n      \"fireplaces\" : 3,\r\n      \"fireplaceQu\": \"average\", //Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"bedroomAbvGr\": 4, \r\n    \"totalbaths\"  : 1,\r\n    \"KitchenAbvGr\": 2,\r\n    \"kitchenQual\" : \"good\",  //'excellent', 'good', 'average', 'fair' , 'poor'\r\n    \"totRmsAbvGrd\": 5             // total rooms without bathrooms\r\n\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -572,12 +576,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/complete/3rd/:residenceId",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/3rd/:residenceId",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -621,12 +623,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/complete/4th/664732efc6684c6e1c23c9be",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/4th/664732efc6684c6e1c23c9be",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -655,12 +655,10 @@
 								"method": "POST",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/location/:residenceId?longitude=&latitude=",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/location/:residenceId?longitude=&latitude=",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -714,12 +712,10 @@
 									]
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/upload/:residenceId",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/upload/:residenceId",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -758,12 +754,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/get/:residenceId",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/get/:residenceId",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -797,12 +791,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/sold",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/sold",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -829,12 +821,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/approved",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/approved",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -861,12 +851,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/nearest",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/nearest",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -893,12 +881,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/pending",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/pending",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -925,12 +911,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/residence/all?page=1",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/all?page=1",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -970,12 +954,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/residence/delete/:residenceId",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}/api/v1/residence/delete/:residenceId",
 							"host": [
-								"localhost"
+								"{{LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -1018,12 +1000,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/residence/update/:residenceId",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}/api/v1/residence/update/:residenceId",
 							"host": [
-								"localhost"
+								"{{LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -1057,12 +1037,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/residence/filter?min=&max=&rating=&bedroom=&bathroom=&neighborhood=",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}/api/v1/residence/filter?min=&max=&rating=&bedroom=&bathroom=&neighborhood=",
 							"host": [
-								"localhost"
+								"{{LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
@@ -1092,6 +1070,167 @@
 								},
 								{
 									"key": "neighborhood",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Add review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"rating\": 0,\r\n    \"comment\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/review/:residenceId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all reviews for one residence",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/review/get/:residenceId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"get",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/review/like/:reviewId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"like",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unlike review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/review/unlike/:reviewId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"unlike",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
 									"value": ""
 								}
 							]
@@ -1135,12 +1274,10 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:8080/api/v1/user/favorites/add/:residenceId",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/user/favorites/add/:residenceId",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -1175,12 +1312,10 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/user/favorites",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/user/favorites",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -1207,12 +1342,10 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/user/favorites/delete/:residenceId",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/user/favorites/delete/:residenceId",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -1247,12 +1380,10 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://localhost:8080/api/v1/user/favorites/delete",
-									"protocol": "http",
+									"raw": "{{LOCAL_URL}}/api/v1/user/favorites/delete",
 									"host": [
-										"localhost"
+										"{{LOCAL_URL}}"
 									],
-									"port": "8080",
 									"path": [
 										"api",
 										"v1",
@@ -1267,14 +1398,135 @@
 					]
 				},
 				{
-					"name": "Get Profile",
+					"name": "Set Location",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/user/location?latitude=30.6686287&longitude=30.0771745",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"location"
+							],
+							"query": [
+								{
+									"key": "latitude",
+									"value": "30.6686287"
+								},
+								{
+									"key": "longitude",
+									"value": "30.0771745"
+								}
+							]
+						},
+						"description": "### POST /api/v1/auth/location\n\nThis endpoint is used to update the user's location by providing longitude and latitude coordinates as query parameters.\n\n#### Query Parameters\n\n- longitude: The longitude coordinate of the user's location.\n- latitude: The latitude coordinate of the user's location.\n    \n\n#### Response\n\n- Status: 200 OK\n- status: The status of the request.\n- user: Object containing user information.\n    \n- location: Object containing user's location information.\n    - fullAddress: The full address of the user's location.\n    - city: The city of the user's location.\n    - state: The state of the user's location.\n    - country: The country of the user's location."
+					},
+					"response": []
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\":\"12345678\",\r\n    \"newPassword\":\"123456789\",\r\n    \"confirmPass\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/user/change-password",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"change-password"
+							]
+						},
+						"description": "This endpoint is used to change the password for the authenticated user. The HTTP PATCH request should be made to {{url}}/api/v1/auth/change-password with the following payload in the raw request body:\n\n- oldPassword (string): The current password of the user.\n- newPassword (string): The new password that the user wants to set.\n- confirmPass (string): Confirmation of the new password.\n    \n\nThe response to the request will have a status code of 200, and the response body will contain a JSON object with a \"status\" key indicating the status of the password change process."
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\":\"Ibrahim\",\r\n    \"gender\":\"male\",\r\n    \"username\":\"ibrahim22\",\r\n    \"lastName\":\"Ahmed\",\r\n    \"phone\":\"01122042430\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/user/update-user",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"update-user"
+							]
+						},
+						"description": "This endpoint allows you to update user information via an HTTP PATCH request to {{url}}/api/v1/auth/update-user.\n\n### Request Body\n\nThe request should include a JSON payload in the raw request body type with the following parameters:\n\n- `firstName` (string): The first name of the user.\n- `gender` (string): The gender of the user.\n- `username` (string): The username of the user.\n- `lastName` (string): The last name of the user.\n- `phone` (string): The phone number of the user.\n    \n\n### Response\n\nUpon a successful execution, the endpoint returns a status code of 200 along with a JSON response containing the updated user information.  \nThe response includes the following fields:\n\n- `status` (string): The status of the response.\n- `user` (object): An object containing the user's information.\n    - `image` (object): An object containing the user's image details.\n        - `public_id` (string): The public ID of the user's image.\n        - `url` (string): The URL of the user's image.\n    - `_id` (string): The unique ID of the user.\n    - `username` (string): The username of the user.\n    - `email` (string): The email address of the user.\n    - `role` (string): The role of the user.\n    - `isVerified` (boolean): Indicates whether the user is verified.\n    - `createdAt` (string): The timestamp of user creation.\n    - `updatedAt` (string): The timestamp of the user's last update.\n    - `firstName` (string): The first name of the user.\n    - `gender` (string): The gender of the user.\n    - `lastName` (string): The last name of the user.\n    - `phone` (string): The phone number of the user."
+					},
+					"response": []
+				},
+				{
+					"name": "Get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
 									"type": "string"
 								}
 							]
@@ -1282,60 +1534,30 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/user/get-user/",
+							"raw": "{{LOCAL_URL}}/api/v1/user/get-user",
 							"host": [
-								"{{baseUrl}}"
+								"{{LOCAL_URL}}"
 							],
 							"path": [
 								"api",
 								"v1",
 								"user",
-								"get-user",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete image profile",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
-									"type": "string"
-								}
+								"get-user"
 							]
 						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{baseUrl}}/api/v1/user/delete-profile-picture",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"delete-profile-picture"
-							]
-						}
+						"description": "This endpoint makes an HTTP GET request to retrieve user information from the API. The response will include the user's details such as username, email, role, verification status, creation and update timestamps, first name, gender, last name, and phone number. Additionally, the response will also include the user's image details and wish list."
 					},
 					"response": []
 				},
 				{
-					"name": "Upoad profile pic",
+					"name": "Upload Image",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
 									"type": "string"
 								}
 							]
@@ -1348,14 +1570,20 @@
 								{
 									"key": "image",
 									"type": "file",
-									"src": "pexels-pixabay-33545.jpg"
+									"src": "/E:/Learning/My pics/PicsArt_11-22-04.49.57.jpg"
+								},
+								{
+									"key": "id",
+									"value": "65ed712b297ab80b3687d4f4",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "{{baseUrl}}/api/v1/user/upload-image",
+							"raw": "{{LOCAL_URL}}/api/v1/user/upload-image",
 							"host": [
-								"{{baseUrl}}"
+								"{{LOCAL_URL}}"
 							],
 							"path": [
 								"api",
@@ -1363,24 +1591,143 @@
 								"user",
 								"upload-image"
 							]
-						}
+						},
+						"description": "This endpoint allows you to upload an image for authentication via a POST request to the specified URL. The request should be of form-data type, and the image should be included as a file parameter.\n\nThe response for the last execution returned a status code of 404 with an empty JSON response body containing the keys \"status\" and \"message\"."
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Reviews",
-			"item": [
+				},
 				{
-					"name": "Add review",
+					"name": "Delete profile picture",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/user/delete-profile-picture",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"delete-profile-picture"
+							]
+						},
+						"description": "This endpoint is used to delete the profile picture of the authenticated user. The HTTP DELETE request should be sent to {{LOCAL_URL}}/api/v1/auth/delete-profile-picture.\n\nThe request does not require a payload in the request body.\n\n### Response\n\n- Status:\n    \n- Body:\n    \n    ``` json\n        {\n            \"status\": \"\"\n        }\n    \n     ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Change Image",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "postman-cloud:///1eedec66-ea54-45c0-8d85-ba4e4e6fe7e4"
+								},
+								{
+									"key": "id",
+									"value": "6572170b55d2a5d1ba091111",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/user/upload-image",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"upload-image"
+							]
+						},
+						"description": "### Upload Image\n\nThis endpoint allows you to upload an image for authentication.\n\n**HTTP Request**\n\n```\nPOST {{url}}/api/v1/auth/upload-image\n\n ```\n\n**Request Body**\n\n- form-data\n    - No parameters required\n\n**Response**\n\n- Status: 200\n    \n    ``` json\n          {\n              \"status\": \"\",\n              \"image\": {\n                  \"public_id\": \"\",\n                  \"url\": \"\"\n              }\n          }\n    \n     ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/user/delete-user",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"delete-user"
+							]
+						},
+						"description": "This endpoint is used to delete a user account. When making an HTTP DELETE request to {{url}}/api/v1/auth/delete-user, the request should include a raw JSON body with the user's password. Upon successful execution, the endpoint returns a 200 status with a JSON response containing a status message.\n\n### Request Body\n\n| Key | Type | Description |\n| --- | --- | --- |\n| password | String | The user's password |\n\n### Response\n\n| Key | Description |\n| --- | --- |\n| status | A message indicating the status of the operation |"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "send message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUwYjhiNTk5ZWEwZmRiN2MyOGUwYzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTIyNjE2NiwiZXhwIjoxNzExODE4MTY2fQ.qIsGhRwX99FWd0CiIDXjxXKgOPttinEffvCIAHAEccM",
 									"type": "string"
 								}
 							]
@@ -1389,7 +1736,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"rating\": 0,\r\n    \"comment\": \"\"\r\n}",
+							"raw": "{\r\n    \"messageContent\":\"Hellloooooooo ma26n\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1397,22 +1744,21 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/review/:residenceId",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}/api/v1/chat/send/:receiverId",
 							"host": [
-								"localhost"
+								"{{LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
-								"review",
-								":residenceId"
+								"chat",
+								"send",
+								":receiverId"
 							],
 							"variable": [
 								{
-									"key": "residenceId",
-									"value": ""
+									"key": "receiverId",
+									"value": "65e0b94099ea0fdb7c28e0ca"
 								}
 							]
 						}
@@ -1420,14 +1766,14 @@
 					"response": []
 				},
 				{
-					"name": "get all reviews for one residence",
+					"name": "get con",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUwYjhiNTk5ZWEwZmRiN2MyOGUwYzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTIyNjE2NiwiZXhwIjoxNzExODE4MTY2fQ.qIsGhRwX99FWd0CiIDXjxXKgOPttinEffvCIAHAEccM",
 									"type": "string"
 								}
 							]
@@ -1435,23 +1781,21 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/review/get/:residenceId",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}/api/v1/chat/get-conversation/:receiverId",
 							"host": [
-								"localhost"
+								"{{LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
-								"review",
-								"get",
-								":residenceId"
+								"chat",
+								"get-conversation",
+								":receiverId"
 							],
 							"variable": [
 								{
-									"key": "residenceId",
-									"value": ""
+									"key": "receiverId",
+									"value": "65e0b94099ea0fdb7c28e0ca"
 								}
 							]
 						}
@@ -1459,14 +1803,14 @@
 					"response": []
 				},
 				{
-					"name": "Like review",
+					"name": "getChatUsers",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUwYjhiNTk5ZWEwZmRiN2MyOGUwYzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTIyNjE2NiwiZXhwIjoxNzExODE4MTY2fQ.qIsGhRwX99FWd0CiIDXjxXKgOPttinEffvCIAHAEccM",
 									"type": "string"
 								}
 							]
@@ -1474,23 +1818,50 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/v1/review/like/:reviewId",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}/api/v1/chat/getChatUsers",
 							"host": [
-								"localhost"
+								"{{LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
-								"review",
-								"like",
-								":reviewId"
-							],
-							"variable": [
+								"chat",
+								"getChatUsers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
 								{
-									"key": "reviewId",
-									"value": ""
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/chat/search-users?search=ahme",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"chat",
+								"search-users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "ahme"
 								}
 							]
 						}
@@ -1498,38 +1869,137 @@
 					"response": []
 				},
 				{
-					"name": "unlike review",
+					"name": "edit message",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
 									"type": "string"
 								}
 							]
 						},
-						"method": "GET",
+						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"messageContent\":\"heiiieie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:8080/api/v1/review/unlike/:reviewId",
-							"protocol": "http",
+							"raw": "{{LOCAL_URL}}/api/v1/chat/edit-message/:messageId",
 							"host": [
-								"localhost"
+								"{{LOCAL_URL}}"
 							],
-							"port": "8080",
 							"path": [
 								"api",
 								"v1",
-								"review",
-								"unlike",
-								":reviewId"
+								"chat",
+								"edit-message",
+								":messageId"
 							],
 							"variable": [
 								{
-									"key": "reviewId",
-									"value": ""
+									"key": "messageId",
+									"value": "65ea938388e2475844e3c83a"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete message",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/chat/delete-message/:messageId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"chat",
+								"delete-message",
+								":messageId"
+							],
+							"variable": [
+								{
+									"key": "messageId",
+									"value": "65e3215a2afd122a9fa033fd"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete conversation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"messageContent\":\"heiiieie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/chat/delete-conversation/:receiverId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"chat",
+								"delete-conversation",
+								":receiverId"
+							],
+							"variable": [
+								{
+									"key": "receiverId",
+									"value": "65e311fff5e912df4317e965"
 								}
 							]
 						}
@@ -1537,6 +2007,12 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"variable": [
+		{
+			"key": "LOCAL_URL",
+			"value": "http://localhost:8080"
 		}
 	]
 }
