@@ -9,7 +9,9 @@ const {
     uploadImage,
     deleteMultipleImages
 } = require("../../../Helpers/cloud.js");
+
 const getLocation = require("../../../Managers/getLocation.manager.js");
+
 const { 
     residenceValidation,
     completeResidenceValidation,
@@ -20,13 +22,9 @@ const {
 
 const { updateResidenceValidation } = require("../validators/updateResidence.validation.js");
 const valueConversion = require('../middlewares/valueConversion.js')
-const { 
-    neighborhoodConverter, centralAirConverter
-    } = require("../../../Helpers/converter.js");
 
 
-// @desc Create a residence
-// @method Post
+
 exports.createResidence = asyncHandler(async (req, res, next) => {
     const user = req.user;
     const {value, error} = residenceValidation(req.body);
@@ -51,7 +49,7 @@ exports.completeResidence = asyncHandler(async (req, res, next) => {
             value.utilities = 'AllPub';
             break;
         case 1:
-            value.utilities = 'ELO';
+            value.utilities = 'ELO'; //electricity is always required
             break;
         default:
             value.utilities = value.utilities.includes('gas') ? 'NoSeWa' : value.utilities.includes('water') ? 'NoSewr' : value.utilities;
@@ -72,9 +70,12 @@ exports.completeResidence = asyncHandler(async (req, res, next) => {
 });
 exports.stepTwoComplete = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
+   
     const {value, error} = stepTwoCompleteValidation(req.body);
     if(error) return next(new appError(error, 400));
+   
     valueConversion(value);
+   
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
 
@@ -85,6 +86,7 @@ exports.stepTwoComplete = asyncHandler(async (req, res, next) => {
 });
 exports.stepThreeComplete = asyncHandler( async(req, res, next) => {
     const {residenceId} = req.params;
+  
     const {value, error} = stepThreeCompleteValidation(req.body);
     if(error) return next(new appError(error, 400));
     
@@ -99,11 +101,11 @@ exports.stepThreeComplete = asyncHandler( async(req, res, next) => {
     });
 });
 exports.stepFourComplete = asyncHandler( async(req, res, next) => {
+    const {residenceId} = req.params;
+
     const {value, error} = stepFourCompleteValidation(req.body);
     if(error) return next(new appError(error, 400));
     
-    const {residenceId} = req.params;
-
     valueConversion(value);
 
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true}).populate({
@@ -187,9 +189,9 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
     });
 });
 
-// @desc Get a residence
-// @method Get
+
 exports.getAllApproved = asyncHandler(async (req, res, next) => {
+    const {_id} = req.user;
     const page  = req.query.page  * 1 || 1;
     const limit = 10;
     const skip  = (page - 1) * limit;
@@ -200,17 +202,18 @@ exports.getAllApproved = asyncHandler(async (req, res, next) => {
     }).populate({
         path: 'reviews',
         populate: {
-            path: 'userId likedUsers',
+            path: 'userId likedBy',
             select : 'username image location.fullAddress',
         }
     }).skip(skip).limit(limit);
 
     await deleteUncompletedResidence(Residence);
-    
-    residences.map(res => {
-        res.neighborhood = neighborhoodConverter(res.neighborhood)
-        res.centralAir = centralAirConverter(res.centralAir)
+
+    residences = residences.map(res => {
+        return res.toJSON({userId: _id});
     });
+
+    
     return res.status(200).json({
         status: 'success',
         count : residences.length,
@@ -219,7 +222,8 @@ exports.getAllApproved = asyncHandler(async (req, res, next) => {
 });
 exports.getOneResidence = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
-    const residence = await Residence.findById(residenceId).populate([
+    const {_id} = req.user;
+    let residence = await Residence.findById(residenceId).populate([
     { 
         path: 'ownerId',
         select: 'username  image location.fullAddress'
@@ -242,9 +246,8 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
         await residence.deleteOne();
         return next(new appError("Residence not found!", 404));
     }
-    residence.neighborhood = neighborhoodConverter(residence.neighborhood);
-    residence.centralAir = centralAirConverter(residence.centralAir);
-
+    
+    residence = residence.toJSON( { userId:_id} );
     return res.status(200).json({
         status: 'success',
         residence
@@ -252,10 +255,14 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
 });
 exports.getNearestResidences = asyncHandler(async (req, res, next) => {
     const {longitude, latitude} = req.user.location;
+    const {_id} = req.user;
+    const page  = req.query.page  * 1 || 1;
+    const limit = 10;
+    const skip  = (page - 1) * limit;
 
     if(!longitude || !latitude) return next(new appError("Please provide a valid location", 400));
     
-    const residences = await Residence.find({
+    let residences = await Residence.find({
         location: {
             $near: {
                 $geometry: {
@@ -277,10 +284,10 @@ exports.getNearestResidences = asyncHandler(async (req, res, next) => {
                 select: 'username image location.fullAddress'
             }
         }
-    ]);
-    residences.map(res => {
-        res.neighborhood = neighborhoodConverter(res.neighborhood)
-        res.centralAir = centralAirConverter(res.centralAir)
+    ]).skip(skip).limit(limit);
+
+    residences = residences.map(res => {
+        return res.toJSON({userId: _id});
     });
 
     return res.status(200).json({
@@ -291,7 +298,10 @@ exports.getNearestResidences = asyncHandler(async (req, res, next) => {
 });
 exports.getPending = asyncHandler(async (req, res, next) => {
     const {_id} = req.user;
-    const residence = await Residence.find({ownerId: _id, status: "pending", isCompleted: true}).populate([
+    const page  = req.query.page  * 1 || 1;
+    const limit = 10;
+    const skip  = (page - 1) * limit;
+    let residences = await Residence.find({ownerId: _id, status: "pending", isCompleted: true}).populate([
     { 
         path: 'ownerId',
         select: 'username  image location.fullAddress'
@@ -302,19 +312,23 @@ exports.getPending = asyncHandler(async (req, res, next) => {
             select : 'username image location.fullAddress'
         }
     }
-    ]);
-    residence.neighborhood = neighborhoodConverter(residence.neighborhood);
-    residence.centralAir   = centralAirConverter(residence.centralAir);
+    ]).skip(skip).limit(limit);
 
+    residences = residences.map(res => {
+        return res.toJSON({userId: _id});
+    });
     return res.status(200).json({
         status: 'success',
-        count : residence.length,
-        residence
+        count : residences.length,
+        residences
     });
 });
 exports.getApproved = asyncHandler(async (req, res, next) => {
     const {_id} = req.user;
-    const residence = await Residence.find({ownerId: _id, status: "approved", isCompleted: true, isSold: false}).populate([
+    const page  = req.query.page  * 1 || 1;
+    const limit = 10;
+    const skip  = (page - 1) * limit;
+    let residences = await Residence.find({ownerId: _id, status: "approved", isCompleted: true, isSold: false}).populate([
     { 
         path: 'ownerId',
         select: 'username  image location.fullAddress'
@@ -325,18 +339,23 @@ exports.getApproved = asyncHandler(async (req, res, next) => {
             select : 'username image location.fullAddress'
         }
     }
-    ]);
-    residence.neighborhood = neighborhoodConverter(residence.neighborhood);
-    
+    ]).skip(skip).limit(limit);
+
+    residences = residences.map(res => {
+        return res.toJSON({userId: _id});
+    });
     return res.status(200).json({
         status: 'success',
-        count : residence.length,
-        residence
+        count : residences.length,
+        residences
     });
 });
 exports.getSold =  asyncHandler(async (req, res, next) => {
     const {_id} = req.user;
-    const residence = await Residence.find({ownerId: _id, isSold: true, isCompleted: true}).populate([
+    const page  = req.query.page  * 1 || 1;
+    const limit = 10;
+    const skip  = (page - 1) * limit;
+    let residences = await Residence.find({ownerId: _id, isSold: true, isCompleted: true}).populate([
     { 
         path: 'ownerId',
         select: 'username  image location.fullAddress'
@@ -347,18 +366,17 @@ exports.getSold =  asyncHandler(async (req, res, next) => {
             select : 'username image location.fullAddress'
         }
     }
-    ]);
-    residence.neighborhood = neighborhoodConverter(residence.neighborhood);
+    ]).skip(skip).limit(limit);
 
+    residences = residences.map(res => {
+        return res.toJSON({userId: _id});
+    });
     return res.status(200).json({
         status: 'success',
-        count : residence.length,
-        residence
+        count : residences.length,
+        residences
     });
 });
-
-
-
 
 
 exports.updateResidence = asyncHandler(async (req, res, next) => {
@@ -422,8 +440,7 @@ exports.deleteOneResidence = asyncHandler(async (req, res, next) => {
 
 exports.filtration = asyncHandler(async (req, res, next) => {
     let {min, max, rating, bedroom, bathroom, neighborhood} = req.query;
-    neighborhood = neighborhoodConverter(neighborhood);
-   
+    
     if(!min) min = 0;
     if(!max) max = 15000;
     if(!bedroom)  bedroom = 1
@@ -457,6 +474,8 @@ exports.filtration = asyncHandler(async (req, res, next) => {
     });
 });
 
+
+// function to delete all uncompleted residences
 async function  deleteUncompletedResidence(Residence){
     let unCompletedResidences = await Residence.find({ isCompleted: false });
     let public_ids = unCompletedResidences.flatMap(residence => residence.images.map(img => img.public_id));
