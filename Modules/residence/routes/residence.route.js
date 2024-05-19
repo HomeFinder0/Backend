@@ -35,12 +35,12 @@ router.post("/complete/4th/:residenceId" , stepFourComplete);
 router.post("/location/:residenceId" , setLocation);
 router.post("/upload/:residenceId", uploadMultiple , residenceImages);
 
-router.get("/get/:residenceId", getOneResidence);
-router.get("/pending",          getPending);
-router.get("/approved",         getApproved);
-router.get("/sold",             getSold);
-router.get("/nearest",          getNearestResidences);
-router.get("/all?",             getAllApproved);
+router.get("/get/:residenceId",  getOneResidence);
+router.get("/pending?",          getPending);
+router.get("/approved?",         getApproved);
+router.get("/sold?",             getSold);
+router.get("/nearest?",          getNearestResidences);
+router.get("/all?",              getAllApproved);
 
 router.patch("/update/:residenceId", updateResidence);
 router.delete("/delete/:residenceId", deleteOneResidence);
