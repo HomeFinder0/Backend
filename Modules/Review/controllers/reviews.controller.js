@@ -3,7 +3,6 @@ const appError = require("../../../Helpers/appError.js");
 
 const Residence = require('../../residence/models/Residence.js');
 const Review = require('../models/Review.js');
-const User = require('../../user/models/User.js');
 
 exports.addReview = asyncHandler(async (req, res, next) => {
     let userId = req.user._id;
@@ -37,14 +36,14 @@ exports.addReview = asyncHandler(async (req, res, next) => {
 
 exports.getResidenceReviews = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
-    const residence = await Residence.findById(residenceId).populate({
+    let residence = await Residence.findById(residenceId).populate({
         path : 'reviews',
         populate :[ {
             path : 'userId',
             select : 'username image'
         },
         {
-            path : 'likedUsers',
+            path : 'likedBy',
             select : 'username image'
         },{
             path : 'residenceId',
@@ -53,11 +52,12 @@ exports.getResidenceReviews = asyncHandler(async (req, res, next) => {
         }
     ]
     });
-
+    residence = residence.toJSON({userId : req.user._id});
     if(!residence) return next(new appError('Residence not found', 404));
 
     res.status(200).json({
         status: 'success',
+        count: residence.reviews.length,
         reviews: residence.reviews
     });
 
@@ -72,17 +72,17 @@ exports.likeReview = asyncHandler(async (req, res, next) => {
     if(!review) return next(new appError('Review not found', 404));
     if(String(req.user._id) == String(review.userId._id)) return next(new appError('You cannot like your own review', 400))
 
-    if(review.likedUsers.includes(req.user._id)) return next(new appError('You already liked this review', 400));
+    if(review.likedBy.includes(req.user._id)) return next(new appError('You already liked this review', 400));
 
-    review.likedUsers.push(req.user._id);
-    review.likes += 1;
+    review.likedBy.push(req.user._id);
+    review.reviewLikes += 1;
     await review.save();
 
     res.status(200).json({
         status: 'success',
         message: 'Review liked successfully',
         reviewId: review._id,
-        likes : review.likes
+        likes : review.reviewLikes
     });
 })
 
@@ -95,17 +95,17 @@ exports.unLikeReview = asyncHandler(async (req, res, next) => {
 
     if(!review) return next(new appError('Review not found', 404));
     
-    if(!review.likedUsers.includes(req.user._id)) return next(new appError('You have not liked this review', 400));
-    if(review.likes == 0) return next(new appError('Review has no likes', 400));
+    if(!review.likedBy.includes(req.user._id)) return next(new appError('You have not liked this review', 400));
+    if(review.reviewLikes == 0) return next(new appError('Review has no likes', 400));
 
-    review.likedUsers.pull(req.user._id);
-    review.likes -= 1;
+    review.likedBy.pull(req.user._id);
+    review.reviewLikes -= 1;
     await review.save();
 
     res.status(200).json({
         status: 'success',
         message: 'Review unliked successfully',
         reviewId: review._id,
-        likes : review.likes
+        likes : review.reviewLikes
     });
 })
