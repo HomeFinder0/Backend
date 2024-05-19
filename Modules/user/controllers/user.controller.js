@@ -11,7 +11,6 @@ const {
 } = require("../../common/validation/common.validation.js");
 
 const { uploadImage, deleteImage } = require("../../../Helpers/cloud.js");
-
 exports.setLocation = asyncHandler(async (req, res, next) => {
   let { user } = req;
 
@@ -57,9 +56,16 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   const userId = req.params.id || req.user._id;
   let user = await User.findById(userId);
   if (!user) return next(new appError("User not found", 404));
-
+  let residences = await Residence.find({ ownerId: userId });
+  let sold = residences.filter((res) => res.isSold === true).length;
+  let pending  = residences.filter((res) => res.status === 'pending').length;
+  let approved = residences.filter((res) => res.status === 'approved' && res.isSold == false).length;
+  
   return res.status(200).json({
     status: "success",
+    soldCount : sold,
+    pendingCount: pending,
+    approvedCount: approved,
     user,
   });
 });
@@ -161,17 +167,19 @@ exports.changePassword = asyncHandler(async (req, res, next) => {
 });
 
 exports.addFavorite = asyncHandler(async (req, res, next) => {
-  let { user } = req;
+  const { user } = req;
   const { residenceId } = req.params;
+
   let residence = await Residence.findById(residenceId);
   if(!residence) return next(new appError('Residence not found', 404));
-  
- // if(residence.ownerId.toString() === user._id.toString()) return next(new appError('You can not add your own residence to your Favorite', 400));
-  if(user.wishlist.includes(residenceId)) return next(new appError('Residence is already in your Favorite', 400));
+
+  if(user.wishlist.includes(residenceId) && residence.likedUsers.includes(user._id)) 
+    return next(new appError('Residence is already in your Favorite', 400));
 
   user.wishlist.push(residenceId);  
-  residence.likes += 1;
-  residence.isLiked = true;
+  residence.likedUsers = [];
+  residence.likedUsers.push(user._id);
+
   Promise.all([user.save(), residence.save()]);
 
   return res.status(200).json({
@@ -187,14 +195,14 @@ exports.deleteOneFavorite = asyncHandler(async (req, res, next) => {
   let residence = await Residence.findById(residenceId);
   if(!residence) return next(new appError('Residence not found', 404));
 
-  if (!user.wishlist.map(String).includes(residenceId))
+  if (!user.wishlist.includes(residenceId) && !residence.likedUsers.includes(user._id))
     return next(new appError("Residence is not in your Favorite", 400));
 
-  user.wishlist = user.wishlist.filter((fav) => fav.toString() !== residenceId);
-  residence.likes -= 1;
-  residence.isLiked = false;
+  user.wishlist        = user.wishlist.filter((fav) => fav.toString() !== residenceId);
+  residence.likedUsers = residence.likedUsers.filter((user)=> user.toString() !== user._id.toString())
 
   Promise.all([user.save(), residence.save()]);
+
   return res.status(200).json({
     status: "success",
     message: "Favorite has been removed",
@@ -208,9 +216,10 @@ exports.deleteAllFavorites = asyncHandler(async (req, res, next) => {
   
   for(let residenceId of user.wishlist){
     let residence = await Residence.findById(residenceId);
-    residence.likes -= 1;
-    residence.isLiked = false;
-    await residence.save();
+    if(residence) {
+      residence.likedUsers = residence.likedUsers.filter((fav) => fav.user !== user._id);
+      await residence.save();
+    }
   }
 
   user.wishlist = [];
@@ -225,27 +234,27 @@ exports.deleteAllFavorites = asyncHandler(async (req, res, next) => {
 exports.getWishlist = asyncHandler(async (req, res, next) => {
   let { _id } = req.user;
 
-  let user = await User.findById(_id).populate({
-    path: 'wishlist',
-    populate:[
-      {
-        path:'ownerId',
-        select: 'username image'
-      },{
-      path: 'reviews',
-      populate: {
-        path: 'userId',
-        select: 'username image'
-        }
-      }  
-    ],
-    select: 'title price image location reviews'
+  let user = await User.findById(_id).populate('wishlist');
+  if(!user) return next(new appError('User not found', 404));
+
+  let wishlist = user.wishlist.map((res) => {
+    return {
+      _id           : res._id,
+      isLiked       : res.likedUsers.includes(user._id),
+      title         : res.title,
+      category      : res.category,
+      salePrice     : res.salePrice,
+      paymentPeriod : res.paymentPeriod,
+      location      : res.location.fullAddress,
+      rating        :  res.reviews.length > 0 ? res.reviews.reduce((acc, curr) => acc + curr.rating, 0) / res.reviews.length : 0, //Avvarage rating
+      images        : res.images,
+      }
   });
 
   return res.status(200).json({
     status: "success",
-    count : user.wishlist.length,
-    wishlist : user.wishlist
+    count : wishlist.length,
+    wishlist
   });
 });
 
