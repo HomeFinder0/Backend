@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const { 
-  neighborhoodConverter, centralAirConverter
-  } = require("../../../Helpers/converter.js");
+const valueConversion = require('../middlewares/valueConversion.js')
 
 const residenceSchema = new mongoose.Schema({
     ownerId     : { type: mongoose.Schema.Types.ObjectId,  ref: 'Users' },
@@ -121,52 +119,27 @@ const residenceSchema = new mongoose.Schema({
 
     houseage       :{ type: Number, default: 0},
     houseremodelage:{ type: Number, default: 0},
-},{
+},
+
+{
   timestamps: true,
   toJSON: { 
       transform: function (doc, ret, options) {
         const userId     = options.userId ? options.userId.toString() : null; // current user id to check if the user liked the residence or not
         const likedUsers = ret.likedUsers ? ret.likedUsers.map(id => id.toString()) : [];
-        console.log(ret._id, likedUsers.includes(userId));
+        const isLiked    = userId ? likedUsers.includes(userId) : false;
+      
+        delete ret.__v;
+        ret = valueConversion(ret);  
         return {
-              _id          : ret._id,
-              isLiked      : likedUsers.includes(userId),
-              isCompleted  : ret.isCompleted,
-              isSold       : ret.isSold,
-
-              title        : ret.title,
-              category     : ret.category,
-              type         : ret.type,
-              status       : ret.status,
-              
-              salePrice    : ret.salePrice,
-              paymentPeriod: ret.paymentPeriod,
-              
-              bedroomAbvGr : ret.bedroomAbvGr,
-              totalbaths   : ret.totalbaths,
-              totRmsAbvGrd : ret.totRmsAbvGrd,
-              KitchenAbvGr : ret.KitchenAbvGr,
-              totalporchsf : ret.totalporchsf,
-              totalarea    : ret.totalarea,
-
-              hasGarage    : ret.hasGarage,
-              hasFireplace : ret.hasFireplace,
-              hasBasement  : ret.hasBasement,
-              centralAir   : centralAirConverter(ret.centralAir),
-              
-              neighborhood : neighborhoodConverter(ret.neighborhood),
-              location     : ret.location,
-              images       : ret.images,
-              reviews      : ret.reviews,
-              ownerId      : ret.ownerId,
-              createdAt    : ret.createdAt, 
-              updatedAt    : ret.updatedAt  
-            };
+          isLiked,
+          ...ret,
+          }
       }
   }
 }
 );
 
-residenceSchema.index({ 'location': '2dsphere'   }); // calculate geometries on an earth-like sphere.
+residenceSchema.index({ 'location': '2dsphere' }); // calculate geometries on an earth-like sphere.
 
 module.exports = mongoose.model('Residence', residenceSchema);
