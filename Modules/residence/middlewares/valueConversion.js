@@ -11,11 +11,29 @@ const {
     centralAirConverter,     saleConditionConverter,
     msSubClassConverter,     bldgTypeConverter,
     foundationConverter,     alleyConverter,
-    qualityRatingConverter,
+    qualityRatingConverter,  utilitiesConverter
     } = require('../../../Helpers/converter.js');
 
     
 module.exports = (value)=>{
+    console.log(typeof value.utilities);
+
+    if(value.utilities){
+        console.log(value.utilities);
+   //     if(typeof value.utilities == string) utilitiesConverter(value);
+        // else{
+            switch(value.utilities.length) {
+                case 3:
+                    value.utilities = 'AllPub';
+                    break;
+                case 1:
+                    value.utilities = 'ELO'; //electricity is always required
+                break;
+                default:
+                    value.utilities = value.utilities.includes('gas') ? 'NoSeWa' : value.utilities.includes('water') ? 'NoSewr' : value.utilities;
+                    break;
+    //}
+}}
     value.neighborhood = neighborhoodConverter(value.neighborhood);
     value.saleCondition= saleConditionConverter(value.saleCondition);
     value.saleType     = saleTypeConverter(value.saleType);
@@ -45,19 +63,16 @@ module.exports = (value)=>{
     value.landSlope    = landSlopeConverter(value.landSlope);
     value.pavedDrive   = pavedDriveConverter(value.pavedDrive);
 
-    if(value.hasGarage){ 
-        value.garageType   = garageConverter(value.garageType);
-        value.garageFinish = garageConverter(value.garageFinish);
-        value.garageQual   = qualityRatingConverter(value.garageQual);
-    }
-    if(value.hasBasement) { 
-        value.bsmtFinType1  = bsmtFinType1Converter(value.bsmtFinType1);
-        value.bsmtExposure  = bsmtExposureConverter(value.bsmtExposure);
-        value.bsmtCond      = qualityRatingConverter(value.bsmtCond);
-        value.bsmtQual      = qualityRatingConverter(value.bsmtQual);
-    }
-    
-    if(value.hasFireplace)  value.fireplaceQu = qualityRatingConverter(value.fireplaceQu);
+    value.garageType   = garageConverter(value.garageType);
+    value.garageFinish = garageConverter(value.garageFinish);
+    value.garageQual   = qualityRatingConverter(value.garageQual);
+
+    value.bsmtFinType1  = bsmtFinType1Converter(value.bsmtFinType1);
+    value.bsmtExposure  = bsmtExposureConverter(value.bsmtExposure);
+    value.bsmtCond      = qualityRatingConverter(value.bsmtCond);
+    value.bsmtQual      = qualityRatingConverter(value.bsmtQual);
+        
+    value.fireplaceQu = qualityRatingConverter(value.fireplaceQu);
 
     return value;
 }   
