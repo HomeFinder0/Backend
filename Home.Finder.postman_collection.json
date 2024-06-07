@@ -435,7 +435,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //15 Attributes\r\n    \"title\"       :\"home test 20\",\r\n    \"type\"        :\"sale\",       //Values:['sale', 'rent']\r\n    \"category\"    :\"house\"   //\"apartment\", \"house\", \"hotel\", \"villa\",  \"cottage\"\r\n}",
+									"raw": "{\r\n    //15 Attributes\r\n    \"title\"       :\"\",\r\n    \"type\"        :\"\",  //Values:['sale', 'rent']\r\n    \"category\"    :\"\"   //\"apartment\", \"house\", \"hotel\", \"villa\",  \"cottage\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -465,7 +465,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 											"type": "string"
 										}
 									]
@@ -482,7 +482,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/1st/6649ae822bd11e0df30ef425",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/1st/:residenceId",
 									"host": [
 										"{{LOCAL_URL}}"
 									],
@@ -492,7 +492,13 @@
 										"residence",
 										"complete",
 										"1st",
-										"6649ae822bd11e0df30ef425"
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
 									]
 								}
 							},
@@ -506,7 +512,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 											"type": "string"
 										}
 									]
@@ -515,7 +521,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{   //17 Attributes\r\n    \"roofStyle\"   : \"Gable\",        //'Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed'\r\n    \"roofMatl\"    : \"membran\",       //'clay or tile','standard shingle','membran','metal','roll','gravel & tar','wood shakes','wood shingles'\r\n    \"houseStyle\"  : \"SFoyer\",      // عدد الطوابق=> Values: [1Story', '1.5Fin', '1.5Unf', '2Story', '2.5Fin', '2.5Unf', 'SFoyer', 'SLvl']\r\n    \"msSubClass\"  : \"2story and older\" ,    //type of residence: عدد الطوابق واشكالها \r\n     //\"2 family conversion\", \"multilevel and split\", \"duplex\", \"split foyer\",\"multi-level\",\"1 story unfinished attic\",\"1 story finished attic\", \"2story and older\", \"2story and newer\",  \"1story and older\", \"1story and newer\"\r\n     \r\n    \"centralAir\" : \"yes\", // Values: [yes, no]\r\n    \"street\"     : \"gravel\",  // Values:[ paved , gravel ]\t نوع الطريق المؤدي إلى العقار\r\n    \"alley\"      : \"no alley access\" ,   //نوع الممر المؤدي إلى العقار   => Values:['gravel', 'paved','no alley access'] **Not required\r\n\r\n    \"heating\"    : \"gas\",  // Type of heating=>Values:['floor','gas', 'gas water', 'gravity', 'other water', 'wall']\r\n    \"heatingQc\"  : \"excellent\",  // Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n              \r\n    \"masVnrType\" : \"cinder block\",  //Masonry veneer type =>Values:['brick face', 'brick common', 'cinder block', 'None', 'Stone']\r\n    \"masVnrArea\" : 110,\r\n    \r\n    \"exterior1st\": \"asphalt shingles\",  //Exterior covering on house \r\n    //'asbestos shingles','asphalt shingles','brick face','brick common','cement board','hardboard','hardboard siding','metal siding', 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block',  'stone', 'imitation stucco'\r\n    \"exterior2nd\": \"plywood\", //Exterior covering on house (if more than one material): same values of exterior1st\r\n\r\n    \"exterCond\"  : \"good\", //Evaluates the present condition of the material on the exterior Values:{'excellent', 'good', 'average', 'fair', 'poor'}\r\n    \"exterQual\"  : \"fair\",  //Evaluates the quality of the material on the exterior=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"condition1\" : \"normal\",   // Proximity to various conditions:   \r\n    \"condition2\" : \"adjacent to arterial street\"    //if more than various conditions , same values of condition1\r\n\r\n\t\t//Conditions Value : ['normal', 'adjacent to feeder street', 'adjacent to arterial street',  \"adjacent to east west railroad\" , 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature','near positive off-site feature']\r\n}",
+									"raw": "{   //17 Attributes\r\n    \"roofStyle\"   : \"Gable\",        //'Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed'\r\n    \"roofMatl\"    : \"membran\",       //'clay or tile','standard shingle','membran','metal','roll','gravel & tar','wood shakes','wood shingles'\r\n    \"houseStyle\"  : \"SFoyer\",      // عدد الطوابق=> Values: [1Story', '1.5Fin', '1.5Unf', '2Story', '2.5Fin', '2.5Unf', 'SFoyer', 'SLvl']\r\n    \"msSubClass\"  : \"2story and older\" ,    //type of residence: عدد الطوابق واشكالها \r\n     //\"2 family conversion\", \"multilevel and split\", \"duplex\", \"split foyer\",\"multi-level\",\"1 story unfinished attic\",\"1 story finished attic\", \"2story and older\", \"2story and newer\",  \"1story and older\", \"1story and newer\"\r\n     \r\n    \"centralAir\" : \"\", // Values: [yes, no]\r\n    \"street\"     : \"\",  // Values:[ paved , gravel ]\t نوع الطريق المؤدي إلى العقار\r\n    \"alley\"      : \"\" ,   //نوع الممر المؤدي إلى العقار   => Values:['gravel', 'paved','no alley access'] **Not required\r\n\r\n    \"heating\"    : \"\",  // Type of heating=>Values:['floor','gas', 'gas water', 'gravity', 'other water', 'wall']\r\n    \"heatingQc\"  : \"\",  // Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n              \r\n    \"masVnrType\" : \"\",  //Masonry veneer type =>Values:['brick face', 'brick common', 'cinder block', 'None', 'Stone']\r\n    \"masVnrArea\" : 0,\r\n    \r\n    \"exterior1st\": \"\",  //Exterior covering on house \r\n    //'asbestos shingles','asphalt shingles','brick face','brick common','cement board','hardboard','hardboard siding','metal siding', 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block',  'stone', 'imitation stucco'\r\n    \"exterior2nd\": \"\", //Exterior covering on house (if more than one material): same values of exterior1st\r\n\r\n    \"exterCond\"  : \"\", //Evaluates the present condition of the material on the exterior Values:{'excellent', 'good', 'average', 'fair', 'poor'}\r\n    \"exterQual\"  : \"\",  //Evaluates the quality of the material on the exterior=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"condition1\" : \"\",   // Proximity to various conditions:   \r\n    \"condition2\" : \"\"    //if more than various conditions , same values of condition1\r\n\r\n\t\t//Conditions Value : ['normal', 'adjacent to feeder street', 'adjacent to arterial street',  \"adjacent to east west railroad\" , 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature','near positive off-site feature']\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -523,7 +529,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/2nd/6649ae822bd11e0df30ef425",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/2nd/residenceId",
 									"host": [
 										"{{LOCAL_URL}}"
 									],
@@ -533,7 +539,7 @@
 										"residence",
 										"complete",
 										"2nd",
-										"6649ae822bd11e0df30ef425"
+										"residenceId"
 									]
 								}
 							},
@@ -547,7 +553,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 											"type": "string"
 										}
 									]
@@ -556,7 +562,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    //19 Attributes\r\n    \"hasGarage\"    : false,\r\n    // \"garageType\"   : \"attached\", // Values:['more than one', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available']\r\n    //  \"garageQual\"  : \"fair\",  // Values:['good','fair','poor','average','excellent', 'not available]\r\n    // \"garageCars\"   : 3,\r\n   //   \"garageFinish\": \"finished\", //Values: ['finished','rough finished' ,'unfinished', 'not available']\r\n\r\n    \"hasBasement\" : false,\r\n    // \"bsmtUnfSF\"   : 1,    //Unfinished square feet of basement ar\r\n    // \"bsmtExposure\": \"minimum\",   //Refers to walkout or garden level walls=> Values:['good', 'average', 'minimum', 'no exposure']\r\n    //  \"bsmtFinType1\": \"low\",  //Rating of basement => Values:['good', 'average', 'below average', 'average rec room',  'low', 'unfinished' ]\r\n    //  \"bsmtQual\"    : \"fair\",  //Evaluates the height of the basement=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n    //  \"bsmtCond\"    : \"average\",  //Evaluates the general condition of the basement=> values:['excellent', 'good', 'average', 'fair', 'poor', 'not available']\r\n\r\n    \"hasFireplace\": true,\r\n     \"fireplaces\" : 1,\r\n     \"fireplaceQu\": \"average\", //Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"bedroomAbvGr\": 3, \r\n    \"totalbaths\"  : 2,\r\n    \"KitchenAbvGr\": 1,\r\n    \"kitchenQual\" : \"good\",  //'excellent', 'good', 'average', 'fair' , 'poor'\r\n    \"totRmsAbvGrd\": 5            // total rooms without bathrooms\r\n\r\n}",
+									"raw": "{\r\n    //19 Attributes\r\n    \"hasGarage\"    : true,\r\n    \"garageType\"   : \"\", // Values:['more than one', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available']\r\n     \"garageQual\"  : \"\",  // Values:['good','fair','poor','average','excellent', 'not available]\r\n    \"garageCars\"   : 0,\r\n     \"garageFinish\": \"\", //Values: ['finished','rough finished' ,'unfinished', 'not available']\r\n\r\n    \"hasBasement\" : false,\r\n    // \"bsmtUnfSF\"   : 1,    //Unfinished square feet of basement ar\r\n    // \"bsmtExposure\": \"minimum\",   //Refers to walkout or garden level walls=> Values:['good', 'average', 'minimum', 'no exposure']\r\n    //  \"bsmtFinType1\": \"low\",  //Rating of basement => Values:['good', 'average', 'below average', 'average rec room',  'low', 'unfinished' ]\r\n    //  \"bsmtQual\"    : \"fair\",  //Evaluates the height of the basement=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n    //  \"bsmtCond\"    : \"average\",  //Evaluates the general condition of the basement=> values:['excellent', 'good', 'average', 'fair', 'poor', 'not available']\r\n\r\n    \"hasFireplace\": true,\r\n     \"fireplaces\" : 0,\r\n     \"fireplaceQu\": \"\", //Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"bedroomAbvGr\": 0, \r\n    \"totalbaths\"  : 0,\r\n    \"KitchenAbvGr\": 0,\r\n    \"kitchenQual\" : \"\",  //'excellent', 'good', 'average', 'fair' , 'poor'\r\n    \"totRmsAbvGrd\": 0            // total rooms without bathrooms\r\n\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -564,7 +570,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/3rd/6649ae822bd11e0df30ef425",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/3rd/:residenceId",
 									"host": [
 										"{{LOCAL_URL}}"
 									],
@@ -574,7 +580,13 @@
 										"residence",
 										"complete",
 										"3rd",
-										"6649ae822bd11e0df30ef425"
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
 									]
 								}
 							},
@@ -597,7 +609,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{  \r\n    //16 Attributes\r\n    \"lotConfig\"      : \"inside\",        //Values : ['inside', 'corner', 'cul de sac', 'frontage on 2', 'frontage on 3']\r\n    \"landContour\"    : \"level\",        //Flatness of the property => Values: ['level', 'banked', 'hillside', 'depression']\r\n    \"landSlope\"      : \"gentle\",       //Slope of property => values: ['gentle', 'moderate', 'severe'] \r\n    \"pavedDrive\"     : \"gravel\",       //type of driveway (road)=> Values:['paved', 'gravel', 'partial'] \r\n\r\n    \"poolArea\"       : 210,\r\n    \"overallQual\"    : 10,\r\n    \"overallCond\"    : 10,\r\n\r\n    \"totalarea\"      : 10, // living area + totalbaths area\r\n    \"totalporchsf\"   : 220, // مساحة العقار كله \r\n    \"lotArea\"        : 120, // مساحة الأرض\r\n\r\n    \"lotFrontage\"    : 10,\r\n\t\"totalsf\"        : 30,\r\n    \"lowQualFinSF\"   : 10, \r\n    \"miscVal\"        : 20,\r\n    \"houseage\"       : 10,\r\n    \"houseremodelage\": 20\r\n}",
+									"raw": "{  \r\n    //16 Attributes\r\n    \"lotConfig\"      : \"\",        //Values : ['inside', 'corner', 'cul de sac', 'frontage on 2', 'frontage on 3']\r\n    \"landContour\"    : \"\",        //Flatness of the property => Values: ['level', 'banked', 'hillside', 'depression']\r\n    \"landSlope\"      : \"\",       //Slope of property => values: ['gentle', 'moderate', 'severe'] \r\n    \"pavedDrive\"     : \"\",       //type of driveway (road)=> Values:['paved', 'gravel', 'partial'] \r\n\r\n    \"poolArea\"       : 0,\r\n    \"overallQual\"    : 0,\r\n    \"overallCond\"    : 0,\r\n\r\n    \"totalarea\"      : 0, // living area + totalbaths area\r\n    \"totalporchsf\"   : 0, // مساحة العقار كله \r\n    \"lotArea\"        : 0, // مساحة الأرض\r\n\r\n    \"lotFrontage\"    : 0,\r\n\t\"totalsf\"        : 0,\r\n    \"lowQualFinSF\"   : 0, \r\n    \"miscVal\"        : 0,\r\n    \"houseage\"       : 0,\r\n    \"houseremodelage\": 0\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -605,7 +617,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/4th/6649ae822bd11e0df30ef425",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/4th/:residenceId",
 									"host": [
 										"{{LOCAL_URL}}"
 									],
@@ -615,92 +627,13 @@
 										"residence",
 										"complete",
 										"4th",
-										"6649ae822bd11e0df30ef425"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Set Location",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/location/6649c364cf7139477513e6d2?longitude=-93.64393414836377&latitude=42.052952373804864",
-									"host": [
-										"{{LOCAL_URL}}"
+										":residenceId"
 									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"location",
-										"6649c364cf7139477513e6d2"
-									],
-									"query": [
+									"variable": [
 										{
-											"key": "longitude",
-											"value": "-93.64393414836377"
-										},
-										{
-											"key": "latitude",
-											"value": "42.052952373804864"
+											"key": "residenceId",
+											"value": ""
 										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Upload images",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
-											"type": "string"
-										}
-									]
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "images",
-											"type": "file",
-											"src": [
-												"OIP.jpeg",
-												"R.jpeg"
-											]
-										}
-									]
-								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/upload/6649ae822bd11e0df30ef425",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"upload",
-										"6649ae822bd11e0df30ef425"
 									]
 								}
 							},
@@ -796,7 +729,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 											"type": "string"
 										}
 									]
@@ -804,7 +737,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/get/:residenceId",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/get/664a8b0dc94e6ed55fec6fa0",
 									"host": [
 										"{{LOCAL_URL}}"
 									],
@@ -813,13 +746,7 @@
 										"v1",
 										"residence",
 										"get",
-										":residenceId"
-									],
-									"variable": [
-										{
-											"key": "residenceId",
-											"value": ""
-										}
+										"664a8b0dc94e6ed55fec6fa0"
 									]
 								}
 							},
@@ -932,26 +859,339 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Get imgages",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/images/:residenceId",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"images",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Location",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/location/:residenceId",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"location",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
 				{
-					"name": "Delete one residence",
+					"name": "Update Residence",
+					"item": [
+						{
+							"name": "Update residence",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\"         : \"\",\r\n    \"type\"          : \"\",\r\n    \"category\"      : \"\" \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/update/:residenceId",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"update",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "1st update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"neighborhood\":\"\",   // Physical location within Ames city limits \r\n    \"mszoning\"    :\"\",   //'agricultural', 'commercial', 'floating village', 'industrial', 'high residential','low', 'park', 'medium' \r\n    \r\n    \"saleCondition\" : \"\", //'normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial'\r\n   \"moSold\"       : 0,   //Month Sold\r\n   \"salePrice\"    : 0,\r\n   \"paymentPeriod\": \"\",  //Yearly, monthly\r\n   \"saleType\"     : \"\",  //Values:['conventional', 'cash', 'va Loan', 'new', 'court officer deed/estate', 'Contract Low Interest',\r\n   // 'contract 15% Down payment regular terms', 'Contract Low Down payment and low intere', 'Contract Low Down', 'Other']\r\n    \r\n       \r\n    \"utilities\"  :[\"electricity\" ],   // Values:[ 'electricity', 'gas' , 'water'] electricity must be sent\r\n   \"lotShape\"   : \"\",   // General shape of property=>Values:['regular', 'slightly', 'moderately', 'irregular']\r\n   \"electrical\" : \"\",   // Values:['average', 'poor', 'fair', 'mixed', 'standard circuit breakers & romex']\r\n   \"foundation\" : \"\",         // Values:['slab', 'stone', 'wood', 'cinder block', 'brick and tile', 'poured contrete']\r\n   \"bldgType\"   : \"\"       // Values:['single family', 'duplex', 'townhouse end unit', 'townhouse inside unit', '2 family conversion']\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/update/1st/:residenceId",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"update",
+										"1st",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "2nd update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{   //17 Attributes\r\n    \"roofStyle\"   : \"\",        //'Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed'\r\n    \"roofMatl\"    : \"\",       //'clay or tile','standard shingle','membran','metal','roll','gravel & tar','wood shakes','wood shingles'\r\n    \"houseStyle\"  : \"\",      // عدد الطوابق=> Values: [1Story', '1.5Fin', '1.5Unf', '2Story', '2.5Fin', '2.5Unf', 'SFoyer', 'SLvl']\r\n    \"msSubClass\"  : \"\" ,    //type of residence: عدد الطوابق واشكالها \r\n     //\"2 family conversion\", \"multilevel and split\", \"duplex\", \"split foyer\",\"multi-level\",\"1 story unfinished attic\",\"1 story finished attic\", \"2story and older\", \"2story and newer\",  \"1story and older\", \"1story and newer\"\r\n     \r\n    \"centralAir\" : \"\", // Values: [yes, no]\r\n    \"street\"     : \"\",  // Values:[ paved , gravel ]\t نوع الطريق المؤدي إلى العقار\r\n    \"alley\"      : \"\" ,   //نوع الممر المؤدي إلى العقار   => Values:['gravel', 'paved','no alley access'] **Not required\r\n\r\n    \"heating\"    : \"\",  // Type of heating=>Values:['floor','gas', 'gas water', 'gravity', 'other water', 'wall']\r\n    \"heatingQc\"  : \"\",  // Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n              \r\n    \"masVnrType\" : \"\",  //Masonry veneer type =>Values:['brick face', 'brick common', 'cinder block', 'None', 'Stone']\r\n    \"masVnrArea\" : 110,\r\n    \r\n    \"exterior1st\": \"\",  //Exterior covering on house \r\n    //'asbestos shingles','asphalt shingles','brick face','brick common','cement board','hardboard','hardboard siding','metal siding', 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block',  'stone', 'imitation stucco'\r\n    \"exterior2nd\": \"\", //Exterior covering on house (if more than one material): same values of exterior1st\r\n\r\n    \"exterCond\"  : \"\", //Evaluates the present condition of the material on the exterior Values:{'excellent', 'good', 'average', 'fair', 'poor'}\r\n    \"exterQual\"  : \"\",  //Evaluates the quality of the material on the exterior=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"condition1\" : \"\",   // Proximity to various conditions:   \r\n    \"condition2\" : \"\"    //if more than various conditions , same values of condition1\r\n\r\n\t\t//Conditions Value : ['normal', 'adjacent to feeder street', 'adjacent to arterial street',  \"adjacent to east west railroad\" , 'adjacent to north south', 'within 200 of east west', 'within 200 of north South', 'adjacent to positive off site feature','near positive off-site feature']\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/update/2nd/:residenceId",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"update",
+										"2nd",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "3rd update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    //19 Attributes\r\n    \"hasGarage\"    : false,\r\n    //\"garageFinish\": \"finished\", //Values: ['finished','rough finished' ,'unfinished', 'not available']\r\n    // \"garageType\"   : \"attached\", // Values:['more than one', 'attached', 'basement', 'built in', 'car port', 'detached', 'not available']\r\n    //  \"garageQual\"  : \"fair\",  // Values:['good','fair','poor','average','excellent', 'not available]\r\n    // \"garageCars\"   : 3,\r\n\r\n    \"hasBasement\" : false,\r\n    // \"bsmtUnfSF\"   : 1,    //Unfinished square feet of basement ar\r\n    // \"bsmtExposure\": \"minimum\",   //Refers to walkout or garden level walls=> Values:['good', 'average', 'minimum', 'no exposure']\r\n    //  \"bsmtFinType1\": \"low\",  //Rating of basement => Values:['good', 'average', 'below average', 'average rec room',  'low', 'unfinished' ]\r\n    //  \"bsmtQual\"    : \"fair\",  //Evaluates the height of the basement=> Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n    //  \"bsmtCond\"    : \"average\",  //Evaluates the general condition of the basement=> values:['excellent', 'good', 'average', 'fair', 'poor', 'not available']\r\n\r\n    \"hasFireplace\": true,\r\n     \"fireplaces\" : 0,\r\n     \"fireplaceQu\": \"\", //Values:['excellent', 'good', 'average', 'fair', 'poor']\r\n\r\n    \"bedroomAbvGr\": 0, \r\n    \"totalbaths\"  : 0,\r\n    \"KitchenAbvGr\": 0,\r\n    \"kitchenQual\" : \"\",  //'excellent', 'good', 'average', 'fair' , 'poor'\r\n    \"totRmsAbvGrd\": 0            // total rooms without bathrooms\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/update/3rd/:residenceId",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"update",
+										"3rd",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "4th update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{  \r\n    //16 Attributes\r\n    \"lotConfig\"      : \"\",        //Values : ['inside', 'corner', 'cul de sac', 'frontage on 2', 'frontage on 3']\r\n    \"landContour\"    : \"\",        //Flatness of the property => Values: ['level', 'banked', 'hillside', 'depression']\r\n    \"landSlope\"      : \"\",       //Slope of property => values: ['gentle', 'moderate', 'severe'] \r\n    \"pavedDrive\"     : \"\",       //type of driveway (road)=> Values:['paved', 'gravel', 'partial'] \r\n\r\n    \"poolArea\"       : 0,\r\n    \"overallQual\"    : 0,\r\n    \"overallCond\"    : 0,\r\n\r\n    \"totalarea\"      : 0, // living area + totalbaths area\r\n    \"totalporchsf\"   : 0, // مساحة العقار كله \r\n    \"lotArea\"        : 0, // مساحة الأرض\r\n\r\n    \"lotFrontage\"    : 0,\r\n\t\"totalsf\"        : 0,\r\n    \"lowQualFinSF\"   : 0, \r\n    \"miscVal\"        : 0,\r\n    \"houseage\"       : 0,\r\n    \"houseremodelage\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/update/4th/:residenceId",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"update",
+										"4th",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Set Location",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 									"type": "string"
 								}
 							]
 						},
-						"method": "DELETE",
+						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/residence/delete/:residenceId",
+							"raw": "{{LOCAL_URL}}/api/v1/residence/location/6649c364cf7139477513e6d2?longitude=-93.64393414836377&latitude=42.052952373804864",
 							"host": [
 								"{{LOCAL_URL}}"
 							],
@@ -959,13 +1199,17 @@
 								"api",
 								"v1",
 								"residence",
-								"delete",
-								":residenceId"
+								"location",
+								"6649c364cf7139477513e6d2"
 							],
-							"variable": [
+							"query": [
 								{
-									"key": "residenceId",
-									"value": ""
+									"key": "longitude",
+									"value": "-93.64393414836377"
+								},
+								{
+									"key": "latitude",
+									"value": "42.052952373804864"
 								}
 							]
 						}
@@ -973,7 +1217,7 @@
 					"response": []
 				},
 				{
-					"name": "Update residence",
+					"name": "Upload images",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -985,19 +1229,23 @@
 								}
 							]
 						},
-						"method": "PATCH",
+						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    // \"title\"         :\"\"\r\n    // \"type\"          :\"\",\r\n    // \"category\"      :\"\" , \r\n    // \"neighborhood\"  :\"\", \r\n    // \"mszoning\"      :\"\",\r\n    //\"roofStyle\"     : \"\"\r\n    // \"roofMatl\"      : \"\",\r\n    // \"houseStyle\"    : \"\",\r\n    // \"kitchenQual\"   : \"\",\r\n    // \"centralAir\"    : \"\",\r\n    // \"saleCondition\" : \"\",\r\n    // \"saleType\"      : \"\",\r\n\t\t// \"street\"        : \"\", \r\n    // \"foundation\"    : \"\", \r\n    // \"bldgType\"      : \"\", \r\n    // \"heating\"       : \"\", \r\n    // \"heatingQc\"     : \"\", \r\n    // \"electrical\"    : \"\", \r\n    // \"utilities\"     : \"\", \r\n    // \"lotShape\"      : \"\", \r\n    // \"lotConfig\"     : \"\", \r\n    // \"landContour\"   : \"\", \r\n    // \"landSlope\"     : \"\", \r\n    // \"condition1\"    : \"\", \r\n    // \"condition2\"    : \"\", \r\n    // \"masVnrType\"    : \"\", \r\n    // \"pavedDrive\"    : \"\", \r\n    // \"exterior2nd\"   : \"\", \r\n    // \"exterior1st\"   : \"\", \r\n    // \"exterCond\"     : \"\", \r\n\t\t\r\n    // \"totRmsAbvGrd\"   : 0,\r\n\t\t// \"poolArea\"       : 0,\r\n    // \"bedroomAbvGr\"   : 0,\r\n    // \"KitchenAbvGr\"   : 0,\r\n    // \"salePrice\"      : 0,\r\n    // \"moSold\"         : 0,\r\n    // \"msSubClass\"     : 0,\r\n    // \"totalarea\"      : 0,\r\n    // \"totalbaths\"     : 0,\r\n    // \"totalporchsf\"   : 0,\r\n    // \"lotFrontage\"    : 0,\r\n    // \"lotArea\"        : 0,\r\n    // \"totalsf\"        : 0,\r\n    // \"overallQual\"    : 0,\r\n    // \"overallCond\"    : 0,\r\n    // \"masVnrArea\"     : 0,\r\n    // \"lowQualFinSF\"   : 0,\r\n    // \"miscVal\"        : 0,\r\n    // \"houseage\"       : 0,\r\n    // \"houseremodelage\": 0,\r\n\r\n\t  // \"hasGarage\": false,\r\n    //   \"garageFinish\": \"\",\r\n    //   \"garageType\"  : \"\",\r\n    //   \"garageQual\"  : \"\",\r\n    //   \"garageCars\"  : 0,\r\n\r\n    // \"hasBasement\": false,\r\n    //   \"bsmtExposure\": \"\",\r\n    //   \"bsmtFinType1\": \"\",\r\n    //   \"bsmtQual\"    : \"\",\r\n    //   \"bsmtCond\"    : \"\",\r\n    //   \"bsmtUnfSF\"   : \"\",\r\n\r\n    // \"hasFireplace\": true,\r\n    //    \"fireplaces\" : 0,\r\n    //    \"fireplaceQu\": \"\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "images",
+									"type": "file",
+									"src": [
+										"OIP.jpeg",
+										"R.jpeg"
+									]
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/residence/update/:residenceId",
+							"raw": "{{LOCAL_URL}}/api/v1/residence/upload/6649ae822bd11e0df30ef425",
 							"host": [
 								"{{LOCAL_URL}}"
 							],
@@ -1005,14 +1253,8 @@
 								"api",
 								"v1",
 								"residence",
-								"update",
-								":residenceId"
-							],
-							"variable": [
-								{
-									"key": "residenceId",
-									"value": ""
-								}
+								"upload",
+								"6649ae822bd11e0df30ef425"
 							]
 						}
 					},
@@ -1067,6 +1309,71 @@
 								},
 								{
 									"key": "neighborhood",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete one residence",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/residence/delete/:residenceId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"residence",
+								"delete",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete residence images",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/residence/delete/images/:residenceId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"residence",
+								"delete",
+								"images",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
 									"value": ""
 								}
 							]
@@ -1248,7 +1555,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 											"type": "string"
 										}
 									]
@@ -1265,7 +1572,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/user/favorites/add/:residenceId",
+									"raw": "{{LOCAL_URL}}/api/v1/user/favorites/add/664a8b0dc94e6ed55fec6fa0",
 									"host": [
 										"{{LOCAL_URL}}"
 									],
@@ -1275,13 +1582,7 @@
 										"user",
 										"favorites",
 										"add",
-										":residenceId"
-									],
-									"variable": [
-										{
-											"key": "residenceId",
-											"value": ""
-										}
+										"664a8b0dc94e6ed55fec6fa0"
 									]
 								}
 							},
