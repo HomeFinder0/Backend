@@ -12,8 +12,7 @@ exports.residenceValidation = function (residence) {
     if (error) error = errorUpdate(error);
     return { value, error };
 };
-
-exports.completeResidenceValidation = function (residence) {
+exports.stepOneCompleteValidation = function (residence) {
     const residenceSchema = Joi.object({
         mszoning     : Joi.string().required().valid('agricultural', 'commercial', 'floating village', 'industrial', 'high residential','low', 'park', 'medium' ).lowercase()
         .messages({ "string.empty": "zoning is required", "any.only": "zoning must be agricultural, commercial, industrial , high residential, low,medium or park "}),
@@ -52,7 +51,6 @@ exports.completeResidenceValidation = function (residence) {
     if (error) error = errorUpdate(error);
     return { value, error };
 };
-
 exports.stepTwoCompleteValidation =function (residence) {
     const residenceSchema = Joi.object({
         roofStyle: Joi.string().required().valid('Flat', 'Gable', 'Gambrel', 'Hip', 'Mansard', 'Shed').messages({ 
