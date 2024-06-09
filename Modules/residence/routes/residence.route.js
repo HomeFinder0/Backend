@@ -53,6 +53,6 @@ router.patch("/update/3rd/:residenceId" , stepThreeUpdate);
 router.patch("/update/4th/:residenceId" , stepFourUpdate);
 
 router.delete("/delete/:residenceId", deleteOneResidence);
-router.delete("/delete/images/:residenceId", deleteResidenceImage);
+router.delete("/image/:imageId", deleteResidenceImage);
 
 module.exports = router;

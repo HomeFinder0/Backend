@@ -16,10 +16,10 @@ const {
 
     
 module.exports = (value)=>{
-    console.log(typeof value.utilities);
+    //console.log(typeof value.utilities);
 
     if(value.utilities){
-        console.log(value.utilities);
+       // console.log(value.utilities);
    //     if(typeof value.utilities == string) utilitiesConverter(value);
         // else{
             switch(value.utilities.length) {
