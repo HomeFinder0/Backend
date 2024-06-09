@@ -7,6 +7,7 @@ const User = require('../../user/models/User.js');
 
 const {
     uploadImage,
+    deleteImage,
     deleteMultipleImages
 } = require("../../../Helpers/cloud.js");
 
@@ -265,7 +266,7 @@ exports.getAllApproved = asyncHandler(async (req, res, next) => {
         }
     }).skip(skip).limit(limit);
 
-    await deleteUnUpdatedResidence(Residence);
+    await deleteUncompletedResidence(Residence);
 
     residences = residences.map(res => {
         return res.toJSON({userId: _id});
@@ -504,26 +505,27 @@ exports.deleteOneResidence = asyncHandler(async (req, res, next) => {
     });
 });
 exports.deleteResidenceImage = asyncHandler(async (req, res, next) => {
-    const {residenceId} = req.params;
-    const residence = await Residence.findById(residenceId);
-    if(!residence) next(new appError("Residence not found!", 404));
+    const {imageId} = req.params;
+    const residence = await Residence.findOne({images: { $elemMatch: {_id: imageId} }}).select('_id images');
+
+    if(!residence) return next(new appError("Not found!", 404));
     
-    const images = residence.images.find(img => img.url == imageId);
-    if(!images) next(new appError("Image not found!", 404));
-    let public_ids = images.map((img) => img.public_id);
-    deleteMultipleImages(public_ids);
-    residence.images = residence.images.filter(img => img.url !== imageId);
-    await residence.save();
-    
+    let image = residence.images.filter((img)=> img._id == imageId)
+    let public_id = image[0].public_id.split('/');
+
+    residence.images = residence.images.filter( (img) => img._id != imageId);
+   
+    Promise.all([residence.save(), deleteImage(public_id[1])])
     res.status(200).json({
         status: "success",
-        residenceId : residence._id,
-        message: "Image deleted successfully"
+        message: "Image deleted successfully",
+        residenceId : residence._id
     });
 });
 
-// function to delete all unUpdated residences
-async function  deleteUnUpdatedResidence(Residence){
+
+// function to delete all uncompleted residences
+async function  deleteUncompletedResidence(Residence){
     let unUpdatedResidences = await Residence.find({ isCompleted: false });
     let public_ids = unUpdatedResidences.flatMap(residence => residence.images.map(img => img.public_id));
     if (public_ids.length > 0) {
