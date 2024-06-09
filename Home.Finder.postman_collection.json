@@ -861,7 +861,7 @@
 							"response": []
 						},
 						{
-							"name": "Get imgages",
+							"name": "Get images",
 							"request": {
 								"auth": {
 									"type": "bearer",
@@ -1356,10 +1356,29 @@
 				{
 					"name": "Delete residence images",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/residence/delete/images/:residenceId",
+							"raw": "{{LOCAL_URL}}/api/v1/residence/image/:imageId",
 							"host": [
 								"{{LOCAL_URL}}"
 							],
@@ -1367,13 +1386,12 @@
 								"api",
 								"v1",
 								"residence",
-								"delete",
-								"images",
-								":residenceId"
+								"image",
+								":imageId"
 							],
 							"variable": [
 								{
-									"key": "residenceId",
+									"key": "imageId",
 									"value": ""
 								}
 							]
