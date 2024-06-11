@@ -1,6 +1,22 @@
 const cloudinary = require("../config/cloudinary");
 const asyncHandler = require("express-async-handler");
 const appError = require("./appError");
+
+module.exports.uploadImageWithoutFolder = asyncHandler(async (filePath, next) => {
+  try {
+    const img = await cloudinary.uploader.upload(filePath);
+
+    return {
+      url: img.secure_url,
+      public_id: img.public_id,
+    };
+
+  } catch (error) {
+    return next(new appError("Error uploading images", 500));
+  }
+});
+
+
 module.exports.uploadImage = asyncHandler(async (folder, filePath, next) => {
   try {
     const img = await cloudinary.uploader.upload(filePath, {
