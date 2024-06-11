@@ -65,7 +65,7 @@ exports.stepOneUpdate = asyncHandler(async (req, res, next) => {
     let residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
 
-    await residence.save();
+   // await residence.save();
     
     residence = {
         _id : residence._id,
@@ -100,8 +100,9 @@ exports.stepTwoUpdate= asyncHandler(async (req, res, next) => {
     }
     
     if(error) return next(new appError(error, 400));
-    
+    console.log(value)
     valueConversion(value);
+    console.log(value)
     
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
@@ -216,8 +217,12 @@ exports.updateResidence = asyncHandler(async (req, res, next) => {
     const {value, error} = updateValidation(req.body);
     if(error) return next(new appError(error, 400));
     
-    const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
+    let residence = await Residence.findById(residenceId);
     if(!residence) next(new appError("Residence not found!", 404));
+
+    if(req.user._id.toString() != residence.ownerId.toString()) return next(new appError("Unauthorized", 401));
+    
+    residence = await Residence.findByIdAndUpdate(residenceId, value, {new :true});
     
     return res.status(200).json({
         status: 'success',
@@ -254,7 +259,6 @@ exports.getAllApproved = asyncHandler(async (req, res, next) => {
     const page  = req.query.page  * 1 || 1;
     const limit = 10;
     const skip  = (page - 1) * limit;
-
     let residences = await Residence.find({ isCompleted: true, status: 'approved'}).populate({
         path: 'ownerId',
         select:'username image location.fullAddress'
@@ -266,7 +270,7 @@ exports.getAllApproved = asyncHandler(async (req, res, next) => {
         }
     }).skip(skip).limit(limit);
 
-    await deleteUncompletedResidence(Residence);
+  //  await deleteUncompletedResidence(Residence);
 
     residences = residences.map(res => {
         return res.toJSON({userId: _id});
@@ -305,7 +309,7 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
         await residence.deleteOne();
         return next(new appError("Residence not found!", 404));
     }
-    
+    console.log(residence.electrical)
     residence = residence.toJSON( { userId:_id} );
     return res.status(200).json({
         status: 'success',
