@@ -6,9 +6,8 @@ const Review = require('../../Review/models/Review.js');
 const User = require('../../user/models/User.js');
 
 const {
-    uploadImage,
-    deleteImage,
-    deleteMultipleImages
+    uploadImageWithoutFolder,
+    deleteImage
 } = require("../../../Helpers/cloud.js");
 
 const getLocation = require("../../../Managers/getLocation.manager.js");
@@ -168,7 +167,7 @@ exports.uploadResidenceImages = asyncHandler(async (req, res, next) => {
     if(! req.files) next(new appError("please, upload an image", 400));
     
     for (const file of req.files) {
-        const image = await uploadImage(residenceId, file.path, next);
+        const image = await uploadImageWithoutFolder(file.path, next);
         residence.images.push(image);
     }
 
@@ -515,11 +514,11 @@ exports.deleteResidenceImage = asyncHandler(async (req, res, next) => {
     if(!residence) return next(new appError("Not found!", 404));
     
     let image = residence.images.filter((img)=> img._id == imageId)
-    let public_id = image[0].public_id.split('/');
+    await deleteImage(image[0].public_id);
 
     residence.images = residence.images.filter( (img) => img._id != imageId);
-   
-    Promise.all([residence.save(), deleteImage(public_id[1])])
+    await residence.save();
+    
     res.status(200).json({
         status: "success",
         message: "Image deleted successfully",
