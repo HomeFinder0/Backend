@@ -139,7 +139,7 @@ const residenceSchema = new mongoose.Schema({
   }
 }
 );
-
+residenceSchema. index({"images._id": 1});
 residenceSchema.index({ 'location': '2dsphere' }); // calculate geometries on an earth-like sphere.
 
 module.exports = mongoose.model('Residence', residenceSchema);
