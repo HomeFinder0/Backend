@@ -20,8 +20,8 @@ module.exports = (value)=>{
 
     if(value.utilities){
        // console.log(value.utilities);
-    if(typeof value.utilities == string) utilitiesConverter(value);
-        else{
+   //     if(typeof value.utilities == string) utilitiesConverter(value);
+        // else{
             switch(value.utilities.length) {
                 case 3:
                     value.utilities = 'AllPub';
@@ -32,7 +32,7 @@ module.exports = (value)=>{
                 default:
                     value.utilities = value.utilities.includes('gas') ? 'NoSeWa' : value.utilities.includes('water') ? 'NoSewr' : value.utilities;
                     break;
-    }
+    //}
 }}
     value.neighborhood = neighborhoodConverter(value.neighborhood);
     value.saleCondition= saleConditionConverter(value.saleCondition);
