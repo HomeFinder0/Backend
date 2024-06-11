@@ -187,14 +187,13 @@ exports.streetConverter = (value) => {
 exports.electricalConverter = (value) => {
     const conversions = {
         'standard circuit breakers & romex' : 'SBrkr',    'SBrkr': 'standard circuit breakers & romex',
-        'Average' : 'FuseA',                              'FuseA': 'Average',
-        'Fair' : 'FuseF',                                 'FuseF': 'Fair',
+        'average' : 'FuseA',                              'FuseA': 'Average',
+        'fair' : 'FuseF',                                 'FuseF': 'Fair',
         'poor' : 'FuseP',                                 'FuseP': 'poor',
         'mixed'   : 'Mix',                                  'Mix': 'mixed'
     }
     return conversions[value];
 }
-
 exports.heatingConverter = (value) => {
     const conversions = {
         'floor'      : 'Floor', 'Floor': 'floor',
@@ -252,18 +251,17 @@ exports.landSlopeConverter = (value) => {
 exports.condConverter = (value) =>{
     const conversions = {
         'normal'                    :'Norm',   'Norm': 'normal',
-        'feeder'                    :'Feedr',  'Feedr': 'feeder',
-        'arterial'                  :'Artery', 'Artery': 'arterial',
-        "east west"                 :'RRAe',   'RRAe': "east west",
-        "north south"               :'RRAn',   'RRAn' :"north south" ,
+        'adjacent to feeder street'                    :'Feedr',  'Feedr': 'adjacent to feeder street',
+        'adjacent to arterial street'                  :'Artery', 'Artery': 'adjacent to arterial street',
+        "adjacent to east west railroadt"                 :'RRAe',   'RRAe': "east west",
+        'adjacent to north south'               :'RRAn',   'RRAn' :'adjacent to north south',
         "within 200 of east west"   :'RRNe',   'RRNe': "within 200 of east west",
-        "within 200 of North-South" :'RRNn',   'RRNn': "within 200 of North-South",
-        "positive off site feature" :'PosA',   'PosA': 'positive off site feature',
-        "near positive"             :'PosN',   'PosN': 'near positive',
+        "within 200 of north south" :'RRNn',   'RRNn': "within 200 of north-south",
+        'adjacent to positive off site feature':'PosA',   'PosA': 'adjacent to positive off site feature',
+        'near positive off-site feature'            :'PosN',   'PosN': 'near positive off-site feature',
     };
     return conversions[value];
 };
-
 
 exports.exteriorConverter = (value) => {
     const conversions = {
