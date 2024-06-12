@@ -63,7 +63,7 @@ const residenceSchema = new mongoose.Schema({
     fireplaceQu  :{ type: String, default: 'NA' }, 
     
     bsmtExposure :{type: String,  enum: ['Gd','Av','Mn','No'], default: "No"},
-    bsmtFinType1 :{type: String,  enum: ['GLQ','ALQ','BLQ','Rec','LwQ','Unf']}, 
+    bsmtFinType1 :{type: String,  enum: ['GLQ','ALQ','BLQ','Rec','LwQ','Unf'], default: "Unf"}, 
     bsmtCond      :{type: String,  enum: ['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NO'], default: "NO"},
     bsmtQual     :{type:String,   enum: ['Ex', 'Gd', 'TA', 'Fa', 'Po', 'NO'], default: "NO"},
     bsmtUnfSF    :{type: Number,  default: 0},
