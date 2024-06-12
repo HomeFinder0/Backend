@@ -270,7 +270,7 @@ exports.exteriorConverter = (value) => {
         'brick face'                : 'BrkFace', 'BrkFace': 'brick face',
         'brick common'              : 'BrkComm', 'BrkComm': 'brick common',
         'cinder block'              : 'CBlock',  'CBlock': 'cinder block',
-        'cement board'              : 'CemntBd', 'CemntBd': 'cement board',
+        'cement board'              : 'CmentBd', 'CemntBd': 'cement board',
         'hardboard'                 : 'HdBoard',  'HdBoard': 'hardboard siding',
         'hardboard siding'          : 'HdBoard',  'HdBoard': 'hardboard siding',
         'metal siding'              : 'MetalSd',  'MetalSd': 'metal siding',
@@ -279,7 +279,7 @@ exports.exteriorConverter = (value) => {
         'stucco'                    : 'Stucco',   'Stucco': 'stucco',
         'vinyl siding'              : 'VinylSd',   'VinylSd': 'vinyl siding',
         'wood siding'               : 'Wd Sdng',  'Wd Sdng': 'wood siding',
-        'wood shingles'             : 'WdShing',  'WdShing': 'wood shingles',
+        'wood shingles'             : 'Wd Shng',  'Wd Shng': 'wood shingles',
         'other'                     : 'Other',    'Other': 'other',
         'imitation stucco'          : 'ImStucc',  'ImStucc': 'imitation stucco',
         'stone'                     :'Stone'	, 'Stone': 'stone'
@@ -292,7 +292,7 @@ exports.masVnrTypeConverter = (value) => {
         'brick face'   : 'BrkFace', 'BrkFace': 'brick face',
         'brick common' : 'BrkCmn',  'BrkCmn': 'brick common',
         'cinder block' : 'CBlock',  'CBlock': 'cinder block',
-        "none"         : "None",    'None': 'none',
+        "no"         : "No",    'No': 'no',
         "stone"	       : "Stone" , 'Stone': 'stone'
     } 
     return conversions[value];
