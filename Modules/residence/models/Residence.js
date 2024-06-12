@@ -55,12 +55,12 @@ const residenceSchema = new mongoose.Schema({
     houseStyle :{ type: String, enum: ['1Story', '1.5Fin', '1.5Unf', '2Story', '2.5Fin', '2.5Unf', 'SFoyer', 'SLvl']},
     
     garageCars  :{ type: Number, default: 0},
-    garageFinish:{ type: String, default: 'NA' }, 
-    garageType  :{ type: String, default: 'NA'},  
-    garageQual  :{ type: String, default: 'NA'},
+    garageFinish:{ type: String, default: 'No' }, 
+    garageType  :{ type: String, default: 'No'},  
+    garageQual  :{ type: String, default: 'No'},
 
     fireplaces   :{ type: Number , default:0},
-    fireplaceQu  :{ type: String, default: 'NA' }, 
+    fireplaceQu  :{ type: String, default: 'No' }, 
     
     bsmtExposure :{type: String,  enum: ['Gd','Av','Mn','No'], default: "No"},
     bsmtFinType1 :{type: String,  enum: ['GLQ','ALQ','BLQ','Rec','LwQ','Unf'], default: "Unf"}, 
