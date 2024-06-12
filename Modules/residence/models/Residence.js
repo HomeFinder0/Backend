@@ -99,9 +99,9 @@ const residenceSchema = new mongoose.Schema({
     exterCond  :{ type: String,   enum: ['Ex', 'Gd', 'TA', 'Fa', 'Po']},
     exterQual  :{ type: String,   enum: ['Ex','Gd','TA','Fa','Po']},
     exterior1st:{ type: String},
-    exterior2nd:{ type: String,   enum: ['AsbShng', 'AsphShn', 'BrkComm', 'BrkFace', 'CBlock', 'CemntBd', 'HdBoard', 'ImStucc', 'MetalSd', 'Other', 'Plywood', 'PreCast', 'Stone', 'Stucco', 'VinylSd', 'Wd Sdng', 'WdShing']}, 
+    exterior2nd:{ type: String,   enum: ['AsbShng', 'AsphShn', 'BrkComm', 'BrkFace', 'CBlock', 'CmentBd', 'HdBoard', 'ImStucc', 'MetalSd', 'Other', 'Plywood', 'PreCast', 'Stone', 'Stucco', 'VinylSd', 'Wd Sdng', 'WdShing']}, 
     
-    masVnrType :{ type: String,   enum: ['BrkCmn', 'BrkFace', 'CBlock', 'None', 'Stone'], default: "None"}, 
+    masVnrType :{ type: String,   enum: ['BrkCmn', 'BrkFace', 'CBlock', 'No', 'Stone'], default: "No"}, 
     masVnrArea     :{ type: Number, default: 0},
     
     overallQual    :{ type: Number}, 

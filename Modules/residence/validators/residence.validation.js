@@ -74,8 +74,8 @@ exports.stepTwoCompleteValidation =function (residence) {
         heatingQc : Joi.string().required().valid('excellent', 'good', 'average', 'fair', 'poor').lowercase().messages({
             "string.empty": "Heating quality is required","any.only": "Heating quality must be excellent, good, average, fair or poor"}),   
         masVnrArea      : Joi.number().required().messages({ "number.type": "masonry veneer area must be a number" }),
-        masVnrType: Joi.string().valid("brick face", "brick common", "cinder block", "stone" , "none").lowercase().messages({
-            "string.empty": "Masonry veneer type is required","any.only": "Masonry veneer type must be brick face, brick common, cinder block, Stone or None "}),
+        masVnrType: Joi.string().valid("brick face", "brick common", "cinder block", "stone" , "no").lowercase().messages({
+            "string.empty": "Masonry veneer type is required","any.only": "Masonry veneer type must be brick face, brick common, cinder block, Stone or no"}),
         exterior1st: Joi.string().required().valid('asbestos shingles', 'asphalt shingles', 'brick face', 'brick common', 'cement board', 'hardboard', 'hardboard siding', 'metal siding' , 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block', 'stone', 'imitation stucco').lowercase().messages({
             "string.empty": "Exterior 1st is required", "any.only": "Exterior 1st must be asbestos shingles, asphalt shingles, brick face, brick common, cement board, hardboard, hardboard siding, metal siding, plywood, Other, precast concrete, stucco, vinyl siding, wood siding, wood shingles , imitation stucco, stone,  or cinder block"}),  
         exterior2nd: Joi.string().required().valid('asbestos shingles', 'asphalt shingles', 'brick face', 'brick common', 'cement board', 'hardboard', 'hardboard siding', 'metal siding' , 'plywood', 'Other', 'precast concrete', 'stucco','vinyl siding', 'wood siding', 'wood shingles','cinder block', 'stone', 'imitation stucco').lowercase().messages({ 

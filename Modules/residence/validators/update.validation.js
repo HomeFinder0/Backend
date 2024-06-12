@@ -151,9 +151,9 @@ exports.updateValidation = function (residence) {
         totalporchsf    : Joi.number().messages({ "number.type": "total porch square footage must be a number" }),
         
         masVnrArea      : Joi.number().messages({ "number.type": "masonry veneer area must be a number" }),
-        masVnrType: Joi.string().valid("brick face", "brick common", "cinder block", "stone" , "none").lowercase().messages({
+        masVnrType: Joi.string().valid("brick face", "brick common", "cinder block", "stone" , "no").lowercase().messages({
             "string.empty": "Masonry veneer type is required",
-            "any.only": "Masonry veneer type must be brick face, brick common, cinder block, Stone or None "
+            "any.only": "Masonry veneer type must be brick face, brick common, cinder block, Stone or no "
         }),
         lotConfig   : Joi.string().valid('inside', 'corner', 'cul de sac', 'frontage on 2', 'frontage on 3').lowercase()
         .messages({ "string.empty": "Lot configuration is required", "any.only": "Lot configuration must be inside, corner, cul de sac, frontage on 2 or frontage on 3" }),
