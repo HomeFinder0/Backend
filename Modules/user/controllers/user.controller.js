@@ -232,29 +232,40 @@ exports.deleteAllFavorites = asyncHandler(async (req, res, next) => {
 });
 
 exports.getWishlist = asyncHandler(async (req, res, next) => {
-  let { _id } = req.user;
+  try {
+    let { _id } = req.user;
 
-  let user = await User.findById(_id).populate('wishlist');
-  if(!user) return next(new appError('User not found', 404));
+    // Use lean for performance and select only necessary fields
+    let user = await User.findById(_id).populate({
+      path: 'wishlist',
+      select: '_id title category salePrice paymentPeriod location reviews images likedUsers'
+    }).lean();
 
-  let wishlist = user.wishlist.map((res) => {
-    return {
-      _id           : res._id,
-      isLiked       : res.likedUsers.includes(user._id),
-      title         : res.title,
-      category      : res.category,
-      salePrice     : res.salePrice,
-      paymentPeriod : res.paymentPeriod,
-      location      : res.location.fullAddress,
-      rating        :  res.reviews.length > 0 ? res.reviews.reduce((acc, curr) => acc + curr.rating, 0) / res.reviews.length : 0, //Avvarage rating
-      images        : res.images,
-      }
-  });
+    if (!user) return next(new appError('User not found', 404));
 
-  return res.status(200).json({
-    status: "success",
-    count : wishlist.length,
-    wishlist
-  });
+    let wishlist = user.wishlist.map((res) => {
+      let rating = res.reviews.length > 0 ? res.reviews.reduce((acc, curr) => acc + curr.rating, 0) / res.reviews.length : 0;
+      
+      return {
+        _id: res._id,
+        isLiked: res.likedUsers.includes(user._id),
+        title: res.title,
+        category: res.category,
+        salePrice: res.salePrice,
+        paymentPeriod: res.paymentPeriod,
+        location: res.location.fullAddress,
+        rating: rating,
+        images: res.images,
+      };
+    });
+
+    return res.status(200).json({
+      status: "success",
+      count: wishlist.length,
+      wishlist
+    });
+  } catch (err) {
+    return next(new appError(err.message, 500));
+  }
 });
 
