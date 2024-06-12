@@ -209,25 +209,30 @@ exports.deleteOneFavorite = asyncHandler(async (req, res, next) => {
   });
 });
 
+
+
 exports.deleteAllFavorites = asyncHandler(async (req, res, next) => {
   let { user } = req;
-  
-  if(user.wishlist.length === 0) return next(new appError('You have no favorites', 400));
-  
-  for(let residenceId of user.wishlist){
-    let residence = await Residence.findById(residenceId);
-    if(residence) {
-      residence.likedUsers = residence.likedUsers.filter((fav) => fav.user !== user._id);
-      await residence.save();
-    }
-  }
+
+  if (user.wishlist.length === 0) return next(new appError('You have no favorites', 400));
+
+  // Find all residences in the user's wishlist
+  const residences = await Residence.find({ _id: { $in: user.wishlist } }, '_id likedUsers');
+
+  if (!residences.length) return next(new appError('No residences found in your wishlist', 404));
+
+  // Update all residences in parallel
+  await Promise.all(residences.map(async (residence) => {
+    residence.likedUsers = residence.likedUsers.filter(fav => fav.toString() !== user._id.toString());
+    await residence.save();
+  }));
 
   user.wishlist = [];
   await user.save();
 
   return res.status(200).json({
     status: "success",
-    message: "All Favorites has been removed",
+    message: "All Favorites have been removed",
   });
 });
 
