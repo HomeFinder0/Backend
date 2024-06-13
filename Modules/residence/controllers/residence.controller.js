@@ -273,10 +273,10 @@ exports.getAllApproved = asyncHandler(async (req, res, next) => {
   //  await deleteUncompletedResidence(Residence);
 
     residences = residences.map(res => {
+        valueConversion(res);
         return res.toJSON({userId: _id});
     });
 
-    valueConversion(residence);
     
     return res.status(200).json({
         status: 'success',
