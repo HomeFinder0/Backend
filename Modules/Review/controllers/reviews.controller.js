@@ -30,7 +30,7 @@ exports.addReview = asyncHandler(async (req, res, next) => {
         select: 'username image'
     }, {
         path: 'residenceId',
-        select: 'title type category avgRating paymentPeriod images location.fullAddress'
+        select: 'title type salePrice category avgRating paymentPeriod images location.fullAddress'
     }])
     
     await review.save();
