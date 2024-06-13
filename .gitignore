@@ -1,4 +1,10 @@
 .env
 node_modules
 package-lock.json
-HomeFinder.postman_collection.json
+
+Cleaned Data
+houses
+train_cleaned_the_last_dance.csv
+model_and_similarity_matrix.pkl
+
+Flask_API/venv

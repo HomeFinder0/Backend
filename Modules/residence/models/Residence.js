@@ -130,7 +130,6 @@ const residenceSchema = new mongoose.Schema({
         const isLiked    = userId ? likedUsers.includes(userId) : false;
       
         delete ret.__v;
-        ret = valueConversion(ret);  
         return {
           isLiked,
           ...ret,

@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const appError = require("../../../Helpers/appError.js");
+const axios = require("axios");
 
 const Residence = require('../models/Residence.js');
 const Review = require('../../Review/models/Review.js');
@@ -275,6 +276,7 @@ exports.getAllApproved = asyncHandler(async (req, res, next) => {
         return res.toJSON({userId: _id});
     });
 
+    valueConversion(residence);
     
     return res.status(200).json({
         status: 'success',
@@ -308,8 +310,8 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
         await residence.deleteOne();
         return next(new appError("Residence not found!", 404));
     }
-    console.log(residence.electrical)
     residence = residence.toJSON( { userId:_id} );
+    valueConversion(residence);
     return res.status(200).json({
         status: 'success',
         residence
@@ -351,7 +353,9 @@ exports.getNearestResidences = asyncHandler(async (req, res, next) => {
     residences = residences.map(res => {
         return res.toJSON({userId: _id});
     });
-
+    
+    valueConversion(residence);
+    
     return res.status(200).json({
         status: 'success',
         count : residences.length,
@@ -379,6 +383,9 @@ exports.getPending = asyncHandler(async (req, res, next) => {
     residences = residences.map(res => {
         return res.toJSON({userId: _id});
     });
+
+    valueConversion(residence);
+
     return res.status(200).json({
         status: 'success',
         count : residences.length,
@@ -406,6 +413,9 @@ exports.getApproved = asyncHandler(async (req, res, next) => {
     residences = residences.map(res => {
         return res.toJSON({userId: _id});
     });
+
+    valueConversion(residence);
+
     return res.status(200).json({
         status: 'success',
         count : residences.length,
@@ -433,6 +443,9 @@ exports.getSold =  asyncHandler(async (req, res, next) => {
     residences = residences.map(res => {
         return res.toJSON({userId: _id});
     });
+
+    valueConversion(residence);
+
     return res.status(200).json({
         status: 'success',
         count : residences.length,
@@ -469,6 +482,8 @@ exports.filtration = asyncHandler(async (req, res, next) => {
     );
     
     if(neighborhood) residences = residences.filter(residence => residence.neighborhood === neighborhood);
+   
+    valueConversion(residence);
     
     return res.status(200).json({
         status: 'success',
@@ -536,3 +551,20 @@ async function  deleteUncompletedResidence(Residence){
     }
     await Residence.deleteMany({ isCompleted: false } );
 };
+
+
+exports.predictPrice = asyncHandler(async (req, res, next) => {
+    const {residenceId} = req.params;
+    const residence = await Residence.findById(residenceId);
+    if(! residence ) return next(new appError("Residence not found!", 400));
+
+    try {
+        const response = await axios.post('http://localhost:5000/predict', {
+            residence
+        });
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+
+});

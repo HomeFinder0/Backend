@@ -1,4 +1,5 @@
 const router = require("express").Router();
+
 const {     
     createResidence,
     stepOneUpdate,
@@ -21,7 +22,9 @@ const {
     getNearestResidences,
     
     deleteOneResidence,
-    filtration
+    filtration,
+
+    predictPrice
                 }      = require("../controllers/residence.controller.js");
 const authMiddleware   = require("../../authentication/middlewares/auth.middleware.js");
 const {uploadMultiple} = require("../../../Utils/multer.js");
@@ -54,5 +57,11 @@ router.patch("/update/4th/:residenceId" , stepFourUpdate);
 
 router.delete("/delete/:residenceId", deleteOneResidence);
 router.delete("/image/:imageId", deleteResidenceImage);
+
+
+
+router.get('/predict/:residenceId', predictPrice);
+
+
 
 module.exports = router;
