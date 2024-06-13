@@ -12,24 +12,34 @@ exports.addReview = asyncHandler(async (req, res, next) => {
 
     let residence = await Residence.findById(residenceId);
     if(!residence) return next(new appError('Residence not found!', 404));
+    
+    //Calculate average rating
+    const reviews = await Review.find({ residenceId: residenceId });
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    residence.avgRating = Math.floor(totalRating / reviews.length);
+    await residence.save();
 
-   if(String(residence.ownerId)==String(userId)) return next(new appError('You cannot review your own residence', 400));
+    if(String(residence.ownerId)==String(userId)) return next(new appError('You cannot review your own residence', 400));
 
-    const review = await Review.create({residenceId:residenceId, userId, rating});
+    let review = await Review.create({residenceId:residenceId, userId, rating});
     if(req.body.comment) review.comment = req.body.comment;
-  
+    
     residence.reviews.push(review._id);
-    review.populate([{
+    review = await review.populate([{
         path: 'userId',
         select: 'username image'
-    }]);
+    }, {
+        path: 'residenceId',
+        select: 'title type category avgRating paymentPeriod images location.fullAddress'
+    }])
     
     await review.save();
     await residence.save();
     
     return res.status(200).json({
-      status: 'success',
-      review
+        status: 'success',
+        message: 'Review added successfully',
+        review
     });
   });
   

@@ -5,7 +5,7 @@ const residenceSchema = new mongoose.Schema({
     isSold      : { type: Boolean, default: false },
     isCompleted : { type: Boolean, default: false },
     status      : {type : String, default: "pending", enum :["pending", "approved", "rejected"]},
-  
+    avgRating   : { type: Number, default: 0 },
     title       : { type: String },
     type        : { type: String,  enum: ['rent', 'sale'] },
     category    : { type: String,  enum: ['apartment', 'house', 'hotel', 'villa', 'cottage'],},
@@ -152,6 +152,7 @@ residenceSchema.methods.mlFeatures = function(){
   delete residenceObject.hasGarage;
   delete residenceObject.hasFireplace;
   delete residenceObject.hasBasement;
+  delete residenceObject.avgRating;
   delete residenceObject.images;
   delete residenceObject.reviews;
   delete residenceObject.likedUsers;
