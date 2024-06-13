@@ -557,9 +557,11 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
     
     residence = residence.mlFeatures();
     try {
-        const response = await axios.post('http://localhost:5000/predict', {
+        const response = await axios.post(`${process.env.FLASK_URL}/predict`, {
             residence
         });
+        console.log(response.data)
+        if(response.data.error) return next(new appError(response.data.error, 500))
         res.json(response.data);
     } catch (error) {
         res.status(500).send(error.message);

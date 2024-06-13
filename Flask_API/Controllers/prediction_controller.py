@@ -8,7 +8,7 @@ def predict():
     _json = request.json    
     try:
         # Convert the JSON object to a pandas DataFrame
-        query_df = pd.DataFrame([_json])
+        query_df = pd.DataFrame([_json]).drop(columns=['_id'])
         
         # Make a prediction
         prediction = predictionModel.predict(query_df)  # Model expects a 2D array

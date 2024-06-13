@@ -158,7 +158,6 @@ residenceSchema.methods.mlFeatures = function(){
   delete residenceObject.likedUsers;
   delete residenceObject.createdAt;
   delete residenceObject.updatedAt;
-  delete residenceObject._id;
   delete residenceObject.__v;
   
   return residenceObject;
