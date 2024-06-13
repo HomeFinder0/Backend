@@ -351,10 +351,10 @@ exports.getNearestResidences = asyncHandler(async (req, res, next) => {
     ]).skip(skip).limit(limit);
 
     residences = residences.map(res => {
+        valueConversion(res);
         return res.toJSON({userId: _id});
     });
     
-    valueConversion(residence);
     
     return res.status(200).json({
         status: 'success',
@@ -381,10 +381,10 @@ exports.getPending = asyncHandler(async (req, res, next) => {
     ]).skip(skip).limit(limit);
 
     residences = residences.map(res => {
+        valueConversion(res);
         return res.toJSON({userId: _id});
     });
 
-    valueConversion(residence);
 
     return res.status(200).json({
         status: 'success',
@@ -411,10 +411,9 @@ exports.getApproved = asyncHandler(async (req, res, next) => {
     ]).skip(skip).limit(limit);
 
     residences = residences.map(res => {
+        valueConversion(res);
         return res.toJSON({userId: _id});
     });
-
-    valueConversion(residence);
 
     return res.status(200).json({
         status: 'success',
@@ -441,11 +440,9 @@ exports.getSold =  asyncHandler(async (req, res, next) => {
     ]).skip(skip).limit(limit);
 
     residences = residences.map(res => {
+        valueConversion(res);
         return res.toJSON({userId: _id});
     });
-
-    valueConversion(residence);
-
     return res.status(200).json({
         status: 'success',
         count : residences.length,
@@ -483,7 +480,7 @@ exports.filtration = asyncHandler(async (req, res, next) => {
     
     if(neighborhood) residences = residences.filter(residence => residence.neighborhood === neighborhood);
    
-    valueConversion(residence);
+   
     
     return res.status(200).json({
         status: 'success',
