@@ -209,27 +209,7 @@ exports.deleteOneFavorite = asyncHandler(async (req, res, next) => {
   });
 });
 
-// exports.deleteAllFavorites = asyncHandler(async (req, res, next) => {
-//   let { user } = req;
-  
-//   if(user.wishlist.length === 0) return next(new appError('You have no favorites', 400));
-  
-//   for(let residenceId of user.wishlist){
-//     let residence = await Residence.findById(residenceId);
-//     if(residence) {
-//       residence.likedUsers = residence.likedUsers.filter((fav) => fav.user !== user._id);
-//       await residence.save();
-//     }
-//   }
 
-//   user.wishlist = [];
-//   await user.save();
-
-//   return res.status(200).json({
-//     status: "success",
-//     message: "All Favorites has been removed",
-//   });
-// });
 
 
 
