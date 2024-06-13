@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const valueConversion = require('../middlewares/valueConversion.js')
 
 const residenceSchema = new mongoose.Schema({
     ownerId     : { type: mongoose.Schema.Types.ObjectId,  ref: 'Users' },
@@ -120,7 +119,6 @@ const residenceSchema = new mongoose.Schema({
     houseage       :{ type: Number, default: 0},
     houseremodelage:{ type: Number, default: 0},
 },
-
 {
   timestamps: true,
   toJSON: { 
@@ -138,6 +136,33 @@ const residenceSchema = new mongoose.Schema({
   }
 }
 );
+residenceSchema.methods.mlFeatures = function(){
+  const residence = this;
+  const residenceObject = residence.toObject();
+
+  delete residenceObject.ownerId;
+  delete residenceObject.title;
+  delete residenceObject.category;
+  delete residenceObject.type;
+  delete residenceObject.location;
+  delete residenceObject.status;
+  delete residenceObject.isCompleted;
+  delete residenceObject.isSold;
+  delete residenceObject.paymentPeriod;
+  delete residenceObject.hasGarage;
+  delete residenceObject.hasFireplace;
+  delete residenceObject.hasBasement;
+  delete residenceObject.images;
+  delete residenceObject.reviews;
+  delete residenceObject.likedUsers;
+  delete residenceObject.createdAt;
+  delete residenceObject.updatedAt;
+  delete residenceObject._id;
+  delete residenceObject.__v;
+  
+  return residenceObject;
+}
+
 residenceSchema. index({"images._id": 1});
 residenceSchema.index({ 'location': '2dsphere' }); // calculate geometries on an earth-like sphere.
 

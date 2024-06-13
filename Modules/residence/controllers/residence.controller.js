@@ -555,9 +555,10 @@ async function  deleteUncompletedResidence(Residence){
 
 exports.predictPrice = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
-    const residence = await Residence.findById(residenceId);
+    let residence = await Residence.findById(residenceId);
     if(! residence ) return next(new appError("Residence not found!", 400));
-
+    
+    residence = residence.mlFeatures();
     try {
         const response = await axios.post('http://localhost:5000/predict', {
             residence
