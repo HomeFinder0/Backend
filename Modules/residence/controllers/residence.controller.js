@@ -293,10 +293,13 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
         select: 'username  image location.fullAddress'
     },{
         path: 'reviews',
-        populate: {
+        populate: [{
             path: 'userId',
             select : 'username image location.fullAddress'
-        }
+        },{
+            path: 'likedBy',
+            select : 'username image location.fullAddress'
+        }]
     }
     ]);
     

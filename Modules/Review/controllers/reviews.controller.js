@@ -15,8 +15,10 @@ exports.addReview = asyncHandler(async (req, res, next) => {
     
     //Calculate average rating
     const reviews = await Review.find({ residenceId: residenceId });
-    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-    residence.avgRating = Math.floor(totalRating / reviews.length);
+    if (reviews.length > 0) {
+        const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+        residence.avgRating = Math.floor(totalRating / reviews.length);
+    } else  residence.avgRating = 0; 
     await residence.save();
 
     if(String(residence.ownerId)==String(userId)) return next(new appError('You cannot review your own residence', 400));
@@ -30,7 +32,14 @@ exports.addReview = asyncHandler(async (req, res, next) => {
         select: 'username image'
     }, {
         path: 'residenceId',
-        select: 'title type salePrice category avgRating paymentPeriod images location.fullAddress'
+        select: 'title type salePrice category avgRating paymentPeriod images location.fullAddress ownerId',
+        populate: {
+            path: 'ownerId',
+            select: 'username image.url location.fullAddress'
+        }
+    }, {
+        path: 'likedBy',
+        select: 'username image'
     }])
     
     await review.save();
@@ -41,12 +50,42 @@ exports.addReview = asyncHandler(async (req, res, next) => {
         message: 'Review added successfully',
         review
     });
-  });
-  
+});
 
+exports.getOneReview = asyncHandler(async (req, res, next) => {
+    const {reviewId} = req.params;
+    const review = await Review.findById(reviewId).populate([
+        {
+            path : 'userId',
+            select : 'username image'
+        },
+        {
+            path : 'likedBy',
+            select : 'username image'
+        },
+        {
+            path : 'residenceId',
+            select : 'title images category avgRating salePrice paymentPeriod location.fullAddress ownerId',
+            populate : {
+                path : 'ownerId',
+                select : 'username image.url location.fullAddress'
+            }
+        }
+    ]);
+
+    if(!review) return next(new appError('Review not found', 404));
+
+    return res.status(200).json({
+        status: 'success',
+        review
+    
+    });
+});
 exports.getResidenceReviews = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
-    let residence = await Residence.findById(residenceId).populate({
+    const {_id} = req.user; 
+
+    let residences = await Residence.findById(residenceId).populate({
         path : 'reviews',
         populate :[ {
             path : 'userId',
@@ -57,18 +96,24 @@ exports.getResidenceReviews = asyncHandler(async (req, res, next) => {
             select : 'username image'
         },{
             path : 'residenceId',
-            select : 'title images location.fullAddress',
-     
+            select : 'title images category avgRating  salePrice paymentPeriod location.fullAddress ownerId',
+            populate : {
+                path : 'ownerId',
+                select : 'username image.url location.fullAddress'
+            }
         }
     ]
     });
-    residence = residence.toJSON({userId : req.user._id});
-    if(!residence) return next(new appError('Residence not found', 404));
+    if(!residences) return next(new appError('Residence not found', 404));
+
+    
+    residences.toJSON({userId: _id});
+
 
     res.status(200).json({
-        status: 'success',
-        count: residence.reviews.length,
-        reviews: residence.reviews
+        status : 'success',
+        count  : residences.reviews.length,
+        reviews: residences.reviews
     });
 
 });
@@ -80,9 +125,9 @@ exports.likeReview = asyncHandler(async (req, res, next) => {
             select : 'name image'
         })
     if(!review) return next(new appError('Review not found', 404));
-    if(String(req.user._id) == String(review.userId._id)) return next(new appError('You cannot like your own review', 400))
-
-    if(review.likedBy.includes(req.user._id)) return next(new appError('You already liked this review', 400));
+    
+    //if(String(req.user._id) == String(review.userId._id)) return next(new appError('You cannot like your own review', 400))
+   if(review.likedBy.includes(req.user._id)) return next(new appError('Already liked this review', 400));
 
     review.likedBy.push(req.user._id);
     review.reviewLikes += 1;
@@ -92,10 +137,56 @@ exports.likeReview = asyncHandler(async (req, res, next) => {
         status: 'success',
         message: 'Review liked successfully',
         reviewId: review._id,
-        likes : review.reviewLikes
+        reviewLikes : review.reviewLikes
     });
-})
+});
 
+exports.removeLikeReview = asyncHandler(async (req, res, next) => {
+    const {reviewId} = req.params;
+    const review = await Review.findById(reviewId).populate({
+            path : 'userId',
+            select : 'name image'
+        });
+
+    if(!review) return next(new appError('Review not found', 404));
+    
+    // if(!review.likedBy.includes(req.user._id)) return next(new appError('You have not liked this review', 400));
+    // if(review.reviewLikes == 0) return next(new appError('Review has no likes', 400));
+
+    review.likedBy.pull(req.user._id);
+    review.reviewLikes -= 1;
+    await review.save();
+
+    res.status(200).json({
+        status  : 'success',
+        message : 'Remove like successfully',
+        reviewId: review._id,
+        reviewLikes   : review.reviewLikes
+    });
+});
+
+exports.removeUnlikeReview = asyncHandler(async (req, res, next) => {
+    const {reviewId} = req.params;
+    const review = await Review.findById(reviewId).populate({
+            path : 'userId',
+            select : 'name image'
+        });
+
+    if(!review) return next(new appError('Review not found', 404));
+    
+    // if(!review.likedBy.includes(req.user._id)) return next(new appError('You have not liked this review', 400));
+    if(review.unLikes == 0) return next(new appError('Review has no unLikes', 400));
+
+    review.unLikes -= 1;
+    await review.save();
+
+    res.status(200).json({
+        status  : 'success',
+        message : 'Remove like successfully',
+        reviewId: review._id,
+        reviewLikes   : review.reviewLikes
+    });
+});
 exports.unLikeReview = asyncHandler(async (req, res, next) => {
     const {reviewId} = req.params;
     const review = await Review.findById(reviewId).populate({
@@ -105,17 +196,17 @@ exports.unLikeReview = asyncHandler(async (req, res, next) => {
 
     if(!review) return next(new appError('Review not found', 404));
     
-    if(!review.likedBy.includes(req.user._id)) return next(new appError('You have not liked this review', 400));
-    if(review.reviewLikes == 0) return next(new appError('Review has no likes', 400));
+    // if(!review.likedBy.includes(req.user._id)) return next(new appError('You have not liked this review', 400));
+    // if(review.reviewLikes == 0) return next(new appError('Review has no likes', 400));
 
-    review.likedBy.pull(req.user._id);
-    review.reviewLikes -= 1;
+    if(review.likedBy.includes(req.user._id)) return next(new appError('remove like review first', 400));
+    review.unLikes += 1;
     await review.save();
 
     res.status(200).json({
         status: 'success',
         message: 'Review unliked successfully',
         reviewId: review._id,
-        likes : review.reviewLikes
+        unLikes : review.unLikes
     });
-})
+});
