@@ -4,7 +4,7 @@
 		"name": "Home.Finder",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "25350743",
-		"_collection_link": "https://www.postman.com/telecoms-specialist-16112359/workspace/applications/collection/25350743-92622551-6996-4e69-bce8-4542e20ea444?source=collection_link"
+		"_collection_link": "https://www.postman.com/telecoms-specialist-16112359/workspace/applications/collection/25350743-92622551-6996-4e69-bce8-4542e20ea444?action=share&source=collection_link&creator=25350743"
 	},
 	"item": [
 		{
@@ -642,9 +642,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/all?page=9",
+									"raw": "{{baseUrl}}/api/v1/residence/all?page=9",
 									"host": [
-										"{{LOCAL_URL}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"api",
@@ -675,7 +675,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 											"type": "string"
 										}
 									]
@@ -719,16 +719,16 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{baseUrl}}/api/v1/residence/get/66688f2400ed067942d0c9a9",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/get/66688f2400ed067942d0c9a7",
 									"host": [
-										"{{baseUrl}}"
+										"{{LOCAL_URL}}"
 									],
 									"path": [
 										"api",
 										"v1",
 										"residence",
 										"get",
-										"66688f2400ed067942d0c9a9"
+										"66688f2400ed067942d0c9a7"
 									]
 								}
 							},
@@ -773,7 +773,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 											"type": "string"
 										}
 									]
@@ -809,7 +809,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 											"type": "string"
 										}
 									]
@@ -889,7 +889,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/images/:residenceId",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/images/666893c9668a45cd264b426c",
 									"host": [
 										"{{LOCAL_URL}}"
 									],
@@ -898,13 +898,7 @@
 										"v1",
 										"residence",
 										"images",
-										":residenceId"
-									],
-									"variable": [
-										{
-											"key": "residenceId",
-											"value": ""
-										}
+										"666893c9668a45cd264b426c"
 									]
 								}
 							},
@@ -926,7 +920,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/location/:residenceId",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/location/666893c9668a45cd264b426c",
 									"host": [
 										"{{LOCAL_URL}}"
 									],
@@ -935,13 +929,7 @@
 										"v1",
 										"residence",
 										"location",
-										":residenceId"
-									],
-									"variable": [
-										{
-											"key": "residenceId",
-											"value": ""
-										}
+										"666893c9668a45cd264b426c"
 									]
 								}
 							},
@@ -1433,7 +1421,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/review/6649c364cf7139477513e6d2",
+							"raw": "{{LOCAL_URL}}/api/v1/review/:residenceId",
 							"host": [
 								"{{LOCAL_URL}}"
 							],
@@ -1441,7 +1429,13 @@
 								"api",
 								"v1",
 								"review",
-								"6649c364cf7139477513e6d2"
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -1455,7 +1449,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 									"type": "string"
 								}
 							]
@@ -1485,6 +1479,43 @@
 					"response": []
 				},
 				{
+					"name": "get one review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/review/get-one/:reviewId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"get-one",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Like review",
 					"request": {
 						"auth": {
@@ -1492,7 +1523,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 									"type": "string"
 								}
 							]
@@ -1522,6 +1553,43 @@
 					"response": []
 				},
 				{
+					"name": "Remove like",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/review/remove-like/:reviewId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"remove-like",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "unlike review",
 					"request": {
 						"auth": {
@@ -1529,7 +1597,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 									"type": "string"
 								}
 							]
@@ -1546,6 +1614,43 @@
 								"v1",
 								"review",
 								"unlike",
+								":reviewId"
+							],
+							"variable": [
+								{
+									"key": "reviewId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove unLike",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/review/remove-unlike/:reviewId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"review",
+								"remove-unlike",
 								":reviewId"
 							],
 							"variable": [
@@ -1626,9 +1731,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/user/favorites",
+									"raw": "{{baseUrl}}/api/v1/user/favorites",
 									"host": [
-										"{{LOCAL_URL}}"
+										"{{baseUrl}}"
 									],
 									"path": [
 										"api",
@@ -2352,7 +2457,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/residence/predict/:residenceId",
+							"raw": "{{LOCAL_URL}}/api/v1/residence/predict/66688f2400ed067942d0c9a7",
 							"host": [
 								"{{LOCAL_URL}}"
 							],
@@ -2361,19 +2466,44 @@
 								"v1",
 								"residence",
 								"predict",
-								":residenceId"
-							],
-							"variable": [
-								{
-									"key": "residenceId",
-									"value": ""
-								}
+								"66688f2400ed067942d0c9a7"
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "flask",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"msSubClass\": 60,\r\n    //    \"mszoning\": \"RL\",\r\n        \"lotFrontage\": 68,\r\n        \"lotArea\": 11250,\r\n       \"street\": \"Pave\",\r\n        \"lotShape\": \"IR1\",\r\n        \"landContour\": \"Lvl\",\r\n        \"utilities\": \"AllPub\",\r\n        \"lotConfig\": \"Inside\",\r\n        \"landSlope\": \"Gtl\",\r\n        \"neighborhood\": \"CollgCr\",\r\n        \"condition1\": \"Norm\",\r\n        \"condition2\": \"Norm\",\r\n        \"bldgType\": \"1Fam\",\r\n        \"houseStyle\": \"2Story\",\r\n        \"overallQual\": 7,\r\n        \"overallCond\": 5,\r\n        \"roofStyle\": \"Gable\",\r\n        \"roofMatl\": \"CompShg\",\r\n        \"exterior1st\": \"VinylSd\",\r\n        \"exterior2nd\": \"VinylSd\",\r\n        \"masVnrType\": \"BrkFace\",\r\n        \"masVnrArea\": 162,\r\n        \"exterQual\": \"Gd\",\r\n        \"exterCond\": \"TA\",\r\n        \"foundation\": \"PConc\",\r\n        \"bsmtQual\": \"Gd\",\r\n        \"bsmtCond\": \"TA\",\r\n        \"bsmtExposure\": \"Mn\",\r\n        \"bsmtFinType1\": \"GLQ\",\r\n        \"bsmtUnfSF\": 434,\r\n        \"heating\": \"GasA\",\r\n        \"heatingQc\": \"Ex\",\r\n        \"centralAir\": \"Y\",\r\n        \"electrical\": \"SBrkr\",\r\n        \"lowQualFinSF\": 0,\r\n        \"bedroomAbvGr\": 3,\r\n        \"kitchenAbvGr\": 1,\r\n        \"kitchenQual\": \"Gd\",\r\n        \"totRmsAbvGrd\": 6,\r\n        \"Functional\": \"Typ\",\r\n        \"fireplaceQu\": \"TA\",\r\n        \"fireplaces\": 1,\r\n        \"garageType\": \"Attchd\",\r\n        \"garageFinish\": \"RFn\",\r\n        \"garageCars\": 2,\r\n        \"garageQual\": \"TA\",\r\n        \"pavedDrive\": \"Y\",\r\n        \"poolArea\": 0,\r\n        \"miscVal\": 0,\r\n        \"moSold\": 9,\r\n        \"saleType\": \"WD\",\r\n        \"saleCondition\": \"Normal\",\r\n        \"salePrice\": 12.31717117,\r\n        \"houseage\": 7,\r\n        \"houseremodelage\": 6,\r\n        \"totalsf\": 2272,\r\n        \"totalarea\": 2706,\r\n        \"totalbaths\": 3.5,\r\n        \"totalporchsf\": 42,\r\n        \"alley\": \"NA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/predict",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"predict"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"variable": [
