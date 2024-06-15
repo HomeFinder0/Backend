@@ -57,8 +57,8 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   let user = await User.findById(userId);
   if (!user) return next(new appError("User not found", 404));
   let residences = await Residence.find({ ownerId: userId });
-  let sold = residences.filter((res) => res.isSold === true).length;
-  let pending  = residences.filter((res) => res.status === 'pending').length;
+  let sold     = residences.filter((res) => res.isSold === true).length;
+  let pending  = residences.filter((res) => res.status === 'pending' && res.isCompleted == true).length;
   let approved = residences.filter((res) => res.status === 'approved' && res.isSold == false).length;
   
   return res.status(200).json({

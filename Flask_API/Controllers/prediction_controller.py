@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 import pickle
 import pandas as pd
 
-predictionModel = pickle.load(open('./Models/prediction.pkl', 'rb'))
+predictionModel = pickle.load(open('./Models/mmodel.pkl', 'rb'))
 
 def predict():
     _json = request.json    
