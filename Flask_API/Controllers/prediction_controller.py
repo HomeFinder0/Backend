@@ -8,7 +8,7 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import  StandardScaler,  LabelEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
-with open('./Models/prediction.pkl', 'rb') as file:
+with open('Models/prediction.pkl', 'rb') as file:
     Model = pickle.load(file)
 
 
