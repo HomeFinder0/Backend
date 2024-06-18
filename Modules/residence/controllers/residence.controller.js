@@ -32,11 +32,17 @@ exports.createResidence = asyncHandler(async (req, res, next) => {
     const {value, error} = residenceValidation(req.body);
     if(error) return next(new appError(error, 400));
     
-    const Id = Math.floor(100000 + Math.random() * 900000);
+    let Id = Math.floor(100000 + Math.random() * 900000);
+    let residence = await Residence.findOne({Id});
 
-    let residence = await Residence.create({...value, ownerId: user._id, Id});
+    while(residence){
+        Id = Math.floor(100000 + Math.random() * 900000);
+        residence = await Residence.findOne({Id});
+    }
+    
+    residence = await Residence.create({...value, ownerId: user._id, Id});
     if(!residence) next(new appError("Unable to create residence", 500));
-    console.log("Id: ", Id)
+
     residence = {
         _id        : residence._id,
         title      : residence.title,
