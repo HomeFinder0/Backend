@@ -455,6 +455,9 @@ exports.getSold =  asyncHandler(async (req, res, next) => {
 
 //search function
 exports.filtration = asyncHandler(async (req, res, next) => {
+    const page  = req.query.page  * 1 || 1;
+    const limit = 10;
+    const skip  = (page - 1) * limit;
     let {min, max, rating, bedroom, bathroom, neighborhood} = req.query;
     
     if(!min) min = 0;
@@ -474,11 +477,11 @@ exports.filtration = asyncHandler(async (req, res, next) => {
             path: 'reviews',
             select: 'rating',
         }
-    ]).select('title salePrice location.fullAddress images category neighborhood bedroomAbvGr totalbaths ');
+    ]).select('title salePrice location.fullAddress images category neighborhood bedroomAbvGr totalbaths ').skip(skip).limit(limit);
 
     if(rating)
     residences = residences.filter(residence => 
-        residence.reviews.some(review => review.rating >= rating)
+        residence.avgRating >= rating 
     );
     
     if(neighborhood) residences = residences.filter(residence => residence.neighborhood === neighborhood);

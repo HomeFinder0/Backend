@@ -47,7 +47,7 @@ router.get("/nearest?",               getNearestResidences);
 router.get("/all?",                   getAllApproved);
 router.get("/images/:residenceId",    getResidenceImages );
 router.get("/location/:residenceId",  getLocation);
-router.get("/filter",                 filtration);
+router.get("/filter?",                 filtration);
 
 router.patch("/update/:residenceId"    , updateResidence);
 router.patch("/update/1st/:residenceId" , stepOneUpdate);
