@@ -589,19 +589,23 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
 
 exports.recommend = asyncHandler(async (req, res, next) => {
 
-    const {residenceId} = req.params;
-    let residence = await Residence.findById(residenceId);
-    if(! residence ) return next(new appError("Residence not found!", 400));
-    
+    const { residenceId } = req.params;
+    const no_of_residences = req.query.no_of_residences || 10;
+
+    let residence = await Residence.findOne({ Id: residenceId });
+    if (!residence) return next(new appError("Residence not found!", 400));
+
     try {
         const response = await axios.post(`${process.env.FLASK_URL}/recommend`, {
             house_id: residenceId,
-            
+            no_recommendations: no_of_residences
         });
-        if(response.data.error) return next(new appError(response.data.error, 500))
+        if (response.data.error) return next(new appError(response.data.error, 500));
+        console.log(response.data);
         res.status(200).json({
             status: "success",
-            recommendedResidences: response.data});
+            recommendedResidencesIds: response.data
+        });
     } catch (error) {
         res.status(500).send(error.message);
     }
