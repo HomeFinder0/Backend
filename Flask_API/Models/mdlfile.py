@@ -1,5 +1,3 @@
-from flask import request, jsonify
-import flask
 import pandas as pd
 import numpy as np
 import pickle
@@ -8,33 +6,75 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import  StandardScaler,  LabelEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
-import catboost
-import scipy
-with open('Flask_API\Models\prediction.pkl', 'rb') as file:
+with open('Flask_API\Models\Model.pkl', 'rb') as file:
     Model = pickle.load(file)
 
-print("catboost ", catboost.__version__)
-print("scipy ", scipy.__version__)
-def predict():
-    X = request.json 
-    X = X['residence']
-    print(X['residence'])   
-    try:
-        X=pd.DataFrame(X)
-        
-        X_preprocessed = preprocessor.fit_transform(X)
+X = {
+    "msSubClass": [60],
+    "mszoning": ["RL"],
+    "lotFrontage": [68],
+    "lotArea": [11250],
+    "street": ["Pave"],
+    "lotShape": ["IR1"],
+    "landContour": ["Lvl"],
+    "utilities": ["AllPub"],
+    "lotConfig": ["Inside"],
+    "landSlope": ["Gtl"],
+    "neighborhood": ["CollgCr"],
+    "condition1": ["Norm"],
+    "condition2": ["Norm"],
+    "bldgType": ["1Fam"],
+    "houseStyle": ["2Story"],
+    "overallQual": [7],
+    "overallCond": [5],
+    "roofStyle": ["Gable"],
+    "roofMatl": ["CompShg"],
+    "exterior1st": ["VinylSd"],
+    "exterior2nd": ["VinylSd"],
+    "masVnrType": ["BrkFace"],
+    "masVnrArea": [162],
+    "exterQual": ["Gd"],
+    "exterCond": ["TA"],
+    "foundation": ["PConc"],
+    "bsmtQual": ["Gd"],
+    "bsmtCond": ["TA"],
+    "bsmtExposure": ["Mn"],
+    "bsmtFinType1": ["GLQ"],
+    "bsmtUnfSF": [434],
+    "heating": ["GasA"],
+    "heatingQc": ["Ex"],
+    "centralAir": ["Y"],
+    "electrical": ["SBrkr"],
+    "lowQualFinSF": [0],
+    "bedroomAbvGr": [3],
+    "kitchenAbvGr": [1],
+    "kitchenQual": ["Gd"],
+    "totRmsAbvGrd": [6],
+    "Functional": ["Typ"],
+    "fireplaceQu": ["TA"],
+    "fireplaces": [1],
+    "garageType": ["Attchd"],
+    "garageFinish": ["RFn"],
+    "garageCars": [2],
+    "garageQual": ["TA"],
+    "pavedDrive": ["Y"],
+    "poolArea": [0],
+    "miscVal": [0],
+    "moSold": [9],
+    "saleType": ["WD"],
+    "saleCondition": ["Normal"],
+    "salePrice": [12.31717117],
+    "houseage": [7],
+    "houseremodelage": [6],
+    "totalsf": [2272],
+    "totalarea": [2706],
+    "totalbaths": [3.5],
+    "totalporchsf": [42],
+    "alley": ["NA"]
+}
 
-        predictions = Model.predict(X_preprocessed)
-        gg= np.expm1(predictions)[0]
-        print(gg)
-        return jsonify(gg), 200
-    
-    except Exception as e:
-        e = list(e) if isinstance(e, set) else e
-        print("Error during prediction:", str(e))  # Debug print statement
-        return jsonify({'error': str(e)}), 500
-    
-    
+X=pd.DataFrame(X)
+
 class LabelEncodingTransformer(BaseEstimator, TransformerMixin):
     def __init__(self):
         self.label_encoders = {}
@@ -84,4 +124,10 @@ preprocessor = ColumnTransformer(
         ('cat', LabelEncodingTransformer(), categorical_cols)
     ]
 )
-    
+
+
+X_preprocessed = preprocessor.fit_transform(X)
+
+predictions = Model.predict(X_preprocessed)
+gg= np.expm1(predictions)[0]
+print(gg)
