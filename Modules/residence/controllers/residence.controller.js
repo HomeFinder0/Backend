@@ -129,8 +129,8 @@ exports.stepThreeUpdate= asyncHandler( async(req, res, next) => {
     
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
-    residence.kitchenAbvGr = residence.KitchenAbvGr
-    await residence.save();
+    //residence.kitchenAbvGr = residence.KitchenAbvGr
+  //  await residence.save();
     
     return res.status(200).json({
         status:"success",
