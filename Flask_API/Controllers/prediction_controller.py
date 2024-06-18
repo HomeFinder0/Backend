@@ -8,13 +8,10 @@ from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import  StandardScaler,  LabelEncoder
 from sklearn.base import BaseEstimator, TransformerMixin
-import catboost
-import scipy
-with open('Flask_API\Models\prediction.pkl', 'rb') as file:
+with open('./Models/prediction.pkl', 'rb') as file:
     Model = pickle.load(file)
 
-print("catboost ", catboost.__version__)
-print("scipy ", scipy.__version__)
+
 def predict():
     X = request.json 
     X = X['residence']
