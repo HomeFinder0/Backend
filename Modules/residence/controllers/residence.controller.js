@@ -8,7 +8,8 @@ const User = require('../../user/models/User.js');
 
 const {
     uploadImageWithoutFolder,
-    deleteImage
+    deleteImage,
+    deleteMultipleImages
 } = require("../../../Helpers/cloud.js");
 
 const getLocation = require("../../../Managers/getLocation.manager.js");
@@ -554,17 +555,7 @@ exports.deleteResidenceImage = asyncHandler(async (req, res, next) => {
 });
 
 
-// function to delete all uncompleted residences
-async function deleteUncompletedResidence(Residence) {
-    let unUpdatedResidences = await Residence.find({ isCompleted: false });
-    let public_ids = unUpdatedResidences.flatMap(residence => residence.images.map(img => img.public_id));
-    if (public_ids.length > 0) {
-        await deleteMultipleImages(public_ids);
-    }
-    await Residence.deleteMany({ isCompleted: false });
-};
-
-
+//ML functions
 exports.predictPrice = asyncHandler(async (req, res, next) => {
     const { residenceId } = req.params;
     let residence = await Residence.findById(residenceId);
@@ -587,7 +578,6 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
     }
 
 });
-
 exports.recommend = asyncHandler(async (req, res, next) => {
     try {
         let residenceId = req.params.residenceId || req.body.residenceId;
@@ -628,4 +618,74 @@ exports.recommend = asyncHandler(async (req, res, next) => {
         console.log(error);
         return next(new appError("An error occurred during the recommendation process", 500));
     }
+});
+
+//Admin functions
+exports.totalSold = asyncHandler(async (req, res, next) => {
+    let count = await Residence.countDocuments({ isSold: true });
+    
+    return res.status(200).json({
+        status: 'success',
+        totalSold: count
+    });
+});
+
+exports.totalPending = asyncHandler(async (req, res, next) => {
+    let count = await Residence.countDocuments({ status: "pending" });
+    
+    return res.status(200).json({
+        status: 'success',
+        totalPending: count
+    });
+});
+
+exports.totalApproved = asyncHandler(async (req, res, next) => {
+    let count = await Residence.countDocuments({ status: "approved" });
+    
+    return res.status(200).json({
+        status: 'success',
+        totalApproved: count
+    });
+});
+
+exports.totalRejected = asyncHandler(async (req, res, next) => {
+    let count = await Residence.countDocuments({ status: "rejected" });
+    
+    return res.status(200).json({
+        status: 'success',
+        totalRejected: count
+    });
+});
+
+exports.getUncompleted = asyncHandler(async (req, res, next) => {
+    let page = req.query.page * 1 || 1;
+    let limit = 10;
+    let skip = (page - 1) * limit;
+    let residences = await Residence.find({ isCompleted: false }).skip(skip).limit(limit);
+    let total = await Residence.countDocuments({ isCompleted: false });
+    residences = residences.map(res => {
+        valueConversion(res);
+        return res.toJSON({ userId: req.user._id });
+    });
+
+    return res.status(200).json({
+        status: 'success',
+        totalUncompleted: total,
+        uncompletedCount: residences.length,
+        residences
+    });
+});
+
+exports.deleteUncompletedResidence = asyncHandler(async (req, res, next) => {
+    let unUCompleted = await Residence.find({ isCompleted: false });
+    let public_ids = unUCompleted.flatMap(residence => residence.images.map(img => img.public_id));
+    if (public_ids.length > 0) {
+        await deleteMultipleImages(public_ids);
+    }
+    await Residence.deleteMany({ isCompleted: false });
+
+    return res.status(200).json({
+        status: 'success',
+        message: 'Uncompleted residences deleted successfully'
+    });
 });

@@ -24,7 +24,7 @@ const {
     deleteOneResidence,
     filtration,
     recommend,
-    predictPrice
+    predictPrice,
 } = require("../controllers/residence.controller.js");
 const authMiddleware = require("../../authentication/middlewares/auth.middleware.js");
 const { uploadMultiple } = require("../../../Utils/multer.js");
@@ -58,8 +58,7 @@ router.patch("/update/4th/:residenceId", stepFourUpdate);
 router.delete("/delete/:residenceId", deleteOneResidence);
 router.delete("/image/:imageId", deleteResidenceImage);
 
-
-
+// Prediction and Recommendation
 router.get('/predict/:residenceId', predictPrice);
 router.get('/recommend/:residenceId', recommend);
 

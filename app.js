@@ -12,6 +12,7 @@ const userRouter      = require("./Modules/user/routes/user.route.js");
 const chatRouter      = require("./Modules/chat/routes/chat.route.js");
 const reviewRouter    = require("./Modules/Review/routes/review.route.js");
 const residenceRouter = require("./Modules/residence/routes/residence.route.js");
+const adminRouter     = require("./Modules/admin/routes/admin.route.js");
 
 app.use(cors());
 app.use(helmet());
@@ -29,6 +30,7 @@ app.use("/api/v1/user", userRouter);
 app.use("/api/v1/chat", chatRouter);
 app.use("/api/v1/review", reviewRouter);
 app.use("/api/v1/residence", residenceRouter);
+app.use("/api/v1/admin",    adminRouter);
 
 app.all("*", (req, res, next) => {
   return next(
