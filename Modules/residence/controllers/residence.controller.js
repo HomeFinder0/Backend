@@ -307,14 +307,14 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
     
     if(!residence) next(new appError("Residence not found!", 404));
 
-    if(!residence.isCompleted){
-        if( residence.images.length != 0){
-            let public_ids = residence.images.map((img) => img.public_id);
-            await deleteMultipleImages(public_ids);
-        }
-        await residence.deleteOne();
-        return next(new appError("Residence not found!", 404));
-    }
+    // if(!residence.isCompleted){
+    //     if( residence.images.length != 0){
+    //         let public_ids = residence.images.map((img) => img.public_id);
+    //         await deleteMultipleImages(public_ids);
+    //     }
+    //     await residence.deleteOne();
+    //     return next(new appError("Residence not found!", 404));
+    // }
     residence = residence.toJSON( { userId:_id} );
     valueConversion(residence);
     return res.status(200).json({
@@ -568,7 +568,10 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
         if(response.data.error) return next(new appError(response.data.error, 500))
         res.status(200).json({
             status: "success",
-            predictedPrice: Math.floor(response.data)});
+            predictedPrice: Math.floor(response.data),
+            residence
+        });
+
     } catch (error) {
         res.status(500).send(error.message);
     }
