@@ -5,9 +5,11 @@ const reviewSchema = new mongoose.Schema({
     userId      : { type: mongoose.Schema.Types.ObjectId, ref: 'Users' },
     rating      : { type: Number, required: true },
     comment     : { type: String },
-    reviewLikes : { type: Number, default: 0 },
+    likes : { type: Number, default: 0 },
     unLikes     : { type: Number, default: 0 },
+    
     likedBy     : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
+    unLikedBy     : [{ type: mongoose.Schema.Types.ObjectId, ref: 'Users' }],
     
 },{
     timestamps: true

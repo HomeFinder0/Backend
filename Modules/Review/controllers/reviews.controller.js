@@ -130,14 +130,16 @@ exports.likeReview = asyncHandler(async (req, res, next) => {
    if(review.likedBy.includes(req.user._id)) return next(new appError('Already liked this review', 400));
 
     review.likedBy.push(req.user._id);
-    review.reviewLikes += 1;
+    review.likes += 1;
     await review.save();
 
     res.status(200).json({
         status: 'success',
         message: 'Review liked successfully',
         reviewId: review._id,
-        reviewLikes : review.reviewLikes
+        likes   : review.likes,
+        unLikes   : review.unLikes
+
     });
 });
 
@@ -150,21 +152,49 @@ exports.removeLikeReview = asyncHandler(async (req, res, next) => {
 
     if(!review) return next(new appError('Review not found', 404));
     
-    // if(!review.likedBy.includes(req.user._id)) return next(new appError('You have not liked this review', 400));
-    // if(review.reviewLikes == 0) return next(new appError('Review has no likes', 400));
+    if(!review.likedBy.includes(req.user._id)) return next(new appError('You do not liked this review', 400));
+    if(review.likes == 0) return next(new appError('Review has no likes', 400));
 
     review.likedBy.pull(req.user._id);
-    review.reviewLikes -= 1;
+    review.likes -= 1;
     await review.save();
 
     res.status(200).json({
         status  : 'success',
         message : 'Remove like successfully',
         reviewId: review._id,
-        reviewLikes   : review.reviewLikes
+        
+        likes   : review.likes,
+        unLikes   : review.unLikes
+
     });
 });
 
+exports.unLikeReview = asyncHandler(async (req, res, next) => {
+    const {reviewId} = req.params;
+    const review = await Review.findById(reviewId).populate({
+        path : 'userId',
+        select : 'name image'
+        });
+        
+    if(!review) return next(new appError('Review not found', 404));
+    
+    if(review.likedBy.includes(req.user._id)) return next(new appError('remove like first', 400));
+    if(review.unLikedBy.includes(req.user._id)) return next(new appError('Already unLiked this review', 400));
+
+    review.unLikedBy.push(req.user._id);
+    review.unLikes += 1;
+    await review.save();
+    
+    res.status(200).json({
+        status: 'success',
+        message: 'Review unliked successfully',
+        reviewId: review._id,
+        likes   : review.likes,
+        unLikes   : review.unLikes
+
+    });
+});
 exports.removeUnlikeReview = asyncHandler(async (req, res, next) => {
     const {reviewId} = req.params;
     const review = await Review.findById(reviewId).populate({
@@ -174,9 +204,10 @@ exports.removeUnlikeReview = asyncHandler(async (req, res, next) => {
 
     if(!review) return next(new appError('Review not found', 404));
     
-    // if(!review.likedBy.includes(req.user._id)) return next(new appError('You have not liked this review', 400));
+    if(!review.unLikedBy.includes(req.user._id)) return next(new appError('You do not unLiked this review', 400));
     if(review.unLikes == 0) return next(new appError('Review has no unLikes', 400));
-
+   
+    review.unLikedBy.pull(req.user._id);
     review.unLikes -= 1;
     await review.save();
 
@@ -184,29 +215,7 @@ exports.removeUnlikeReview = asyncHandler(async (req, res, next) => {
         status  : 'success',
         message : 'Remove like successfully',
         reviewId: review._id,
-        reviewLikes   : review.reviewLikes
-    });
-});
-exports.unLikeReview = asyncHandler(async (req, res, next) => {
-    const {reviewId} = req.params;
-    const review = await Review.findById(reviewId).populate({
-            path : 'userId',
-            select : 'name image'
-        });
-
-    if(!review) return next(new appError('Review not found', 404));
-    
-    // if(!review.likedBy.includes(req.user._id)) return next(new appError('You have not liked this review', 400));
-    // if(review.reviewLikes == 0) return next(new appError('Review has no likes', 400));
-
-    if(review.likedBy.includes(req.user._id)) return next(new appError('remove like review first', 400));
-    review.unLikes += 1;
-    await review.save();
-
-    res.status(200).json({
-        status: 'success',
-        message: 'Review unliked successfully',
-        reviewId: review._id,
-        unLikes : review.unLikes
+        likes   : review.likes,
+        unLikes   : review.unLikes
     });
 });
