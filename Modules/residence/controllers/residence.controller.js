@@ -100,7 +100,8 @@ exports.stepTwoUpdate= asyncHandler(async (req, res, next) => {
     }
     
     if(error) return next(new appError(error, 400));
-    console.log(value)
+
+    
     valueConversion(value);
     console.log(value)
     
@@ -128,7 +129,7 @@ exports.stepThreeUpdate= asyncHandler( async(req, res, next) => {
     
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
-
+    residence.kitchenAbvGr = residence.KitchenAbvGr
     await residence.save();
     
     return res.status(200).json({
@@ -572,6 +573,27 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
             residence
         });
 
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+
+});
+
+exports.recommend = asyncHandler(async (req, res, next) => {
+
+    const {residenceId} = req.params;
+    let residence = await Residence.findById(residenceId);
+    if(! residence ) return next(new appError("Residence not found!", 400));
+    
+    try {
+        const response = await axios.post(`${process.env.FLASK_URL}/recommend`, {
+            house_id: residenceId,
+            
+        });
+        if(response.data.error) return next(new appError(response.data.error, 500))
+        res.status(200).json({
+            status: "success",
+            recommendedResidences: response.data});
     } catch (error) {
         res.status(500).send(error.message);
     }
