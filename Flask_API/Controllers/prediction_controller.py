@@ -14,8 +14,8 @@ with open('Models/prediction.pkl', 'rb') as file:
 
 def predict():
     X = request.json 
-    X = X['residence']
-    print(X['residence'])   
+    X =[X['residence']]
+    print(X)
     try:
         X=pd.DataFrame(X)
         
