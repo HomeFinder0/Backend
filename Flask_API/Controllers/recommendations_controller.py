@@ -57,14 +57,14 @@ def recommend():
         return jsonify({'error': 'Invalid JSON format'}), 400
 
     house_id = data.get('house_id')  # Use get method instead of direct access
-    n_recommendations = data.get('n', 10)  # Default to 10 recommendations if not provided
+    n_recommendations = data.get('no_recommendations', 10)  # Default to 10 recommendations if not provided
 
     if house_id is None or not house_id:
         return jsonify({'error': 'House ID not provided'}), 400
 
-    if not isinstance(n_recommendations, int):
-        return jsonify({'error': 'Number of recommendations must be an integer'}), 400
-
+    if(n_recommendations is None or n_recommendations < 1):
+        n_recommendations = 10
+        
     recommended_ids, recommended_houses = recommend_similar_houses(house_id, n_recommendations, similarity_matrix)
 
     if recommended_ids:
