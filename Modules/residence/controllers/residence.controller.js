@@ -566,11 +566,16 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
         const response = await axios.post(`${process.env.FLASK_URL}/predict`, {
             residence
         });
-        console.log(response.data)
+
         if(response.data.error) return next(new appError(response.data.error, 500))
-        res.json(response.data);
+        res.status(200).json({
+            status: "success",
+            predictedPrice: Math.floor(response.data),
+        });
     } catch (error) {
         res.status(500).send(error.message);
     }
 
 });
+
+// exports.getByTitle = 
