@@ -627,6 +627,42 @@
 					"name": "Get Residences",
 					"item": [
 						{
+							"name": "Get Nearest",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/nearest?page=1",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"nearest"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "Get All",
 							"request": {
 								"auth": {
@@ -661,42 +697,6 @@
 										{
 											"key": "page",
 											"value": "9"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "Get Nearest",
-							"request": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
-								},
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/nearest?page=1",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"nearest"
-									],
-									"query": [
-										{
-											"key": "page",
-											"value": "1"
 										}
 									]
 								}
@@ -1171,47 +1171,6 @@
 					]
 				},
 				{
-					"name": "Set Location",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/residence/location/6649c364cf7139477513e6d2?longitude=-93.64393414836377&latitude=42.052952373804864",
-							"host": [
-								"{{LOCAL_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"residence",
-								"location",
-								"6649c364cf7139477513e6d2"
-							],
-							"query": [
-								{
-									"key": "longitude",
-									"value": "-93.64393414836377"
-								},
-								{
-									"key": "latitude",
-									"value": "42.052952373804864"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Upload images",
 					"request": {
 						"auth": {
@@ -1253,22 +1212,75 @@
 					"response": []
 				},
 				{
-					"name": "Filtration",
+					"name": "Set Location",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/residence/location/6649c364cf7139477513e6d2?longitude=-93.64393414836377&latitude=42.052952373804864",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"residence",
+								"location",
+								"6649c364cf7139477513e6d2"
+							],
+							"query": [
+								{
+									"key": "longitude",
+									"value": "-93.64393414836377"
+								},
+								{
+									"key": "latitude",
+									"value": "42.052952373804864"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filtration",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
 									"type": "string"
 								}
 							]
 						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/residence/filter?min=&max=&rating=&bedroom=&bathroom=&neighborhood=",
+							"raw": "{{LOCAL_URL}}/api/v1/residence/filter?page=1&min=12&max=14&rating=&bedroom=&bathroom=4&neighborhood=Mitchel",
 							"host": [
 								"{{LOCAL_URL}}"
 							],
@@ -1280,12 +1292,16 @@
 							],
 							"query": [
 								{
+									"key": "page",
+									"value": "1"
+								},
+								{
 									"key": "min",
-									"value": ""
+									"value": "12"
 								},
 								{
 									"key": "max",
-									"value": ""
+									"value": "14"
 								},
 								{
 									"key": "rating",
@@ -1297,11 +1313,11 @@
 								},
 								{
 									"key": "bathroom",
-									"value": ""
+									"value": "4"
 								},
 								{
 									"key": "neighborhood",
-									"value": ""
+									"value": "Mitchel"
 								}
 							]
 						}
@@ -2457,7 +2473,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/residence/predict/66688f2400ed067942d0c9a7",
+							"raw": "{{LOCAL_URL}}/api/v1/residence/predict/:redidenceId",
 							"host": [
 								"{{LOCAL_URL}}"
 							],
@@ -2466,44 +2482,19 @@
 								"v1",
 								"residence",
 								"predict",
-								"66688f2400ed067942d0c9a7"
+								":redidenceId"
+							],
+							"variable": [
+								{
+									"key": "redidenceId",
+									"value": ""
+								}
 							]
 						}
 					},
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "flask",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"msSubClass\": 60,\r\n    //    \"mszoning\": \"RL\",\r\n        \"lotFrontage\": 68,\r\n        \"lotArea\": 11250,\r\n       \"street\": \"Pave\",\r\n        \"lotShape\": \"IR1\",\r\n        \"landContour\": \"Lvl\",\r\n        \"utilities\": \"AllPub\",\r\n        \"lotConfig\": \"Inside\",\r\n        \"landSlope\": \"Gtl\",\r\n        \"neighborhood\": \"CollgCr\",\r\n        \"condition1\": \"Norm\",\r\n        \"condition2\": \"Norm\",\r\n        \"bldgType\": \"1Fam\",\r\n        \"houseStyle\": \"2Story\",\r\n        \"overallQual\": 7,\r\n        \"overallCond\": 5,\r\n        \"roofStyle\": \"Gable\",\r\n        \"roofMatl\": \"CompShg\",\r\n        \"exterior1st\": \"VinylSd\",\r\n        \"exterior2nd\": \"VinylSd\",\r\n        \"masVnrType\": \"BrkFace\",\r\n        \"masVnrArea\": 162,\r\n        \"exterQual\": \"Gd\",\r\n        \"exterCond\": \"TA\",\r\n        \"foundation\": \"PConc\",\r\n        \"bsmtQual\": \"Gd\",\r\n        \"bsmtCond\": \"TA\",\r\n        \"bsmtExposure\": \"Mn\",\r\n        \"bsmtFinType1\": \"GLQ\",\r\n        \"bsmtUnfSF\": 434,\r\n        \"heating\": \"GasA\",\r\n        \"heatingQc\": \"Ex\",\r\n        \"centralAir\": \"Y\",\r\n        \"electrical\": \"SBrkr\",\r\n        \"lowQualFinSF\": 0,\r\n        \"bedroomAbvGr\": 3,\r\n        \"kitchenAbvGr\": 1,\r\n        \"kitchenQual\": \"Gd\",\r\n        \"totRmsAbvGrd\": 6,\r\n        \"Functional\": \"Typ\",\r\n        \"fireplaceQu\": \"TA\",\r\n        \"fireplaces\": 1,\r\n        \"garageType\": \"Attchd\",\r\n        \"garageFinish\": \"RFn\",\r\n        \"garageCars\": 2,\r\n        \"garageQual\": \"TA\",\r\n        \"pavedDrive\": \"Y\",\r\n        \"poolArea\": 0,\r\n        \"miscVal\": 0,\r\n        \"moSold\": 9,\r\n        \"saleType\": \"WD\",\r\n        \"saleCondition\": \"Normal\",\r\n        \"salePrice\": 12.31717117,\r\n        \"houseage\": 7,\r\n        \"houseremodelage\": 6,\r\n        \"totalsf\": 2272,\r\n        \"totalarea\": 2706,\r\n        \"totalbaths\": 3.5,\r\n        \"totalporchsf\": 42,\r\n        \"alley\": \"NA\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:5000/predict",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "5000",
-					"path": [
-						"predict"
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"variable": [
