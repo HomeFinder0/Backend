@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "92622551-6996-4e69-bce8-4542e20ea444",
-		"name": "Home.Finder",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25350743",
-		"_collection_link": "https://www.postman.com/telecoms-specialist-16112359/workspace/applications/collection/25350743-92622551-6996-4e69-bce8-4542e20ea444?action=share&source=collection_link&creator=25350743"
+		"_postman_id": "3a4acd70-f29a-4669-83c8-4c39454ec17e",
+		"name": "Home.Finder Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "24291675"
 	},
 	"item": [
 		{
@@ -27,18 +26,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/auth/signup",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"signup"
-									]
-								},
+								"url": "{{LOCAL_URL}}/api/v1/auth/signup",
 								"description": "This endpoint allows users to sign up by creating a new account. The HTTP POST request should be made to {{url}}/api/v1/auth/signup with the following payload in the raw request body type:\n\n- username (string): The username of the user\n- email (string): The email address of the user\n- password (string): The password for the user's account\n- confirmPass (string): The confirmation of the password\n    \n\nThe response to the request will have a status code of 200 and will include the following data:\n\n- status (string): The status of the response\n- message (string): A message related to the response\n- user (object): An object containing user details including username, email, role, image URL, public ID, verification status, user ID, creation timestamp, and update timestamp\n- token (string): The authentication token for the user\n    \n\nEnsure that the provided user details are accurate and complete to successfully create a new account."
 							},
 							"response": []
@@ -48,13 +36,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "POST",
 								"header": [],
@@ -67,18 +51,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/auth/verification",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"verification"
-									]
-								},
+								"url": "{{LOCAL_URL}}/api/v1/auth/verification",
 								"description": "The API endpoint `POST /api/v1/auth/verification/:id` is used to verify a user's identity by providing the OTP (One-Time Password) for the given ID. The request should be sent with a JSON payload containing the OTP.\n\n### Request Body\n\n- `otp` (number, required): The OTP (One-Time Password) to verify the user's identity.\n    \n\n### Request Parameters\n\n- `id` (in path, required): The ID of the user for whom the verification is being performed.\n    \n\n### Response\n\nUpon successful execution, the API returns a status code of 200 and a JSON response with the following structure:\n\n``` json\n{\n  \"status\": \"\",\n  \"user\": {{ /* User details */ }\n}\n\n ```\n\nThe `user` object contains information about the verified user, including their ID, username, email, role, and verification status."
 							},
 							"response": []
@@ -88,28 +61,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NThiNDY2NGM2ZmY3ZjhlNmY1MjFiNzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwMzYyNjM0Mn0.rIZhrwzdoXqO_qp3vH1ENyZsWzE5yBPN2fFIqnOKfEY",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NThiNDY2NGM2ZmY3ZjhlNmY1MjFiNzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwMzYyNjM0Mn0.rIZhrwzdoXqO_qp3vH1ENyZsWzE5yBPN2fFIqnOKfEY"
+									}
 								},
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/auth/resend-code",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"resend-code"
-									]
-								},
+								"url": "{{LOCAL_URL}}/api/v1/auth/resend-code",
 								"description": "This endpoint triggers an HTTP GET request to resend a verification code for a specific user ID.\n\nThe request does not contain a request body.\n\nUpon a successful execution, the response will have a status code of 200 and will include the user details with their image, ID, username, email, role, verification status, and timestamps for creation and update."
 							},
 							"response": []
@@ -119,13 +77,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "POST",
 								"header": [],
@@ -138,18 +92,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/auth/complete-signup",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"complete-signup"
-									]
-								},
+								"url": "{{LOCAL_URL}}/api/v1/auth/complete-signup",
 								"description": "The API endpoint `POST /api/v1/auth/complete-signup` is used to complete the user signup process. The request should include the user's first name, last name, gender, and phone number in the request body.\n\n### Request Body\n\n- `firstName` (string): The user's first name.\n- `lastName` (string): The user's last name.\n- `gender` (string): The user's gender.\n- `phone` (string): The user's phone number.\n    \n\n### Response\n\nUpon successful execution, the API responds with a status code of 200 and the following JSON object:\n\n``` json\n{\n    \"status\": \"\",\n    \"user\": {/* user details */},\n    \"token\": \"\"\n}\n\n ```\n\n- `status` (string): The status of the response.\n- `user` (object): An object containing user details such as image, location, ID, username, email, role, wishlist, verification status, and timestamps.\n- `token` (string): The authentication token for the user."
 							},
 							"response": []
@@ -174,18 +117,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/auth/login",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"login"
-									]
-								},
+								"url": "{{LOCAL_URL}}/api/v1/auth/login",
 								"description": "### Auth Login\n\nThis endpoint allows users to log in and obtain an authentication token.\n\n#### Request Body\n\n- `email` (string, required): The email address of the user.\n- `password` (string, required): The password for the user's account.\n    \n\n#### Response\n\n- `status` (string): The status of the response.\n- `token` (string): The authentication token for the logged-in user.\n- `user` (object): An object containing user details including:\n    - `image` (object): An object with the public ID and URL of the user's image.\n    - `_id` (string): The unique identifier of the user.\n    - `username` (string): The username of the user.\n    - `email` (string): The email address of the user.\n    - `role` (string): The role of the user.\n    - `isVerified` (boolean): Indicates if the user's account is verified.\n    - `createdAt` (string): The timestamp of user creation.\n    - `updatedAt` (string): The timestamp of the last update.\n\n#### Example\n\n``` json\n{\n    \"email\": \"user@example.com\",\n    \"password\": \"********\"\n}\n\n ```"
 							},
 							"response": []
@@ -195,28 +127,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NThiNDY2NGM2ZmY3ZjhlNmY1MjFiNzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwMzYyNjM0Mn0.rIZhrwzdoXqO_qp3vH1ENyZsWzE5yBPN2fFIqnOKfEY",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NThiNDY2NGM2ZmY3ZjhlNmY1MjFiNzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwMzYyNjM0Mn0.rIZhrwzdoXqO_qp3vH1ENyZsWzE5yBPN2fFIqnOKfEY"
+									}
 								},
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/auth/logout",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"logout"
-									]
-								},
+								"url": "{{LOCAL_URL}}/api/v1/auth/logout",
 								"description": "This endpoint is used to log out the authenticated user. Upon successful execution, it returns a status code of 200 with an empty JSON response body.\n\nNo request payload is required for this request.\n\n### Response\n\n- status (string): Indicates the status of the logout process."
 							},
 							"response": []
@@ -226,28 +143,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2MzU2NywiZXhwIjoxNzEyNjU1NTY3fQ.GXWmjBIuIUj8gab1vuHaPbQl4kx5Z32bu3ppRPV0zbk",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2MzU2NywiZXhwIjoxNzEyNjU1NTY3fQ.GXWmjBIuIUj8gab1vuHaPbQl4kx5Z32bu3ppRPV0zbk"
+									}
 								},
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/auth/logout-all",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"logout-all"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/auth/logout-all"
 							},
 							"response": []
 						}
@@ -261,13 +163,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU0YmY1Y2RlNTMxODQwNGJlOTNhNzIiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTQ5MDAxNCwiZXhwIjoxNzEyMDgyMDE0fQ.K5yLE9TvDjzquPtv1Ux_HDYcZWNGdS7dKUB6vR4sHn8",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWU0YmY1Y2RlNTMxODQwNGJlOTNhNzIiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTQ5MDAxNCwiZXhwIjoxNzEyMDgyMDE0fQ.K5yLE9TvDjzquPtv1Ux_HDYcZWNGdS7dKUB6vR4sHn8"
+									}
 								},
 								"method": "POST",
 								"header": [],
@@ -280,18 +178,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/auth/forgot-pass",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"auth",
-										"forgot-pass"
-									]
-								},
+								"url": "{{LOCAL_URL}}/api/v1/auth/forgot-pass",
 								"description": "This API endpoint is used to initiate the process of resetting a forgotten password. When making a POST request to [https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/forgot-pass](https://home-finder-back-end-i7ca.onrender.com/api/v1/auth/forgot-pass), the request should include a JSON payload in the raw request body type with the user's email address.\n\n### Request Body\n\n- email (string, required): The email address of the user who has forgotten their password.\n    \n\n### Response\n\nUpon successful execution, the API will return a 200 status code with a JSON response containing the following fields:\n\n- status (string): Indicates the status of the request.\n- message (string): Provides a message regarding the status of the password reset process.\n    \n\nExample:\n\n``` json\n{\n    \"status\": \"success\",\n    \"message\": \"Password reset instructions sent to the provided email address\"\n}\n\n ```"
 							},
 							"response": []
@@ -423,13 +310,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "POST",
 								"header": [],
@@ -442,18 +325,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/create",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"create"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/create"
 							},
 							"response": []
 						},
@@ -462,13 +334,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "POST",
 								"header": [],
@@ -481,20 +349,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/1st/6668507c8c3e5ebba6b12714",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"complete",
-										"1st",
-										"6668507c8c3e5ebba6b12714"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/complete/1st/6668507c8c3e5ebba6b12714"
 							},
 							"response": []
 						},
@@ -503,13 +358,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "POST",
 								"header": [],
@@ -522,20 +373,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/2nd/6668507c8c3e5ebba6b12714",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"complete",
-										"2nd",
-										"6668507c8c3e5ebba6b12714"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/complete/2nd/6668507c8c3e5ebba6b12714"
 							},
 							"response": []
 						},
@@ -544,13 +382,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "POST",
 								"header": [],
@@ -563,20 +397,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/3rd/6668507c8c3e5ebba6b12714",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"complete",
-										"3rd",
-										"6668507c8c3e5ebba6b12714"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/complete/3rd/6668507c8c3e5ebba6b12714"
 							},
 							"response": []
 						},
@@ -585,13 +406,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "POST",
 								"header": [],
@@ -604,20 +421,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/4th/6668507c8c3e5ebba6b12714",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"complete",
-										"4th",
-										"6668507c8c3e5ebba6b12714"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/complete/4th/6668507c8c3e5ebba6b12714"
 							},
 							"response": []
 						}
@@ -631,13 +435,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
@@ -667,13 +467,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
@@ -708,29 +504,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/get/66688f2400ed067942d0c9a7",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"get",
-										"66688f2400ed067942d0c9a7"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/get/66688f2400ed067942d0c9a7"
 							},
 							"response": []
 						},
@@ -739,29 +519,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/get/6668269a2c6af71a906c4549",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"get",
-										"6668269a2c6af71a906c4549"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/get/6668269a2c6af71a906c4549"
 							},
 							"response": []
 						},
@@ -770,13 +534,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
@@ -806,13 +566,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
@@ -842,13 +598,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
@@ -878,29 +630,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/images/666893c9668a45cd264b426c",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"images",
-										"666893c9668a45cd264b426c"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/images/666893c9668a45cd264b426c"
 							},
 							"response": []
 						},
@@ -909,29 +645,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/location/666893c9668a45cd264b426c",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"location",
-										"666893c9668a45cd264b426c"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/location/666893c9668a45cd264b426c"
 							},
 							"response": []
 						}
@@ -945,13 +665,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "PATCH",
 								"header": [],
@@ -964,19 +680,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/update/66684eb700ed067942d0c3bc",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"residence",
-										"update",
-										"66684eb700ed067942d0c3bc"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/residence/update/66684eb700ed067942d0c3bc"
 							},
 							"response": []
 						},
@@ -985,13 +689,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "PATCH",
 								"header": [],
@@ -1032,13 +732,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "PATCH",
 								"header": [],
@@ -1079,13 +775,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "PATCH",
 								"header": [],
@@ -1126,13 +818,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "PATCH",
 								"header": [],
@@ -1175,13 +863,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -1195,19 +879,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "{{baseUrl}}/api/v1/residence/upload/6668507c8c3e5ebba6b12714",
-							"host": [
-								"{{baseUrl}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"residence",
-								"upload",
-								"6668507c8c3e5ebba6b12714"
-							]
-						}
+						"url": "{{baseUrl}}/api/v1/residence/upload/6668507c8c3e5ebba6b12714"
 					},
 					"response": []
 				},
@@ -1216,13 +888,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -1260,13 +928,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -1329,13 +993,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
@@ -1366,13 +1026,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
@@ -1417,13 +1073,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -1462,13 +1114,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -1499,13 +1147,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -1536,13 +1180,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -1573,13 +1213,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -1610,13 +1246,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -1647,13 +1279,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -1695,13 +1323,9 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
@@ -1714,20 +1338,7 @@
 										}
 									}
 								},
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/user/favorites/add/664a8b0dc94e6ed55fec6fa0",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"user",
-										"favorites",
-										"add",
-										"664a8b0dc94e6ed55fec6fa0"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/user/favorites/add/664a8b0dc94e6ed55fec6fa0"
 							},
 							"response": []
 						},
@@ -1736,28 +1347,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "GET",
 								"header": [],
-								"url": {
-									"raw": "{{baseUrl}}/api/v1/user/favorites",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"user",
-										"favorites"
-									]
-								}
+								"url": "{{baseUrl}}/api/v1/user/favorites"
 							},
 							"response": []
 						},
@@ -1766,30 +1362,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "DELETE",
 								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/user/favorites/delete/6649c364cf7139477513e6d6",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"user",
-										"favorites",
-										"delete",
-										"6649c364cf7139477513e6d6"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/user/favorites/delete/6649c364cf7139477513e6d6"
 							},
 							"response": []
 						},
@@ -1798,29 +1377,13 @@
 							"request": {
 								"auth": {
 									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-											"type": "string"
-										}
-									]
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+									}
 								},
 								"method": "DELETE",
 								"header": [],
-								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/user/favorites/delete",
-									"host": [
-										"{{LOCAL_URL}}"
-									],
-									"path": [
-										"api",
-										"v1",
-										"user",
-										"favorites",
-										"delete"
-									]
-								}
+								"url": "{{LOCAL_URL}}/api/v1/user/favorites/delete"
 							},
 							"response": []
 						}
@@ -1831,13 +1394,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -1876,13 +1435,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "PATCH",
 						"header": [],
@@ -1895,18 +1450,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/user/change-password",
-							"host": [
-								"{{LOCAL_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"change-password"
-							]
-						},
+						"url": "{{LOCAL_URL}}/api/v1/user/change-password",
 						"description": "This endpoint is used to change the password for the authenticated user. The HTTP PATCH request should be made to {{url}}/api/v1/auth/change-password with the following payload in the raw request body:\n\n- oldPassword (string): The current password of the user.\n- newPassword (string): The new password that the user wants to set.\n- confirmPass (string): Confirmation of the new password.\n    \n\nThe response to the request will have a status code of 200, and the response body will contain a JSON object with a \"status\" key indicating the status of the password change process."
 					},
 					"response": []
@@ -1916,13 +1460,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "PATCH",
 						"header": [],
@@ -1935,18 +1475,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/user/update-user",
-							"host": [
-								"{{LOCAL_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"update-user"
-							]
-						},
+						"url": "{{LOCAL_URL}}/api/v1/user/update-user",
 						"description": "This endpoint allows you to update user information via an HTTP PATCH request to {{url}}/api/v1/auth/update-user.\n\n### Request Body\n\nThe request should include a JSON payload in the raw request body type with the following parameters:\n\n- `firstName` (string): The first name of the user.\n- `gender` (string): The gender of the user.\n- `username` (string): The username of the user.\n- `lastName` (string): The last name of the user.\n- `phone` (string): The phone number of the user.\n    \n\n### Response\n\nUpon a successful execution, the endpoint returns a status code of 200 along with a JSON response containing the updated user information.  \nThe response includes the following fields:\n\n- `status` (string): The status of the response.\n- `user` (object): An object containing the user's information.\n    - `image` (object): An object containing the user's image details.\n        - `public_id` (string): The public ID of the user's image.\n        - `url` (string): The URL of the user's image.\n    - `_id` (string): The unique ID of the user.\n    - `username` (string): The username of the user.\n    - `email` (string): The email address of the user.\n    - `role` (string): The role of the user.\n    - `isVerified` (boolean): Indicates whether the user is verified.\n    - `createdAt` (string): The timestamp of user creation.\n    - `updatedAt` (string): The timestamp of the user's last update.\n    - `firstName` (string): The first name of the user.\n    - `gender` (string): The gender of the user.\n    - `lastName` (string): The last name of the user.\n    - `phone` (string): The phone number of the user."
 					},
 					"response": []
@@ -1956,28 +1485,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVmODU1MWMyYmQ3YTU2NDZiMDUwM2MiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNDI4Mjc3NiwiZXhwIjoxNzE2ODc0Nzc2fQ.OMf38H3oYVO39FwBl5cllEz5xu_NOdfSLfvW3zMw7X8"
+							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/user/get-user",
-							"host": [
-								"{{LOCAL_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"get-user"
-							]
-						},
+						"url": "{{LOCAL_URL}}/api/v1/user/get-user",
 						"description": "This endpoint makes an HTTP GET request to retrieve user information from the API. The response will include the user's details such as username, email, role, verification status, creation and update timestamps, first name, gender, last name, and phone number. Additionally, the response will also include the user's image details and wish list."
 					},
 					"response": []
@@ -1987,13 +1501,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -2013,18 +1523,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/user/upload-image",
-							"host": [
-								"{{LOCAL_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"upload-image"
-							]
-						},
+						"url": "{{LOCAL_URL}}/api/v1/user/upload-image",
 						"description": "This endpoint allows you to upload an image for authentication via a POST request to the specified URL. The request should be of form-data type, and the image should be included as a file parameter.\n\nThe response for the last execution returned a status code of 404 with an empty JSON response body containing the keys \"status\" and \"message\"."
 					},
 					"response": []
@@ -2034,28 +1533,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
-						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/user/delete-profile-picture",
-							"host": [
-								"{{LOCAL_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"delete-profile-picture"
-							]
-						},
+						"url": "{{LOCAL_URL}}/api/v1/user/delete-profile-picture",
 						"description": "This endpoint is used to delete the profile picture of the authenticated user. The HTTP DELETE request should be sent to {{LOCAL_URL}}/api/v1/auth/delete-profile-picture.\n\nThe request does not require a payload in the request body.\n\n### Response\n\n- Status:\n    \n- Body:\n    \n    ``` json\n        {\n            \"status\": \"\"\n        }\n    \n     ```"
 					},
 					"response": []
@@ -2065,13 +1549,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -2091,18 +1571,7 @@
 								}
 							]
 						},
-						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/user/upload-image",
-							"host": [
-								"{{LOCAL_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"upload-image"
-							]
-						},
+						"url": "{{LOCAL_URL}}/api/v1/user/upload-image",
 						"description": "### Upload Image\n\nThis endpoint allows you to upload an image for authentication.\n\n**HTTP Request**\n\n```\nPOST {{url}}/api/v1/auth/upload-image\n\n ```\n\n**Request Body**\n\n- form-data\n    - No parameters required\n\n**Response**\n\n- Status: 200\n    \n    ``` json\n          {\n              \"status\": \"\",\n              \"image\": {\n                  \"public_id\": \"\",\n                  \"url\": \"\"\n              }\n          }\n    \n     ```"
 					},
 					"response": []
@@ -2112,13 +1581,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
@@ -2131,18 +1596,7 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/user/delete-user",
-							"host": [
-								"{{LOCAL_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"user",
-								"delete-user"
-							]
-						},
+						"url": "{{LOCAL_URL}}/api/v1/user/delete-user",
 						"description": "This endpoint is used to delete a user account. When making an HTTP DELETE request to {{url}}/api/v1/auth/delete-user, the request should include a raw JSON body with the user's password. Upon successful execution, the endpoint returns a 200 status with a JSON response containing a status message.\n\n### Request Body\n\n| Key | Type | Description |\n| --- | --- | --- |\n| password | String | The user's password |\n\n### Response\n\n| Key | Description |\n| --- | --- |\n| status | A message indicating the status of the operation |"
 					},
 					"response": []
@@ -2157,13 +1611,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUwYjhiNTk5ZWEwZmRiN2MyOGUwYzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTIyNjE2NiwiZXhwIjoxNzExODE4MTY2fQ.qIsGhRwX99FWd0CiIDXjxXKgOPttinEffvCIAHAEccM",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUwYjhiNTk5ZWEwZmRiN2MyOGUwYzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTIyNjE2NiwiZXhwIjoxNzExODE4MTY2fQ.qIsGhRwX99FWd0CiIDXjxXKgOPttinEffvCIAHAEccM"
+							}
 						},
 						"method": "POST",
 						"header": [],
@@ -2203,13 +1653,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUwYjhiNTk5ZWEwZmRiN2MyOGUwYzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTIyNjE2NiwiZXhwIjoxNzExODE4MTY2fQ.qIsGhRwX99FWd0CiIDXjxXKgOPttinEffvCIAHAEccM",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUwYjhiNTk5ZWEwZmRiN2MyOGUwYzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTIyNjE2NiwiZXhwIjoxNzExODE4MTY2fQ.qIsGhRwX99FWd0CiIDXjxXKgOPttinEffvCIAHAEccM"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -2240,28 +1686,13 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUwYjhiNTk5ZWEwZmRiN2MyOGUwYzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTIyNjE2NiwiZXhwIjoxNzExODE4MTY2fQ.qIsGhRwX99FWd0CiIDXjxXKgOPttinEffvCIAHAEccM",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWUwYjhiNTk5ZWEwZmRiN2MyOGUwYzAiLCJyb2xlIjoidXNlciIsImlhdCI6MTcwOTIyNjE2NiwiZXhwIjoxNzExODE4MTY2fQ.qIsGhRwX99FWd0CiIDXjxXKgOPttinEffvCIAHAEccM"
+							}
 						},
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{LOCAL_URL}}/api/v1/chat/getChatUsers",
-							"host": [
-								"{{LOCAL_URL}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"chat",
-								"getChatUsers"
-							]
-						}
+						"url": "{{LOCAL_URL}}/api/v1/chat//get-conversations"
 					},
 					"response": []
 				},
@@ -2270,13 +1701,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -2306,13 +1733,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "PATCH",
 						"header": [],
@@ -2352,13 +1775,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
@@ -2398,13 +1817,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NWVkNzEyYjI5N2FiODBiMzY4N2Q0ZjQiLCJyb2xlIjoidXNlciIsImlhdCI6MTcxMDA2NDAwNCwiZXhwIjoxNzEyNjU2MDA0fQ.b8B0Bvxfk8wVWjJ59l6KR4bK_OzPOk9JDQhx0DvXs50"
+							}
 						},
 						"method": "DELETE",
 						"header": [],
@@ -2448,7 +1863,8 @@
 					"name": "New Request",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": ""
 					},
 					"response": []
 				}
@@ -2462,13 +1878,9 @@
 					"request": {
 						"auth": {
 							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
-									"type": "string"
-								}
-							]
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0"
+							}
 						},
 						"method": "GET",
 						"header": [],
@@ -2491,6 +1903,15 @@
 								}
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recommendation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "The API endpoint retrieves a recommended residence based on the provided residence ID. The response returns a JSON object with a status and data field. The data field contains an array of residence objects, each including various details such as location, average rating, reviews, amenities, and images."
 					},
 					"response": []
 				}
