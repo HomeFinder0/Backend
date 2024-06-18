@@ -125,10 +125,12 @@ exports.stepThreeUpdate= asyncHandler( async(req, res, next) => {
     if(error) return next(new appError(error, 400));
     
     valueConversion(value);
-
+    
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
 
+    await residence.save();
+    
     return res.status(200).json({
         status:"success",
         residence
@@ -455,9 +457,6 @@ exports.getSold =  asyncHandler(async (req, res, next) => {
 
 //search function
 exports.filtration = asyncHandler(async (req, res, next) => {
-    const page  = req.query.page  * 1 || 1;
-    const limit = 10;
-    const skip  = (page - 1) * limit;
     let {min, max, rating, bedroom, bathroom, neighborhood} = req.query;
     
     if(!min) min = 0;
@@ -477,11 +476,11 @@ exports.filtration = asyncHandler(async (req, res, next) => {
             path: 'reviews',
             select: 'rating',
         }
-    ]).select('title salePrice location.fullAddress images category neighborhood bedroomAbvGr totalbaths ').skip(skip).limit(limit);
+    ]).select('title salePrice location.fullAddress images category neighborhood bedroomAbvGr totalbaths ');
 
     if(rating)
     residences = residences.filter(residence => 
-        residence.avgRating >= rating 
+        residence.reviews.some(review => review.rating >= rating)
     );
     
     if(neighborhood) residences = residences.filter(residence => residence.neighborhood === neighborhood);
@@ -566,16 +565,12 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
         const response = await axios.post(`${process.env.FLASK_URL}/predict`, {
             residence
         });
-
         if(response.data.error) return next(new appError(response.data.error, 500))
         res.status(200).json({
             status: "success",
-            predictedPrice: Math.floor(response.data),
-        });
+            predictedPrice: Math.floor(response.data)});
     } catch (error) {
         res.status(500).send(error.message);
     }
 
 });
-
-// exports.getByTitle = 

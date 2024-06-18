@@ -118,6 +118,8 @@ const residenceSchema = new mongoose.Schema({
 
     houseage       :{ type: Number, default: 0},
     houseremodelage:{ type: Number, default: 0},
+    Functional     :{ type: String, default: 'Typ'},
+    kitchenAbvGr   :{ type: Number, default: 0},
 },
 {
   timestamps: true,
@@ -128,6 +130,8 @@ const residenceSchema = new mongoose.Schema({
         const isLiked    = userId ? likedUsers.includes(userId) : false;
       
         delete ret.__v;
+        delete ret.Functional;
+        delete ret.kitchenAbvGr;
         return {
           isLiked,
           ...ret,
@@ -159,6 +163,7 @@ residenceSchema.methods.mlFeatures = function(){
   delete residenceObject.createdAt;
   delete residenceObject.updatedAt;
   delete residenceObject.__v;
+  delete residenceObject.KitchenAbvGr;
   
   return residenceObject;
 }
