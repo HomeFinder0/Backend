@@ -29,7 +29,7 @@ const {
 const authMiddleware = require("../../authentication/middlewares/auth.middleware.js");
 const { uploadMultiple } = require("../../../Utils/multer.js");
 
-// router.use(authMiddleware);
+router.use(authMiddleware);
 
 router.post("/create", createResidence);
 router.post("/complete/1st/:residenceId", stepOneUpdate);
