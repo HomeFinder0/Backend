@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "3a4acd70-f29a-4669-83c8-4c39454ec17e",
-		"name": "Home.Finder Copy",
+		"name": "Home.Finder",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "24291675"
 	},
@@ -1908,9 +1908,40 @@
 				},
 				{
 					"name": "Recommendation",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"residenceId\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/residence/recommend/:residenceId",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"residence",
+								"recommend",
+								":residenceId"
+							],
+							"variable": [
+								{
+									"key": "residenceId",
+									"value": "4654654654"
+								}
+							]
+						},
 						"description": "The API endpoint retrieves a recommended residence based on the provided residence ID. The response returns a JSON object with a status and data field. The data field contains an array of residence objects, each including various details such as location, average rating, reviews, amenities, and images."
 					},
 					"response": []
