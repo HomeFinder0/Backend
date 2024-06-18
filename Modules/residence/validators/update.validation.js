@@ -14,7 +14,7 @@ exports.updateValidation = function (residence) {
         .lowercase().messages({ "string.empty": "Neighborhood is required", "any.only": "Neighborhood must be within Ames city limits ",}),
         
 
-        salePrice    : Joi.number().messages({ "number.type": "Sale price must be a number" }).min(100),
+        salePrice    : Joi.number().messages({ "number.type": "Sale price must be a number" }),
         saleCondition: Joi.string().valid('normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial').lowercase().messages({
             "string.empty": "Sale condition is required",  "any.only": "Sale condition must be normal, abnormal, adjoining land purchase , family, partial or allocation"}),
         moSold       : Joi.number().messages({ "number.type": "Month sold must be a number" }).min(1).max(12),

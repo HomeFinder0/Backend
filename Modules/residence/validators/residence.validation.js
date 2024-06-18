@@ -22,7 +22,7 @@ exports.stepOneCompleteValidation = function (residence) {
         .lowercase().required().messages({ "string.empty": "Neighborhood is required", "any.only": "Neighborhood must be within Ames city limits ",}),
         
 
-        salePrice    : Joi.number().required().messages({ "number.type": "Sale price must be a number" }).min(100),
+        salePrice    : Joi.number().required().messages({ "number.type": "Sale price must be a number" }),
         saleCondition: Joi.string().required().valid('normal', 'abnormal', 'adjoining land purchase', 'allocation', 'family', 'partial').lowercase().messages({
             "string.empty": "Sale condition is required",  "any.only": "Sale condition must be normal, abnormal, adjoining land purchase , family, partial or allocation"}),
         moSold       : Joi.number().required().messages({ "number.type": "Month sold must be a number" }).min(1).max(12),
