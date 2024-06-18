@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const residenceSchema = new mongoose.Schema({
     ownerId     : { type: mongoose.Schema.Types.ObjectId,  ref: 'Users' },
+    Id          : { type: Number, unique: true},
     isSold      : { type: Boolean, default: false },
     isCompleted : { type: Boolean, default: false },
     status      : {type : String, default: "pending", enum :["pending", "approved", "rejected"]},
