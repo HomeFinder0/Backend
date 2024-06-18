@@ -100,7 +100,8 @@ exports.stepTwoUpdate= asyncHandler(async (req, res, next) => {
     }
     
     if(error) return next(new appError(error, 400));
-    console.log(value)
+
+    
     valueConversion(value);
     console.log(value)
     
@@ -128,7 +129,7 @@ exports.stepThreeUpdate= asyncHandler( async(req, res, next) => {
     
     const residence = await Residence.findByIdAndUpdate(residenceId, value, {new: true});
     if(!residence) next(new appError("Residence not found!", 404));
-
+    residence.kitchenAbvGr = residence.KitchenAbvGr
     await residence.save();
     
     return res.status(200).json({
