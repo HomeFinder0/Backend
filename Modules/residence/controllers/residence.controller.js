@@ -814,10 +814,9 @@ exports.acceptBooking  = asyncHandler(async (req, res, next) => {
     const residence = await Residence.findById(residenceId).select("bookedBy ownerId avgRating category title salePrice");
     if (!residence) return next(new appError("Residence not found!", 404));
     
-    // if(residence.ownerId && residence.ownerId.toString() !== req.user._id.toString())  return next(new appError("Unauthorized!", 400)); //only the owner can sell the residence
+    if(residence.ownerId && residence.ownerId.toString() !== req.user._id.toString())  return next(new appError("Unauthorized!", 400)); //only the owner can sell the residence
     if(residence.buyerId && residence.buyerId.toString() === req.user._id.toString() ) return next(new appError("You have already purchased this residence", 400));
     if(residence.isSold) return next(new appError("Already sold!", 400));
-    console.log("Booked by ", residence.bookedBy);
 
     if(!residence.bookedBy || residence.bookedBy.length == 0) return next(new appError("No booked", 400));
     if(!residence.bookedBy.includes(userId)) return next(new appError("User has not booked this residence", 400));
