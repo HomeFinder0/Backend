@@ -654,6 +654,39 @@
 								"url": "{{LOCAL_URL}}/api/v1/residence/location/666893c9668a45cd264b426c"
 							},
 							"response": []
+						},
+						{
+							"name": "Get new (30 days)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": {
+										"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODczNDU0OCwiZXhwIjoxNzIxMzI2NTQ4fQ.U3vflS7JZkJCT4PiXnmjzO1wFpWvln-jyMNpDtdtEK0"
+									}
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/new-residences?page=1",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"new-residences"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								},
+								"description": "This endpoint makes an HTTP GET request to retrieve a list of new residences (lats 30 days added), with the ability to paginate through the results. The request should be made to /api/v1/residence/new-residences and include the query parameter \"page\" with the desired page number.\n\n### Request Body\n\nThis request does not require a request body.\n\n### Response Body\n\nThe response will be in JSON format with a 200 status code. It will contain an array of \"residences\" with details about each residence, including whether it is liked, location coordinates, owner ID, sale status, average rating, title, type, category, and various other property details. Additionally, the response will include the total count of residences available under the key \"residences_count\".\n\nIt's important to note that the response may contain masked or minified data for privacy purposes, and specific values will not be visible in the response.\n\nExample Response:\n\n``` json\n{\n    \"status\": \"\",\n    \"residences\": [\n        {\n            \"isLiked\": true,\n            \"location\": {\n                \"type\": \"\",\n                \"coordinates\": [0]\n            },\n            \"_id\": \"\",\n            \"ownerId\": \"\",\n            \"Id\": 0,\n            \"isSold\": true,\n            \"isCompleted\": true,\n            \"status\": \"\",\n            \"avgRating\": 0,\n            \"title\": \"\",\n            \"type\": \"\",\n            \"category\": \"\",\n            \"hasGarage\": true,\n            ...\n        }\n    ],\n    \"residences_count\": 0\n}\n\n ```"
+							},
+							"response": []
 						}
 					]
 				},
@@ -1600,6 +1633,39 @@
 						"description": "This endpoint is used to delete a user account. When making an HTTP DELETE request to {{url}}/api/v1/auth/delete-user, the request should include a raw JSON body with the user's password. Upon successful execution, the endpoint returns a 200 status with a JSON response containing a status message.\n\n### Request Body\n\n| Key | Type | Description |\n| --- | --- | --- |\n| password | String | The user's password |\n\n### Response\n\n| Key | Description |\n| --- | --- |\n| status | A message indicating the status of the operation |"
 					},
 					"response": []
+				},
+				{
+					"name": "Search Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODczNDU0OCwiZXhwIjoxNzIxMzI2NTQ4fQ.U3vflS7JZkJCT4PiXnmjzO1wFpWvln-jyMNpDtdtEK0"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/user/search?search=s",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"search"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "s"
+								}
+							]
+						},
+						"description": "This endpoint allows you to search for users by providing a search query parameter (name and usernsme).\n\n### Request\n\n- Method: GET\n- URL: {{LOCAL_URL}}/api/v1/user/search\n- Query Parameters:\n    - search (string, required): The search query.\n\n### Response\n\n- Status: 200\n- Content-Type: application/json\n- Body:\n    \n    ``` json\n    {\n      \"status\": \"\",\n      \"count\": 0,\n      \"users\": [\n        {\n          \"image\": {\n            \"url\": \"\",\n            \"public_id\": \"\"\n          },\n          \"_id\": \"\",\n          \"username\": \"\",\n          \"email\": \"\",\n          \"role\": \"\",\n          \"wishlist\": [],\n          \"isVerified\": true,\n          \"createdAt\": \"\",\n          \"updatedAt\": \"\"\n        }\n      ]\n    }\n    \n     ```\n    \n      \n    The response includes an array of users matching the search query, along with their details such as username, email, role, and verification status."
+					},
+					"response": []
 				}
 			]
 		},
@@ -1987,7 +2053,45 @@
 									"value": "6670bc00573f4d9090923eba"
 								}
 							]
-						}
+						},
+						"description": "The API updates the status of a residence with the given residence ID. The request should be a PATCH method to the specified URL, with the \"status\" parameter in the request body indicating whether the residence status should be 'approved' or 'rejected'.\n\n### Response\n\nThe response will be in JSON format with a status code of 200. The response schema is as follows:\n\n``` json\n{\n  \"status\": \"string\",\n  \"residence\": {\n    \"isLiked\": \"boolean\",\n    \"location\": {\n      \"type\": \"string\",\n      \"coordinates\": [\"number\"],\n      \"fullAddress\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\"\n    },\n    \"_id\": \"string\",\n    \"Id\": \"number\",\n    \"title\": \"string\",\n    \"category\": \"string\",\n    \"status\": \"string\",\n    \"type\": \"string\",\n    \"isSold\": \"boolean\",\n    \"paymentPeriod\": \"string\",\n    \"isCompleted\": \"boolean\",\n    \"hasGarage\": \"boolean\",\n    \"hasFireplace\": \"boolean\",\n    \"hasBasement\": \"boolean\",\n    \"createdAt\": \"string\",\n    \"updatedAt\": \"string\",\n    \"images\": [\n      {\n        \"_id\": \"string\",\n        \"url\": \"string\"\n      }\n    ],\n    \"msSubClass\": \"number\",\n    \"mszoning\": \"string\",\n    \"lotFrontage\": \"number\",\n    \"lotArea\": \"number\",\n    \"street\": \"string\",\n    \"lotShape\": \"string\",\n    \"landContour\": \"string\",\n    \"utilities\": \"string\",\n    \"lotConfig\": \"string\",\n    \"landSlope\": \"string\",\n    \"neighborhood\": \"string\",\n    \"condition1\": \"string\",\n    \"condition2\": \"string\",\n    \"bldgType\": \"string\",\n    \"houseStyle\": \"string\",\n    \"overallQual\": \"number\",\n    \"overallCond\": \"number\",\n    \"roofStyle\": \"string\",\n    \"roofMatl\": \"string\",\n    \"exterior1st\": \"string\",\n    \"exterior2nd\": \"string\",\n    \"masVnrType\": \"string\",\n    \"masVnrArea\": \"number\",\n    \"exterQual\": \"string\",\n    \"exterCond\": \"string\",\n    \"foundation\": \"string\",\n    \"bsmtQual\": \"string\",\n    \"bsmtCond\": \"string\",\n    \"bsmtExposure\": \"string\",\n    \"bsmtFinType1\": \"string\",\n    \"bsmtUnfSF\": \"number\",\n    \"heating\": \"string\",\n    \"heatingQc\": \"string\",\n    \"centralAir\": \"string\",\n    \"electrical\": \"string\",\n    \"lowQualFinSF\": \"number\",\n    \"bedroomAbvGr\": \"number\",\n    \"kitchenQual\": \"string\",\n    \"totRmsAbvGrd\": \"number\",\n    \"fireplaces\": \"number\",\n    \"fireplaceQu\": \"string\",\n    \"garageType\": \"string\",\n    \"garageFinish\": \"string\",\n    \"garageCars\": \"number\",\n    \"garageQual\": \"string\",\n    \"pavedDrive\": \"string\",\n    \"poolArea\": \"number\",\n    \"miscVal\": \"number\",\n    \"moSold\": \"number\",\n    \"saleType\": \"string\",\n    \"saleCondition\": \"string\",\n    \"salePrice\": \"number\",\n    \"houseage\": \"number\",\n    \"houseremodelage\": \"number\",\n    \"totalsf\": \"number\",\n    \"totalarea\": \"number\",\n    \"totalbaths\": \"number\",\n    \"totalporchsf\": \"number\",\n    \"alley\": \"string\",\n    \"avgRating\": \"number\",\n    \"likedUsers\": [\"string\"],\n    \"reviews\": [\"string\"]\n  }\n}\n\n ```"
+					},
+					"response": []
+				},
+				{
+					"name": "Get users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODczNDU0OCwiZXhwIjoxNzIxMzI2NTQ4fQ.U3vflS7JZkJCT4PiXnmjzO1wFpWvln-jyMNpDtdtEK0"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{LOCAL_URL}}/api/v1/admin/users?page=2&oldest=1",
+							"host": [
+								"{{LOCAL_URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "oldest",
+									"value": "1"
+								}
+							]
+						},
+						"description": "This endpoint makes an HTTP GET request to retrieve a list of admin users. The request includes query parameters for pagination, where \"page\" indicates the page number and \"oldest\" specifies whether to sort the users by oldest.  \nif \"oldest\" is equal to \"1\" it will be sorted by oldest elseit will be sorted by newest.\n\n### Request Body\n\nThis request does not include a request body.\n\n### Response Body\n\nThe response will be in JSON format with a 200 status code. It includes a \"status\" field, the total \"count\" of users, and an array of \"users\". Each user object contains information such as their image URL, user ID, username, email, role, wishlist, verification status, and creation/update timestamps.\n\nExample response:\n\n``` json\n{\n    \"status\": \"\",\n    \"count\": 0,\n    \"users\": [\n        {\n            \"image\": {\n                \"url\": \"\",\n                \"public_id\": \"\"\n            },\n            \"_id\": \"\",\n            \"username\": \"\",\n            \"email\": \"\",\n            \"role\": \"\",\n            \"wishlist\": [],\n            \"isVerified\": true,\n            \"createdAt\": \"\",\n            \"updatedAt\": \"\"\n        }\n    ]\n}\n\n ```"
 					},
 					"response": []
 				}

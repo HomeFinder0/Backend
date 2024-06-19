@@ -708,3 +708,33 @@ exports.updateResidenceStatus = asyncHandler(async (req, res, next) => {
         residence
     });
 });
+
+exports.getNewResidences = asyncHandler(async (req, res, next) => {
+    const page = req.query.page * 1 || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    // Calculate the date 30 days ago
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    // Query for residences created within the last 30 days
+    let residences = await Residence.find({
+        isCompleted: true,
+        status: 'approved',
+        createdAt: { $gte: thirtyDaysAgo } // Use $gte to find documents with createdAt greater than or equal to thirtyDaysAgo
+    }).sort({ createdAt: -1 }).skip(skip).limit(limit);
+
+    if (residences.length === 0) {
+        residences = await Residence.find({
+            isCompleted: true,
+            status: 'approved',
+        }).sort({ createdAt: -1 }).limit(limit);
+    }
+    // Return the residences
+    return res.status(200).json({
+        status: 'success',
+        residences,
+        residences_count: residences.length
+    });
+});

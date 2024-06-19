@@ -10,11 +10,11 @@ const {
   uploadAvatar,
   deleteUser,
   changePassword,
-  addReview,
   addFavorite,
   deleteOneFavorite,
   deleteAllFavorites,
-  getWishlist
+  getWishlist,
+  searchUsers
 } = require("../controllers/user.controller.js");
 
 router.use(authMiddleware);
@@ -22,10 +22,9 @@ router.use(isVerified);
 
 router.get("/get-user/:id?", getUser);
 router.patch("/update-user", updateUser);
+router.get("/search", searchUsers);
 router.patch("/change-password", changePassword);
-
 router.post("/location", setLocation);
-
 router.post("/upload-image", uploadSingle, uploadAvatar);
 router.delete("/delete-profile-picture", deleteProfilePicture);
 
@@ -35,5 +34,6 @@ router.get("/favorites", getWishlist);
 router.get("/favorites/add/:residenceId", addFavorite);
 router.delete("/favorites/delete/:residenceId", deleteOneFavorite);
 router.delete("/favorites/delete", deleteAllFavorites);
+
 
 module.exports = router;
