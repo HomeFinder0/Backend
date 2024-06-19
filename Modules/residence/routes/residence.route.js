@@ -25,6 +25,7 @@ const {
     filtration,
     recommend,
     predictPrice,
+<<<<<<< HEAD
 
     getSalePrice,
     updateSalePrice,
@@ -36,6 +37,9 @@ const {
     getBookedBy,
     cancelBooking
 
+=======
+    getNewResidences
+>>>>>>> 37b826f5538278ea0fa97c5f277132f66b03b7f1
 } = require("../controllers/residence.controller.js");
 const authMiddleware = require("../../authentication/middlewares/auth.middleware.js");
 const { uploadMultiple } = require("../../../Utils/multer.js");
@@ -51,6 +55,7 @@ router.post("/location/:residenceId", setLocation);
 router.post("/upload/:residenceId", uploadMultiple, uploadResidenceImages);
 
 router.get("/get/:residenceId", getOneResidence);
+router.get("/new-residences", getNewResidences);
 router.get("/pending?", getPending);
 router.get("/approved?", getApproved);
 router.get("/sold?", getSold);

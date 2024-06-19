@@ -583,7 +583,7 @@ exports.recommend = asyncHandler(async (req, res, next) => {
 
         let residence = await Residence.findOne({ Id: residenceId });
         if (!residence) residence = await Residence.findOne();
-        
+
         residenceId = parseInt(residence.Id);
         const response = await axios.post(`${process.env.FLASK_URL}/recommend`, {
             house_id: residenceId
@@ -620,7 +620,7 @@ exports.recommend = asyncHandler(async (req, res, next) => {
 //Admin functions
 exports.totalSold = asyncHandler(async (req, res, next) => {
     let count = await Residence.countDocuments({ isSold: true });
-    
+
     return res.status(200).json({
         status: 'success',
         totalSold: count
@@ -629,7 +629,7 @@ exports.totalSold = asyncHandler(async (req, res, next) => {
 
 exports.totalPending = asyncHandler(async (req, res, next) => {
     let count = await Residence.countDocuments({ status: "pending" });
-    
+
     return res.status(200).json({
         status: 'success',
         totalPending: count
@@ -638,7 +638,7 @@ exports.totalPending = asyncHandler(async (req, res, next) => {
 
 exports.totalApproved = asyncHandler(async (req, res, next) => {
     let count = await Residence.countDocuments({ status: "approved" });
-    
+
     return res.status(200).json({
         status: 'success',
         totalApproved: count
@@ -647,7 +647,7 @@ exports.totalApproved = asyncHandler(async (req, res, next) => {
 
 exports.totalRejected = asyncHandler(async (req, res, next) => {
     let count = await Residence.countDocuments({ status: "rejected" });
-    
+
     return res.status(200).json({
         status: 'success',
         totalRejected: count
@@ -687,6 +687,7 @@ exports.deleteUncompletedResidence = asyncHandler(async (req, res, next) => {
 });
 
 
+<<<<<<< HEAD
 exports.getSalePrice = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
     const residence = await Residence.findById(residenceId).select('_id salePrice');
@@ -848,5 +849,52 @@ exports.acceptBooking  = asyncHandler(async (req, res, next) => {
         status: 'success',
         message: 'Residence Purchase successfully. Residence is now sold',
         residence
+=======
+exports.updateResidenceStatus = asyncHandler(async (req, res, next) => {
+    const residenceId = req.params.residenceId || req.body.residenceId;
+    const { status } = req.body;
+
+    if (!status) return next(new appError("Please provide a status", 400));
+
+    if (status !== 'approved' && status !== 'rejected')
+        return next(new appError("Invalid status. Choices are 'approved' or 'rejected'.", 400));
+
+    let residence = await Residence.findByIdAndUpdate(residenceId, { status }, { new: true });
+    if (!residence) return next(new appError("Residence not found!", 404));
+
+    return res.status(200).json({
+        status: 'success',
+        residence
+    });
+});
+
+exports.getNewResidences = asyncHandler(async (req, res, next) => {
+    const page = req.query.page * 1 || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+
+    // Calculate the date 30 days ago
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+    // Query for residences created within the last 30 days
+    let residences = await Residence.find({
+        isCompleted: true,
+        status: 'approved',
+        createdAt: { $gte: thirtyDaysAgo } // Use $gte to find documents with createdAt greater than or equal to thirtyDaysAgo
+    }).sort({ createdAt: -1 }).skip(skip).limit(limit);
+
+    if (residences.length === 0) {
+        residences = await Residence.find({
+            isCompleted: true,
+            status: 'approved',
+        }).sort({ createdAt: -1 }).limit(limit);
+    }
+    // Return the residences
+    return res.status(200).json({
+        status: 'success',
+        residences,
+        residences_count: residences.length
+>>>>>>> 37b826f5538278ea0fa97c5f277132f66b03b7f1
     });
 });
