@@ -48,7 +48,6 @@ module.exports = (error, req, res, next) => {
     devErrorHandler(res, error);
   } else {
     if (error.name === "CastError") error = castErrorHandler(error);
-
     prodErrorHandler(res, error);
   }
 };

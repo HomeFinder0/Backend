@@ -587,7 +587,7 @@ exports.recommend = asyncHandler(async (req, res, next) => {
 
         let residence = await Residence.findOne({ Id: residenceId });
         if (!residence) residence = await Residence.findOne();
-        
+
         residenceId = parseInt(residence.Id);
         const response = await axios.post(`${process.env.FLASK_URL}/recommend`, {
             house_id: residenceId
@@ -623,7 +623,7 @@ exports.recommend = asyncHandler(async (req, res, next) => {
 //Admin functions
 exports.totalSold = asyncHandler(async (req, res, next) => {
     let count = await Residence.countDocuments({ isSold: true });
-    
+
     return res.status(200).json({
         status: 'success',
         totalSold: count
@@ -632,7 +632,7 @@ exports.totalSold = asyncHandler(async (req, res, next) => {
 
 exports.totalPending = asyncHandler(async (req, res, next) => {
     let count = await Residence.countDocuments({ status: "pending" });
-    
+
     return res.status(200).json({
         status: 'success',
         totalPending: count
@@ -641,7 +641,7 @@ exports.totalPending = asyncHandler(async (req, res, next) => {
 
 exports.totalApproved = asyncHandler(async (req, res, next) => {
     let count = await Residence.countDocuments({ status: "approved" });
-    
+
     return res.status(200).json({
         status: 'success',
         totalApproved: count
@@ -650,7 +650,7 @@ exports.totalApproved = asyncHandler(async (req, res, next) => {
 
 exports.totalRejected = asyncHandler(async (req, res, next) => {
     let count = await Residence.countDocuments({ status: "rejected" });
-    
+
     return res.status(200).json({
         status: 'success',
         totalRejected: count
@@ -687,5 +687,24 @@ exports.deleteUncompletedResidence = asyncHandler(async (req, res, next) => {
     return res.status(200).json({
         status: 'success',
         message: 'Uncompleted residences deleted successfully'
+    });
+});
+
+
+exports.updateResidenceStatus = asyncHandler(async (req, res, next) => {
+    const residenceId = req.params.residenceId || req.body.residenceId;
+    const { status } = req.body;
+
+    if (!status) return next(new appError("Please provide a status", 400));
+
+    if (status !== 'approved' && status !== 'rejected')
+        return next(new appError("Invalid status. Choices are 'approved' or 'rejected'.", 400));
+
+    let residence = await Residence.findByIdAndUpdate(residenceId, { status }, { new: true });
+    if (!residence) return next(new appError("Residence not found!", 404));
+
+    return res.status(200).json({
+        status: 'success',
+        residence
     });
 });
