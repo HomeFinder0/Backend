@@ -57,13 +57,13 @@ exports.getUser = asyncHandler(async (req, res, next) => {
   let user = await User.findById(userId);
   if (!user) return next(new appError("User not found", 404));
   let residences = await Residence.find({ ownerId: userId });
-  let sold     = residences.filter((res) => res.isSold === true).length;
-  let pending  = residences.filter((res) => res.status === 'pending' && res.isCompleted == true).length;
+  let sold = residences.filter((res) => res.isSold === true).length;
+  let pending = residences.filter((res) => res.status === 'pending' && res.isCompleted == true).length;
   let approved = residences.filter((res) => res.status === 'approved' && res.isSold == false).length;
-  
+
   return res.status(200).json({
     status: "success",
-    soldCount : sold,
+    soldCount: sold,
     pendingCount: pending,
     approvedCount: approved,
     user,
@@ -116,7 +116,7 @@ exports.deleteProfilePicture = asyncHandler(async (req, res, next) => {
   return res.status(200).json({
     status: "success",
     message: "Profile picture has been deleted",
-    image : user.image
+    image: user.image
   });
 });
 
@@ -166,17 +166,62 @@ exports.changePassword = asyncHandler(async (req, res, next) => {
   });
 });
 
+exports.getUsers = asyncHandler(async (req, res, next) => {
+  const page = req.query.page * 1 || 1;
+  let oldest = req.query.oldest == '1' ? true : false;
+
+  const limit = 10;
+  const skip = (page - 1) * limit;
+
+  // Sort by createdAt in ascending order if oldest is true, otherwise in descending order
+  const sortCondition = oldest ? 'createdAt' : '-createdAt';
+
+  let users = await User.find({ role: "user" }).sort(sortCondition).skip(skip).limit(limit);
+
+  // If no users are found, get first page users
+  if(users.length === 0) users = await User.find({ role: "user" }).sort(sortCondition).limit(limit);
+
+  if (!users) return next(new appError("No users found", 404));
+
+  return res.status(200).json({
+    status: "success",
+    users
+  });
+});
+
+exports.searchUsers = asyncHandler(async (req, res, next) => {
+  const { search } = req.query;
+  if (!search) return next(new appError("Please provide a search query", 400));
+  let users = await User.find({
+    $and: [
+      { _id: { $ne: req.user._id } },
+      {
+        $or: [
+          { username: { $regex: search, $options: "i" } },
+          { fullName: { $regex: search, $options: "i" } },
+        ],
+      },
+    ],
+  });
+  if (!users) users = [];
+  return res.status(200).json({
+    status: "success",
+    count: users.length,
+    users
+  });
+});
+
 exports.addFavorite = asyncHandler(async (req, res, next) => {
   const { user } = req;
   const { residenceId } = req.params;
 
   let residence = await Residence.findById(residenceId);
-  if(!residence) return next(new appError('Residence not found', 404));
+  if (!residence) return next(new appError('Residence not found', 404));
 
-  if(user.wishlist.includes(residenceId) && residence.likedUsers.includes(user._id)) 
+  if (user.wishlist.includes(residenceId) && residence.likedUsers.includes(user._id))
     return next(new appError('Residence is already in your Favorite', 400));
 
-  user.wishlist.push(residenceId);  
+  user.wishlist.push(residenceId);
   residence.likedUsers = [];
   residence.likedUsers.push(user._id);
 
@@ -193,13 +238,13 @@ exports.deleteOneFavorite = asyncHandler(async (req, res, next) => {
   const { residenceId } = req.params;
 
   let residence = await Residence.findById(residenceId);
-  if(!residence) return next(new appError('Residence not found', 404));
+  if (!residence) return next(new appError('Residence not found', 404));
 
   if (!user.wishlist.includes(residenceId) && !residence.likedUsers.includes(user._id))
     return next(new appError("Residence is not in your Favorite", 400));
 
-  user.wishlist        = user.wishlist.filter((fav) => fav.toString() !== residenceId);
-  residence.likedUsers = residence.likedUsers.filter((user)=> user.toString() !== user._id.toString())
+  user.wishlist = user.wishlist.filter((fav) => fav.toString() !== residenceId);
+  residence.likedUsers = residence.likedUsers.filter((user) => user.toString() !== user._id.toString())
 
   Promise.all([user.save(), residence.save()]);
 
@@ -208,8 +253,6 @@ exports.deleteOneFavorite = asyncHandler(async (req, res, next) => {
     message: "Favorite has been removed",
   });
 });
-
-
 
 
 
@@ -252,7 +295,7 @@ exports.getWishlist = asyncHandler(async (req, res, next) => {
 
     let wishlist = user.wishlist.map((res) => {
       let rating = res.reviews.length > 0 ? res.reviews.reduce((acc, curr) => acc + curr.rating, 0) / res.reviews.length : 0;
-      
+
       return {
         _id: res._id,
         isLiked: res.likedUsers.includes(user._id),
