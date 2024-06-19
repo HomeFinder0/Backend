@@ -658,7 +658,10 @@ exports.getUncompleted = asyncHandler(async (req, res, next) => {
     let page = req.query.page * 1 || 1;
     let limit = 10;
     let skip = (page - 1) * limit;
-    let residences = await Residence.find({ isCompleted: false }).skip(skip).limit(limit);
+    let residences = await Residence.find({ isCompleted: false }).select("title category salePrice avgRating ownerId ").populate({
+        path: 'ownerId',
+        select: 'username image'
+    }).skip(skip).limit(limit);
     let total = await Residence.countDocuments({ isCompleted: false });
     residences = residences.map(res => {
         return res.toJSON({ userId: req.user._id });
