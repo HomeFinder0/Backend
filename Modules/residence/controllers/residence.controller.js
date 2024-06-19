@@ -69,29 +69,29 @@ exports.stepOneUpdate = asyncHandler(async (req, res, next) => {
 
     if (error) return next(new appError(error, 400));
 
-    valueConversion(value);
-
+    
     let residence = await Residence.findByIdAndUpdate(residenceId, value, { new: true });
     if (!residence) next(new appError("Residence not found!", 404));
-
+    
     // await residence.save();
+    valueConversion(value);
 
-    residence = {
-        _id: residence._id,
-        neighborhood: residence.neighborhood,
-        mszoning: residence.mszoning,
-        saleCondition: residence.saleCondition,
-        moSold: residence.moSold,
-        salePrice: residence.salePrice,
-        paymentPeriod: residence.paymentPeriod,
-        saleType: residence.saleType,
-        utilities: residence.utilities,
-        lotShape: residence.lotShape,
-        electrical: residence.electrical,
-        foundation: residence.foundation,
-        bldgType: residence.bldgType,
-        ownerId: residence.ownerId
-    }
+    // residence = {
+    //     _id: residence._id,
+    //     neighborhood: residence.neighborhood,
+    //     mszoning: residence.mszoning,
+    //     saleCondition: residence.saleCondition,
+    //     moSold: residence.moSold,
+    //     salePrice: residence.salePrice,
+    //     paymentPeriod: residence.paymentPeriod,
+    //     saleType: residence.saleType,
+    //     utilities: residence.utilities,
+    //     lotShape: residence.lotShape,
+    //     electrical: residence.electrical,
+    //     foundation: residence.foundation,
+    //     bldgType: residence.bldgType,
+    //     ownerId: residence.ownerId
+    // }
 
     res.status(200).json({
         status: "success",
@@ -112,11 +112,10 @@ exports.stepTwoUpdate = asyncHandler(async (req, res, next) => {
 
 
     valueConversion(value);
-    console.log(value)
 
     const residence = await Residence.findByIdAndUpdate(residenceId, value, { new: true });
     if (!residence) next(new appError("Residence not found!", 404));
-
+    
     return res.status(200).json({
         status: "success",
         residence
@@ -283,10 +282,7 @@ exports.getAllApproved = asyncHandler(async (req, res, next) => {
         }
     }).skip(skip).limit(limit);
 
-    //  await deleteUncompletedResidence(Residence);
-
     residences = residences.map(res => {
-        valueConversion(res);
         return res.toJSON({ userId: _id });
     });
 
@@ -304,6 +300,9 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
         {
             path: 'ownerId',
             select: 'username  image location.fullAddress'
+        },{
+            path: 'buyerId',
+            select: 'username  image location.fullAddress'
         }, {
             path: 'reviews',
             populate: [{
@@ -318,16 +317,8 @@ exports.getOneResidence = asyncHandler(async (req, res, next) => {
 
     if (!residence) next(new appError("Residence not found!", 404));
 
-    // if(!residence.isCompleted){
-    //     if( residence.images.length != 0){
-    //         let public_ids = residence.images.map((img) => img.public_id);
-    //         await deleteMultipleImages(public_ids);
-    //     }
-    //     await residence.deleteOne();
-    //     return next(new appError("Residence not found!", 404));
-    // }
     residence = residence.toJSON({ userId: _id });
-    valueConversion(residence);
+
     return res.status(200).json({
         status: 'success',
         residence
@@ -367,7 +358,6 @@ exports.getNearestResidences = asyncHandler(async (req, res, next) => {
     ]).skip(skip).limit(limit);
 
     residences = residences.map(res => {
-        valueConversion(res);
         return res.toJSON({ userId: _id });
     });
 
@@ -387,6 +377,9 @@ exports.getPending = asyncHandler(async (req, res, next) => {
         {
             path: 'ownerId',
             select: 'username  image location.fullAddress'
+        },{
+            path: 'buyerId',
+            select: 'username  image location.fullAddress'
         }, {
             path: 'reviews',
             populate: {
@@ -397,7 +390,6 @@ exports.getPending = asyncHandler(async (req, res, next) => {
     ]).skip(skip).limit(limit);
 
     residences = residences.map(res => {
-        valueConversion(res);
         return res.toJSON({ userId: _id });
     });
 
@@ -418,6 +410,9 @@ exports.getApproved = asyncHandler(async (req, res, next) => {
             path: 'ownerId',
             select: 'username  image location.fullAddress'
         }, {
+            path: 'buyerId',
+            select: 'username  image location.fullAddress'
+        },{
             path: 'reviews',
             populate: {
                 path: 'userId',
@@ -427,7 +422,6 @@ exports.getApproved = asyncHandler(async (req, res, next) => {
     ]).skip(skip).limit(limit);
 
     residences = residences.map(res => {
-        valueConversion(res);
         return res.toJSON({ userId: _id });
     });
 
@@ -446,6 +440,9 @@ exports.getSold = asyncHandler(async (req, res, next) => {
         {
             path: 'ownerId',
             select: 'username  image location.fullAddress'
+        },{
+            path: 'buyerId',
+            select: 'username  image location.fullAddress'
         }, {
             path: 'reviews',
             populate: {
@@ -456,7 +453,6 @@ exports.getSold = asyncHandler(async (req, res, next) => {
     ]).skip(skip).limit(limit);
 
     residences = residences.map(res => {
-        valueConversion(res);
         return res.toJSON({ userId: _id });
     });
     return res.status(200).json({
@@ -487,7 +483,7 @@ exports.filtration = asyncHandler(async (req, res, next) => {
             path: 'reviews',
             select: 'rating',
         }
-    ]).select('title salePrice location.fullAddress images category neighborhood bedroomAbvGr totalbaths ');
+    ]).select('title category avgRating salePrice location.fullAddress images neighborhood bedroomAbvGr totalbaths ');
 
     if (rating)
         residences = residences.filter(residence =>
@@ -620,6 +616,7 @@ exports.recommend = asyncHandler(async (req, res, next) => {
     }
 });
 
+
 //Admin functions
 exports.totalSold = asyncHandler(async (req, res, next) => {
     let count = await Residence.countDocuments({ isSold: true });
@@ -664,7 +661,6 @@ exports.getUncompleted = asyncHandler(async (req, res, next) => {
     let residences = await Residence.find({ isCompleted: false }).skip(skip).limit(limit);
     let total = await Residence.countDocuments({ isCompleted: false });
     residences = residences.map(res => {
-        valueConversion(res);
         return res.toJSON({ userId: req.user._id });
     });
 
@@ -687,5 +683,170 @@ exports.deleteUncompletedResidence = asyncHandler(async (req, res, next) => {
     return res.status(200).json({
         status: 'success',
         message: 'Uncompleted residences deleted successfully'
+    });
+});
+
+
+exports.getSalePrice = asyncHandler(async (req, res, next) => {
+    const {residenceId} = req.params;
+    const residence = await Residence.findById(residenceId).select('_id salePrice');
+    if(!residence) return next(new appError("Residence not found!", 404));
+
+    return res.status(200).json({
+        status: 'success',
+        residenceId: residence._id,
+        salePrice: residence.salePrice
+    });
+});
+
+exports.updateSalePrice = asyncHandler(async (req, res, next) => {
+    const {residenceId} = req.params;
+    const {newPrice}   = req.body;
+    if(!newPrice) return next(new appError("Please provide a sale price", 400));
+    if(typeof newPrice !== 'number') return next(new appError("Sale price must be a number", 400));
+
+    const residence = await Residence.findByIdAndUpdate(residenceId, {salePrice: newPrice}, {new:true}).select('_id salePrice');
+    if(!residence) return next(new appError("Residence not found!", 404));
+
+    return res.status(200).json({
+        status: 'success',
+        residenceId: residence._id,
+        salePrice  : residence.salePrice
+    });
+});
+
+
+
+exports.getPurchasedResidences = asyncHandler(async (req, res, next) => {
+    const { _id } = req.user;
+    const page = req.query.page * 1 || 1;
+    const limit = 10;
+    const skip = (page - 1) * limit;
+    let residences = await Residence.find({ buyerId: _id, isSold: true }).populate([
+        {
+            path: 'ownerId',
+            select: 'username  image location.fullAddress'
+        },{
+            path: 'buyerId',
+            select: 'username  image location.fullAddress'
+        }, {
+            path: 'reviews',
+            populate: {
+                path: 'userId',
+                select: 'username image location.fullAddress'
+            }
+        }
+    ]).select("title category type isSold isCompleted avgRating location images reviews ownerId buyerId ").skip(skip).limit(limit);
+
+    residences = residences.map(res => {
+        return res.toJSON({ userId: _id });
+    })
+
+    return res.status(200).json({
+        status: 'success',
+        count: residences.length,
+        residences
+    });
+});
+
+exports.book = asyncHandler(async (req, res, next) => {
+    const { residenceId } = req.params;
+    const residence = await Residence.findById(residenceId);
+    if (!residence) return next(new appError("Residence not found!", 404));
+
+    if (residence.ownerId.toString() === req.user._id.toString()) return next(new appError("You can't book your own residence", 400));
+    if (residence.isSold) return next(new appError("Already sold ", 400));
+    if (residence.bookedBy && residence.bookedBy.includes(req.user._id)) return next(new appError("Already booked", 400));
+    
+    residence.bookedBy = residence.bookedBy || [];
+    console.log(residence.bookedBy);
+    residence.bookedBy.push(req.user._id);
+
+    await residence.save();
+
+    return res.status(200).json({
+        status: 'success',
+        message: 'Residence booked successfully',
+    });
+});
+
+exports.getBookedBy = asyncHandler(async (req, res, next) => {
+    const { residenceId } = req.params;
+    const residence = await Residence.findById(residenceId).select('bookedBy');
+    if (!residence) return next(new appError("Residence not found!", 404));
+
+    await residence.populate({
+        path: 'bookedBy',
+        select : 'username image'
+    });
+
+    return res.status(200).json({
+        status: 'success',
+        residenceId: residence._id,
+        bookedBy: residence.bookedBy
+    });
+});
+
+exports.cancelBooking = asyncHandler(async (req, res, next) => {
+    const { residenceId } = req.params;
+    const { userId } = req.params;
+
+    const residence = await Residence.findById(residenceId).select('bookedBy');
+    if (!residence) return next(new appError("Residence not found!", 404));
+
+    if(residence.ownerId && residence.ownerId.toString() === req.user._id.toString()) return next(new appError("Unauthorized!", 400));
+    if(!residence.bookedBy || residence.bookedBy.length == 0) return next(new appError("No booked", 400));
+    if(!residence.bookedBy.includes(userId)) return next(new appError("User has not booked this residence", 400));
+    
+    residence.bookedBy = residence.bookedBy.filter(id => id.toString() !== userId.toString());
+    await residence.save();
+
+    return res.status(200).json({
+        status: 'success',
+        message: 'Booking canceled successfully'
+    });
+});
+
+exports.acceptBooking  = asyncHandler(async (req, res, next) => {
+    const { residenceId } = req.params;
+    const { userId } = req.params;
+    console.log("User ", userId);
+    
+    const residence = await Residence.findById(residenceId).select("bookedBy ownerId avgRating category title salePrice");
+    if (!residence) return next(new appError("Residence not found!", 404));
+    
+    // if(residence.ownerId && residence.ownerId.toString() !== req.user._id.toString())  return next(new appError("Unauthorized!", 400)); //only the owner can sell the residence
+    if(residence.buyerId && residence.buyerId.toString() === req.user._id.toString() ) return next(new appError("You have already purchased this residence", 400));
+    if(residence.isSold) return next(new appError("Already sold!", 400));
+    console.log("Booked by ", residence.bookedBy);
+
+    if(!residence.bookedBy || residence.bookedBy.length == 0) return next(new appError("No booked", 400));
+    if(!residence.bookedBy.includes(userId)) return next(new appError("User has not booked this residence", 400));
+
+    residence.bookedBy = [];
+    residence.buyerId  = userId;
+    residence.isSold   = true;
+    await residence.save();
+    
+    await residence.populate([
+        {
+            path: 'ownerId',
+            select: 'username  image'
+        },{
+            path: 'buyerId',
+            select: 'username  image'
+        }, {
+            path: 'reviews',
+            populate: {
+                path: 'userId',
+                select: 'username image'
+            }
+        }
+    ]);
+
+    return res.status(200).json({
+        status: 'success',
+        message: 'Residence Purchase successfully. Residence is now sold',
+        residence
     });
 });
