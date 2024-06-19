@@ -686,8 +686,6 @@ exports.deleteUncompletedResidence = asyncHandler(async (req, res, next) => {
     });
 });
 
-
-<<<<<<< HEAD
 exports.getSalePrice = asyncHandler(async (req, res, next) => {
     const {residenceId} = req.params;
     const residence = await Residence.findById(residenceId).select('_id salePrice');
@@ -849,7 +847,9 @@ exports.acceptBooking  = asyncHandler(async (req, res, next) => {
         status: 'success',
         message: 'Residence Purchase successfully. Residence is now sold',
         residence
-=======
+    });
+});
+
 exports.updateResidenceStatus = asyncHandler(async (req, res, next) => {
     const residenceId = req.params.residenceId || req.body.residenceId;
     const { status } = req.body;
@@ -895,6 +895,5 @@ exports.getNewResidences = asyncHandler(async (req, res, next) => {
         status: 'success',
         residences,
         residences_count: residences.length
->>>>>>> 37b826f5538278ea0fa97c5f277132f66b03b7f1
     });
 });
