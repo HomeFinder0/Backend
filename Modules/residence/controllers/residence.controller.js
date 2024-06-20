@@ -70,11 +70,10 @@ exports.stepOneUpdate = asyncHandler(async (req, res, next) => {
     if (error) return next(new appError(error, 400));
 
     
+    valueConversion(value);
     let residence = await Residence.findByIdAndUpdate(residenceId, value, { new: true });
     if (!residence) next(new appError("Residence not found!", 404));
     
-    // await residence.save();
-    valueConversion(value);
 
     // residence = {
     //     _id: residence._id,
