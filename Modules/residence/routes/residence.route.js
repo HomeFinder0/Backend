@@ -25,6 +25,17 @@ const {
     filtration,
     recommend,
     predictPrice,
+
+    getSalePrice,
+    updateSalePrice,
+
+    acceptBooking,
+    getPurchasedResidences,
+
+    book,
+    getBookedBy,
+    cancelBooking,
+
     getNewResidences
 } = require("../controllers/residence.controller.js");
 const authMiddleware = require("../../authentication/middlewares/auth.middleware.js");
@@ -49,13 +60,18 @@ router.get("/nearest?", getNearestResidences);
 router.get("/all?", getAllApproved);
 router.get("/images/:residenceId", getResidenceImages);
 router.get("/location/:residenceId", getLocation);
+router.get("/price/:residenceId", getSalePrice);
+router.get("/all/purchase?", getPurchasedResidences);
 router.get("/filter?", filtration);
+
+
 
 router.patch("/update/:residenceId", updateResidence);
 router.patch("/update/1st/:residenceId", stepOneUpdate);
 router.patch("/update/2nd/:residenceId", stepTwoUpdate);
 router.patch("/update/3rd/:residenceId", stepThreeUpdate);
 router.patch("/update/4th/:residenceId", stepFourUpdate);
+router.patch("/price/:residenceId", updateSalePrice);
 
 router.delete("/delete/:residenceId", deleteOneResidence);
 router.delete("/image/:imageId", deleteResidenceImage);
@@ -64,5 +80,9 @@ router.delete("/image/:imageId", deleteResidenceImage);
 router.get('/predict/:residenceId', predictPrice);
 router.get('/recommend/:residenceId', recommend);
 
+router.get("/accept-book/:residenceId/:userId", acceptBooking);
+router.get("/cancel-book/:residenceId/:userId", cancelBooking);
+router.get("/make-book/:residenceId",  book);
+router.get("/users-booked/:residenceId", getBookedBy);
 
 module.exports = router;

@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
+const valueConversion = require('../middlewares/valueConversion.js');
 
 const residenceSchema = new mongoose.Schema({
     ownerId     : { type: mongoose.Schema.Types.ObjectId,  ref: 'Users' },
+    buyerId     : { type: mongoose.Schema.Types.ObjectId,  ref: 'Users' },
+    bookedBy    :[ { type: mongoose.Schema.Types.ObjectId,  ref: 'Users' }],
+
     Id          : { type: Number, unique: true},
     isSold      : { type: Boolean, default: false },
     isCompleted : { type: Boolean, default: false },
@@ -133,6 +137,8 @@ const residenceSchema = new mongoose.Schema({
         delete ret.__v;
         delete ret.Functional;
         delete ret.kitchenAbvGr;
+        valueConversion(ret);
+
         return {
           isLiked,
           ...ret,
