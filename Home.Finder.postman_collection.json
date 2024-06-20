@@ -426,7 +426,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODcxMzQzMiwiZXhwIjoxNzIxMzA1NDMyfQ.J67G94JaoLyS5hrcF4tik8B6N5q0hp0zZDubHplEMvE",
 											"type": "string"
 										}
 									]
@@ -465,7 +465,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODcxMzQzMiwiZXhwIjoxNzIxMzA1NDMyfQ.J67G94JaoLyS5hrcF4tik8B6N5q0hp0zZDubHplEMvE",
 											"type": "string"
 										}
 									]
@@ -482,7 +482,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/1st/6668507c8c3e5ebba6b12714",
+									"raw": "{{LOCAL_URL}}/api/v1/residence/complete/1st/:residenceId",
 									"host": [
 										"{{LOCAL_URL}}"
 									],
@@ -492,7 +492,13 @@
 										"residence",
 										"complete",
 										"1st",
-										"6668507c8c3e5ebba6b12714"
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": "66741ec1588ebfcc017d0ce7"
+										}
 									]
 								}
 							},
@@ -656,7 +662,7 @@
 									"variable": [
 										{
 											"key": "residenceId",
-											"value": ""
+											"value": "6670bc00573f4d9090923eba"
 										}
 									]
 								}
@@ -807,7 +813,7 @@
 									"variable": [
 										{
 											"key": "residencId",
-											"value": ""
+											"value": "6670bc00573f4d9090923eba"
 										}
 									]
 								}
@@ -1026,6 +1032,52 @@
 				{
 					"name": "Update Residence",
 					"item": [
+						{
+							"name": "update sale price",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODcxMzQzMiwiZXhwIjoxNzIxMzA1NDMyfQ.J67G94JaoLyS5hrcF4tik8B6N5q0hp0zZDubHplEMvE",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"newPrice\": 15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{LOCAL_URL}}/api/v1/residence/price/:residenceId",
+									"host": [
+										"{{LOCAL_URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"residence",
+										"price",
+										":residenceId"
+									],
+									"variable": [
+										{
+											"key": "residenceId",
+											"value": "6670bc00573f4d9090923eba"
+										}
+									]
+								}
+							},
+							"response": []
+						},
 						{
 							"name": "Update residence",
 							"request": {
@@ -1669,7 +1721,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxNjEwNjMzOCwiZXhwIjoxNzE4Njk4MzM4fQ.zLTxYceiV_UlalThOQeK3NMc8RXq8Y2NqNxi6JY8se0",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQ5YjQ2MDdmYjBkYzY1MTdjNTQyNDciLCJyb2xlIjoidXNlciIsImlhdCI6MTcxODcxMzQzMiwiZXhwIjoxNzIxMzA1NDMyfQ.J67G94JaoLyS5hrcF4tik8B6N5q0hp0zZDubHplEMvE",
 									"type": "string"
 								}
 							]
@@ -1699,7 +1751,7 @@
 							"variable": [
 								{
 									"key": "residenceId",
-									"value": ""
+									"value": "6670bc00573f4d9090923eba"
 								}
 							]
 						}
