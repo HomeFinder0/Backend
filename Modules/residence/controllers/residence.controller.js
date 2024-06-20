@@ -564,8 +564,9 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
         if (response.data.error) return next(new appError(response.data.error, 500))
         res.status(200).json({
             status: "success",
-            predictedPrice: Math.floor(response.data),
-            residence
+            predicted_price: Math.floor(response.data),
+            residence_price : residence.salePrice,
+            residenceId: residenceId
         });
 
     } catch (error) {
