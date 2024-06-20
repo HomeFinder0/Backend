@@ -775,9 +775,12 @@ exports.book = asyncHandler(async (req, res, next) => {
 
 exports.getBookedBy = asyncHandler(async (req, res, next) => {
     const { residenceId } = req.params;
-    const residence = await Residence.findById(residenceId).select('bookedBy');
+    const residence = await Residence.findById(residenceId).select('bookedBy ownerId');
     if (!residence) return next(new appError("Residence not found!", 404));
 
+    if(residence.ownerId && residence.ownerId.toString() != req.user._id.toString() ) return next(new appError("Unauthorized!", 400));
+    else if(!residence.ownerId && req.user.role != 'admin') return next(new appError("Unauthorized!", 401));
+    
     await residence.populate({
         path: 'bookedBy',
         select : 'username image'
