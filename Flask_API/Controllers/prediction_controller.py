@@ -5,11 +5,11 @@ import numpy as np
 import pickle
 
 # Load the pre from the file
-with open(r"D:\Fully Projects\Graduation\Flask_API\Models\preprocessor.pkl", 'rb') as file:
+with open(r".\Models\preprocessor.pkl", 'rb') as file:
     preprocessor = pickle.load(file)
     
 # Load the model from the file
-with open(r"D:\Fully Projects\Graduation\Flask_API\Models\prediction_model.pkl", 'rb') as file:
+with open(r".\Models\prediction_model.pkl", 'rb') as file:
     Model = pickle.load(file)
 
 def predict():
