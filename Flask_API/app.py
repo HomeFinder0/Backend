@@ -19,5 +19,9 @@ def predict_route():
 def recommend_route():
     return recommend()
 
+@app.errorhandler(500)
+def internal_server_error(e):
+    return jsonify(error=str(e)), 500
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
