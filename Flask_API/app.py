@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from Controllers.prediction_controller import predict
 from Controllers.recommendations_controller import recommend
 import os
@@ -18,6 +18,10 @@ def predict_route():
 @app.route('/recommend', methods=['POST'])
 def recommend_route():
     return recommend()
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return jsonify(error=str(e)), 500
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
