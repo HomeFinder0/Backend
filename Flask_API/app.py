@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from Controllers.prediction_controller import predict
 from Controllers.recommendations_controller import recommend
 import os
