@@ -79,7 +79,7 @@ const residenceSchema = new mongoose.Schema({
     
     street     :{ type: String, enum: ['Pave', 'Grvl']},
     foundation :{ type: String, enum:['BrkTil','CBlock','PConc','Slab', 'Stone', 'Wood']},
-    bldgType   :{ type: String, enum: ['1Fam', '2fmCon', 'Duplx', 'TwnhsE', 'TwnhsI'] }, //Type of dwelling
+    bldgType   :{ type: String, enum: ['1Fam', '2fmCon', 'Duplex', 'TwnhsE', 'TwnhsI','Twnhs'] }, //Type of dwelling
     
     centralAir :{ type: String, enum:['N','Y']},
     heating    :{ type: String, enum:['Floor','GasA','GasW','Grav','OthW','Wall'] },
