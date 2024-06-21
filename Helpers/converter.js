@@ -47,8 +47,7 @@ exports.qualityRatingConverter = (value) => {
         'poor': 'Po', 'Po': 'poor',
         'average': 'TA', 'TA': 'average',
         'excellent': 'Ex', 'Ex': 'excellent',
-        'not available': 'NA', 'NA': 'not available',
-        'Not available': 'NO', 'NO': 'Not available',
+        'not available': 'NO', 'NO': 'not available',
     };
 
     return conversions[value];
