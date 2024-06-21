@@ -47,7 +47,7 @@ exports.qualityRatingConverter = (value) => {
         'poor': 'Po', 'Po': 'poor',
         'average': 'TA', 'TA': 'average',
         'excellent': 'Ex', 'Ex': 'excellent',
-        'not available': 'NO', 'NO': 'not available',
+        'NO': 'No', 'No': 'NO',
     };
 
     return conversions[value];
@@ -321,7 +321,7 @@ exports.bsmtFinType1Converter = (value) => {
         'below average': 'BLQ', 'BLQ': 'below average',
         'average rec room': 'Rec', 'Rec': 'average rec room',
         'low': 'LwQ', 'LwQ': 'low',
-        'unfinished': 'Unf', 'Unf': 'unfinished',
+        'NO': 'Unf', 'Unf': 'NO',
     };
     return conversions[value];
 };
@@ -331,7 +331,7 @@ exports.bsmtExposureConverter = (value) => {
         'good': 'Gd', 'Gd': 'good',
         'average': 'Av', 'Av': 'average',
         'minimum': 'Mn', 'Mn': 'minimum',
-        'no exposure': 'No', 'No': 'no exposure'
+        'NO': 'No', 'No': 'NO'
     };
     return conversions[value];
 
