@@ -579,16 +579,25 @@ exports.recommend = asyncHandler(async (req, res, next) => {
         let residenceId = req.params.residenceId || req.body.residenceId;
 
         residenceId = parseInt(residenceId);
-        if (!residenceId) return next(new appError("Please provide a residence id", 400));
+
+        if (!residenceId || residenceId < 1) return next(new appError("Please provide a valid residence id", 400));
+        if (residenceId > 1439) {
+            // If the residenceId is greater than the total number of residences, generate a random residenceId
+            residenceId = Math.floor(Math.random() * 1438) + 1;
+        }
 
         let residence = await Residence.findOne({ Id: residenceId });
-        if (!residence) residence = await Residence.findOne();
+        if (!residence) residence = await Residence.findOne({ Id: (Math.floor(Math.random() * 1438) + 1) });
 
         residenceId = parseInt(residence.Id);
         const response = await axios.post(`${process.env.FLASK_URL}/recommend`, {
             house_id: residenceId
-        });
-
+        }
+        );
+        if (response.data.error) {
+            return next(new appError(response.data.error, 500));
+        }
+        
         let recommendedResidencesIds = response.data?.recommended_ids;
 
         let recommendedResidences = [];
@@ -601,7 +610,7 @@ exports.recommend = asyncHandler(async (req, res, next) => {
             } else {
                 // If a recommended residence is not found, you might want to handle it differently.
                 // This line fetches a random residence, which might not be the desired behavior.
-                recommendedResidences.push(await Residence.findOne());
+                recommendedResidences.push(await Residence.findOne({ Id: (Math.floor(Math.random() * 1438) + 1) }));
             }
         }
 
