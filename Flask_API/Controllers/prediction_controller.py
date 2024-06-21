@@ -3,7 +3,9 @@ import pandas as pd
 import numpy as np
 import pickle
 import os
+import xgboost
 
+print(xgboost.__version__)
 # Define the directory where the model is stored
 model_dir = 'Models'
 
@@ -15,20 +17,19 @@ preprocessor_file = 'preprocessor.pkl'
 model_path = os.path.join(model_dir, model_file)
 preprocessor_path = os.path.join(model_dir, preprocessor_file)
 
-
-with open(model_path, 'rb') as file:
+# Load the preprocessor from the file
+with open(".\Models\preprocessor.pkl", 'rb') as file:
     preprocessor = pickle.load(file)
-    
+
 # Load the model from the file
-with open(preprocessor_path, 'rb') as file:
+with open(".\Models\prediction_model.pkl", 'rb') as file:
     Model = pickle.load(file)
 
 def predict():
     X = request.json 
-    X =[X['residence']]
+    X =[X['residence']] 
     try:
         X=pd.DataFrame(X)
-        
         #Check if all necessary columns are present in the input
         check_columns(X)
 
@@ -37,6 +38,7 @@ def predict():
         gg= np.expm1(predictions)[0]
 
         return jsonify(float(gg)), 200  # Convert float32 to float    
+   
     except Exception as e:
         e = list(e) if isinstance(e, set) else e
         print("Error during prediction:", str(e))  # Debug print statement
