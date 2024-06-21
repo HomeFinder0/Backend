@@ -2,13 +2,25 @@ from flask import request, jsonify
 import pandas as pd
 import numpy as np
 import pickle
+import os
 
-# Load the pre from the file
-with open(r".\Models\preprocessor.pkl", 'rb') as file:
+# Define the directory where the model is stored
+model_dir = 'Models'
+
+# Define the name of the model file
+model_file = 'prediction_model.pkl'
+preprocessor_file = 'preprocessor.pkl'
+
+# Create the full path to the model file
+model_path = os.path.join(model_dir, model_file)
+preprocessor_path = os.path.join(model_dir, preprocessor_file)
+
+
+with open(model_path, 'rb') as file:
     preprocessor = pickle.load(file)
     
 # Load the model from the file
-with open(r".\Models\prediction_model.pkl", 'rb') as file:
+with open(preprocessor_path, 'rb') as file:
     Model = pickle.load(file)
 
 def predict():
