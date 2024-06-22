@@ -3,27 +3,38 @@ import pandas as pd
 import numpy as np
 import pickle
 import os
-import xgboost
 
-print(xgboost.__version__)
-# Define the directory where the model is stored
-model_dir = 'Models'
+# # Define the directory where the model is stored
+# model_dir = 'Models'
 
-# Define the name of the model file
-model_file = 'prediction_model.pkl'
-preprocessor_file = 'preprocessor.pkl'
+# # Define the name of the model file
+# model_file = 'XGBModel.pkl'
+# preprocessor_file = 'preprocessor.pkl'
 
-# Create the full path to the model file
-model_path = os.path.join(model_dir, model_file)
-preprocessor_path = os.path.join(model_dir, preprocessor_file)
-print(f"Loading model from: {model_path}")
+# # Create the full path to the model file
+# model_path = os.path.join(model_dir, model_file)
+# preprocessor_path = os.path.join(model_dir, preprocessor_file)
+# print(f"Loading model from: {model_path}")
 
-# Load the preprocessor from the file
-with open(preprocessor_path, 'rb') as file:
+# # Load the preprocessor from the file
+# with open(preprocessor_path, 'rb') as file:
+#     preprocessor = pickle.load(file)
+
+# # Load the model from the file
+# with open(model_path, 'rb') as file:
+#     Model = pickle.load(file)
+
+# with open(".\Models\preprocessor.pkl", 'rb') as file:
+#     preprocessor = pickle.load(file)
+
+# # Load the model from the file
+# with open(".\Models\XGBModel.pkl", 'rb') as file:
+#     Model = pickle.load(file)
+with open(r"D:\Fully Projects\Graduation\Flask_API\Models\preprocessor.pkl", 'rb') as file:
     preprocessor = pickle.load(file)
 
 # Load the model from the file
-with open(model_path, 'rb') as file:
+with open(r"D:\Fully Projects\Graduation\Flask_API\Models\XGBModel.pkl", 'rb') as file:
     Model = pickle.load(file)
 
 def predict():
