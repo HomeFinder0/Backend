@@ -44,7 +44,7 @@ exports.qualityRatingConverter = (value) => {
     const conversions = {
         'good': 'Gd', 'Gd': 'good',
         'fair': 'Fa', 'Fa': 'fair',
-        'poor': 'Po', 'Po': 'poor',
+        'poor': 'Fa', 'Fa': 'poor',
         'average': 'TA', 'TA': 'average',
         'excellent': 'Ex', 'Ex': 'excellent',
         'NO': 'No', 'No': 'NO',
@@ -96,13 +96,13 @@ exports.neighborhoodConverter = (value) => {
 
 exports.mszoningConverter = (value) => {
     const conversions = {
-        'agricultural': 'A', 'A': 'agricultural',
-        'commercial': 'C', 'C': 'commercial',
+        'agricultural': 'RL',
+        'commercial': 'RL', 
         'floating village': 'FV', 'FV': 'floating village',
-        'industrial': 'I', 'I': 'industrial',
-        'high residential': 'RH', 'RH': 'high residential',
+        'industrial': 'RL',
+        'high residential': 'RM', 'RM': 'high residential',
         'low': 'RL', 'RL': 'low',
-        'park': 'RP', 'RP': 'park',
+        'park': 'RL', 'RL': 'park',
         'medium': 'RM', 'RM': 'medium'
     };
 
@@ -273,8 +273,8 @@ exports.exteriorConverter = (value) => {
         'brick face': 'BrkFace', 'BrkFace': 'brick face',
         'brick common': 'BrkComm', 'BrkComm': 'brick common',
         'cinder block': 'CBlock', 'CBlock': 'cinder block',
-        'cement board': 'CmentBd', 'CmentBd': 'cement board',
-        'CemntBd': 'cement board', 'cement board': 'CemntBd',
+        'cement board': 'AsbShng',
+       
         'Brk Cmn': 'brick common', 'brick common': 'Brk Cmn',
         'hardboard': 'HdBoard', 'HdBoard': 'hardboard siding',
         'hardboard siding': 'HdBoard', 'HdBoard': 'hardboard siding',
@@ -285,7 +285,7 @@ exports.exteriorConverter = (value) => {
         'vinyl siding': 'VinylSd', 'VinylSd': 'vinyl siding',
         'wood siding': 'Wd Sdng', 'Wd Sdng': 'wood siding',
         'WdShing': 'wood shingles','wood shingles': 'WdShing',
-        'wood shingles': 'Wd Shng', 'Wd Shng': 'wood shingles',
+        'wood shingles': 'AsbShng',
         'other': 'Other', 'Other': 'other',
         'imitation stucco': 'ImStucc', 'ImStucc': 'imitation stucco',
         'stone': 'Stone', 'Stone': 'stone'

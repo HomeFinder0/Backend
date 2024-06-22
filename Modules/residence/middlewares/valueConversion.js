@@ -27,10 +27,12 @@ module.exports = (value)=>{
                     value.utilities = 'AllPub';
                     break;
                 case 1:
-                    value.utilities = 'ELO'; //electricity is always required
+                    // value.utilities = 'ELO'; //electricity is always required
+                    value.utilities = 'AllPub'; 
                 break;
                 default:
-                    value.utilities = value.utilities.includes('gas') ? 'NoSeWa' : value.utilities.includes('water') ? 'NoSewr' : value.utilities;
+                    value.utilities =  'AllPub';
+                    // value.utilities = value.utilities.includes('gas') ? 'NoSeWa' : value.utilities.includes('water') ? 'NoSewr' : value.utilities;
                     break;
    // }
 }}
@@ -57,7 +59,6 @@ module.exports = (value)=>{
     value.msSubClass   = msSubClassConverter(value.msSubClass);
     value.condition1   = condConverter(value.condition1);
     value.condition2   = condConverter(value.condition2);
-    value.kitchenQual  = qualityRatingConverter(value.kitchenQual);
     value.lotConfig    = lotConfigConverter(value.lotConfig);
     value.landContour  = landContourConverter(value.landContour);
     value.landSlope    = landSlopeConverter(value.landSlope);

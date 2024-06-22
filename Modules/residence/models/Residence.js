@@ -90,7 +90,7 @@ const residenceSchema = new mongoose.Schema({
     saleType     :{ type: String,  enum:['WD','CWD','VWD','New','COD','Con','ConLw','ConLI','ConLD','Oth']},
     moSold       :{ type: Number },
     salePrice    :{ type: Number },
-    mszoning     :{ type: String, enum:["A", "C", 'FV', 'I', 'RH','RL', 'RP', 'RM']},
+    mszoning     :{ type: String},
     
     utilities  :{ type: String,   enum: ['AllPub', 'NoSewr', 'NoSeWa', 'ELO']},
     lotShape   :{ type: String,   enum: ['Reg', 'IR1', 'IR2', 'IR3']},
