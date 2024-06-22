@@ -75,23 +75,6 @@ exports.stepOneUpdate = asyncHandler(async (req, res, next) => {
     if (!residence) next(new appError("Residence not found!", 404));
     
 
-    // residence = {
-    //     _id: residence._id,
-    //     neighborhood: residence.neighborhood,
-    //     mszoning: residence.mszoning,
-    //     saleCondition: residence.saleCondition,
-    //     moSold: residence.moSold,
-    //     salePrice: residence.salePrice,
-    //     paymentPeriod: residence.paymentPeriod,
-    //     saleType: residence.saleType,
-    //     utilities: residence.utilities,
-    //     lotShape: residence.lotShape,
-    //     electrical: residence.electrical,
-    //     foundation: residence.foundation,
-    //     bldgType: residence.bldgType,
-    //     ownerId: residence.ownerId
-    // }
-
     res.status(200).json({
         status: "success",
         residence
@@ -563,7 +546,8 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
     if (!residence) return next(new appError("Residence not found!", 400));
 
     residence = residence.check_columns();
-    // if (!residence) return next(new appError("Residence is not completed", 400));
+    console.log(residence);
+    if (!residence) return next(new appError("Residence is not completed", 400));
     try {
         const response = await axios.post(`${process.env.FLASK_URL}/predict`, {
             residence

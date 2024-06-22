@@ -38,7 +38,6 @@ def predict():
         X=pd.DataFrame(X)
         #Check if all necessary columns are present in the input
         check_columns(X)
-        print(X)
         X_preprocessed = preprocessor.transform(X)
         predictions = Model.predict(X_preprocessed)
         gg= np.expm1(predictions)[0]
