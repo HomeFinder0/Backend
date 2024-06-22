@@ -16,7 +16,6 @@ preprocessor_file = 'preprocessor.pkl'
 # Create the full path to the model file
 model_path = os.path.join(model_dir, model_file)
 preprocessor_path = os.path.join(model_dir, preprocessor_file)
-
 print(f"Loading model from: {model_path}")
 
 # Load the preprocessor from the file
