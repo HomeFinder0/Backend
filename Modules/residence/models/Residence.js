@@ -150,10 +150,17 @@ const residenceSchema = new mongoose.Schema({
   }
 }
 );
-residenceSchema.methods.mlFeatures = function(){
+necessary_columns = [ "msSubClass","mszoning","lotFrontage", "lotArea","street", "lotShape","landContour","utilities","lotConfig","landSlope",
+  "neighborhood","condition1", "condition2","bldgType","houseStyle","overallQual","overallCond","roofStyle", "roofMatl","exterior1st","exterior2nd",
+  "masVnrType","masVnrArea","exterQual","exterCond","foundation","bsmtQual","bsmtCond","bsmtExposure","bsmtFinType1","bsmtUnfSF","heating","heatingQc",
+  "centralAir", "electrical", "lowQualFinSF","bedroomAbvGr","kitchenAbvGr","kitchenQual","totRmsAbvGrd","Functional","fireplaceQu","fireplaces",
+  "garageType","garageFinish","garageCars", "garageQual","pavedDrive","poolArea","miscVal","moSold","saleType","saleCondition","salePrice","houseage",
+  "houseremodelage","totalsf","totalarea", "totalbaths","totalporchsf","alley"];  
+
+residenceSchema.methods.check_columns = function(){
   const residence = this;
   const residenceObject = residence.toObject();
-
+  
   delete residenceObject.ownerId;
   delete residenceObject.title;
   delete residenceObject.category;
@@ -174,6 +181,14 @@ residenceSchema.methods.mlFeatures = function(){
   delete residenceObject.updatedAt;
   delete residenceObject.__v;
   delete residenceObject.KitchenAbvGr;
+  delete residenceObject.buyerId;
+  delete residenceObject.bookedBy;
+
+  for (const key in residenceObject) {
+    if (!necessary_columns.includes(key)) {
+        return false;
+    }
+  }
   
   return residenceObject;
 }
