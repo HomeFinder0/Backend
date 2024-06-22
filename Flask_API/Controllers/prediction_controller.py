@@ -20,11 +20,11 @@ preprocessor_path = os.path.join(model_dir, preprocessor_file)
 print(f"Loading model from: {model_path}")
 
 # Load the preprocessor from the file
-with open(model_path, 'rb') as file:
+with open(preprocessor_path, 'rb') as file:
     preprocessor = pickle.load(file)
 
 # Load the model from the file
-with open(preprocessor_path, 'rb') as file:
+with open(model_path, 'rb') as file:
     Model = pickle.load(file)
 
 def predict():
