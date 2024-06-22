@@ -126,7 +126,7 @@ exports.likeReview = asyncHandler(async (req, res, next) => {
         })
     if(!review) return next(new appError('Review not found', 404));
     
-    //if(String(req.user._id) == String(review.userId._id)) return next(new appError('You cannot like your own review', 400))
+   if(String(req.user._id) == String(review.userId._id)) return next(new appError('You cannot like your own review', 400))
    if(review.likedBy.includes(req.user._id)) return next(new appError('Already liked this review', 400));
 
     review.likedBy.push(req.user._id);
