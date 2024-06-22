@@ -139,7 +139,6 @@ const residenceSchema = new mongoose.Schema({
         delete ret.kitchenAbvGr;
 
         ret.totalbaths   = Math.floor(ret.totalbaths);
-        ret.totRmsAbvGrd = Math.floor(ret.totRmsAbvGrd);
         ret.salePrice    = Math.floor(ret.salePrice);
         valueConversion(ret);
 

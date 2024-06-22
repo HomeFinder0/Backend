@@ -493,8 +493,10 @@ exports.filtration = asyncHandler(async (req, res, next) => {
             residence.reviews.some(review => review.rating >= rating)
         );
 
-    if (neighborhood) residences = residences.filter(residence => residence.neighborhood === neighborhood);
-
+        if (neighborhood) {
+            const regex = new RegExp(neighborhood, 'i'); // 'i' for case-insensitive matching
+            residences = residences.filter(residence => regex.test(residence.neighborhood));
+          }
    
 
     return res.status(200).json({
