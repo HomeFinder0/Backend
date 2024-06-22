@@ -24,11 +24,11 @@ with open(preprocessor_path, 'rb') as file:
 with open(model_path, 'rb') as file:
     Model = pickle.load(file)
 
-with open(".\Models\preprocessor.pkl", 'rb') as file:
+with open(preprocessor_path, 'rb') as file:
     preprocessor = pickle.load(file)
 
 # Load the model from the file
-with open(".\Models\XGBModel.pkl", 'rb') as file:
+with open(model_path, 'rb') as file:
     Model = pickle.load(file)
 
 def predict():
