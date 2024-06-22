@@ -30,11 +30,11 @@ import os
 # # Load the model from the file
 # with open(".\Models\XGBModel.pkl", 'rb') as file:
 #     Model = pickle.load(file)
-with open(r"D:\Fully Projects\Graduation\Flask_API\Models\preprocessor.pkl", 'rb') as file:
+with open(r".\Models\preprocessor.pkl", 'rb') as file:
     preprocessor = pickle.load(file)
 
 # Load the model from the file
-with open(r"D:\Fully Projects\Graduation\Flask_API\Models\XGBModel.pkl", 'rb') as file:
+with open(r".\Models\XGBModel.pkl", 'rb') as file:
     Model = pickle.load(file)
 
 def predict():
