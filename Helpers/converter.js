@@ -135,7 +135,9 @@ exports.garageConverter = (value) => {
         'more than one': '2Types', '2Types': 'more than one',
         'basement garage': 'Basment', 'Basment': 'basement garage',
         'attached': 'Attchd', 'Attchd': 'attached',
-        'Detached': 'Detchd', 'Detchd': 'Detached'
+        'Detached': 'Detchd', 'Detchd': 'Detached',
+
+        "No" : "NA"
     }
     return conversions[value];
 }
