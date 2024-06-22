@@ -563,7 +563,7 @@ exports.predictPrice = asyncHandler(async (req, res, next) => {
     if (!residence) return next(new appError("Residence not found!", 400));
 
     residence = residence.check_columns();
-    if (!residence) return next(new appError("Residence is not completed", 400));
+    // if (!residence) return next(new appError("Residence is not completed", 400));
     try {
         const response = await axios.post(`${process.env.FLASK_URL}/predict`, {
             residence

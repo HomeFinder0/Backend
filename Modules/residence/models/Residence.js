@@ -184,11 +184,11 @@ residenceSchema.methods.check_columns = function(){
   delete residenceObject.buyerId;
   delete residenceObject.bookedBy;
 
-  for (const key in residenceObject) {
-    if (!necessary_columns.includes(key)) {
-        return false;
-    }
-  }
+  // for (const key in residenceObject) {
+  //   if (!necessary_columns.includes(key)) {
+  //       return false;
+  //   }
+  // }
   
   return residenceObject;
 }
