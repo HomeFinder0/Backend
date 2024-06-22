@@ -463,10 +463,14 @@ exports.getSold = asyncHandler(async (req, res, next) => {
 
 //search function
 exports.filtration = asyncHandler(async (req, res, next) => {
+    let page = req.query.page * 1 || 1;
+    let limit = 10;
+    let skip = (page - 1) * limit;
+
     let { min, max, rating, bedroom, bathroom, neighborhood } = req.query;
 
     if (!min) min = 0;
-    if (!max) max = 15000;
+    if (!max) max = 90000000;
     if (!bedroom) bedroom = 1
     if (!bathroom) bathroom = 1
 
@@ -482,7 +486,7 @@ exports.filtration = asyncHandler(async (req, res, next) => {
             path: 'reviews',
             select: 'rating',
         }
-    ]).select('title category avgRating salePrice location.fullAddress images neighborhood bedroomAbvGr totalbaths ');
+    ]).select('title category avgRating salePrice location.fullAddress images neighborhood bedroomAbvGr totalbaths ').skip(skip).limit(limit);
 
     if (rating)
         residences = residences.filter(residence =>
@@ -491,7 +495,7 @@ exports.filtration = asyncHandler(async (req, res, next) => {
 
     if (neighborhood) residences = residences.filter(residence => residence.neighborhood === neighborhood);
 
-
+   
 
     return res.status(200).json({
         status: 'success',
