@@ -46,6 +46,7 @@ exports.createResidence = asyncHandler(async (req, res, next) => {
 
     residence = {
         _id: residence._id,
+        Id : residence.Id,
         title: residence.title,
         type: residence.type,
         category: residence.category,
@@ -170,6 +171,7 @@ exports.uploadResidenceImages = asyncHandler(async (req, res, next) => {
     res.status(200).json({
         status: "success",
         residenceId: residence._id,
+        Id : residence.Id,
         images: residence.images
     });
 });
@@ -201,6 +203,7 @@ exports.setLocation = asyncHandler(async (req, res, next) => {
     return res.status(200).json({
         status: "success",
         residenceId: residence._id,
+        Id : residence.Id,
         location
     });
 });
