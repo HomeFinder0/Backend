@@ -1,11 +1,6 @@
 # Home finder
 Welcome to the Home finder app, a comprehensive platform designed to simplify the process of finding and exploring homes for sale or rent. Whether you're a user searching for the perfect property, an agent or seller looking to list homes, or an admin overseeing the platform, My Residence has you covered.
 
-![App screens](./images/Screenshot%202024-07-02%20124242.png)
-![App screens](./images/Screenshot%202024-07-02%20124255.png)
-![App screens](./images/Screenshot%202024-07-02%20124329.png)
-![App screens](./images/Screenshot%202024-07-02%20124416.png)
-
 
 ## Table of Contents
 - [User](#User)
