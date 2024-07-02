@@ -35,9 +35,6 @@ User
   Share your feedback by rating properties and leave comment [optional].
 - Book Residence:
   Book a residence and manage bookings.
-- Leave Reviews: 
-   Leave detailed reviews for properties you've interacted with.
-- Like Reviews and unLike.
 
 Admin
 - Manage Users: 
