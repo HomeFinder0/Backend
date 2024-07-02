@@ -1,11 +1,20 @@
 # Home finder
-Welcome to the My Residence app, a comprehensive platform designed to simplify the process of finding and exploring homes for sale or rent. Whether you're a user searching for the perfect property, an agent or seller looking to list homes, or an admin overseeing the platform, My Residence has you covered.
+Welcome to the Home finder app, a comprehensive platform designed to simplify the process of finding and exploring homes for sale or rent. Whether you're a user searching for the perfect property, an agent or seller looking to list homes, or an admin overseeing the platform, My Residence has you covered.
+
+![App screens](./images/Screenshot%202024-07-02%20124242.png)
+![App screens](./images/Screenshot%202024-07-02%20124255.png)
+![App screens](./images/Screenshot%202024-07-02%20124329.png)
+![App screens](./images/Screenshot%202024-07-02%20124416.png)
+
 
 ## Table of Contents
-- [Features](#features)
+- [User](#User)
+- [Admin](#Admin)
+- [Buyer & Seller](#Buyer&Seller)
+- [System](#System)
 - [Technology Stack](#api-documentation)
 
-## Features
+## User
 User 
 - Register: 
    Create an account to access personalized features.
@@ -15,24 +24,25 @@ User
    Keep your profile information up-to-date.
 - Search for Properties:
    Explore a vast array of properties based on your preferences.
-- Save Searches:
-   Save your favorite searches for quick access.
-- Compare Properties: 
-  Evaluate multiple properties side by side.
+- Wishlist:
+   Save your favorite residences for quick access.
 - View Recommendations: 
    Receive tailored property recommendations.
 - View Property Details: 
    Get in-depth information about each property.
-- Add Property to Favorites:
-   Keep track of your favorite properties.
+- View Nearby Residences:
+  See all residences near your location (3km).
 - Send Messages: 
    Communicate with agents, sellers, or other users.
 - Receive Messages: 
    Stay connected with relevant updates.
 - Rate Properties: 
-  Share your feedback by rating properties.
+  Share your feedback by rating properties and leave comment [optional].
+- Book Residence:
+  Book a residence and manage bookings.
 - Leave Reviews: 
    Leave detailed reviews for properties you've interacted with.
+- Like Reviews and unLike.
 
 Admin
 - Manage Users: 
@@ -41,12 +51,9 @@ Admin
     Oversee property listings and ensure accuracy.
 - Manage Recommendations:
      Fine-tune property recommendations for users.
-- Manage Property Categories:
-     Organize properties into logical categories.
-- Manage Property Tags:
-     Implement tags for easy property classification.
 - Monitor User Activity: 
     Keep track of user interactions and engagement.
+- Delete Incomplete Residences: Remove incomplete residence listings.
 
 Buyer & Seller
 - Create Property Listing: 
@@ -57,12 +64,10 @@ Buyer & Seller
      Organize and oversee all listed properties.
 - Receive Inquiries:
      Respond to user inquiries about listed properties.
-- Schedule Open Houses:
-     Plan and promote property viewings.
-- Receive Property Alerts: 
-    Stay informed about relevant property updates.
 - Access Property Insights:
      Gain valuable insights into property perform
+- Accept or Cancel Bookings: 
+    Manage bookings by accepting or canceling them.
 
 System
 - Integrate Mapping Service:
@@ -75,57 +80,30 @@ System
         Use algorithms to suggest personalized property recommendations.
 - Predict Property Prices:
         Utilize machine learning to predict property prices.
-- Perform Image Recognition:
-        Enhance property listings with image recognition technology.
-- Analyze User Behavior: Gain insights into user interactions and preferences.
-- Detect Fraudulent Activity:
-        Implement measures to identify and prevent fraudulent behavior.
-- Provide Property Valuation:
-        Offer tools for users to estimate property values.
-- Support Legal Compliance:
-        Ensure the platform complies with legal standards.
-- Display Property Insights:
-        Provide users with valuable insights into properties.
 - Enable Messaging and Notifications:
         Facilitate communication between users.
 - Ensure Data Security:
         Prioritize the security of user data.
-- Facilitate Social Media Integration: 
-       Allow users to share and interact via social media.
-- Assist with Virtual Tours:
-        Enable virtual property tours for a richer experience.
-- Provide Customer Support:
-        Offer assistance to users as needed.
-- Implement Machine Learning Features: 
-       Leverage machine learning for enhanced features.
-- Offer Content and Information: 
-       Provide relevant content and information to users.
 - Support Accessibility:
         Ensure the platform is accessible to users with disabilities.
-- Promote the Platform:
-        Develop strategies to promote and grow the user base.
-- Enable Community Features:
-        Foster a sense of community among platform users.
-- Manage Virtual Tours and AR/VR: 
-       Oversee virtual tours and augmented/virtual reality features.
 - Generate Property Reports:
         Create reports for property analytics.
 
 # Technology Stack
-- Platform:
+# Platform:
+- IOS 
+- Android  
+- Website 
 
-Android (for mobile)
-Website (for desktop)
-
-- Front-end:
+# Front-end:
     - Kotlin (for Android)
     - Flutter (for Ios)
     - HTML, CSS (for Website)
 
-- Back-end:
+# Back-end:
     - Node.js
     - Express
-    - Mongoose (for MongoDB)
+    - Mongoose 
 
-- Database:
+# Database:
     - MongoDB
