@@ -91,14 +91,14 @@ System
 - Website 
 
 # Front-end:
-    - Kotlin (for Android)
-    - Flutter (for Ios)
-    - HTML, CSS (for Website)
+- Kotlin (for Android)
+- Flutter (for Ios)
+- HTML, CSS (for Website)
 
 # Back-end:
-    - Node.js
-    - Express
-    - Mongoose 
+- Node.js
+- Express
+- Mongoose 
 
 # Database:
-    - MongoDB
+- MongoDB
